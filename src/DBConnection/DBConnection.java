@@ -38,44 +38,4 @@ public class DBConnection {
 		this.usuarioBanco = usuarioBanco;
 		this.senhaBanco = senhaBanco;
 	}
-	
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public String getPorta() {
-		return porta;
-	}
-
-	public void setPorta(String porta) {
-		this.porta = porta;
-	}
-
-	public String getNomeBanco() {
-		return nomeBanco;
-	}
-
-	public void setNomeBanco(String nomeBanco) {
-		this.nomeBanco = nomeBanco;
-	}
-
-	public String getUsuarioBanco() {
-		return usuarioBanco;
-	}
-
-	public void setUsuarioBanco(String usuarioBanco) {
-		this.usuarioBanco = usuarioBanco;
-	}
-
-	public String getSenhaBanco() {
-		return senhaBanco;
-	}
-
-	public void setSenhaBanco(String senhaBanco) {
-		this.senhaBanco = senhaBanco;
-	}
 }
