@@ -11,6 +11,13 @@ public class DBConnection {
 		    usuarioBanco = "root", 
 		    senhaBanco = "";
 
+	public DBConnection(String nomeBanco, String usuarioBanco, String senhaBanco) {
+		super();
+		this.nomeBanco = nomeBanco;
+		this.usuarioBanco = usuarioBanco;
+		this.senhaBanco = senhaBanco;
+	}
+	
 	public Connection getConnection() {
 		try {
 			return DriverManager.getConnection("jdbc:mysql://" + ip + ":" + porta +"/" + nomeBanco, usuarioBanco, senhaBanco);
@@ -18,24 +25,16 @@ public class DBConnection {
 			throw new RuntimeException(e);
 		}
 	}
+	
 
-	public DBConnection() {
-		
-	}
-
-	public DBConnection(String nomeBanco, String usuarioBanco, String senhaBanco) {
-		super();
-		this.nomeBanco = nomeBanco;
-		this.usuarioBanco = usuarioBanco;
-		this.senhaBanco = senhaBanco;
-	}
-
-	public DBConnection(String ip, String porta, String nomeBanco, String usuarioBanco, String senhaBanco) {
+	/*public DBConnection(String ip, String porta, String nomeBanco, String usuarioBanco, String senhaBanco) {
 		super();
 		this.ip = ip;
 		this.porta = porta;
 		this.nomeBanco = nomeBanco;
 		this.usuarioBanco = usuarioBanco;
 		this.senhaBanco = senhaBanco;
-	}
+	}*/
+	
+	
 }
