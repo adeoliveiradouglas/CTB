@@ -10,13 +10,19 @@ public class DBConnection {
 		    nomeBanco = "", 
 		    usuarioBanco = "root", 
 		    senhaBanco = "";
-
-	public DBConnection(String nomeBanco, String usuarioBanco, String senhaBanco) {
-		super();
+	
+	public DBConnection(String ip, String nomeBanco, String usuarioBanco, String senhaBanco) {
+		this.ip = ip;
 		this.nomeBanco = nomeBanco;
 		this.usuarioBanco = usuarioBanco;
 		this.senhaBanco = senhaBanco;
 	}
+
+	/*public DBConnection(String nomeBanco, String usuarioBanco, String senhaBanco) {
+		this.nomeBanco = nomeBanco;
+		this.usuarioBanco = usuarioBanco;
+		this.senhaBanco = senhaBanco;
+	}*/
 	
 	public Connection getConnection() {
 		try {
