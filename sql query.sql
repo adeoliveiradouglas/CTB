@@ -1,39 +1,41 @@
-drop database gestaodecontratos;
+drop database if exists gestaodecontratos;
 create database gestaodecontratos;
 
 create table gestaodecontratos.grupo(
-	idGrupo int primary key not null auto_increment,
+	idgrupo int primary key not null auto_increment,
     nome varchar(50) not null,
     descricao varchar(200) not null
 );
 
 create table gestaodecontratos.permissao(
-	idPermissao int primary key not null auto_increment,
+	idpermissao int primary key not null auto_increment,
     permissao varchar(50) not null,
     descricao varchar(100) not null
 );
 
-create table gestaodecontratos.usuario(
-	idUsuario int primary key not null auto_increment,
-    nome varchar(60) not null,
-    login varchar(60) not null,
+create table gestaodecontratos.funcionario(
+	idfuncionario int primary key not null auto_increment,
+    matricula int,
+    nome varchar(100) not null,
+    email varchar(255) not null,
     senha varchar(400) not null,
+    setor int not null,
     ativo boolean not null
 );
 
-CREATE TABLE gestaodecontratos.usuarioXgrupo
+CREATE TABLE gestaodecontratos.funcionarioxgrupo
 (
-  idUsuario INT NOT NULL,  
-  idGrupo   INT NOT NULL,
+  idfuncionario INT NOT NULL,  
+  idgrupo   INT NOT NULL,
   CONSTRAINT PK_USU_GRUP   PRIMARY KEY(idUsuario,idGrupo),
   FOREIGN KEY(idUsuario) REFERENCES usuario(idUsuario), 
   FOREIGN KEY(idGrupo)  REFERENCES grupo(idGrupo)
 );
 
-CREATE TABLE gestaodecontratos.permissaoXgrupo
+CREATE TABLE gestaodecontratos.permissaoxgrupo
 (
-  idPermissao INT NOT NULL,  
-  idGrupo     INT NOT NULL,
+  idpermissao INT NOT NULL,  
+  idgrupo     INT NOT NULL,
   CONSTRAINT PK_PER_GRUP   PRIMARY KEY(idPermissao,idGrupo),
   CONSTRAINT FK_PERM_1 FOREIGN KEY(idPermissao) REFERENCES permissao(idPermissao), 
   CONSTRAINT FK_GRUP_1 FOREIGN KEY(idGrupo)  REFERENCES grupo(idGrupo)
@@ -46,7 +48,7 @@ insert into gestaodecontratos.grupo (nome, descricao) values ('USUARIOS', 'Usuá
 insert into gestaodecontratos.grupo (nome, descricao) values ('BACKOFFICE', 'Cadastro');
 
 /*Usuarios*/
-insert into gestaodecontratos.usuario (nome, login, senha, ativo) values ('Douglas Almeida', 'douglas', '$2a$10$rQaIkdsWCvF2.LEhPm1UWu4Zy9tU3XhFqB4ascKWxRCgTGbjRBtV2' , true);
+insert into gestaodecontratos.funcionario (nome, login, senha, ativo) values ('Douglas Almeida', 'douglas', '$2a$10$rQaIkdsWCvF2.LEhPm1UWu4Zy9tU3XhFqB4ascKWxRCgTGbjRBtV2' , true);
 
 /*Permissões*/
 insert into gestaodecontratos.permissao (permissao, descricao) values ('ROLE_CADASTROUSUARIO', 'Cadastro de novos usuários');
