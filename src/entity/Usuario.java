@@ -1,18 +1,22 @@
 /*
- * Dados de um usuÃ¡rio no banco de dados
+ * Dados de um usuario no banco de dados
+ * 
+ * Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Data"
  * */
-
 package entity;
 
+import lombok.Data;
+
+@Data
 public class Usuario {
 	private int id;
-	private String nome,
-				   login,
-				   senha;
-	private boolean isAtivo;	
+	private int matricula;
+	private String nome;
+	private String login;
+	private String senha;
+	private boolean isAtivo;
 
 	public Usuario(String nome, String login, String senha, boolean isAtivo) {
-		super();
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
@@ -20,49 +24,5 @@ public class Usuario {
 	}
 
 	public Usuario() {
-		// TODO Auto-generated constructor stub
-	}
-
-	
-	//GETTERS
-	public int getId() {
-		return id;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public boolean isAtivo(){
-		return isAtivo;
-	}
-	
-	//SETTERS
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}	
-	
-	public void setAtivo(boolean ativo){
-		this.isAtivo = ativo;
 	}
 }
