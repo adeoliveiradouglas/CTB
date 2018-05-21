@@ -5,19 +5,21 @@ import java.util.ArrayList;
 import entity.Usuario;
 
 public class UsuarioDAO extends DAO{
-
-	public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB){
+	
+	/*public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB){
 		super(nomeDB, usuarioDB, senhaDB, "usuario");		
+	}*/
+	
+	public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB, String ip){
+		super(nomeDB, usuarioDB, senhaDB, "usuario", ip);
 	}
 	
-	@Override
 	public void inserir(Usuario usuario){ 
 		//Insere usuario no banco
-		//caso houver erro, retorna falso
 		super.iniciaConexaoComBanco();
 		super.setSqlQuery("insert into " +
 				   		  super.getNomeTabela() + //nome da tabela
-				   		  " (nome, login, senha, ativo)" + //campos para inserir na tabela 
+				   		  " (nome, email, senha, ativo)" + //campos para inserir na tabela 
 				   		  " values (?,?,?,?)");
 				
 		try {
@@ -36,7 +38,6 @@ public class UsuarioDAO extends DAO{
 		}
 	}
 	
-	@Override
 	public void atualizar(Usuario usuario){
 		super.iniciaConexaoComBanco();
 		
@@ -65,15 +66,13 @@ public class UsuarioDAO extends DAO{
 		}
 	}
 	
-	@Override
-	public void delete(Usuario usuario){
+	public void delete(Usuario usuario){ //falta implementar
 		super.iniciaConexaoComBanco();
 		super.encerraConexaocomBanco();
 	}
 	
-	@Override
 	public Usuario getByName(String nome){
-		//select que retorna um �nico usu�rio pesquisado pelo nome
+		//select que retorna um unico usuario pesquisado pelo nome
 		super.iniciaConexaoComBanco();
 		super.setSqlQuery("select * from " +
 						  super.getNomeTabela() + //nome da tabela
@@ -81,7 +80,7 @@ public class UsuarioDAO extends DAO{
 		Usuario usuario = null;
 		
 		try {
-			//Buscar usu�rio no banco
+			//Buscar usuario no banco
 			//prepara o Statement
 			super.setStatement(super.getDbConnection().prepareStatement(super.getSqlQuery()));
 			//completa as ? do Statement
@@ -110,19 +109,17 @@ public class UsuarioDAO extends DAO{
 		return usuario; 
 	}
 	
-	@Override
 	public ArrayList<Usuario> getAll(){
-		//select que retorna todos os usu�rios cadastrados no banco
+		//select que retorna todos os usuarios cadastrados no banco
 		super.iniciaConexaoComBanco();		
 
 		setSqlQuery("select * from " +
 				    getNomeTabela());  
 		ArrayList<Usuario> usuarios = new ArrayList<>(); //guarda os usuarios da query
 		
-		try { //Buscar usu�rios no banco
+		try { //Buscar usuarios no banco
 			super.setStatement(super.getDbConnection().prepareStatement(super.getSqlQuery()));			
-			super.setSelect(super.getStatement().executeQuery());
-			super.getStatement().close();			
+			super.setSelect(super.getStatement().executeQuery());		
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -131,9 +128,9 @@ public class UsuarioDAO extends DAO{
 			//Traduz o resultado para um objeto Usuario e insere na lista
 			while(getSelect().next()){
 				Usuario usuario = new Usuario();
-				usuario.setId(getSelect().getInt("id"));
+				usuario.setId(getSelect().getInt("idUsuario"));
 				usuario.setNome(getSelect().getString("nome"));
-				usuario.setLogin(getSelect().getString("login"));
+				usuario.setLogin(getSelect().getString("email"));
 				usuario.setSenha(getSelect().getString("senha"));
 				usuario.setAtivo(getSelect().getBoolean("ativo"));
 				//insere na lista
@@ -142,6 +139,11 @@ public class UsuarioDAO extends DAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			try {
+				super.getStatement().close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	
 			encerraConexaocomBanco();
 		}
 		
