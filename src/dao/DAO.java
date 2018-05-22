@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import DBConnection.DBConnection;
 import lombok.Data;
 
-@Data
+@Data 
 public class DAO {
 	private Connection dbConnection;
 	private String sqlQuery = null, 
@@ -41,6 +41,7 @@ public class DAO {
 	}
 
 	protected void encerraConexaocomBanco() {
+		// fecha a conexão com o banco e limpa as variáveis para "liberar memória"
 		try {
 			this.dbConnection.close();
 			this.limpaVariaveis();

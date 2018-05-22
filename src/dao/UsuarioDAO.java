@@ -19,8 +19,8 @@ public class UsuarioDAO extends DAO{
 		super.iniciaConexaoComBanco();
 		super.setSqlQuery("insert into " +
 				   		  super.getNomeTabela() + //nome da tabela
-				   		  " (nome, email, senha, ativo)" + //campos para inserir na tabela 
-				   		  " values (?,?,?,?)");
+				   		  " (nome, email, senha, ativo) " + //campos para inserir na tabela 
+				   		  "values (?,?,?,?)");
 				
 		try {
 			super.setStatement(super.getDbConnection().prepareStatement(super.getSqlQuery()));
@@ -41,13 +41,13 @@ public class UsuarioDAO extends DAO{
 	public void atualizar(Usuario usuario){
 		super.iniciaConexaoComBanco();
 		
-		super.setSqlQuery("update " + super.getNomeTabela() + 
-				   		  " set" +
-				   		  " nome = ?" + 
-				   		  " login = ?" + 
-				   		  " senha = ?" +  
-				   		  " ativo = ?" + 
-				   		  " where idUsuario = ?");
+		super.setSqlQuery("update " + super.getNomeTabela() +
+				   		  " set " +
+				   		  "nome = ? " + 
+				   		  "login = ? " + 
+				   		  "senha = ? " +  
+				   		  "ativo = ? " + 
+				   		  "where idUsuario = ?");
 		
 		try {
 			super.setStatement(super.getDbConnection().prepareStatement(super.getSqlQuery()));
