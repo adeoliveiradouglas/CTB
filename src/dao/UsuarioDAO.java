@@ -14,6 +14,10 @@ public class UsuarioDAO extends DAO{
 		super(nomeDB, usuarioDB, senhaDB, "usuario", ip);
 	}
 	
+	public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB){
+		super(nomeDB, usuarioDB, senhaDB, "usuario");
+	}
+	
 	public void inserir(Usuario usuario){ 
 		//Insere usuario no banco
 		super.iniciaConexaoComBanco();
@@ -25,7 +29,7 @@ public class UsuarioDAO extends DAO{
 		try {
 			super.setStatement(super.getDbConnection().prepareStatement(super.getSqlQuery()));
 			super.getStatement().setString(1, usuario.getNome());
-			super.getStatement().setString(2, usuario.getLogin());
+			super.getStatement().setString(2, usuario.getEmail());
 			super.getStatement().setString(3, usuario.getSenha());
 			super.getStatement().setBoolean(4, true);
 			
@@ -44,7 +48,7 @@ public class UsuarioDAO extends DAO{
 		super.setSqlQuery("update " + super.getNomeTabela() +
 				   		  " set " +
 				   		  "nome = ? " + 
-				   		  "login = ? " + 
+				   		  "email = ? " + 
 				   		  "senha = ? " +  
 				   		  "ativo = ? " + 
 				   		  "where idUsuario = ?");
@@ -52,7 +56,7 @@ public class UsuarioDAO extends DAO{
 		try {
 			super.setStatement(super.getDbConnection().prepareStatement(super.getSqlQuery()));
 			super.getStatement().setString(1, usuario.getNome());
-			super.getStatement().setString(2, usuario.getLogin());
+			super.getStatement().setString(2, usuario.getEmail());
 			super.getStatement().setString(3, usuario.getSenha());
 			super.getStatement().setBoolean(4, usuario.isAtivo());
 			super.getStatement().setInt(5, usuario.getId());
@@ -97,7 +101,7 @@ public class UsuarioDAO extends DAO{
 			usuario = new Usuario();
 			usuario.setId(super.getSelect().getInt("id"));
 			usuario.setNome(super.getSelect().getString("nome"));
-			usuario.setLogin(super.getSelect().getString("login"));
+			usuario.setEmail(super.getSelect().getString("email"));
 			usuario.setSenha(super.getSelect().getString("senha"));
 			usuario.setAtivo(super.getSelect().getBoolean("ativo"));
 		} catch (SQLException e) {
@@ -130,7 +134,7 @@ public class UsuarioDAO extends DAO{
 				Usuario usuario = new Usuario();
 				usuario.setId(getSelect().getInt("idUsuario"));
 				usuario.setNome(getSelect().getString("nome"));
-				usuario.setLogin(getSelect().getString("email"));
+				usuario.setEmail(getSelect().getString("email"));
 				usuario.setSenha(getSelect().getString("senha"));
 				usuario.setAtivo(getSelect().getBoolean("ativo"));
 				//insere na lista

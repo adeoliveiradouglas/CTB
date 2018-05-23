@@ -18,11 +18,11 @@ public class DBConnection {
 		this.senhaBanco = senhaBanco;
 	}
 
-	/*public DBConnection(String nomeBanco, String usuarioBanco, String senhaBanco) {
+	public DBConnection(String nomeBanco, String usuarioBanco, String senhaBanco) {
 		this.nomeBanco = nomeBanco;
 		this.usuarioBanco = usuarioBanco;
 		this.senhaBanco = senhaBanco;
-	}*/
+	}
 	
 	public Connection getConnection() {
 		try {

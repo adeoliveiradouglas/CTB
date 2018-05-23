@@ -28,12 +28,14 @@ public class DAO {
 		this.ip = ip;
 	}
 
-	/*public DAO(String nomeDB, String usuarioDB, String senhaDB, String tabelaBD) {
+	public DAO(String nomeDB, String usuarioDB, String senhaDB, String tabelaBD) {
 		this.nomeBanco = nomeDB;
 		this.usuarioBanco = usuarioDB;
 		this.senhaBanco = senhaDB;
 		this.nomeTabela = tabelaBD;		
-	}*/
+	}
+
+	
 
 	protected void iniciaConexaoComBanco() {
 		// inicia a conexão com o banco de dados
