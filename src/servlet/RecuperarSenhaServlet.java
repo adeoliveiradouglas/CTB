@@ -37,7 +37,7 @@ public class RecuperarSenhaServlet extends HttpServlet {
 		String  assunto = "Recuperação de senha Gestão de Contratos - CTB",
 				mensagem = "O token de recuperação é: " + codigo + ".\nSe não solicitou, desconsidere essa mensagem.",
 				smtp = "smtp.office365.com",
-				emailFrom = "029151129@unifacs.edu.br",
+				emailFrom = "contratos.ctb@ctb.ba.gov.br",
 				senha = "",
 				nome = "Gestão de Contratos";
 		int smtpPorta = 587;
