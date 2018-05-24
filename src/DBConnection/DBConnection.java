@@ -26,6 +26,7 @@ public class DBConnection {
 	
 	public Connection getConnection() {
 		try {
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 			return DriverManager.getConnection("jdbc:mysql://" + ip + ":" + porta +"/" + nomeBanco, usuarioBanco, senhaBanco);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

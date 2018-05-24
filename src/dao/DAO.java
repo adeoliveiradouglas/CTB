@@ -33,9 +33,7 @@ public class DAO {
 		this.usuarioBanco = usuarioDB;
 		this.senhaBanco = senhaDB;
 		this.nomeTabela = tabelaBD;		
-	}
-
-	
+	}	
 
 	protected void iniciaConexaoComBanco() {
 		// inicia a conexão com o banco de dados
