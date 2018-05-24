@@ -21,7 +21,7 @@ import org.apache.commons.mail.SimpleEmail;
 public class RecuperarSenhaServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest pedido, HttpServletResponse resposta) throws IOException {
-		int i = gerarCodigoEEnviarEmail();
+		int i = gerarCodigoEEnviarEmail(pedido.getParameter("email"));
 		PrintWriter out = resposta.getWriter();
 		
 		out.println("<html>");
@@ -31,17 +31,16 @@ public class RecuperarSenhaServlet extends HttpServlet {
         out.println("</html>");
 	}
 	
-	private int gerarCodigoEEnviarEmail(){
+	private int gerarCodigoEEnviarEmail(String emailTo){
 		SimpleEmail mail = new SimpleEmail();
 		int codigo = new Random().nextInt(8999) + 1000;
 		String  assunto = "Recuperação de senha Gestão de Contratos - CTB",
 				mensagem = "O token de recuperação é: " + codigo + ".\nSe não solicitou, desconsidere essa mensagem.",
-				smtp = "smtp.gmail.com",
-				emailFrom = "adeoliveiradouglas@gmail.com",
-				senha = "raspiberrypi",
-				nome = "Gestão de Contratos",
-				emailTo = "adeoliveiradouglas@gmail.com";
-		int smtpPorta=465;
+				smtp = "smtp.office365.com",
+				emailFrom = "029151129@unifacs.edu.br",
+				senha = "",
+				nome = "Gestão de Contratos";
+		int smtpPorta = 587;
 
 		try {
 			mail.setFrom(emailFrom, nome);
