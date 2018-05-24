@@ -113,6 +113,44 @@ public class UsuarioDAO extends DAO{
 		return usuario; 
 	}
 	
+	public Usuario getByEmail(String email){
+		//select que retorna um unico usuario pesquisado pelo email
+		super.iniciaConexaoComBanco();
+		super.setSqlQuery("select * from " +
+						  super.getNomeTabela() + //nome da tabela
+				   		  " where nome = ?"); //campos para pesquisar na tabela
+		Usuario usuario = null;
+		
+		try {
+			//Buscar usuario no banco
+			//prepara o Statement
+			super.setStatement(super.getDbConnection().prepareStatement(super.getSqlQuery()));
+			//completa as ? do Statement
+			super.getStatement().setString(1, email);
+			//executa a query e guarda na variavel super.select
+			super.setSelect(super.getStatement().executeQuery());
+			super.getStatement().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			//Traduz o resultado para um objeto Usuario
+			usuario = new Usuario();
+			usuario.setId(super.getSelect().getInt("id"));
+			usuario.setNome(super.getSelect().getString("nome"));
+			usuario.setEmail(super.getSelect().getString("email"));
+			usuario.setSenha(super.getSelect().getString("senha"));
+			usuario.setAtivo(super.getSelect().getBoolean("ativo"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.encerraConexaocomBanco();
+		}
+		
+		return usuario; 
+	}
+	
 	public ArrayList<Usuario> getAll(){
 		//select que retorna todos os usuarios cadastrados no banco
 		super.iniciaConexaoComBanco();		
