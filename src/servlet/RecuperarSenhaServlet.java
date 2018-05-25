@@ -1,7 +1,7 @@
 /*
  * Servlet responsável por recuperar senha
- * Gera um token e envia para o email do usuario 
- * */
+ * Gera um token numérico de 4 dígitos e envia para o email do usuario 
+ */
 
 package servlet;
 
@@ -17,32 +17,38 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.mail.SimpleEmail;
 
 @SuppressWarnings("serial")
-@WebServlet("/recuperarsenhaservlet")
+@WebServlet("/recuperarsenhaservlet") //nome da servlet
 public class RecuperarSenhaServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest pedido, HttpServletResponse resposta) throws IOException {
-		int i = gerarCodigoEEnviarEmail(pedido.getParameter("email"));
+		//Gera o token
+		int token = new Random().nextInt(8999) + 1000;
+
 		PrintWriter out = resposta.getWriter();
-		
 		out.println("<html>");
         out.println("<body>");
-        out.println(i);
+        out.println("<p>" + token + "</p>");
         out.println("</body>");
         out.println("</html>");
+        
+        /*É melhor chamar essa função no final do método pois desse jeito não atrasa a exibição da página*/
+        enviarCodigoEmail(pedido.getParameter("email"), token);
 	}
 	
-	private int gerarCodigoEEnviarEmail(String emailTo){
+	private void enviarCodigoEmail(String emailTo, int codigo){
+		//envia a mensagem com o codigo para o email recebido no parametro
+		
 		SimpleEmail mail = new SimpleEmail();
-		int codigo = new Random().nextInt(8999) + 1000;
 		String  assunto = "Recuperação de senha Gestão de Contratos - CTB",
 				mensagem = "O token de recuperação é: " + codigo + ".\nSe não solicitou, desconsidere essa mensagem.",
 				smtp = "smtp.office365.com",
 				emailFrom = "contratos.ctb@ctb.ba.gov.br",
-				senha = "",
+				senha = "", //falta colocar senha do email
 				nome = "Gestão de Contratos";
 		int smtpPorta = 587;
 
 		try {
+			//monta a mensagem
 			mail.setFrom(emailFrom, nome);
 			mail.setSubject(assunto);
 			mail.setMsg(mensagem);
@@ -51,8 +57,8 @@ public class RecuperarSenhaServlet extends HttpServlet {
 			mail.setHostName(smtp);
 			mail.setSmtpPort(smtpPorta);
 			mail.addTo(emailTo);
+			//envia a mensagem
 			mail.send();
 		} catch (Exception e) {}
-		return codigo;
 	}
 }

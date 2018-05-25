@@ -6,11 +6,15 @@ package dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import entity.Usuario;
 
 public class UsuarioDAO extends DAO {
-	String nomeColunaId = "idUsuario", nomeColunaNome = "nome", nomeColunaEmail = "email", nomeColunaSenha = "senha",
-			nomeColunaAtivo;
+	String  nomeColunaId = "idUsuario", 
+			nomeColunaNome = "nome", 
+			nomeColunaEmail = "email", 
+			nomeColunaSenha = "senha",
+			nomeColunaAtivo = "ativo";
 
 	/*
 	 * public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB){
@@ -30,12 +34,11 @@ public class UsuarioDAO extends DAO {
 		super.iniciaConexaoComBanco();
 		super.setSqlQuery("insert into " + super.getNomeTabela() + // nome da
 																	// tabela
-				" (" + nomeColunaNome + "," + nomeColunaEmail + "," + nomeColunaSenha + "," + nomeColunaAtivo + ")" + // campos
-																														// para
-																														// inserir
-																														// na
-																														// tabela
-				"values (?,?,?,?)");
+				" (" + nomeColunaNome + ", " + 
+					nomeColunaEmail + ", " + 
+					nomeColunaSenha + ", " + 
+					nomeColunaAtivo + ")" + // campos
+					"values (?,?,?,?)");
 
 		try {
 			super.setStatement(super.getDbConnection().prepareStatement(super.getSqlQuery()));
@@ -89,20 +92,30 @@ public class UsuarioDAO extends DAO {
 	public Usuario getByName(String nome) {
 		// select que retorna um unico usuario pesquisado pelo nome
 		super.iniciaConexaoComBanco();
-		super.setSqlQuery("select * from " + super.getNomeTabela() + // nome da
-																		// tabela
-				" where " + nomeColunaNome + " = ?"); // campos para pesquisar
-														// na tabela
+		// campos para pesquisar na tabela
+		super.setSqlQuery("select * from usuario where nome = '" + nome + "'"); //não funciona 
+//		super.setSqlQuery("select * from usuario where nome = ?");
+		
 		Usuario usuario = null;
 
 		try {
 			// Buscar usuario no banco
 			// prepara o Statement
-			super.setStatement(super.getDbConnection().prepareStatement(super.getSqlQuery()));
+			super.setStatement(
+				super.getDbConnection().prepareStatement(
+					super.getSqlQuery()
+				)
+			);
+			
 			// completa as ? do Statement
+			super.getStatement().setString(1, super.getNomeTabela());
+			super.getStatement().setString(2, this.nomeColunaNome);
+			super.getStatement().setString(3, nome);
 			super.getStatement().setString(1, nome);
 			// executa a query e guarda na variavel super.select
-			super.setSelect(super.getStatement().executeQuery());
+			super.setSelect(
+				super.getStatement().executeQuery()
+			);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -119,12 +132,12 @@ public class UsuarioDAO extends DAO {
 			e.printStackTrace();
 		} finally {
 			super.encerraConexaocomBanco();
-			try {
-				super.getStatement().close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				super.getStatement().close();
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 
 		return usuario;
@@ -216,11 +229,11 @@ public class UsuarioDAO extends DAO {
 		Usuario usuario = new Usuario();
 		boolean erroResult = false; //controla se houve erro na busca do usuario
 		try {
-			usuario.setId(super.getSelect().getInt(nomeColunaId));
-			usuario.setNome(super.getSelect().getString(nomeColunaNome));
-			usuario.setEmail(super.getSelect().getString(nomeColunaEmail));
-			usuario.setSenha(super.getSelect().getString(nomeColunaSenha));
-			usuario.setAtivo(super.getSelect().getBoolean(nomeColunaAtivo));
+			usuario.setId(super.getSelect().getInt(this.nomeColunaId));
+			usuario.setNome(super.getSelect().getString(this.nomeColunaNome));
+			usuario.setEmail(super.getSelect().getString(this.nomeColunaEmail));
+			usuario.setSenha(super.getSelect().getString(this.nomeColunaSenha));
+			usuario.setAtivo(super.getSelect().getBoolean(this.nomeColunaAtivo));
 		} catch (SQLException e) {
 			erroResult = true;
 		}

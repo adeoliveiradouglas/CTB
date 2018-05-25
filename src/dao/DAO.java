@@ -54,6 +54,6 @@ public class DAO {
 		// reseta o conteúdo de todas as variáveis desse objeto
 		this.select = null;
 		this.sqlQuery = null;
-		this.statement = null;
+//		this.statement = null;
 	}
 }
