@@ -1,3 +1,8 @@
+/*
+ * Super classe com dados e métodos usuados por todos os DAO.
+ * Todo DAO deve ser uma extensão dessa classe. 
+ */
+
 package dao;
 
 import java.sql.Connection;
@@ -17,7 +22,7 @@ public class DAO {
 				   usuarioBanco = null, 
 				   senhaBanco = null,
 				   ip = "localhost";
-	private ResultSet select = null;
+	private ResultSet resultado = null;
 	private PreparedStatement statement = null;
 	
 	public DAO(String nomeDB, String usuarioDB, String senhaDB, String tabelaBD, String ip) {
@@ -44,6 +49,7 @@ public class DAO {
 		// fecha a conexão com o banco e limpa as variáveis para "liberar memória"
 		try {
 			this.dbConnection.close();
+			this.statement.close();
 			this.limpaVariaveis();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,7 +58,7 @@ public class DAO {
 
 	protected void limpaVariaveis() {
 		// reseta o conteúdo de todas as variáveis desse objeto
-		this.select = null;
+		this.resultado = null;
 		this.sqlQuery = null;
 //		this.statement = null;
 	}
