@@ -1,3 +1,9 @@
+import java.util.ArrayList;
+
+import dao.SetorDAO;
+import dao.UsuarioDAO;
+import entity.Setor;
+
 /*
  * Classe main não utilizada no decorrer do programa
  * Usada somente para testes durante o desenvolvimento
@@ -7,5 +13,16 @@
 public class GestaoDeContratos {
 
 	public static void main(String[] args) {
+		SetorDAO sdao = new SetorDAO("gestaodecontratos", "douglas", "administrador", "10.95.1.247");
+		UsuarioDAO udao = new UsuarioDAO("gestaodecontratos", "douglas", "administrador", "10.95.1.247");
+		Setor s;
+		ArrayList<Setor> setores = new ArrayList<Setor>();
+		
+		setores = sdao.getAll();
+		
+		for (int i = 0 ; i < setores.size(); ++i){
+			System.out.println(setores.get(i).toString());
+		}
+		
 	}
 }

@@ -40,6 +40,10 @@ public class DAO {
 		this.nomeTabela = tabelaBD;		
 	}	
 
+	public DAO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	protected void iniciaConexaoComBanco() {
 		// inicia a conexão com o banco de dados
 		this.dbConnection = new DBConnection(ip, nomeBanco, usuarioBanco, senhaBanco).getConnection();

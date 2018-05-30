@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema gestaodecontratos
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `gestaodecontratos` ;
 
 -- -----------------------------------------------------
 -- Schema gestaodecontratos
@@ -60,6 +61,17 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `gestaodecontratos`.`cargo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `gestaodecontratos`.`cargo` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `gestaodecontratos`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gestaodecontratos`.`usuario` (
@@ -68,11 +80,18 @@ CREATE TABLE IF NOT EXISTS `gestaodecontratos`.`usuario` (
   `login` VARCHAR(100) NOT NULL,
   `senha` VARCHAR(255) NOT NULL,
   `setor_codigo` VARCHAR(8) NOT NULL,
-  PRIMARY KEY (`matricula`, `setor_codigo`),
+  `cargo_id` INT(11) NOT NULL,
+  PRIMARY KEY (`matricula`, `setor_codigo`, `cargo_id`),
   INDEX `fk_usuario_setor1_idx` (`setor_codigo` ASC),
+  INDEX `fk_usuario_cargo1_idx` (`cargo_id` ASC),
   CONSTRAINT `fk_usuario_setor1`
     FOREIGN KEY (`setor_codigo`)
     REFERENCES `gestaodecontratos`.`setor` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuario_cargo1`
+    FOREIGN KEY (`cargo_id`)
+    REFERENCES `gestaodecontratos`.`cargo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -140,18 +159,6 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `gestaodecontratos`.`permissao`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gestaodecontratos`.`permissao` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `descricao` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `gestaodecontratos`.`processo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gestaodecontratos`.`processo` (
@@ -167,29 +174,6 @@ CREATE TABLE IF NOT EXISTS `gestaodecontratos`.`processo` (
   CONSTRAINT `fk_processo_Contrato1`
     FOREIGN KEY (`contratoNumero`)
     REFERENCES `gestaodecontratos`.`contrato` (`numero`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `gestaodecontratos`.`usuario_has_permissao`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gestaodecontratos`.`usuario_has_permissao` (
-  `usuario_matricula` INT(11) NOT NULL,
-  `permissao_id` INT(11) NOT NULL,
-  PRIMARY KEY (`usuario_matricula`, `permissao_id`),
-  INDEX `fk_usuario_has_permissao_permissao1_idx` (`permissao_id` ASC),
-  INDEX `fk_usuario_has_permissao_usuario1_idx` (`usuario_matricula` ASC),
-  CONSTRAINT `fk_usuario_has_permissao_permissao1`
-    FOREIGN KEY (`permissao_id`)
-    REFERENCES `gestaodecontratos`.`permissao` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_permissao_usuario1`
-    FOREIGN KEY (`usuario_matricula`)
-    REFERENCES `gestaodecontratos`.`usuario` (`matricula`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

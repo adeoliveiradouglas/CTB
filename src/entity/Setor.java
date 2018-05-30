@@ -13,8 +13,8 @@ public class Setor {
 				   nome,
 				   sigla;
 
-	public Setor(String id, String nome, String sigla) {
-		this.codigo = id;
+	public Setor(String codigo, String nome, String sigla) {
+		this.codigo = codigo;
 		this.nome = nome;
 		this.sigla = sigla;
 	}
