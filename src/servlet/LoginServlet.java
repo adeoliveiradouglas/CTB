@@ -18,16 +18,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import dao.UsuarioDAO;
 import entity.Usuario;
 
-@SuppressWarnings("serial")
 @WebServlet("/loginservlet")
 public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void service(HttpServletRequest pedido, HttpServletResponse resposta) throws IOException {
+		final String usuarioB = "servidorApp",
+					 banco = "gestaodecontratos",
+					 senhaB = "suporte2017";
+		
 		PrintWriter out = resposta.getWriter();
 		PasswordEncoder pe = new BCryptPasswordEncoder(); // objeto responsável
 															// por criptografar
 															// uma string
-		UsuarioDAO dbUsuario = new UsuarioDAO("gestaodecontratos", "douglas", "administrador", "10.95.1.247");
+		UsuarioDAO dbUsuario = new UsuarioDAO(banco, usuarioB, senhaB);
 		Usuario u;
 		String email = pedido.getParameter("email");
 		// Busca usuario no banco usando o email

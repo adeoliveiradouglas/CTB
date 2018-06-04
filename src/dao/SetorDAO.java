@@ -9,13 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entity.Setor;
-import lombok.Getter;
 
 public class SetorDAO extends DAO{
-	private final String colunaCodigo = super.getNomeTabela() + ".codigo",
-				   		 colunaNome = super.getNomeTabela() + ".setor.nome";
-	@Getter
-	private final String colunaSigla = super.getNomeTabela() + ".setor.sigla";
+	private final String colunaNome = super.getNomeTabela() + ".nome",
+						 colunaCodigo = super.getNomeTabela() + ".codigo",
+	   		 			 colunaSigla = super.getNomeTabela() + ".sigla";
 
 	public SetorDAO(String nomeDB, String usuarioDB, String senhaDB) {
 		super(nomeDB, usuarioDB, senhaDB, "setor");
@@ -24,18 +22,70 @@ public class SetorDAO extends DAO{
 	public SetorDAO(String nomeDB, String usuarioDB, String senhaDB, String ip) {
 		super(nomeDB, usuarioDB, senhaDB, "setor", ip);
 	}
-	
-	public SetorDAO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	public Setor getSetorBySigla(String sigla){
+	public Setor getByCodigo(String codigo){
 		iniciaConexaoComBanco();
 		
 //		monta a query
 		super.setSqlQuery(
-//			select * from setor where sigla = "siglaDesejada" 
+//			select * from setor where codigo = "codigoInserido" 
+			"select * from " + 
+			super.getNomeTabela() + 
+			" where "+ 
+			this.colunaCodigo + 
+			" = ?"	
+		);
+		
+		try {
+//			monta o statement
+			super.setStatement( 
+//				pega da conexao
+				super.getDbConnection().prepareStatement(
+					super.getSqlQuery()	
+				)
+			);
+			
+//			preenche o statement
+			super.getStatement().setString(
+				1, 
+				codigo
+			);
+//			executa a query
+			super.setResultado(
+				super.getStatement().executeQuery()
+			);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			encerraConexaocomBanco();
+			return null;
+		} 
+		
+//		traduz o resultado para um objeto Setor
+		Setor s = null;
+		try {
+			while (super.getResultado().next()){
+				s = new Setor(
+					super.getResultado().getString(colunaCodigo),
+					super.getResultado().getString(colunaNome),
+					super.getResultado().getString(colunaSigla)
+				);				
+			}
+		} catch (SQLException e) {
+			s = null;
+			e.printStackTrace();
+		}
+		
+		encerraConexaocomBanco();
+		return s;
+	}
+	
+	public Setor getBySigla(String sigla){
+		iniciaConexaoComBanco();
+		
+//		monta a query
+		super.setSqlQuery(
+//			select * from setor where sigla = "siglaInserida" 
 			"select * from " + 
 			super.getNomeTabela() + 
 			" where "+ 
@@ -86,7 +136,6 @@ public class SetorDAO extends DAO{
 		encerraConexaocomBanco();
 		return s;
 	}
-	
 	public ArrayList<Setor> getAll(){
 		iniciaConexaoComBanco();
 		super.setSqlQuery(

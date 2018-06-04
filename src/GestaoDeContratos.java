@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 
-import dao.SetorDAO;
-import dao.UsuarioDAO;
-import entity.Setor;
+import dao.*;
+import entity.*;
 
 /*
  * Classe main não utilizada no decorrer do programa
@@ -13,15 +12,29 @@ import entity.Setor;
 public class GestaoDeContratos {
 
 	public static void main(String[] args) {
-		SetorDAO sdao = new SetorDAO("gestaodecontratos", "douglas", "administrador", "10.95.1.247");
-		UsuarioDAO udao = new UsuarioDAO("gestaodecontratos", "douglas", "administrador", "10.95.1.247");
-		Setor s;
-		ArrayList<Setor> setores = new ArrayList<Setor>();
+		String usuarioB = "servidorApp",
+				banco = "gestaodecontratos",
+				senhaB = "suporte2017";
 		
-		setores = sdao.getAll();
+//		Usuario u2 = new Usuario(88552233, "Douglas", "adeoliveiradouglas@gmail.com", "$2a$10$k1SV2r4SH9DcZloBEndktOo2ePCxYeSCOBzpmWuMJg3WHIYRSMZ62", "CTB/ TECI", "Administrador");
+		SetorDAO sdao = new SetorDAO(banco, usuarioB, senhaB);
+		UsuarioDAO udao = new UsuarioDAO(banco, usuarioB, senhaB);
+		CargoDAO cdao = new CargoDAO(banco, usuarioB, senhaB);
 		
+				ArrayList<Setor> setores = sdao.getAll();
+		ArrayList<Cargo> cargos = cdao.getAll();
+		Usuario u = udao.getByMatricula(88552233);
+		ArrayList<Usuario> usuarios = udao.getAll();
+		
+		System.out.println(u.toString());
+		for (int i = 0 ; i < cargos.size(); ++i){
+			System.out.println(cargos.get(i).toString());
+		}
 		for (int i = 0 ; i < setores.size(); ++i){
 			System.out.println(setores.get(i).toString());
+		}
+		for (int i = 0 ; i < usuarios.size(); ++i){
+			System.out.println(usuarios.get(i).toString());
 		}
 		
 	}

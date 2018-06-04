@@ -25,7 +25,7 @@ public class DAO {
 	private ResultSet resultado = null;
 	private PreparedStatement statement = null;
 	
-	public DAO(String nomeDB, String usuarioDB, String senhaDB, String tabelaBD, String ip) {
+	protected DAO(String nomeDB, String usuarioDB, String senhaDB, String tabelaBD, String ip) {
 		this.nomeBanco = nomeDB;
 		this.usuarioBanco = usuarioDB;
 		this.senhaBanco = senhaDB;
@@ -33,16 +33,12 @@ public class DAO {
 		this.ip = ip;
 	}
 
-	public DAO(String nomeDB, String usuarioDB, String senhaDB, String tabelaBD) {
+	protected DAO(String nomeDB, String usuarioDB, String senhaDB, String tabelaBD) {
 		this.nomeBanco = nomeDB;
 		this.usuarioBanco = usuarioDB;
 		this.senhaBanco = senhaDB;
 		this.nomeTabela = tabelaBD;		
 	}	
-
-	public DAO() {
-		// TODO Auto-generated constructor stub
-	}
 
 	protected void iniciaConexaoComBanco() {
 		// inicia a conexão com o banco de dados

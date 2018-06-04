@@ -16,9 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.SimpleEmail;
 
-@SuppressWarnings("serial")
 @WebServlet("/recuperarsenhaservlet") //nome da servlet
 public class RecuperarSenhaServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void service(HttpServletRequest pedido, HttpServletResponse resposta) throws IOException {
 		//Gera o token

@@ -27,21 +27,16 @@ public class DBConnection {
 	public Connection getConnection() {
 		try {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			return DriverManager.getConnection("jdbc:mysql://" + ip + ":" + porta +"/" + nomeBanco, usuarioBanco, senhaBanco);
+			
+			/*Exemplo de url
+			jdbc:mysql://ip:porta/nomeDoBanco?autoReconnect=true&useSSL=false*/			
+			return DriverManager.getConnection(
+				"jdbc:mysql://" + ip + ":" + porta +"/" + nomeBanco + "?autoReconnect=true&useSSL=false", 
+				usuarioBanco, 
+				senhaBanco
+			);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
-
-	/*public DBConnection(String ip, String porta, String nomeBanco, String usuarioBanco, String senhaBanco) {
-		super();
-		this.ip = ip;
-		this.porta = porta;
-		this.nomeBanco = nomeBanco;
-		this.usuarioBanco = usuarioBanco;
-		this.senhaBanco = senhaBanco;
-	}*/
-	
-	
 }
