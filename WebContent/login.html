@@ -4,11 +4,11 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-<meta charset="UTF-8" />
+<meta charset="ISO-8859-1" />
 <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
 
-<title>Sistema de Gest√£o Administrativa da CTB</title>
+<title>Sistema de Gest„o Administrativa da CTB</title>
 
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
@@ -22,7 +22,7 @@
 		<div align="center">
 			<img
 				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
-			<!--<p>Por favor, fa√ßa o login.</p>-->
+			<!--<p>Por favor, faÁa o login.</p>-->
 		</div>
 
 		<br />
@@ -30,38 +30,32 @@
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 					<div class="form-group  has-feedback">
-						<input type="text" class="form-control  input-lg"
-							placeholder="Seu e-mail" name="email" /> <span
-							class="glyphicon  glyphicon-envelope  form-control-feedback"
-							aria-hidden="true"></span>
+						<input type="email" class="form-control  input-lg" placeholder="Seu e-mail" name="email" required/> 
+						<span class="glyphicon  glyphicon-envelope  form-control-feedback" aria-hidden="true"></span>
 					</div>
 
 					<div class="form-group  has-feedback">
-						<input type="password" class="form-control  input-lg"
-							placeholder="Sua senha" name="senha" /> <span
-							class="glyphicon  glyphicon-lock  form-control-feedback"
-							aria-hidden="true"></span>
+						<input type="password" class="form-control  input-lg" placeholder="Sua senha" name="senha" required/> 
+						<span class="glyphicon  glyphicon-lock  form-control-feedback" aria-hidden="true"></span>
 					</div>
 					<div class="form-group">
-						<button type="submit"
-							class="btn btn-primary btn-lg aw-btn-full-width">Entrar</button>
+						<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Entrar</button>
 					</div>
 
 					<div class="form-group clearfix">
 						<div class="checkbox  pull-left  aw-checkbox-no-margin">
-							<input type="checkbox" id="lembrar" /> <label for="lembrar">Lembre
-								de mim</label>
+							<input type="checkbox" id="lembrar" /> 
+							<label for="lembrar">Lembre de mim</label>
 						</div>
 
-
 						<div class="pull-right">
-							<a href="esqueceuasenha.html">Esqueci minha senha</a>
+							<a href="esqueceuasenha">Esqueci minha senha</a>
 						</div>
 					</div>
 				</div>
 
 				<div class="aw-simple-panel__footer">
-					Novo por aqui? <a href="cadastro/CadastroUsuario.html">Cadastre-se</a>.
+					Novo por aqui? <a href="cadastrarusuario">Cadastre-se</a>.					
 				</div>
 			</div>
 		</form>

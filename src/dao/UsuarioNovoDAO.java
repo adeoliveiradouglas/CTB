@@ -20,10 +20,6 @@ public class UsuarioNovoDAO extends DAO {
 						 colunaSetor = super.getNomeTabela() + ".setor_codigo",
 						 colunaCargo = super.getNomeTabela() + ".cargo_id";
 
-	/*
-	 * public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB){
-	 * super(nomeDB, usuarioDB, senhaDB, "usuario"); }
-	 */
 
 	public UsuarioNovoDAO(String nomeDB, String usuarioDB, String senhaDB, String ip) {
 		super(nomeDB, usuarioDB, senhaDB, "usuariosnovos", ip);
@@ -32,14 +28,17 @@ public class UsuarioNovoDAO extends DAO {
 	public UsuarioNovoDAO(String nomeDB, String usuarioDB, String senhaDB) {
 		super(nomeDB, usuarioDB, senhaDB, "usuariosnovos");
 	}
+	
+	public UsuarioNovoDAO(){
+		super("usuariosnovos");
+	}
 
-	public void inserir(Usuario usuario) {
+	public void inserir(Usuario usuario) throws SQLException {
 		iniciaConexaoComBanco();
 		super.setSqlQuery(
 			"insert into " + super.getNomeTabela() + " values (?,?,?,?,?,?)"
 		);
 		
-		try {
 			int posicao = 0;
 			SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
 			CargoDAO cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
@@ -86,9 +85,7 @@ public class UsuarioNovoDAO extends DAO {
 			
 			super.getStatement().executeUpdate();
 				
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
+				
 		
 		encerraConexaocomBanco();
 	}
@@ -111,7 +108,7 @@ public class UsuarioNovoDAO extends DAO {
 		
 //		monta a query
 		super.setSqlQuery(
-			"select * from usuario where " + colunaMatricula +" = ?"
+			"select * from "+ super.getNomeTabela() +" where " + colunaMatricula +" = ?"
 		);
 		
 		try {
@@ -196,23 +193,16 @@ public class UsuarioNovoDAO extends DAO {
 	
 	public Usuario getByEmail(String email) {
 		iniciaConexaoComBanco();
-		
-/*		
- 		Exemplo de query para esse método
- 		
- 		select * from usuario where usuario.login = ?";
- 		depois busca setor e cargo através do resultado do usuario
- 		
-*/
-		int idCargo;
-		String codigoSetor;
-		SetorDAO sdao;
-		CargoDAO cdao;
 		Usuario u;
 		
-//		monta a query
+/*		monta a query
+			
+ 		Exemplo de query para esse método
+ 		
+ 		select * from usuariosnovos where usuariosnovos.login = ?";	
+*/
 		super.setSqlQuery(
-				"select * from usuario where usuario.login = ?"
+				"select * from " + super.getNomeTabela() + " where " + colunaEmail + "= ?"
 		);
 		
 		try {
@@ -268,22 +258,16 @@ public class UsuarioNovoDAO extends DAO {
 				)
 			);
 			
-			codigoSetor = super.getResultado().getString(colunaSetor);
-			idCargo = super.getResultado().getInt(colunaCargo);
-			
-			sdao = new SetorDAO("gestaodecontratos", "douglas", "administrador", super.getIp());
-			cdao = new CargoDAO("gestaodecontratos", "douglas", "administrador", super.getIp());
-			
 //			busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 			u.setSetor(
-				sdao.getByCodigo(
-					codigoSetor
+				new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp()).getByCodigo(
+					super.getResultado().getString(colunaSetor) //codigo do setor no usuario do banco
 				).getSigla()
 			);
 			
 			u.setCargo(
-				cdao.getByCodigo(
-					idCargo
+				new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp()).getByCodigo(
+					super.getResultado().getInt(colunaCargo) //codigo do cargo no usuario do banco
 				).getNome()
 			);
 		} catch (SQLException e) {

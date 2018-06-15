@@ -8,7 +8,8 @@ import lombok.Getter;
 public class CargoDAO extends DAO{
 	@Getter
 	private final String colunaId = super.getNomeTabela() + ".id",
-						 colunaNome = super.getNomeTabela() + ".nome";
+						 colunaNome = super.getNomeTabela() + ".nome",
+						 colunaDescricao = super.getNomeTabela() + ".descricao";
 	
 	public CargoDAO(String nomeDB, String usuarioDB, String senhaDB) {
 		super(nomeDB, usuarioDB, senhaDB, "cargo");
@@ -16,6 +17,10 @@ public class CargoDAO extends DAO{
 	
 	public CargoDAO(String nomeDB, String usuarioDB, String senhaDB, String ip) {
 		super(nomeDB, usuarioDB, senhaDB, "cargo", ip);
+	}
+	
+	public CargoDAO(){
+		super("cargo");
 	}
 	
 	public Cargo getByCodigo(int codigo){
@@ -56,7 +61,9 @@ public class CargoDAO extends DAO{
 			super.getResultado().next();
 			c = new Cargo(
 				super.getResultado().getInt(colunaId),
-				super.getResultado().getString(colunaNome)
+				super.getResultado().getString(colunaNome),
+				super.getResultado().getString(colunaDescricao)
+				
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -100,7 +107,8 @@ public class CargoDAO extends DAO{
 			while (super.getResultado().next()){
 				c = new Cargo(
 					super.getResultado().getInt(colunaId),
-					super.getResultado().getString(colunaNome)
+					super.getResultado().getString(colunaNome),
+					super.getResultado().getString(colunaDescricao)
 				);
 				lc.add(c);
 			}
@@ -152,7 +160,8 @@ public class CargoDAO extends DAO{
 			super.getResultado().next();
 			c = new Cargo(
 				super.getResultado().getInt(colunaId),
-				super.getResultado().getString(colunaNome)
+				super.getResultado().getString(colunaNome),
+				super.getResultado().getString(colunaDescricao)
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();

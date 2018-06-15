@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +20,7 @@
 		<p>
 			Ainda estamos trabalhando para oferecer esse funcionalidade para você. Em breve estará disponível.
 			<br /><br />
-			Para voltar para a página principal clique <a href="login">aqui</a>
+			Para voltar para a página principal clique <a href="login.html">aqui</a>
 		</p>
 
 

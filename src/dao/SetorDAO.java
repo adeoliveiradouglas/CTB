@@ -139,7 +139,7 @@ public class SetorDAO extends DAO{
 	public ArrayList<Setor> getAll(){
 		iniciaConexaoComBanco();
 		super.setSqlQuery(
-			"select * from " + super.getNomeTabela()
+			"select * from " + super.getNomeTabela() + " order by sigla"
 		);
 		
 		try {

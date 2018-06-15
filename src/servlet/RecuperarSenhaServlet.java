@@ -9,14 +9,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.SimpleEmail;
 
-@WebServlet("/recuperarsenhaservlet") //nome da servlet
 public class RecuperarSenhaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,8 +41,8 @@ public class RecuperarSenhaServlet extends HttpServlet {
 		String  assunto = "Recuperação de senha Gestão de Contratos - CTB",
 				mensagem = "O token de recuperação é: " + codigo + ".\nSe não solicitou, desconsidere essa mensagem.",
 				smtp = "smtp.office365.com",
-				emailFrom = "contratos.ctb@ctb.ba.gov.br",
-				senha = "", //falta colocar senha do email
+				emailFrom = "contrato.ctb@ctb.ba.gov.br",
+				senha = "-aA#EY^u", //falta colocar senha do email
 				nome = "Gestão de Contratos";
 		int smtpPorta = 587;
 

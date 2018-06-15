@@ -18,9 +18,9 @@ public class DAO {
 	private Connection dbConnection;
 	private String sqlQuery = null, 
 				   nomeTabela = null, 
-				   nomeBanco = null,
-				   usuarioBanco = null, 
-				   senhaBanco = null,
+				   nomeBanco = "gestaodecontratos",
+				   usuarioBanco = "servidorApp", 
+				   senhaBanco = "suporte2017",
 				   ip = "localhost";
 	private ResultSet resultado = null;
 	private PreparedStatement statement = null;
@@ -39,6 +39,10 @@ public class DAO {
 		this.senhaBanco = senhaDB;
 		this.nomeTabela = tabelaBD;		
 	}	
+	
+	protected DAO (String tabelaDB){
+		this.nomeTabela = tabelaDB;
+	}
 
 	protected void iniciaConexaoComBanco() {
 		// inicia a conexão com o banco de dados

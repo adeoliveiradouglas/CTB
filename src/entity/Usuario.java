@@ -8,6 +8,7 @@
 
 package entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import lombok.Data;
 
 @Data
@@ -28,9 +29,14 @@ public class Usuario {
 		this.matricula = matricula;
 		this.nome = nome;
 		this.email = email;
-		this.senha = senha;
+		this.setSenha(senha);
 		this.setor = setor;
 		this.cargo = cargo;
+	} 
+	
+	public void setSenha(String s){
+		// criptografa senha
+		this.senha = new BCryptPasswordEncoder().encode(s);	
 	}
 	
 }

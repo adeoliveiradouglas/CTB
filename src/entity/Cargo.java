@@ -10,12 +10,12 @@ import lombok.Data;
 @Data
 public class Cargo {
 	int id;
-	String nome;
+	String nome,
+		   descricao;
 		
-	public Cargo(int id, String nome) {
+	public Cargo(int id, String nome, String descricao) {
 		this.id = id;
 		this.nome = nome;
-	}
-	
-	
+		this.descricao = descricao;
+	}	
 }

@@ -5,39 +5,35 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import dao.UsuarioDAO;
-import entity.Usuario;
-
-@WebServlet("/loginservlet")
 public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6756540979800400483L;
 
 	@Override
 	protected void service(HttpServletRequest pedido, HttpServletResponse resposta) throws IOException {
-		final String usuarioB = "servidorApp",
-					 banco = "gestaodecontratos",
-					 senhaB = "suporte2017";
+		try {
+			pedido.getRequestDispatcher("esqueceuasenha").forward(pedido, resposta);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		PrintWriter out = resposta.getWriter();
-		PasswordEncoder pe = new BCryptPasswordEncoder(); // objeto responsável
+		/*
+//		PrintWriter out = resposta.getWriter();
+//		PasswordEncoder pe; // objeto responsável
 															// por criptografar
 															// uma string
-		UsuarioDAO dbUsuario = new UsuarioDAO(banco, usuarioB, senhaB);
 		Usuario u;
 		String email = pedido.getParameter("email");
 		// Busca usuario no banco usando o email
 		try {
-			u = dbUsuario.getByEmail(email);
+			u = new UsuarioDAO().getByEmail(email);
 		} catch (Exception e) {
 			u = null;
 		}
@@ -45,31 +41,41 @@ public class LoginServlet extends HttpServlet {
 		// Criptografa senha inserida
 		String senha = null;
 		try {
-			senha = pe.encode(pedido.getParameter("senha"));
+			senha = new BCryptPasswordEncoder().encode(pedido.getParameter("senha"));
 		} catch (IllegalStateException e) {
 			//Não conseguiu carregar classe BCryptPasswordEncoder que criptografa string
 			System.out.println("IllegalStateException");
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-
-		out.println("<html>");
-		out.println("<body>");
-
+		
 		// Compara senhas criptografadas
 		if (u != null) {
 			if (pedido.getParameter(senha).equals(u.getSenha())) {
 				// Caso a senha esteja correta
-				out.println("<p>Logado</p>");
+				try {
+					pedido.getRequestDispatcher("/logado.html").forward(pedido, resposta);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else {
 				// Caso senha errada
-				out.println("<p>Senha incorreta ou usuario não existe</p>");
+				try {
+					pedido.getRequestDispatcher("/erro.html").forward(pedido, resposta);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
 			// Caso usuario não exista
-			out.println("<p>Senha incorreta ou usuario não existe</p>");
-		}
-		out.println("</body>");
-		out.println("</html>");
+			try {
+				pedido.getRequestDispatcher("/erro.html").forward(pedido, resposta);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
 	}
 }

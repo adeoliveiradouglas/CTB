@@ -31,6 +31,9 @@ public class UsuarioDAO extends DAO {
 		super(nomeDB, usuarioDB, senhaDB, "usuario");
 	}
 
+	public UsuarioDAO(){
+		super("usuario");
+	}
 	public void inserir(Usuario usuario) {
 		iniciaConexaoComBanco();
 		super.setSqlQuery(
