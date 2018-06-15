@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8" />
+
+<title>Sistema de Gestão Administrativa da CTB</title>
+
+<link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
+<link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
+<link rel="stylesheet" type="text/css" href="css/application.css" />
+
+<style>
+	select{
+		width:100%;
+	}
+</style>
+
+</head>
+
+<body class="aw-layout-simple-page">
+		
+	<div class="aw-layout-simple-page__container">
+		<div align="center">
+			<img
+				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
+		</div>
+		<br />
+		<form action="/cadastrarusuarioservlet" th:object="" method="POST">
+			<div class="aw-simple-panel">
+				<div class="aw-simple-panel__box">
+					<div class="form-group  has-feedback">
+						<input type="number" class="form-control input-lg" placeholder="Sua matrícula" name="matricula" required> 
+						<span class="form-control-feedback"	aria-hidden="true"> </span>
+					</div>
+
+					<div class="form-group  has-feedback">
+						<input type="text" class="form-control input-lg" placeholder="Seu nome completo" name="nome" required> 
+						<span class="form-control-feedback" aria-hidden="true"> </span>
+					</div>
+
+					<div class="form-group  has-feedback">
+						<input type="email" class="form-control input-lg" placeholder="Seu e-mail corporativo" name="email" required>
+						<span class="form-control-feedback" aria-hidden="true"></span>
+					</div>
+
+					<div class="form-group has-feedback">
+						<input type="password" class="form-control input-lg" placeholder="Crie sua senha" name="senha" id="senha">
+						<span class="form-control-feedback" aria-hidden="true"></span>
+						<div id="mensagemsenha">
+							<label>Senha deve ter mais que 6 caracteres</label>
+						</div>
+					</div>
+					
+					<div class="form-group has-feedback" id="confirmacaosenhadiv">
+						<input type="password" class="form-control input-lg" placeholder="Confirme sua senha" name="confirmacaosenha" id="confirmacaosenha">
+						<span class="form-control-feedback" aria-hidden="true"></span>
+						<div id="mensagemconfirmacaosenha">
+							<label>Senhas não conferem</label>
+						</div>
+					</div>
+					
+					<br />
+					<!-- Mostrar as opções de cargos -->
+					<div  class="form-group custom-select has-feedback">
+					  <select name="cargo" id="cargoselect">
+					  	<option style="display: none">Selecione seu cargo:</option>
+					  	
+					  	
+					  	
+					  	<option value="Administrador">
+					  		Administrador - Tem domínio sobre todo o sistema					  	
+					  	</option>
+					  	
+					  	<option value="Gestor geral">
+					  		Gestor geral - Enxerga todos os processos da empresa e inicia novos contratos					  	
+					  	</option>
+					  	
+					  	<option value="Gestor">
+					  		Gestor - Adiciona processos aos contratos já existentes ou é um fiscal de processo					  	
+					  	</option>
+					  	
+					  	<option value="Tesoureiro">
+					  		Tesoureiro - Libera o pagamento de processos					  	
+					  	</option>
+					  	
+					  </select> <!-- select cargos -->
+					</div> <!-- fim div select cargos -->
+					
+					<!-- Mostrar as opções de setores -->
+					<div class="form-group custom-select has-feedback">
+					  <select name="setor">
+					  	<option style="display: none">Selecione seu setor:</option>
+					  	
+					  	
+					  	
+					  	<option value="CTB">
+					  		CTB - Companhia de Transportes do Estado da Bahia					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ ARQ CENTRAL">
+					  		CTB/ ARQ CENTRAL - Arquivo Central					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ ARQ CORRENTE">
+					  		CTB/ ARQ CORRENTE - Arquivo Corrente					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ DIPRE">
+					  		CTB/ DIPRE - Diretoria de Presidência					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ ASJUR">
+					  		CTB/ ASJUR - Assessoria Jurídica					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ ASTEC">
+					  		CTB/ ASTEC - Assessoria Técnica					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ ASREI">
+					  		CTB/ ASREI - Assessoria de Relações Institucionais					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ DIRAF">
+					  		CTB/ DIRAF - Diretoria Administrativa e Financeira					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ CODGE">
+					  		CTB/ CODGE - Coordenadoria de Desenvolvimento da Gestão					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ QUAS">
+					  		CTB/ QUAS - Subcoordenadoria de Gestão e Qualidade dos Serviços					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ TECI">
+					  		CTB/ TECI - Subcoordenadoria de Tecnologia da Informação					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ GESP">
+					  		CTB/ GESP - Subcoordenadoria de Gestão de Pessoas					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ COADM">
+					  		CTB/ COADM - Coordenadoria Administrativa					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ SPAT">
+					  		CTB/ SPAT - Subcoordenadoria de Suprimentos e Patrimônio					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ GSER">
+					  		CTB/ GSER - Subcoordenadoria de Gestão de Serviços					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ COFIN">
+					  		CTB/ COFIN - Coordenadoria Financeira					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ CEFI">
+					  		CTB/ CEFI - Subcoordenadoria de Controle e Execução Financeira					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ FATC">
+					  		CTB/ FATC - Subcoordenadoria de Faturamento e Cobrança					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ CONT">
+					  		CTB/ CONT - Subcoordenadoria de Contabilidade					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ CONV">
+					  		CTB/ CONV - Subcoordenadoria de Convênios e Contratos					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ DIROM">
+					  		CTB/ DIROM - Diretoria de Operação e Manutenção					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ COMAN">
+					  		CTB/ COMAN - Coordenadoria de Manutenção					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ MARO">
+					  		CTB/ MARO - Subcoordenadoria de Material Rodante					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ SISF">
+					  		CTB/ SISF - Subcoordenadoria de Sistema Fixo					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ VIAP">
+					  		CTB/ VIAP - Subcoordenadoria de Via Permanente					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ COOPE">
+					  		CTB/ COOPE - Coordenadoria de Operação					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ TMOV">
+					  		CTB/ TMOV - Subcoordenadoria de Trens Controle e Movimento					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ POPE">
+					  		CTB/ POPE - Subcoordenadoria de Planejamento Operacional das Estações					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ DIRES">
+					  		CTB/ DIRES - Diretoria das Estações					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ COBEU">
+					  		CTB/ COBEU - Coordenadoria de Bem Estar do Usuário					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ SEGU">
+					  		CTB/ SEGU - Subcoordenadoria de Seguranca dos Usuários					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ çosEG">
+					  		CTB/ çosEG - Coordenadoria de Segurança					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ SEPA">
+					  		CTB/ SEPA - Subcoordenadoria de Segurança Patrimonial					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ DIPLA">
+					  		CTB/ DIPLA - Diretoria de Planejamento					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ COAAP">
+					  		CTB/ COAAP - Coordenadoria de Avaliação e Acompanhamento de Projetos					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ çõesP">
+					  		CTB/ çõesP - Coordenadoria de Estudos e Planos					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ DIROB">
+					  		CTB/ DIROB - Diretoria de Obras					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ COOES">
+					  		CTB/ COOES - Coordenadoria de Operações Especiais					  						  	
+					  	</option>
+					  	
+					  	<option value="CTB/ COFIS">
+					  		CTB/ COFIS - Coordenadoria de Fiscalização de Obras					  						  	
+					  	</option>
+					  	
+					  </select> <!-- select setores -->
+					</div> <!-- fim div select setores -->
+					
+				</div>
+				
+				<br/>
+				<div class="form-group" id="botaocadastrar">
+					<button type="submit"
+						class="btn btn-primary btn-lg aw-btn-full-width">Cadastrar</button>
+				</div>
+				<div class="aw-simple-panel__footer"><br/></div>
+			</div>
+		</form>
+		
+	<script type="text/javascript" src="script.js"></script>
+	</div>
+</body>
+</html>

@@ -12,17 +12,17 @@
 	<!-- Declaração de servlets -->	
 	<servlet>
 		<servlet-name>LoginPag</servlet-name>
-		<jsp-file>login.html</jsp-file>
+		<jsp-file>/login.html</jsp-file>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>CadastrarUsuarioPag</servlet-name>
-		<jsp-file>cadastrousuario.jsp</jsp-file>
+		<jsp-file>/cadastrousuario.jsp</jsp-file>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>EsqueceuSenhaPag</servlet-name>
-		<jsp-file>esqueceuasenha.html</jsp-file>
+		<jsp-file>/esqueceuasenha.html</jsp-file>
 	</servlet>
 	
 	<servlet>
