@@ -15,8 +15,6 @@
 	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/lib/commons-email-1.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/lib/javax.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/lib/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/lib/javax.servlet.jsp.jstl.jar"/>
-	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/lib/javax.servlet.jsp.jstl-api.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/lib/javax.servlet-3.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/lib/lombok.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/lib/mysql-connector-java-5.1.46.jar"/>

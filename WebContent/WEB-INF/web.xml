@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-    version="2.4">
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0">
 	<display-name>Gestão de contratos</display-name>
 	<welcome-file-list>
-		<welcome-file>login</welcome-file>
+		<welcome-file>login.html</welcome-file>
 	</welcome-file-list>	
 	
 	
@@ -23,16 +24,6 @@
 	<servlet>
 		<servlet-name>EsqueceuSenhaPag</servlet-name>
 		<jsp-file>/esqueceuasenha.html</jsp-file>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>CadastrarUsuarioServlet</servlet-name>
-		<servlet-class>servlet.CadastrarUsuarioServlet</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>servlet.LoginServlet</servlet-class>
 	</servlet>
 	
 	<!-- Servlets de erros -->
@@ -58,15 +49,6 @@
 		<url-pattern>/esqueceuasenha</url-pattern>
 	</servlet-mapping>
 	
-	<servlet-mapping>
-		<servlet-name>CadastrarUsuarioServlet</servlet-name>
-		<url-pattern>/cadastrarusuarioservlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/loginservlet</url-pattern>
-	</servlet-mapping>
 	
 	<!-- Servlets de erros -->
 	<servlet-mapping>

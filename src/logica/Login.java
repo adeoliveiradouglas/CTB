@@ -1,16 +1,8 @@
-/*
- * Servlet responsável por autenticar o usuário no sistema 
- */
+package logica;
 
-package servlet;
-
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,12 +10,10 @@ import dao.UsuarioDAO;
 import entity.Usuario;
 import sun.misc.BASE64Encoder;
 
-@WebServlet("/loginservlet")
-public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = -6756540979800400483L;
+public class Login implements Logica{
 
 	@Override
-	protected void service(HttpServletRequest pedido, HttpServletResponse resposta) throws IOException, ServletException {
+	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		//Busca usuario no banco
 		Usuario u = new UsuarioDAO().getByEmail(
 						pedido.getParameter("email")
@@ -35,11 +25,11 @@ public class LoginServlet extends HttpServlet {
 					   );
 		
 		if(u != null && senha.equals(u.getSenha())){
-			pedido.getRequestDispatcher("/logado.html").forward(pedido, resposta);
+			return "/logado.html";
 		} else {
-			pedido.getRequestDispatcher("/usuarioexiste").forward(pedido, resposta);
+			return "/usuarioexiste";
 		}
-	}
+}
 	
 	public String criptografa(String senha) {
 		try {
@@ -52,4 +42,5 @@ public class LoginServlet extends HttpServlet {
 		}
 		return senha;
 	}
+
 }

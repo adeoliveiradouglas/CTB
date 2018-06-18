@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import entity.Cargo;
 import lombok.Getter;
-
 public class CargoDAO extends DAO{
 	@Getter
 	private final String colunaId = super.getNomeTabela() + ".id",

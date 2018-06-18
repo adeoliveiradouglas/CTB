@@ -4,10 +4,13 @@
 
 package dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entity.Usuario;
+import sun.misc.BASE64Encoder;
 
 public class UsuarioDAO extends DAO {
 	//Nome das colunas no banco de dados
@@ -36,6 +39,12 @@ public class UsuarioDAO extends DAO {
 	}
 	public void inserir(Usuario usuario) {
 		iniciaConexaoComBanco();
+		
+//		criptografa senha do usuario antes de inserir no banco
+		usuario.setSenha(
+			criptografa(usuario.getSenha())
+		);
+		
 		super.setSqlQuery(
 			"insert into " + super.getNomeTabela() + " values (?,?,?,?,?,?)"
 		);
@@ -106,10 +115,6 @@ public class UsuarioDAO extends DAO {
  		depois busca setor e cargo através do resultado do usuario
  		
 */
-		int idCargo;
-		String codigoSetor;
-		SetorDAO sdao;
-		CargoDAO cdao;
 		Usuario u;
 		
 //		monta a query
@@ -145,47 +150,26 @@ public class UsuarioDAO extends DAO {
 		
 		try{
 			super.getResultado().next();
-			u = new Usuario();
-			u.setMatricula(
+			u = new Usuario(
 				super.getResultado().getInt(
 					colunaMatricula
-				)
-			);
-			
-			u.setNome(
+				),
 				super.getResultado().getString(
 					colunaNome
-				)
-			);
-			
-			u.setEmail(
+				),
 				super.getResultado().getString(
 					colunaEmail
-				)
-			);
-			
-			u.setSenha(
+				),
 				super.getResultado().getString(
 					colunaSenha
-				)
-			);
-			
-			codigoSetor = super.getResultado().getString(colunaSetor);
-			idCargo = super.getResultado().getInt(colunaCargo);
-			
-			sdao = new SetorDAO("gestaodecontratos", "douglas", "administrador", super.getIp());
-			cdao = new CargoDAO("gestaodecontratos", "douglas", "administrador", super.getIp());
-			
-//			busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-			u.setSetor(
-				sdao.getByCodigo(
-					codigoSetor
-				).getSigla()
-			);
-			
-			u.setCargo(
-				cdao.getByCodigo(
-					idCargo
+				),
+				
+//				busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+				new SetorDAO().getByCodigo(
+						super.getResultado().getString(colunaSetor)
+				).getSigla(),
+				new CargoDAO().getByCodigo(
+						super.getResultado().getInt(colunaCargo)
 				).getNome()
 			);
 		} catch (SQLException e) {
@@ -207,10 +191,6 @@ public class UsuarioDAO extends DAO {
  		depois busca setor e cargo através do resultado do usuario
  		
 */
-		int idCargo;
-		String codigoSetor;
-		SetorDAO sdao;
-		CargoDAO cdao;
 		Usuario u;
 		
 //		monta a query
@@ -246,49 +226,29 @@ public class UsuarioDAO extends DAO {
 		
 		try{
 			super.getResultado().next();
-			u = new Usuario();
-			u.setMatricula(
+			u = new Usuario(
 				super.getResultado().getInt(
-					colunaMatricula
-				)
-			);
-			
-			u.setNome(
+						colunaMatricula
+				),
 				super.getResultado().getString(
 					colunaNome
-				)
-			);
-			
-			u.setEmail(
+				),
 				super.getResultado().getString(
 					colunaEmail
-				)
-			);
-			
-			u.setSenha(
+				),
 				super.getResultado().getString(
 					colunaSenha
-				)
-			);
-			
-			codigoSetor = super.getResultado().getString(colunaSetor);
-			idCargo = super.getResultado().getInt(colunaCargo);
-			
-			sdao = new SetorDAO("gestaodecontratos", "douglas", "administrador", super.getIp());
-			cdao = new CargoDAO("gestaodecontratos", "douglas", "administrador", super.getIp());
-			
-//			busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-			u.setSetor(
-				sdao.getByCodigo(
-					codigoSetor
-				).getSigla()
-			);
-			
-			u.setCargo(
-				cdao.getByCodigo(
-					idCargo
+				),
+				
+//				busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+				new SetorDAO().getByCodigo(
+						super.getResultado().getString(colunaSetor)
+				).getSigla(),
+				new CargoDAO().getByCodigo(
+						super.getResultado().getInt(colunaCargo)
 				).getNome()
 			);
+			
 		} catch (SQLException e) {
 			u = null;
 			e.printStackTrace();
@@ -308,10 +268,7 @@ public class UsuarioDAO extends DAO {
  		depois busca setor e cargo através do resultado do usuario
  		
 */
-		int idCargo;
-		String codigoSetor;
-		SetorDAO sdao;
-		CargoDAO cdao;
+		Usuario u = null;
 		ArrayList<Usuario> lu = new ArrayList<>();
 		
 //		monta a query
@@ -338,42 +295,31 @@ public class UsuarioDAO extends DAO {
 			return lu;
 		}
 		
-		Usuario u = null;
-		sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
-		cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
+		
 		try{
 			while(super.getResultado().next()){
-				u = new Usuario();
-				u.setMatricula(
+				u = new Usuario(
 					super.getResultado().getInt(
-						colunaMatricula
-					)
-				);
-				
-				u.setNome(
+							colunaMatricula
+					),
 					super.getResultado().getString(
 						colunaNome
-					)
-				);
-				
-				u.setEmail(
+					),
 					super.getResultado().getString(
 						colunaEmail
-					)
-				);
-				
-				u.setSenha(
+					),
 					super.getResultado().getString(
 						colunaSenha
-					)
+					),
+					
+//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+					new SetorDAO().getByCodigo(
+							super.getResultado().getString(colunaSetor)
+					).getSigla(),
+					new CargoDAO().getByCodigo(
+							super.getResultado().getInt(colunaCargo)
+					).getNome()
 				);
-				
-				codigoSetor = super.getResultado().getString(colunaSetor);
-				idCargo = super.getResultado().getInt(colunaCargo);
-				
-				//busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-				u.setSetor(sdao.getByCodigo(codigoSetor).getSigla());
-				u.setCargo(cdao.getByCodigo(idCargo).getNome());
 				lu.add(u);
 			}
 		} catch (SQLException e) {
@@ -383,5 +329,17 @@ public class UsuarioDAO extends DAO {
 		encerraConexaocomBanco();
 		return lu;
 	}
-
+	
+	private String criptografa(String senha){
+		/*Código retirado do site http://www.guj.com.br/t/cadastro-de-usuario-com-senha-criptografada/192679*/		
+		try{
+		 MessageDigest digest = MessageDigest.getInstance("SHA-256");
+		               digest.update(senha.getBytes());
+		 BASE64Encoder encoder = new BASE64Encoder();
+		        return encoder.encode(digest.digest());
+		}catch(NoSuchAlgorithmException ns){
+			ns.printStackTrace();
+		}
+		return senha;
+	}
 }

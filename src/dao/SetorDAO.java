@@ -23,6 +23,10 @@ public class SetorDAO extends DAO{
 		super(nomeDB, usuarioDB, senhaDB, "setor", ip);
 	}
 
+	public SetorDAO(){
+		super("setor");
+	}
+	
 	public Setor getByCodigo(String codigo){
 		iniciaConexaoComBanco();
 		

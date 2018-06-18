@@ -1,5 +1,5 @@
 /*
- * Classe responsável por armazenar dados de um processo
+z * Classe responsável por armazenar dados de um processo
  * Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Data"
  * Cada processo está dentro de um contrato.
  * obs1: numeroSei é o número do contrato.
@@ -22,4 +22,6 @@ public class Processo {
 			numeroSei; // vide cabecalho obs1
 	private BigDecimal aditivo; // vide cabecalho obs2
 	private Date dataPagamento; // vide cabecalho obs3
+	
+	public Processo(){}
 }

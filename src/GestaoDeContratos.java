@@ -1,7 +1,9 @@
-import java.util.ArrayList;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
-import dao.*;
-import entity.*;
+import dao.UsuarioDAO;
+import entity.Usuario;
+import sun.misc.BASE64Encoder;
 
 /*
  * Classe main não utilizada no decorrer do programa
@@ -12,30 +14,27 @@ import entity.*;
 public class GestaoDeContratos {
 
 	public static void main(String[] args) {
-		String usuarioB = "servidorApp",
-				banco = "gestaodecontratos",
-				senhaB = "suporte2017";
 		
-//		Usuario u2 = new Usuario(88552233, "Douglas", "adeoliveiradouglas@gmail.com", "$2a$10$k1SV2r4SH9DcZloBEndktOo2ePCxYeSCOBzpmWuMJg3WHIYRSMZ62", "CTB/ TECI", "Administrador");
-		SetorDAO sdao = new SetorDAO(banco, usuarioB, senhaB);
-		UsuarioDAO udao = new UsuarioDAO(banco, usuarioB, senhaB);
-		CargoDAO cdao = new CargoDAO(banco, usuarioB, senhaB);
+		Usuario u = new UsuarioDAO().getByEmail("adeoliveiradouglas@gmail.com");
 		
-				ArrayList<Setor> setores = sdao.getAll();
-		ArrayList<Cargo> cargos = cdao.getAll();
-		Usuario u = udao.getByMatricula(88552233);
-		ArrayList<Usuario> usuarios = udao.getAll();
+		System.out.println(u.getNome());
 		
-		System.out.println(u.toString());
-		for (int i = 0 ; i < cargos.size(); ++i){
-			System.out.println(cargos.get(i).toString());
-		}
-		for (int i = 0 ; i < setores.size(); ++i){
-			System.out.println(setores.get(i).toString());
-		}
-		for (int i = 0 ; i < usuarios.size(); ++i){
-			System.out.println(usuarios.get(i).toString());
-		}
-		
+		String s = criptografa("gestor");
+		System.out.println(s);
 	}
+	
+	
+	public static String criptografa(String senha){
+//		classe usada para criptografar as senhas
+		try{
+		 MessageDigest digest = MessageDigest.getInstance("SHA-256");
+		               digest.update(senha.getBytes());
+		 BASE64Encoder encoder = new BASE64Encoder();
+		        return encoder.encode(digest.digest());
+		}catch(NoSuchAlgorithmException ns){
+			ns.printStackTrace();
+		}
+		return senha;
+	}
+	
 }

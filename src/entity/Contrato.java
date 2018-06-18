@@ -47,4 +47,6 @@ public class Contrato {
 	
 	private ArrayList<Processo> processos;
 	
+	public Contrato(){}
+	
 }
