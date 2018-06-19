@@ -1,13 +1,9 @@
-package servlet;
+package logica;
 
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,12 +13,10 @@ import email.Email;
 import entity.Usuario;
 import sun.misc.BASE64Encoder;
 
-@WebServlet("/cadastrarusuarioservlet")
-public class CadastrarUsuarioServlet extends HttpServlet {
-	private static final long serialVersionUID = -325209724266609709L;
+public class CadastrarUsuario implements Logica {
 
 	@Override
-	protected void service(HttpServletRequest pedido, HttpServletResponse resposta) throws IOException, ServletException {
+	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		String nome = pedido.getParameter("nome");
 		String email = pedido.getParameter("email");
 		UsuarioNovoDAO undao = new UsuarioNovoDAO();
@@ -49,13 +43,12 @@ public class CadastrarUsuarioServlet extends HttpServlet {
 			new Email().enviarConfirmacaoCadastro(email, nome);
 
 			// mostra página informando confirmação do cadastro
-			pedido.getRequestDispatcher("/confirmacaocadastro.jsp").forward(pedido, resposta);
+			return "/confirmacaocadastro.jsp";
 		
 		}//Fim do if que testa se o usuário já existe no sistema
 		
-		else 
-			pedido.getRequestDispatcher("/usuarioexiste").forward(pedido, resposta);
-	}//Fim do método "service"
+		else return "/errosPag/usuarioexiste.html";
+	}
 	
 	private String criptografa(String senha){
 		/*
@@ -72,4 +65,5 @@ public class CadastrarUsuarioServlet extends HttpServlet {
 		}
 		return senha;
 	}
-} //Fim da classe
+
+}

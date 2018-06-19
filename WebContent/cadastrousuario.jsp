@@ -30,7 +30,7 @@
 				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
 		</div>
 		<br />
-		<form action="cadastrarusuarioservlet" th:object="${userdetails}" method="POST">
+		<form action="sistema?logica=CadastrarUsuario" th:object="${userdetails}" method="POST">
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 					<div class="form-group  has-feedback">

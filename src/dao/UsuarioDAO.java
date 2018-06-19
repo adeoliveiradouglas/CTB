@@ -4,13 +4,10 @@
 
 package dao;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entity.Usuario;
-import sun.misc.BASE64Encoder;
 
 public class UsuarioDAO extends DAO {
 	//Nome das colunas no banco de dados
@@ -37,71 +34,60 @@ public class UsuarioDAO extends DAO {
 	public UsuarioDAO(){
 		super("usuario");
 	}
-	public void inserir(Usuario usuario) {
+	
+	public void inserir(Usuario usuario) throws SQLException {
 		iniciaConexaoComBanco();
-		
-//		criptografa senha do usuario antes de inserir no banco
-		usuario.setSenha(
-			criptografa(usuario.getSenha())
-		);
 		
 		super.setSqlQuery(
 			"insert into " + super.getNomeTabela() + " values (?,?,?,?,?,?)"
 		);
 		
-		try {
-			int posicao = 0;
-			SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
-			CargoDAO cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
-			
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
-				)
-			);
-			
-			super.getStatement().setInt(
-				++posicao,
-				usuario.getMatricula()
-			);
-			
-			super.getStatement().setString(
-				++posicao,
-				usuario.getNome()
-			);
-			
-			super.getStatement().setString(
-				++posicao,
-				usuario.getEmail()
-			);
-			
-			super.getStatement().setString(
-				++posicao,
-				usuario.getSenha()
-			);
-			
-			super.getStatement().setString(
-				++posicao,
-				sdao.getBySigla( //busca o codigo da sigla na tabela de setores
-					usuario.getSetor()
-				).getCodigo()
-			);
-			
-			super.getStatement().setInt(
-				++posicao,
-				cdao.getByNome( //busca o codigo do cargo na tabela de cargos
-					usuario.getCargo()
-				).getId()
-			);
-			
-			super.getStatement().executeUpdate();
-				
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		int posicao = 0;
+		SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
+		CargoDAO cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
 		
+		super.setStatement(
+			super.getDbConnection().prepareStatement(
+				super.getSqlQuery()
+			)
+		);
 		
+		super.getStatement().setInt(
+			++posicao,
+			usuario.getMatricula()
+		);
+		
+		super.getStatement().setString(
+			++posicao,
+			usuario.getNome()
+		);
+		
+		super.getStatement().setString(
+			++posicao,
+			usuario.getEmail()
+		);
+		
+		super.getStatement().setString(
+			++posicao,
+			usuario.getSenha()
+		);
+		
+		super.getStatement().setString(
+			++posicao,
+			sdao.getBySigla( //busca o codigo da sigla na tabela de setores
+				usuario.getSetor()
+			).getCodigo()
+		);
+		
+		super.getStatement().setInt(
+			++posicao,
+			cdao.getByNome( //busca o codigo do cargo na tabela de cargos
+				usuario.getCargo()
+			).getId()
+		);
+		
+		super.getStatement().executeUpdate();
+			
 		encerraConexaocomBanco();
 	}
 	
@@ -195,7 +181,7 @@ public class UsuarioDAO extends DAO {
 		
 //		monta a query
 		super.setSqlQuery(
-				"select * from usuario where usuario.login = ?"
+				"select * from usuario where " + colunaEmail + " = ?"
 		);
 		
 		try {
@@ -228,7 +214,7 @@ public class UsuarioDAO extends DAO {
 			super.getResultado().next();
 			u = new Usuario(
 				super.getResultado().getInt(
-						colunaMatricula
+					colunaMatricula
 				),
 				super.getResultado().getString(
 					colunaNome
@@ -273,7 +259,7 @@ public class UsuarioDAO extends DAO {
 		
 //		monta a query
 		super.setSqlQuery(
-			"select * from usuario"
+			"select * from " + super.getNomeTabela()
 		);
 		
 		try {
@@ -292,7 +278,7 @@ public class UsuarioDAO extends DAO {
 		} catch(SQLException e) {
 			e.printStackTrace();
 			encerraConexaocomBanco();
-			return lu;
+			return null;
 		}
 		
 		
@@ -324,22 +310,10 @@ public class UsuarioDAO extends DAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			lu = null;
 		}
 		
 		encerraConexaocomBanco();
 		return lu;
-	}
-	
-	private String criptografa(String senha){
-		/*Código retirado do site http://www.guj.com.br/t/cadastro-de-usuario-com-senha-criptografada/192679*/		
-		try{
-		 MessageDigest digest = MessageDigest.getInstance("SHA-256");
-		               digest.update(senha.getBytes());
-		 BASE64Encoder encoder = new BASE64Encoder();
-		        return encoder.encode(digest.digest());
-		}catch(NoSuchAlgorithmException ns){
-			ns.printStackTrace();
-		}
-		return senha;
 	}
 }

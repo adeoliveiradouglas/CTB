@@ -6,7 +6,8 @@
  *  obs2 - objeto: descricao do contrato
  *  obs3 - recurso, fontePagante e uso: há padrões para os três campos no bd, aqui só será armazenado o campo String/Varchar dos mesmos
  *  obs4 - guarda apenas a matricula da pessoa responsavel pelo contrato
- *  obs5 - valor total é o valor de todos os aditivos de todos os processos mais o valor inicial do contrato 
+ *  obs5 - valor total é o valor de todos os aditivos de todos os processos mais o valor inicial do contrato
+ *  	   Em beta: calcular dinamicamente toda vez que o usuario pedir a pagina ou guardar o valor no banco e aumentar a cada aditivo 	
  */
 
 package entity;

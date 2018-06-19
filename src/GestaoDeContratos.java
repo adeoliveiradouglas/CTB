@@ -1,9 +1,9 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import sun.misc.BASE64Encoder;
 
 import dao.UsuarioDAO;
 import entity.Usuario;
-import sun.misc.BASE64Encoder;
 
 /*
  * Classe main não utilizada no decorrer do programa

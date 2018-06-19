@@ -35,58 +35,56 @@ public class UsuarioNovoDAO extends DAO {
 
 	public void inserir(Usuario usuario) throws SQLException {
 		iniciaConexaoComBanco();
+		
 		super.setSqlQuery(
 			"insert into " + super.getNomeTabela() + " values (?,?,?,?,?,?)"
 		);
 		
-			int posicao = 0;
-			SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
-			CargoDAO cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
-			
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
-				)
-			);
-			
-			super.getStatement().setInt(
-				++posicao,
-				usuario.getMatricula()
-			);
-			
-			super.getStatement().setString(
-				++posicao,
-				usuario.getNome()
-			);
-			
-			super.getStatement().setString(
-				++posicao,
-				usuario.getEmail()
-			);
-			
-			super.getStatement().setString(
-				++posicao,
-				usuario.getSenha()
-			);
-			
-			super.getStatement().setString(
-				++posicao,
-				sdao.getBySigla( //busca o codigo da sigla na tabela de setores
-					usuario.getSetor()
-				).getCodigo()
-			);
-			
-			super.getStatement().setInt(
-				++posicao,
-				cdao.getByNome( //busca o codigo do cargo na tabela de cargos
-					usuario.getCargo()
-				).getId()
-			);
-			
-			super.getStatement().executeUpdate();
-				
-				
+		int posicao = 0;
+		SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
+		CargoDAO cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
 		
+		super.setStatement(
+			super.getDbConnection().prepareStatement(
+				super.getSqlQuery()
+			)
+		);
+		
+		super.getStatement().setInt(
+			++posicao,
+			usuario.getMatricula()
+		);
+		
+		super.getStatement().setString(
+			++posicao,
+			usuario.getNome()
+		);
+		
+		super.getStatement().setString(
+			++posicao,
+			usuario.getEmail()
+		);
+		
+		super.getStatement().setString(
+			++posicao,
+			usuario.getSenha()
+		);
+		
+		super.getStatement().setString(
+			++posicao,
+			sdao.getBySigla( //busca o codigo da sigla na tabela de setores
+				usuario.getSetor()
+			).getCodigo()
+		);
+		
+		super.getStatement().setInt(
+			++posicao,
+			cdao.getByNome( //busca o codigo do cargo na tabela de cargos
+				usuario.getCargo()
+			).getId()
+		);
+		
+		super.getStatement().executeUpdate();
 		encerraConexaocomBanco();
 	}
 	
@@ -364,4 +362,6 @@ public class UsuarioNovoDAO extends DAO {
 		encerraConexaocomBanco();
 		return lu;
 	}
+	
+	
 }
