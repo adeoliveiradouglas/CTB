@@ -1,4 +1,4 @@
-package servlet;
+package logica;
 
 import java.io.IOException;
 
@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import logica.Logica;
-
 @WebServlet("/sistema")
 public class SistemaServlet extends HttpServlet {
 	private static final long serialVersionUID = -5866444462741496740L;
@@ -17,8 +15,7 @@ public class SistemaServlet extends HttpServlet {
 	protected void service(HttpServletRequest pedido, HttpServletResponse resposta) throws ServletException, IOException {
 		final String pacote = "logica.";
 		
-		String parametro = pedido.getParameter("logica");
-        String nomeDaClasse = pacote + parametro;
+        String nomeDaClasse = pacote + pedido.getParameter("logica");
 
         try {
             Class<?> classe = Class.forName(nomeDaClasse);

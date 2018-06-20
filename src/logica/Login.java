@@ -25,9 +25,11 @@ public class Login implements Logica{
 					   );
 		
 		if(u != null && senha.equals(u.getSenha())){
-			return "/logado.html";
+			HttpServletRequest req = (HttpServletRequest) pedido;
+			req.getSession().setAttribute("usuario", u);
+			return "/" + u.getCargo() + "/logado.html";
 		} else {
-			return "/usuarioexiste";
+			return "errosPag/403.html";
 		}
 }
 	

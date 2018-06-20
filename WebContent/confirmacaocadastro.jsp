@@ -26,8 +26,10 @@
 		<p align="justify">
 			Pronto, ${param.nome}, obrigado por se cadastrar no Sistema de Gestão de Contratos
 			da CTB. Agora basta aguardar o administrador liberar o seu acesso
-			para começar a usar. Te informaremos por email quando seu acesso for aprovado. <br /><br />Clique <a
-				href="login.html">aqui</a> para voltar para a página principal.
+			para começar a usar. Te informaremos por email quando seu acesso for aprovado. 
+			<br />
+			<br />
+			Clique <a href="login.html">aqui</a> para voltar para a página principal.
 		</p>
 
 	</div>

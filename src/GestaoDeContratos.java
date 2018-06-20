@@ -1,26 +1,20 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import sun.misc.BASE64Encoder;
 
-import dao.UsuarioDAO;
-import entity.Usuario;
+import email.Email;
+import sun.misc.BASE64Encoder;
 
 /*
  * Classe main não utilizada no decorrer do programa
  * Usada somente para testes durante o desenvolvimento
- * senha criptografada  com spring security asd = $2a$10$k1SV2r4SH9DcZloBEndktOo2ePCxYeSCOBzpmWuMJg3WHIYRSMZ62 
  */
 
 public class GestaoDeContratos {
 
 	public static void main(String[] args) {
-		
-		Usuario u = new UsuarioDAO().getByEmail("adeoliveiradouglas@gmail.com");
-		
-		System.out.println(u.getNome());
-		
-		String s = criptografa("gestor");
-		System.out.println(s);
+		Email e = new Email();
+		e.enviarConfirmacaoCadastro("adeoliveiradouglas@gmail.com", "adeoliveiradouglas@gmail.com");
+		e.enviarCodigo("adeoliveiradouglas@gmail.com", 123);
 	}
 	
 	

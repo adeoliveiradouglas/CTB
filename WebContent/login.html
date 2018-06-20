@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
 <meta charset="ISO-8859-1" />
@@ -24,7 +24,7 @@
 		</div>
 
 		<br />
-		<form action="loginservlet" th:object="${userdetails}" method="POST">
+		<form action="sistema?logica=Login" th:object="${userdetails}" method="POST">
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 					<div class="form-group  has-feedback">

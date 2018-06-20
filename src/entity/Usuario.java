@@ -19,9 +19,7 @@ public class Usuario {
 				   setor, // vide cabecalho obs1
 				   cargo; // vide cabecalho obs2
 	
-
 	public Usuario() {}
-
 
 	public Usuario(int matricula, String nome, String email, String senha, String setor, String cargo) {
 		super();

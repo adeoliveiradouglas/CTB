@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="ISO-8859-1">
 <title>Sistema de Gestão Administrativa da CTB - Recuperar senha</title>
@@ -17,13 +19,20 @@
 				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
 		</div>
 		<br />
-		<p>
-			Ainda estamos trabalhando para oferecer esse funcionalidade para você. Em breve estará disponível.
-			<br /><br />
-			Para voltar para a página principal clique <a href="login.html">aqui</a>
-		</p>
-
-
+		<form action="sistema?logica=RecuperarSenha1GerarToken" th:object="${userdetails}" method="POST"> 
+			<div class="aw-simple-panel">
+				<div class="aw-simple-panel__box">
+					Por favor, informe seu email de acesso:
+					<div class="form-group  has-feedback">
+						<input type="email" class="form-control  input-lg" placeholder="Seu e-mail" name="email" required/> 
+						<span class="glyphicon  glyphicon-envelope  form-control-feedback" aria-hidden="true"></span>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Enviar código</button>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </body>
 </html>

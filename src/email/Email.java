@@ -20,8 +20,8 @@ public class Email {
 	public void enviarCodigo(String emailTo, int codigo){
 		//envia a mensagem com o codigo para o email recebido no parametro
 		this.assunto = "Recuperação de senha Gestão de Contratos - CTB";
-		this.mensagem = "O token de recuperação é: " + codigo + ".\nSe não solicitou, desconsidere essa mensagem.";
 		this.emailTo = emailTo;
+		this.mensagem = "O token de recuperação é: " + codigo + ".\nSe não solicitou, desconsidere essa mensagem.";
 		this.enviar();
 	}
 	
@@ -51,20 +51,5 @@ public class Email {
 		} catch (EmailException e) {
 		    e.printStackTrace();
 		}
-		/*
-		
-		try {
-			//monta a mensagem
-			mail.setFrom(emailFrom, nome);
-			mail.setSubject(assunto);
-			mail.setMsg(mensagem);
-			mail.setSSLOnConnect(true);
-			mail.setAuthentication(emailFrom, senha);
-			mail.setHostName(smtp);
-			mail.setSmtpPort(smtpPorta);
-			mail.addTo(emailTo);
-			//envia a mensagem
-			mail.send();
-		} catch (EmailException e) {}*/
 	}
 }
