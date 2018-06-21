@@ -1,4 +1,4 @@
-/*Responsável por restringir o acesso às páginas de administrador*/
+/*Responsável por restringir o acesso às páginas de tesoureiro*/
 
 package filtro;
 
@@ -19,13 +19,13 @@ import javax.servlet.http.HttpSession;
 import entity.Usuario;
 
 @WebFilter(
-	urlPatterns = {"/Administrador/*"}, 
+	urlPatterns = {"/Tesoureiro/*"}, 
 	dispatcherTypes = {
 		DispatcherType.REQUEST, 
 		DispatcherType.FORWARD
 	}
 )
-public class LoginAdministrador implements Filter{
+public class LoginTesoureiro implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest pedido, ServletResponse resposta, FilterChain chain)
@@ -47,7 +47,7 @@ public class LoginAdministrador implements Filter{
  * 		Aqui recupera os dados da sessão e verifica se o usuário tem autorização para acessar essa página através do cargo dele
  * */
 		if (
-			((Usuario) sessao.getAttribute("usuario")).getCargo().equals("Administrador")
+			((Usuario) sessao.getAttribute("usuario")).getCargo().equals("Tesoureiro")
 		   )
 			chain.doFilter(pedido, resposta);
 		else

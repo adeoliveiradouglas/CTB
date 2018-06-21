@@ -25,11 +25,15 @@ public class Login implements Logica{
 					   );
 		
 		if(u != null && senha.equals(u.getSenha())){
-			HttpServletRequest req = (HttpServletRequest) pedido;
-			req.getSession().setAttribute("usuario", u);
-			return "/" + u.getCargo() + "/logado.html";
+//			Coloca os dados do usuário na sessão
+			pedido.getSession().setAttribute("usuario", u);
+//			Muda o tempo de inatividade para 5 minutos (o padrão são 30 minutos)
+			pedido.getSession().setMaxInactiveInterval(300);
+			
+//			Retorna a página do respectivo cargo que deve ser acessada 
+			return "/" + u.getCargo() + "/index.html";
 		} else {
-			return "errosPag/403.html";
+			return "sistema?logica=Erro403";
 		}
 }
 	
