@@ -35,7 +35,7 @@ public class UsuarioDAO extends DAO {
 		super("usuario");
 	}
 	
-	public void inserir(Usuario usuario) throws SQLException {
+	public void inserir(Usuario usuario){
 		iniciaConexaoComBanco();
 		
 		super.setSqlQuery(
@@ -46,47 +46,51 @@ public class UsuarioDAO extends DAO {
 		SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
 		CargoDAO cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
 		
-		super.setStatement(
-			super.getDbConnection().prepareStatement(
-				super.getSqlQuery()
-			)
-		);
-		
-		super.getStatement().setInt(
-			++posicao,
-			usuario.getMatricula()
-		);
-		
-		super.getStatement().setString(
-			++posicao,
-			usuario.getNome()
-		);
-		
-		super.getStatement().setString(
-			++posicao,
-			usuario.getEmail()
-		);
-		
-		super.getStatement().setString(
-			++posicao,
-			usuario.getSenha()
-		);
-		
-		super.getStatement().setString(
-			++posicao,
-			sdao.getBySigla( //busca o codigo da sigla na tabela de setores
-				usuario.getSetor()
-			).getCodigo()
-		);
-		
-		super.getStatement().setInt(
-			++posicao,
-			cdao.getByNome( //busca o codigo do cargo na tabela de cargos
-				usuario.getCargo()
-			).getId()
-		);
-		
-		super.getStatement().executeUpdate();
+		try {
+			super.setStatement(
+				super.getDbConnection().prepareStatement(
+					super.getSqlQuery()
+				)
+			);
+			
+			super.getStatement().setInt(
+				++posicao,
+				usuario.getMatricula()
+			);
+			
+			super.getStatement().setString(
+				++posicao,
+				usuario.getNome()
+			);
+			
+			super.getStatement().setString(
+				++posicao,
+				usuario.getEmail()
+			);
+			
+			super.getStatement().setString(
+				++posicao,
+				usuario.getSenha()
+			);
+			
+			super.getStatement().setString(
+				++posicao,
+				sdao.getBySigla( //busca o codigo da sigla na tabela de setores
+					usuario.getSetor()
+				).getCodigo()
+			);
+			
+			super.getStatement().setInt(
+				++posicao,
+				cdao.getByNome( //busca o codigo do cargo na tabela de cargos
+					usuario.getCargo()
+				).getId()
+			);
+			
+			super.getStatement().executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 			
 		encerraConexaocomBanco();
 	}
@@ -315,5 +319,42 @@ public class UsuarioDAO extends DAO {
 		
 		encerraConexaocomBanco();
 		return lu;
+	}
+
+	public void atualizarSenha(String senha, String email){
+		iniciaConexaoComBanco();
+		
+		/*
+		  Exemplo de query
+		  update usuario set senha = senha where usuario.login = email;
+		*/
+		super.setSqlQuery(
+			"update " + super.getNomeTabela() + " set senha = ? where " + colunaEmail + " = ?"
+		);
+		
+		try {
+			int posicao = 0;
+			super.setStatement(
+				super.getDbConnection().prepareStatement(
+					super.getSqlQuery()
+				)
+			);
+			
+			super.getStatement().setString(
+				++posicao, 
+				senha
+			);
+			
+			super.getStatement().setString(
+				++posicao, 
+				email
+			);
+			
+			super.getStatement().executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		encerraConexaocomBanco();
 	}
 }

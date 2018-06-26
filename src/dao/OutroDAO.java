@@ -69,13 +69,13 @@ public class OutroDAO extends DAO{
 		return lista;
 	}
 	
-	public Outro getByNome(String nome){
+	public Outro getById(int id){
 		iniciaConexaoComBanco();
 		
 		/*Exemplo de query
-		  select * from uso/fontepagante/recurso where nome = parametro*/
+		  select * from uso/fontepagante/recurso where id = parametro*/
 		super.setSqlQuery(
-			"select * from " + super.getNomeTabela() + " where " + colunaNome + " = ?"
+			"select * from " + super.getNomeTabela() + " where " + colunaId + " = ?"
 		);
 		
 		try {
@@ -86,9 +86,9 @@ public class OutroDAO extends DAO{
 				)
 			);
 			
-			super.getStatement().setString(
+			super.getStatement().setInt(
 				1, 
-				nome
+				id
 			);
 			
 //			Executa a query
@@ -103,10 +103,11 @@ public class OutroDAO extends DAO{
 		
 		
 //		Tipo abstrato para dados das tabelas uso, recurso e fontepagante
-		Outro o = new Outro();
+		Outro o = null;
 		try {
 			super.getResultado().next();
-
+			
+			o = new Outro();
 			o.setId(
 				super.getResultado().getInt(colunaId)
 			);

@@ -1,8 +1,8 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import email.Email;
 import sun.misc.BASE64Encoder;
+import utilidades.Email;
 
 /*
  * Classe main não utilizada no decorrer do programa
@@ -13,7 +13,7 @@ public class GestaoDeContratos {
 
 	public static void main(String[] args) {
 		Email e = new Email();
-		e.enviarConfirmacaoCadastro("adeoliveiradouglas@gmail.com", "adeoliveiradouglas@gmail.com");
+		e.enviarConfirmacaoCadastro("adeoliveiradouglas@gmail.com", "Douglas");
 		e.enviarCodigo("adeoliveiradouglas@gmail.com", 123);
 	}
 	

@@ -8,7 +8,7 @@
 <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
 
-<title>Sistema de Gestão Administrativa da CTB</title>
+<title>Sistema de Gestão de Contratos da CTB</title>
 
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
@@ -23,7 +23,6 @@
 </head>
 
 <body class="aw-layout-simple-page">
-		
 	<div class="aw-layout-simple-page__container">
 		<div align="center">
 			<img
@@ -49,7 +48,7 @@
 					</div>
 
 					<div class="form-group has-feedback">
-						<input type="password" class="form-control input-lg" placeholder="Crie sua senha" name="senha" id="senha" maxlength=11>
+						<input type="password" class="form-control input-lg" placeholder="Crie sua senha" name="senha" id="senha">
 						<span class="form-control-feedback" aria-hidden="true"></span>
 						<div id="mensagemsenha">
 							<label>Senha deve ter mais que 6 caracteres</label>
@@ -57,7 +56,7 @@
 					</div>
 					
 					<div class="form-group has-feedback" id="confirmacaosenhadiv">
-						<input type="password" class="form-control input-lg" placeholder="Confirme sua senha" name="confirmacaosenha" id="confirmacaosenha" maxlength=11>
+						<input type="password" class="form-control input-lg" placeholder="Confirme sua senha" name="confirmacaosenha" id="confirmacaosenha">
 						<span class="form-control-feedback" aria-hidden="true"></span>
 						<div id="mensagemconfirmacaosenha">
 							<label>Senhas não conferem</label>

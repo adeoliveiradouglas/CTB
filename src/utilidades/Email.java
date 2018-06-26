@@ -1,4 +1,4 @@
-package email;
+package utilidades;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
@@ -8,11 +8,11 @@ public class Email {
 	private SimpleEmail email;
 	private String  assunto = null,
 			mensagem = null,
-			smtp = "smtp.office365.com",
-			emailFrom = "contrato.ctb@ctb.ba.gov.br",
 			emailTo = null,
-			senha = "-aA#EY^u", 
-			nome = "Gestão de Contratos";
+			nome = "Gestão de Contratos",
+			smtp = "smtp.office365.com",
+			senha = "-aA#EY^u",
+			emailFrom = "contrato.ctb@ctb.ba.gov.br";
 	private int smtpPorta = 587;
 
 	public Email(){}

@@ -1,6 +1,6 @@
 <!-- 
-	Parte 1 da recuperação de senha 
-	Inserir email
+	Parte 2 da recuperação de senha 
+	Confirmar código enviado por email
 -->
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -24,16 +24,16 @@
 				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
 		</div>
 		<br />
-		<form action="sistema?logica=GerarToken" th:object="${userdetails}" method="POST"> 
+		<form action="sistema?logica=ValidarToken" th:object="${userdetails}" method="POST"> 
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
-					Por favor, informe seu email de acesso:
+					Insira o código que foi enviado para você:
 					<div class="form-group  has-feedback">
-						<input type="email" class="form-control  input-lg" placeholder="Seu e-mail" name="email" required/> 
+						<input type="number" class="form-control  input-lg" placeholder="Código" name="codigo" required/> 
 						<span class="glyphicon  glyphicon-envelope  form-control-feedback" aria-hidden="true"></span>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Enviar código</button>
+						<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Confirmar</button>
 					</div>
 				</div>
 			</div>

@@ -18,7 +18,6 @@ public class ProcessoDAO extends DAO{
 	}
 	
 	public ArrayList<Processo> getByContrato(int numeroContrato){
-		ArrayList<Processo> lista = new ArrayList<Processo>();
 		iniciaConexaoComBanco();
 		
 		super.setSqlQuery(
@@ -45,24 +44,32 @@ public class ProcessoDAO extends DAO{
 			encerraConexaocomBanco();
 			return null;
 		}
-		
-		
+		ArrayList<Processo> lista = new ArrayList<Processo>();
+		Processo p;
+				
 		try {
 			while(super.getResultado().next()){
-				Processo p = new Processo();
-				p.setNumeroSei(
-					super.getResultado().getString(colunaSei)
-				);
-				
-				p.setAditivo(
-					super.getResultado().getBigDecimal(colunaAditivo)
-				);
+				p = new Processo();
 				
 				p.setNotaFiscal(
 					super.getResultado().getString(colunaNotaFiscal)
 				);
+					
+				p.setAditivo(
+					super.getResultado().getBigDecimal(colunaAditivo)
+				);
+					
+				p.setTipoAditivo(
+					super.getResultado().getString(colunaTipoAditivo)
+				);
+
+				p.setDataPagamento(
+					super.getResultado().getDate(colunaDataPagamento)
+				);
 				
-//				FALTA TERMINAR
+				p.setNumeroSei(
+					super.getResultado().getString(colunaSei)
+				);
 				
 				lista.add(p);
 			}

@@ -21,8 +21,8 @@ public class Login implements Logica{
 		
 		//criptografa senha digitada. A comparação é feita com as senhas criptografadas
 		String senha = criptografa(
-					   		pedido.getParameter("senha")
-					   );
+			pedido.getParameter("senha")
+		);
 		
 		if(u != null && senha.equals(u.getSenha())){
 //			Coloca os dados do usuário na sessão
@@ -31,11 +31,11 @@ public class Login implements Logica{
 			pedido.getSession().setMaxInactiveInterval(300);
 			
 //			Retorna a página do respectivo cargo que deve ser acessada 
-			return "/" + u.getCargo() + "/index.html";
+			return "/" + u.getCargo() + "/index.jsp";
 		} else {
 			return "sistema?logica=Erro403";
 		}
-}
+	}
 	
 	public String criptografa(String senha) {
 		try {
