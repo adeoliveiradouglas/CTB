@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+
+<title>Cadastro de Contratos</title>
+ 	<link rel="stylesheet" type="text/css" href="/layout/stylesheets/vendors.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/layout/stylesheets/algaworks.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/layout/stylesheets/application.css"/>
+</head>
+
+<aside class="aw-layout-sidebar  js-sidebar">
+		<div class="aw-layout-sidebar__content">
+
+    <nav class="aw-menu  js-menu">
+      <ul class="aw-menu__list">
+
+        <li class="aw-menu__item">
+          <a href="/transparenciactb/"><i class="fa  fa-fw  fa-home"></i><span>Home</span></a>
+        </li>
+
+        <li class="aw-menu__item">
+          <a href="#">
+            <i class="glyphicon glyphicon-edit"></i><span>Contratos</span>
+            <i class="aw-menu__navigation-icon  fa"></i>
+          </a>
+      
+         <ul class="aw-menu__list  aw-menu__list--sublist">
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/contratos/novo" th:if="${permissao}">Cadastro de Contrato</a></li>
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/contratos">Todos os contratos</a></li>
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/contratos/vigentes">Contratos Vigentes</a></li>
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/contratos/vencidos">Contratos Vencidos</a></li>
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/garantias/novo" th:if="${permissao}">Cadastro de Garantias</a></li>
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/garantias">Pesquisa de Garantias</a></li>
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/contratos/pagamentos_a_efetuar">Pagamentos a Efetuar</a></li>
+             <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/contratos/pagamentos_efetuados">Pagamentos Efetuados</a></li>
+       
+        
+            
+                        
+          </ul>
+        </li>
+        
+        <li class="aw-menu__item">
+          <a href="#">
+            <i class="glyphicon glyphicon-user"></i><span>Usuários</span>
+            <i class="aw-menu__navigation-icon  fa"></i>
+          </a>
+          
+          <ul class="aw-menu__list  aw-menu__list--sublist">
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/usuarios/novo" th:if="${permissao}">Cadastro de Usuário</a></li>
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/usuarios">Pesquisa de Usuários</a></li>
+       </ul>
+      </li>
+      
+      <li class="aw-menu__item">
+          <a href="#">
+            <i class="glyphicon glyphicon-lock"></i><span>Empresas</span>
+            <i class="aw-menu__navigation-icon  fa"></i>
+          </a>
+      	
+      	<ul class="aw-menu__list  aw-menu__list--sublist">
+      		     <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/contratados/novo" th:if="${permissao}">Cadastro de Empresa Contratada</a></li>
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/contratados/">Pesquisa de Empresas Contratadas</a></li>
+      	</ul>
+      </li>
+        
+        
+        
+    	 <li class="aw-menu__item" >
+          <a href="#">
+            <i class="fa  fa-fw  fa-file-text"></i><span>Processos</span>
+            <i class="aw-menu__navigation-icon  fa"></i>
+          </a>
+      
+          <ul class="aw-menu__list  aw-menu__list--sublist">
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/processos/novo">Cadastro de Processos</a></li>
+           <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/processos/">Pesquisa de Processos</a></li>
+          </ul>
+        </li>
+        
+        
+         <li class="aw-menu__item">
+          <a href="#">
+            <i class="fa  fa-fw  fa-file-text"></i><span>Licitações</span>
+            <i class="aw-menu__navigation-icon  fa"></i>
+          </a>
+      
+          <ul class="aw-menu__list  aw-menu__list--sublist">
+            <li class="aw-menu__item  aw-menu__item--link" th:if="${permissao}" ><a href="/transparenciactb/licitacoes/novo">Cadastrar Licitação</a></li>
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/licitacoes">Pesquisar Licitação</a></li>
+           
+            
+          </ul>
+        </li>
+        
+        
+      <li class="aw-menu__item" th:if="${permissao}">
+          <a href="#">
+            <i class="glyphicon glyphicon-stats"></i><span>Relatórios</span>
+            <i class="aw-menu__navigation-icon  fa"></i>
+          </a>
+      
+          <ul class="aw-menu__list  aw-menu__list--sublist">
+            <li class="aw-menu__item  aw-menu__item--link"><a href="/transparenciactb/contratos/relatorio_tce">Tribunal de CONTAS</a></li>
+            
+           
+            
+          </ul>
+        </li>
+        
+               
+             <li class="aw-menu__item" th:if="${permissao}">
+          <a href="#">
+            <i class="glyphicon glyphicon-folder-open"></i><span>Documentos</span>
+            <i class="aw-menu__navigation-icon  fa"></i>
+          </a>
+ 
+        </li>
+
+      </ul>
+     
+    </nav>
+
+		</div>
+	</aside>
+	</html>

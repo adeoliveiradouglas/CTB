@@ -15,11 +15,10 @@ public class AlterarSenha implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String senha = pedido.getParameter("senha"),
-			   cript = new Cripto().criptografa(senha);
-		
 		new UsuarioDAO().atualizarSenha(
-			cript,
+			new Cripto().criptografa(
+				pedido.getParameter("senha")
+			),
 			(String) pedido.getSession().getAttribute("email")
 		);
 		

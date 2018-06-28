@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<title>Seja bem vindo ao Sistema de Gestão Administrativa da CTB</title>
+<link rel="stylesheet" type="text/css"
+	href="/layout/stylesheets/bootstrap-datepicker.standalone.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/layout/stylesheets/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/layout/stylesheets/vendors.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/layout/stylesheets/algaworks.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/layout/stylesheets/application.css" />
+
+</head>
+
+<body>
+	<div class="aw-layout-page">
+
+		<div layout:include="/cabecalho/Cabecalho"></div>
+
+		<div layout:include="/cabecalho/DashBoard"></div>
+
+		<section class="aw-layout-content  js-content">
+
+
+			<div class="page-header">
+				<div class="container-fluid">
+					<h3>
+						Seja bem vindo(a) senhor(a) gestor(a) <i><span
+							style="color: blue" th:text="${gestor.nome}"></span></i>
+					</h3>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<br /> <br />
+				<div th:if="${home_gestor_contratos}">
+					Informações gerais
+					<table class="table  table-hover">
+
+						<thead>
+							<tr>
+								<th class="text-center col-md-2">Numero de contratos</th>
+								<th class="text-center col-md-2">Numero de Empresas</th>
+								<th class="text-center col-md-2">Numero de Gestores</th>
+								<th class="text-center col-md-2">Número de lançamentos</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-center" th:text="${ntotal_contratos}"></td>
+								<td class="text-center" th:text="${ntotal_empresas}"></td>
+								<td class="text-center" th:text="${ntotal_gestores}"></td>
+								<td class="text-center" th:text="${ntotal_lancamentos}"></td>
+
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+				<div th:if="${home_gestor_contratos} == false">
+					Você é gestor de <span th:text="${n_contratosgeridos}"></span>
+					contrato(s)
+					<table class="table  table-hover">
+
+						<thead>
+							<tr>
+								<th class="text-center col-md-2">Numero</th>
+								<th class="text-center col-md-2">Empresa</th>
+								<th class="text-center col-md-2">Valor</th>
+								<th class="text-center col-md-2">Saldo</th>
+								<th class="text-center col-md-2">Data de vencimento</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="contrato : ${contratosgeridos}">
+								<td class="text-center"><a
+									th:href="@{/transparenciactb/lancamentos/pesquisar/{id_contrato}(id_contrato=${contrato.id_contrato})}"
+									th:text="${contrato.numero}"></a> (<a
+									th:href="@{/transparenciactb/contratos/visualizar/{id_contrato}(id_contrato=${contrato.id_contrato})}"
+									th:text="'Visualizar'"></a>)</td>
+								<td class="text-center"
+									th:text="${contrato.contratado} ? ${contrato.contratado.nome} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${contrato} ? |R$ ${{contrato.valor_contrato}} |: 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${contrato} ? |R$ ${{contrato.saldo_contrato}}| : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${contrato} ? ${#dates.format(contrato.data_vencimento, 'dd/MM/yyyy')}  : 'Não informado'"></td>
+
+							</tr>
+
+							<tr>
+								<td colspan="6" th:if="${#lists.isEmpty(contratosgeridos)}"><div
+										style="text-align: center">Nenhum contrato encontrado</div></td>
+							</tr>
+						</tbody>
+
+
+					</table>
+				</div>
+				<br /> <br /> <br />
+
+				<div style="color: red" th:if="${home_gestor_contratos} == false">
+					Contratos com vencimento em 90 dias ou menos:
+					<table class="table  table-hover">
+
+						<thead>
+							<tr>
+								<th class="text-center col-md-2">Numero</th>
+								<th class="text-center col-md-2">Empresa</th>
+								<th class="text-center col-md-2">Data de vencimento</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="contrato : ${vencimento90dias}">
+								<td class="text-center"><a
+									th:href="@{/transparenciactb/lancamentos/pesquisar/{id_contrato}(id_contrato=${contrato.id_contrato})}"
+									th:text="${contrato.numero}"></a> (<a
+									th:href="@{/transparenciactb/contratos/visualizar/{id_contrato}(id_contrato=${contrato.id_contrato})}"
+									th:text="'Visualizar'"></a>)</td>
+								<td class="text-center"
+									th:text="${contrato.contratado} ? ${contrato.contratado.nome} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${contrato} ? ${#dates.format(contrato.data_vencimento, 'dd/MM/yyyy')}  : 'Não informado'"></td>
+
+							</tr>
+
+							<tr>
+								<td colspan="6" th:if="${#lists.isEmpty(contratosgeridos)}"><div
+										style="text-align: center">Nenhum contrato com
+										vencimento em 90 dias ou menos encontrado</div></td>
+							</tr>
+						</tbody>
+
+					</table>
+					<br /> <br /> <br />
+
+				</div>
+
+
+				<div style="color: red" th:if="${home_gestor_contratos}">
+					Contratos com vencimento em 90 dias ou menos:
+					<table class="table  table-hover">
+
+						<thead>
+							<tr>
+								<th class="text-center col-md-2">Numero</th>
+								<th class="text-center col-md-2">Empresa</th>
+								<th class="text-center col-md-2">Gestor</th>
+								<th class="text-center col-md-2">Data de vencimento</th>
+								<th class="text-center col-md-2">Processo
+									Renovação/Licitação</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="contrato : ${vencimento90dias_todos}">
+								<td class="text-center"><a
+									th:href="@{/transparenciactb/lancamentos/pesquisar/{id_contrato}(id_contrato=${contrato.id_contrato})}"
+									th:text="${contrato.numero}"></a> (<a
+									th:href="@{/transparenciactb/contratos/visualizar/{id_contrato}(id_contrato=${contrato.id_contrato})}"
+									th:text="'Visualizar'"></a>)</td>
+								<td class="text-center"
+									th:text="${contrato.contratado} ? ${contrato.contratado.nome} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${contrato.gestor} ? ${contrato.gestor.nome} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${contrato} ? ${#dates.format(contrato.data_vencimento, 'dd/MM/yyyy')}  : 'Não informado'"></td>
+								<td class="text-center"><div
+										th:switch="${contrato.processo}">
+										<span th:text="${contrato.processo.numero_processo}"
+											th:if="${contrato.processo}"></span><a
+											th:href="@{/transparenciactb/contratos/gerar_renovacao/{id_contrato}(id_contrato=${contrato.id_contrato})}"
+											class="btn btn-link btn-xs" th:case="null"><span
+											class="glyphicon glyphicon-usd">Registrar Processo</span></a>
+									</div></td>
+
+
+							</tr>
+
+							<tr>
+								<td colspan="6"
+									th:if="${#lists.isEmpty(vencimento90dias_todos)}"><div
+										style="text-align: center">Nenhum contrato encontrado</div></td>
+							</tr>
+						</tbody>
+
+					</table>
+					<br /> <br /> <br />
+
+				</div>
+
+				<div th:if="${registrar_processo}">
+					Últimos laçamentos não pagos
+					<table class="table  table-hover">
+
+						<thead>
+							<tr>
+								<th class="text-center col-md-2">Contrato</th>
+								<th class="text-center col-md-2">Empresa</th>
+								<th class="text-center col-md-2">Gestor</th>
+								<th class="text-center col-md-2">Valor</th>
+								<th class="text-center col-md-2">Data de lancamento</th>
+								<th class="text-center col-md-2">Hora</th>
+								<th class="text-center col-md-2">Processo de pagamento</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="lancamento : ${ultimoslancamentos_sem_pgto}">
+								<td class="text-center" th:text="${lancamento.contrato.numero}"></td>
+								<td class="text-center"
+									th:text="${lancamento.contrato.contratado} ? ${lancamento.contrato.contratado.nome} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento.contrato.gestor} ? ${lancamento.contrato.gestor.nome} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento} ? |R$ ${{lancamento.valor}}| : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento} ? ${#dates.format(lancamento.data, 'dd/MM/yyyy')} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento.hora} ? ${lancamento.hora} : 'Não informado'"></td>
+								<td class="text-center"><div
+										th:switch="${lancamento.processo} ? ${lancamento.processo.pago}">
+										<span class="label label-success" th:text="'Pago'"
+											th:case="true"></span><a
+											th:href="@{/transparenciactb/lancamentos/gerar_pagamento/{id_lancamento}(id_lancamento=${lancamento.id_lancamento})}"
+											class="btn btn-link btn-xs" th:case="false"><span
+											class="glyphicon glyphicon-usd">Registrar Pagamento</span></a>
+									</div></td>
+							</tr>
+
+							<tr>
+								<td colspan="6"
+									th:if="${#lists.isEmpty(ultimoslancamentos_todos_contratos)}"><div
+										style="text-align: center">Nenhum lançamento encontrado</div></td>
+							</tr>
+						</tbody>
+
+					</table>
+					<br /> <br /> <br />
+				</div>
+
+
+				<div th:if="${home_gestor_contratos} == false">
+					Últimos laçamentos(até 10)
+					<table class="table  table-hover">
+
+						<thead>
+							<tr>
+								<th class="text-center col-md-2">Contrato</th>
+								<th class="text-center col-md-2">Empresa</th>
+								<th class="text-center col-md-2">Valor</th>
+								<th class="text-center col-md-2">Data/Hora de lançamento</th>
+								<!-- <th class="text-center col-md-2">Hora de lançamento</th> -->
+								<th class="text-center col-md-2">Liquidação da nota</th>
+								<th class="text-center col-md-2">Numero do processo</th>
+								<th class="text-center col-md-2">Data do processo</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="lancamento : ${ultimoslancamentos}">
+								<!--  <td class="text-center"><a th:href="@{/transparenciactb/contratos/visualizar/{id_contrato}(id_contrato=${lancamento.contrato.id_contrato})}" th:text="${lancamento.contrato.numero}"></a></td>-->
+								<td class="text-center"><a
+									th:href="@{/transparenciactb/lancamentos/pesquisar/{id_contrato}(id_contrato=${lancamento.contrato.id_contrato})}"
+									th:text="${lancamento.contrato.numero}"></a> (<a
+									th:href="@{/transparenciactb/contratos/visualizar/{id_contrato}(id_contrato=${lancamento.contrato.id_contrato})}"
+									th:text="'Visualizar'"></a>)</td>
+								<td class="text-center"
+									th:text="${lancamento.contrato.contratado} ? ${lancamento.contrato.contratado.nome} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento} ? |R$ ${{lancamento.valor}}| : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento} ? ${#dates.format(lancamento.data, 'dd/MM/yyyy')} + '-' + ${lancamento.hora} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento.dataliquidacao} ? ${#dates.format(lancamento.dataliquidacao, 'dd/MM/yyyy')}  : 'Nota não liquidada'"></td>
+								<td class="text-center"><div
+										th:switch="${lancamento.processo} ? ${lancamento.processo.pago}">
+										<span
+											th:text="${lancamento.processo} ? ${lancamento.processo.numero_processo}"
+											th:if="${lancamento.processo}"></span><span
+											class="label label-warning"
+											th:text="'Processo não pago ainda'" th:case="null"></span>
+									</div></td>
+								<td class="text-center"><div
+										th:switch="${lancamento.liquidado}">
+										<span
+											th:text="${lancamento.processo} and ${lancamento.processo.data_abertura} ? ${#dates.format(lancamento.processo.data_abertura, 'dd/MM/yyyy')}"></span>
+									</div></td>
+							</tr>
+
+							<tr>
+								<td colspan="6" th:if="${#lists.isEmpty(ultimoslancamentos)}"><div
+										style="text-align: center">Nenhum lançamento encontrado</div></td>
+							</tr>
+						</tbody>
+
+					</table>
+					<br /> <br /> <br />
+				</div>
+
+
+				<div th:if="${home_gestor_contratos}">
+					Últimos laçamentos(até 15)
+					<table class="table  table-hover">
+
+						<thead>
+							<tr>
+								<th class="text-center col-md-2">Contrato</th>
+								<th class="text-center col-md-2">Empresa</th>
+								<th class="text-center col-md-2">Gestor</th>
+								<th class="text-center col-md-2">Valor</th>
+								<th class="text-center col-md-2">Data de lancamento</th>
+								<th class="text-center col-md-2">Hora</th>
+								<th class="text-center col-md-2">Processo de pagamento</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="lancamento : ${ultimoslancamentos_todos_contratos}">
+								<td class="text-center"><a
+									th:href="@{/transparenciactb/lancamentos/pesquisar/{id_contrato}(id_contrato=${lancamento.contrato.id_contrato})}"
+									th:text="${lancamento.contrato.numero}"></a> (<a
+									th:href="@{/transparenciactb/contratos/visualizar/{id_contrato}(id_contrato=${lancamento.contrato.id_contrato})}"
+									th:text="'Visualizar'"></a>)</td>
+								<td class="text-center"
+									th:text="${lancamento.contrato.contratado} ? ${lancamento.contrato.contratado.nome} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento.contrato.gestor} ? ${lancamento.contrato.gestor.nome} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento} ? |R$ ${{lancamento.valor}}| : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento} ? ${#dates.format(lancamento.data, 'dd/MM/yyyy')} : 'Não informado'"></td>
+								<td class="text-center"
+									th:text="${lancamento.hora} ? ${lancamento.hora} : 'Não informado'"></td>
+								<td class="text-center"><div
+										th:switch="${lancamento.processo} ? ${lancamento.processo.pago}">
+										<span class="label label-success" th:text="'Pago'"
+											th:case="true"></span><a
+											th:href="@{/transparenciactb/lancamentos/gerar_pagamento/{id_lancamento}(id_lancamento=${lancamento.id_lancamento})}"
+											class="btn btn-link btn-xs" th:case="false"><span
+											class="glyphicon glyphicon-usd">Registrar Pagamento</span></a>
+									</div></td>
+							</tr>
+
+							<tr>
+								<td colspan="6"
+									th:if="${#lists.isEmpty(ultimoslancamentos_todos_contratos)}"><div
+										style="text-align: center">Nenhum lançamento encontrado</div></td>
+							</tr>
+						</tbody>
+
+					</table>
+					<br /> <br /> <br />
+				</div>
+
+
+
+				<div class="col-sm-6" th:if="${home_gestor_contratos} == false">
+					<div data-target="#graficoContratos"></div>
+					<div id="graficoContratos"
+						th:attr="data-valor=${valorjaneiro} + ',' + ${valorfevereiro} + ',' + ${valormarco} + ',' + ${valorabril} + ',' + ${valormaio} + ',' + ${valorjunho} + ',' + ${valorjulho} + ',' + ${valoragosto} + ',' + ${valorsetembro} + ',' + ${valoroutubro} + ',' + ${valornovembro} + ',' + ${valordezembro}"
+						class="aw-graph-box">
+						<div class="aw-graph-box__header">
+							<h2 class="aw-graph-box__title">Lançamentos por origem</h2>
+						</div>
+						<div class="aw-graph-box__content">
+							<div class="aw-graph-box__no-data">
+								<!--   <i class="fa  fa-line-chart  fa-2x"></i>
+							<span>Não há dados</span> -->
+							</div>
+							<div>
+								<canvas id="graficoValorTotal" height="160"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6" th:if="${home_gestor_contratos} == false">
+					<div data-target="#graficoPagamento"></div>
+					<div id="graficoPagamento"
+						th:attr="data-pg= ${lancamentospagos} + ',' + ${lancamentosnpagos}"
+						class="aw-graph-box">
+						<div class="aw-graph-box__header">
+							<h2 class="aw-graph-box__title">Lançamentos por origem</h2>
+						</div>
+						<div class="aw-graph-box__content">
+							<div class="aw-graph-box__no-data">
+								<!--   <i class="fa  fa-line-chart  fa-2x"></i>
+							<span>Não há dados</span> -->
+							</div>
+							<div>
+								<canvas id="graficoDePagamentos" height="160"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6" th:if="${home_gestor_contratos}">
+					<div data-target="#graficoEmpresas"></div>
+					<div id="graficoEmpresas" th:attr="data-empresas= ${empresas}">
+						<div class="aw-graph-box__header">
+							<h2 class="aw-graph-box__title">Lançamentos por origem</h2>
+						</div>
+						<div class="aw-graph-box__content">
+							<div class="aw-graph-box__no-data">
+								<!--   <i class="fa  fa-line-chart  fa-2x"></i>
+							<span>Não há dados</span> -->
+							</div>
+							<div>
+								<canvas id="graficoValorEmpresas" height="180"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<script>
+				function excluir() {
+					swal(
+							{
+								title : "Tem certeza?",
+								text : "Você não poderá recuperar o produto após a exclusão.",
+								type : "warning",
+								showCancelButton : true,
+								confirmButtonColor : "#DD6B55",
+								confirmButtonText : "Sim, exclua agora!",
+								closeOnConfirm : false,
+								showLoaderOnConfirm : true
+							},
+							function() {
+								setTimeout(
+										function() {
+											swal(
+													"Excluído!",
+													"O produto foi excluído com sucesso.",
+													"success");
+										}, 2000);
+							});
+				}
+			</script>
+
+		</section>
+		<footer class="aw-layout-footer  js-content">
+			<div class="container-fluid">
+				<span class="aw-footer-disclaimer">Companhia de Transportes
+					do Estado da Bahia . Todos os direitos reservados.</span>
+			</div>
+		</footer>
+
+
+	</div>
+
+	<!--  <script src="/layout/javascripts/bootstrap.min.js"></script> -->
+	<script src="/layout/javascripts/vendors.min.js"></script>
+	<script src="/layout/javascripts/algaworks.min.js"></script>
+
+
+	<script src="/layout/javascripts/bootstrap-datepicker.min.js"></script>
+	<script src="/layout/javascripts/bootstrap-datepicker.pt-BR.min.js"></script>
+	<script src="/layout/javascripts/bootstrap.min.js"></script>
+	<script src="/layout/javascripts/jquery-2.2.0.min.js"></script>
+	<script src="/layout/javascripts/jquery.maskMoney.min.js"></script>
+	<script src="/layout/javascripts/jquery.maskMoney.js"></script>
+	<script src="/layout/javascripts/Chart.min.js"></script>
+	<script th:if="!${permissao}" src="/layout/javascripts/ctb.js"></script>
+	<script th:if="${permissao}"
+		src="/layout/javascripts/ctb_home_gestor.js"></script>
+</body>
+</html>

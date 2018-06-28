@@ -1,12 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="ISO-8859-1" />
+<title>Sistema de Gestão de Contratos da CTB</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.standalone.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
+<link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
+<link rel="stylesheet" type="text/css" href="css/application.css" />
+
 </head>
-<body>
-	logou gestor geral
+<body class="aw-layout-page">
+
+<jsp:include page="../cabecalho/Cabecalho.jsp"></jsp:include>
+ 
+logou gestor geral
+	
 </body>
 </html>
