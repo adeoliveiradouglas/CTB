@@ -9,8 +9,8 @@
 		<welcome-file>login.html</welcome-file>
 	</welcome-file-list>
 	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/sistema?=erro404</location>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/sistema?logica=Erro404</location>
 	</error-page>
 </web-app>
 

@@ -32,7 +32,7 @@ public class ContratoDAO extends DAO{
 					 	 tabelaUso = "uso";
 	
 	
-	public ContratoDAO(String tabelaDB) {
+	public ContratoDAO() {
 		super("contrato");
 	}
 	

@@ -1,8 +1,8 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import dao.UsuarioNovoDAO;
 import sun.misc.BASE64Encoder;
-import utilidades.Email;
 
 /*
  * Classe main não utilizada no decorrer do programa
@@ -12,9 +12,7 @@ import utilidades.Email;
 public class GestaoDeContratos {
 
 	public static void main(String[] args) {
-		Email e = new Email();
-		e.enviarConfirmacaoCadastro("adeoliveiradouglas@gmail.com", "Douglas");
-		e.enviarCodigo("adeoliveiradouglas@gmail.com", 123);
+		new UsuarioNovoDAO().deleteByMatricula(123123);
 	}
 	
 	

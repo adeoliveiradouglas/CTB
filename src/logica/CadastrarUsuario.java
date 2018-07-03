@@ -1,7 +1,5 @@
 package logica;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,7 +31,7 @@ public class CadastrarUsuario implements Logica {
 						pedido.getParameter("cargo")
 					)
 				);
-			} catch (NumberFormatException | SQLException e) {
+			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
 

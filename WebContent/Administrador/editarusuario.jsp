@@ -5,33 +5,32 @@
 
 <head>
 <meta charset="ISO-8859-1" />
-
 <title>Sistema de Gestão de Contratos da CTB</title>
 
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.standalone.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
 <link rel="stylesheet" type="text/css" href="css/application.css" />
 
-<style>
-	select{
-		width:100%;
-	}
-</style>
-
 </head>
-
-<body class="aw-layout-simple-page">
-	<div class="aw-layout-simple-page__container">
-		<div align="center">
-			<img
-				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
-		</div>
-		<br />
-		<form action="sistema?logica=CadastrarUsuario" th:object="${userdetails}" method="POST">
+<body class="aw-layout-page">
+	<jsp:include page="../cabecalho/Cabecalho.jsp"></jsp:include>
+	
+	<%@ page import="dao.UsuarioDAO,
+			         entity.Usuario" %>
+	
+	<%
+		UsuarioDAO udao = new UsuarioDAO();
+		Usuario u = udao.getByEmail("");
+	%>	
+			
+			 
+	<form action="sistema?logica=CadastrarUsuario" th:object="${userdetails}" method="POST">
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 					<div class="form-group  has-feedback">
-						<input type="number" class="form-control input-lg" placeholder="Sua matrícula" name="matricula" required> 
+						<input type="number" class="form-control input-lg" placeholder="Sua matrícula" name="matricula" value=<%=u.getMatricula() %> required> 
 						<span class="form-control-feedback"	aria-hidden="true"> </span>
 					</div>
 
@@ -120,6 +119,5 @@
 		</form>
 		
 	<script type="text/javascript" src="script.js"></script>
-	</div>
 </body>
 </html>

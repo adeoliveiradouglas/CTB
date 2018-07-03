@@ -46,9 +46,7 @@ public class LoginAdministrador implements Filter{
 /*		A lógica responsável por autenticar o usuário insere os dados dele na sessão
  * 		Aqui recupera os dados da sessão e verifica se o usuário tem autorização para acessar essa página através do cargo dele
  * */
-		if (
-			((Usuario) sessao.getAttribute("usuario")).getCargo().equals("Administrador")
-		   )
+		if (((Usuario) sessao.getAttribute("usuario")).getCargo().equals("Administrador"))
 			chain.doFilter(pedido, resposta);
 		else
 			res.sendRedirect("sistema?logica=Erro403");			

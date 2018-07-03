@@ -98,13 +98,13 @@ public class UsuarioDAO extends DAO {
 	public Usuario getByMatricula(int matricula) {
 		iniciaConexaoComBanco();
 		
-/*		
- 		Exemplo de query para esse método
+		
+ 	/*	Exemplo de query para esse método
  		
  		select * from usuario where usuario.login = ?";
- 		depois busca setor e cargo através do resultado do usuario
+ 		depois busca setor e cargo através do resultado do usuario*/
  		
-*/
+
 		Usuario u;
 		
 //		monta a query
@@ -356,5 +356,36 @@ public class UsuarioDAO extends DAO {
 		}
 		
 		encerraConexaocomBanco();
+	}
+
+	
+	public void deleteByMatricula(int matricula) {
+		iniciaConexaoComBanco();
+		
+		/*Exemplo
+		 * delete from usuario where matricula = ?; 
+		 */
+		super.setSqlQuery(
+			"delete from " + super.getNomeTabela() + " where matricula = ?"
+		);
+		
+		try {
+			super.setStatement(
+				super.getDbConnection().prepareStatement(
+					super.getSqlQuery()
+				)
+			);
+			
+			super.getStatement().setInt(
+				1,
+				matricula
+			);
+			
+			super.getStatement().executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		encerraConexaocomBanco();	
 	}
 }

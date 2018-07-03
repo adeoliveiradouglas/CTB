@@ -24,7 +24,7 @@
 				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
 		</div>
 		<br />
-		<form action="sistema?logica=ValidarToken" th:object="${userdetails}" method="POST"> 
+		<form action="sistema?logica=ValidarToken" method="POST"> 
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 					Insira o código que foi enviado para você:
