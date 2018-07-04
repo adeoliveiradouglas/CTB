@@ -17,16 +17,13 @@
 <body class="aw-layout-page">
 	<jsp:include page="../cabecalho/Cabecalho.jsp"></jsp:include>
 	
-	<%@ page import="dao.UsuarioDAO,
-			         entity.Usuario" %>
+	<%@ page import="entity.Usuario" %>
 	
 	<%
-		UsuarioDAO udao = new UsuarioDAO();
-		Usuario u = udao.getByEmail("");
+		Usuario u = (Usuario) request.getSession().getAttribute("usuarioeditar");
 	%>	
-			
 			 
-	<form action="sistema?logica=CadastrarUsuario" th:object="${userdetails}" method="POST">
+	<form action="sistema?logica=EditarUsuario" method="POST">
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 					<div class="form-group  has-feedback">
@@ -35,29 +32,13 @@
 					</div>
 
 					<div class="form-group  has-feedback">
-						<input type="text" class="form-control input-lg" placeholder="Seu nome completo" name="nome" required> 
+						<input type="text" class="form-control input-lg" placeholder="Seu nome completo" name="nome" value=<%=u.getNome() %> required> 
 						<span class="form-control-feedback" aria-hidden="true"> </span>
 					</div>
 
 					<div class="form-group  has-feedback">
-						<input type="email" class="form-control input-lg" placeholder="Seu e-mail corporativo" name="email" required>
+						<input type="email" class="form-control input-lg" placeholder="Seu e-mail corporativo" name="email" value=<%=u.getEmail() %> required>
 						<span class="form-control-feedback" aria-hidden="true"></span>
-					</div>
-
-					<div class="form-group has-feedback">
-						<input type="password" class="form-control input-lg" placeholder="Crie sua senha" name="senha" id="senha">
-						<span class="form-control-feedback" aria-hidden="true"></span>
-						<div id="mensagemsenha">
-							<label>Senha deve ter mais que 6 caracteres</label>
-						</div>
-					</div>
-					
-					<div class="form-group has-feedback" id="confirmacaosenhadiv">
-						<input type="password" class="form-control input-lg" placeholder="Confirme sua senha" name="confirmacaosenha" id="confirmacaosenha">
-						<span class="form-control-feedback" aria-hidden="true"></span>
-						<div id="mensagemconfirmacaosenha">
-							<label>Senhas não conferem</label>
-						</div>
 					</div>
 					
 					<br />
@@ -112,12 +93,11 @@
 				<br/>
 				<div class="form-group" id="botaocadastrar">
 					<button type="submit"
-						class="btn btn-primary btn-lg aw-btn-full-width">Cadastrar</button>
+						class="btn btn-primary btn-lg aw-btn-full-width">Confimar</button>
 				</div>
 				<div class="aw-simple-panel__footer"><br/></div>
 			</div>
 		</form>
 		
-	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

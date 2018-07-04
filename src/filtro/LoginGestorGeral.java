@@ -36,7 +36,7 @@ public class LoginGestorGeral implements Filter{
 		HttpSession sessao = req.getSession(false);
 
 		try{
-			System.out.println(sessao.getMaxInactiveInterval());
+			System.out.println("Acesso por " + ((Usuario) sessao.getAttribute("usuario")).getNome());
 		} catch (Exception e){
 			e.printStackTrace();
 			pedido.getRequestDispatcher("/sistema?logica=Erro403").forward(pedido, resposta);

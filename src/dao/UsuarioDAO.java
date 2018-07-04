@@ -329,7 +329,7 @@ public class UsuarioDAO extends DAO {
 		  update usuario set senha = senha where usuario.login = email;
 		*/
 		super.setSqlQuery(
-			"update " + super.getNomeTabela() + " set senha = ? where " + colunaEmail + " = ?"
+			"update " + super.getNomeTabela() + " set " + colunaSenha + " = ? where " + colunaEmail + " = ?"
 		);
 		
 		try {
@@ -357,7 +357,6 @@ public class UsuarioDAO extends DAO {
 		
 		encerraConexaocomBanco();
 	}
-
 	
 	public void deleteByMatricula(int matricula) {
 		iniciaConexaoComBanco();
@@ -387,5 +386,81 @@ public class UsuarioDAO extends DAO {
 		}
 		
 		encerraConexaocomBanco();	
+	}
+
+	public void atualizar(Usuario usuario){
+		iniciaConexaoComBanco();
+		
+		/*
+		  Exemplo de query
+		  update usuario set todos os parametros where usuario.login = email;
+		*/
+		super.setSqlQuery(
+			"update " + super.getNomeTabela() + " set " + 
+			colunaMatricula + " = ?, " + 
+			colunaNome + " = ?, " +
+			colunaEmail + " = ?, " +
+			colunaSenha + " = ?, " +
+			colunaSetor + " = ?, " +
+			colunaCargo + " = ? " +
+			"where " + colunaMatricula + " = ?"
+		);
+		
+		int posicao = 0;
+		SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
+		CargoDAO cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
+		
+		try {
+			super.setStatement(
+				super.getDbConnection().prepareStatement(
+					super.getSqlQuery()
+				)
+			);
+			
+			super.getStatement().setInt(
+				++posicao,
+				usuario.getMatricula()
+			);
+			
+			super.getStatement().setString(
+				++posicao,
+				usuario.getNome()
+			);
+			
+			super.getStatement().setString(
+				++posicao,
+				usuario.getEmail()
+			);
+			
+			super.getStatement().setString(
+				++posicao,
+				usuario.getSenha()
+			);
+			
+			super.getStatement().setString(
+				++posicao,
+				sdao.getBySigla( //busca o codigo da sigla na tabela de setores
+					usuario.getSetor()
+				).getCodigo()
+			);
+			
+			super.getStatement().setInt(
+				++posicao,
+				cdao.getByNome( //busca o codigo do cargo na tabela de cargos
+					usuario.getCargo()
+				).getId()
+			);
+			
+			super.getStatement().setInt(
+				++posicao,
+				usuario.getMatricula()
+			);
+				
+			super.getStatement().executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		encerraConexaocomBanco();
 	}
 }

@@ -28,8 +28,6 @@ public class SistemaServlet extends HttpServlet {
         } catch (Exception e) {
             throw new ServletException(
                 "A lógica de negócios causou uma exceção", e);
-        }
-		
+        }	
 	}
-
 }
