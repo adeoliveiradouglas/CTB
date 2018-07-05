@@ -15,7 +15,7 @@
 
 </head>
 <body class="aw-layout-page">
-	<jsp:include page="../cabecalho/Cabecalho.jsp"></jsp:include>
+	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
 	<%@ page import="entity.Usuario" %>
 	

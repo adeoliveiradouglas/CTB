@@ -4,20 +4,16 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="ISO-8859-1" />
-<title>Cadastro de Contratos</title>
-<link rel="stylesheet" type="text/css"
-	href="/layout/stylesheets/vendors.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="/layout/stylesheets/algaworks.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="/layout/stylesheets/application.css" />
+<title>SGC</title>
+<link rel="stylesheet" type="text/css" href="/layout/stylesheets/vendors.min.css" />
+<link rel="stylesheet" type="text/css" href="/layout/stylesheets/algaworks.min.css" />
+<link rel="stylesheet" type="text/css" href="/layout/stylesheets/application.css" />
 </head>
 
-<nav
-	class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
+<nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="sistema?logica=TelaPrincipal"> <!--    <img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png"/>  -->
-			SGC - Sistema de Gestão de Contratos da CTB
+		<a class="navbar-brand" href="sistema?logica=TelaPrincipal"> <!--   	 <img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png"/>  -->
+			Sistema de Gestão de Contratos
 		</a>
 	</div>
 

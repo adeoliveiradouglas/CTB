@@ -6,7 +6,7 @@
 <head>
 <meta charset="ISO-8859-1" />
 
-<title>Sistema de Gestão de Contratos da CTB</title>
+<title>Sistema de Gestão de Contratos</title>
 
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
@@ -58,5 +58,7 @@
 			</div>
 		</form>
 	</div>
+	
+	<jsp:include page="adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

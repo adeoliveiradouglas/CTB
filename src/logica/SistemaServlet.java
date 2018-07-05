@@ -1,3 +1,8 @@
+/*
+ * Servlet padrão para redirecionamento de páginas
+ * uso = sistema?logica=oquefazer
+ */
+
 package logica;
 
 import java.io.IOException;

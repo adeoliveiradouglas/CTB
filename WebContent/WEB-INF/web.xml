@@ -6,7 +6,7 @@
     version="3.0">
 	<display-name>Gestão de contratos</display-name>
 	<welcome-file-list>
-		<welcome-file>login.html</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<exception-type>java.lang.NullPointerException</exception-type>

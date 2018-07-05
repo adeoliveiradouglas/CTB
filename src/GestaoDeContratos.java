@@ -1,8 +1,6 @@
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
-import dao.UsuarioNovoDAO;
-import sun.misc.BASE64Encoder;
+import utilidades.Email;
 
 /*
  * Classe main não utilizada no decorrer do programa
@@ -12,21 +10,12 @@ import sun.misc.BASE64Encoder;
 public class GestaoDeContratos {
 
 	public static void main(String[] args) {
-		new UsuarioNovoDAO().deleteByMatricula(123123);
-	}
-	
-	
-	public static String criptografa(String senha){
-//		classe usada para criptografar as senhas
-		try{
-		 MessageDigest digest = MessageDigest.getInstance("SHA-256");
-		               digest.update(senha.getBytes());
-		 BASE64Encoder encoder = new BASE64Encoder();
-		        return encoder.encode(digest.digest());
-		}catch(NoSuchAlgorithmException ns){
-			ns.printStackTrace();
-		}
-		return senha;
+		int token = new Random().nextInt(8999) + 1000;
+		
+		new Email().enviarCodigo(
+				"adeoliveiradouglas@gmail.com", 
+				token
+			);
 	}
 	
 }

@@ -5,7 +5,6 @@
 
 <head>
 <meta charset="ISO-8859-1" />
-<title>Sistema de Gestão de Contratos da CTB</title>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.standalone.min.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
@@ -15,7 +14,7 @@
 
 </head>
 <body class="aw-layout-page">
-	<jsp:include page="../cabecalho/Cabecalho.jsp"></jsp:include>
+	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
 	<%@ page import="dao.UsuarioNovoDAO,
 					 dao.UsuarioDAO,
@@ -39,10 +38,7 @@
 		</thead>
 		<tbody>
 			<%
-				UsuarioNovoDAO undao = new UsuarioNovoDAO();
-				ArrayList<Usuario> usuariosnovos = undao.getAll();
-					  		
-				for (Usuario u: usuariosnovos){
+				for (Usuario u: new UsuarioNovoDAO().getAll()){
 			%>
 			<tr>
 				<td class="text-center"><%=u.getNome() %></td>
@@ -87,10 +83,7 @@
 		</thead>
 		<tbody>
 			<%
-				UsuarioDAO udao = new UsuarioDAO();
-				ArrayList<Usuario> usuarios = udao.getAll();
-					  		
-				for (Usuario u: usuarios){
+				for (Usuario u: new UsuarioDAO().getAll()){
 			%>
 			<tr>
 				<td class="text-center"><%=u.getNome() %></td>
@@ -111,5 +104,6 @@
 		</tbody>
 	</table>
 	
+	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 	</body>
 </html>

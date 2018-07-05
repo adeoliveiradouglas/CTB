@@ -35,14 +35,6 @@ public class LoginGestor implements Filter{
 		HttpServletResponse res = (HttpServletResponse) resposta;
 		HttpSession sessao = req.getSession(false);
 
-		try{
-			System.out.println("Acesso por " + ((Usuario) sessao.getAttribute("usuario")).getNome());
-		} catch (Exception e){
-			e.printStackTrace();
-			pedido.getRequestDispatcher("/sistema?logica=Erro403").forward(pedido, resposta);
-			chain.doFilter(pedido, resposta);
-			return;
-		}
 /*		A lógica responsável por autenticar o usuário insere os dados dele na sessão
  * 		Aqui recupera os dados da sessão e verifica se o usuário tem autorização para acessar essa página através do cargo dele
  * */

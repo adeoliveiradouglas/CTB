@@ -121,5 +121,7 @@
 		
 	<script type="text/javascript" src="script.js"></script>
 	</div>
+	
+	<jsp:include page="adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

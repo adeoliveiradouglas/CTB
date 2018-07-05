@@ -7,7 +7,7 @@ public class TelaLogin implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		return "/login.html";
+		return "/login.jsp";
 	}
 
 }

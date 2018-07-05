@@ -35,8 +35,6 @@ public class GerarToken implements Logica{
 			);
 			return "esqueceuasenha2.jsp";
 		}
-		return "errosPag/403.html";
+		return "sistema?logica=Erro403";
 	}
-
-
 }
