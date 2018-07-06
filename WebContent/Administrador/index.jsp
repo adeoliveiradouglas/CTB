@@ -1,3 +1,4 @@
+<!-- Página principal do Administrador -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -34,11 +35,12 @@
 				<th class="text-center col-md-2">Login</th>
 				<th class="col-md-1"></th><th class="col-md-1"></th>
 			</tr>
-
 		</thead>
 		<tbody>
 			<%
-				for (Usuario u: new UsuarioNovoDAO().getAll()){
+				ArrayList<Usuario> lu = (ArrayList<Usuario>) request.getSession().getAttribute("usuariosnovos");
+			
+				for (Usuario u: lu){
 			%>
 			<tr>
 				<td class="text-center"><%=u.getNome() %></td>

@@ -12,7 +12,8 @@ import lombok.Data;
 
 @Data
 public class Usuario {
-	private int matricula;
+	private int id,
+				matricula;
 	private String nome,
 				   email,
 				   senha,
@@ -21,8 +22,21 @@ public class Usuario {
 	
 	public Usuario() {}
 
+	
 	public Usuario(int matricula, String nome, String email, String senha, String setor, String cargo) {
 		super();
+		this.matricula = matricula;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.setor = setor;
+		this.cargo = cargo;
+	}
+
+
+	public Usuario(int id, int matricula, String nome, String email, String senha, String setor, String cargo) {
+		super();
+		this.id = id;
 		this.matricula = matricula;
 		this.nome = nome;
 		this.email = email;

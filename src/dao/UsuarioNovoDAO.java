@@ -166,7 +166,9 @@ public class UsuarioNovoDAO extends DAO {
 		
 		try{
 			super.getResultado().next();
-			u = new Usuario();
+			u = new Usuario(
+					
+			);
 			u.setMatricula(
 				super.getResultado().getInt(
 					colunaMatricula
@@ -193,13 +195,15 @@ public class UsuarioNovoDAO extends DAO {
 			
 //			busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 			u.setSetor(
-				new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp()).getByCodigo(
+				new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp())
+				.getByCodigo(
 					super.getResultado().getString(colunaSetor) //codigo do setor no usuario do banco
 				).getSigla()
 			);
 			
 			u.setCargo(
-				new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp()).getByCodigo(
+				new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp())
+				.getByCodigo(
 					super.getResultado().getInt(colunaCargo) //codigo do cargo no usuario do banco
 				).getNome()
 			);
@@ -218,7 +222,7 @@ public class UsuarioNovoDAO extends DAO {
 /*		
  		Exemplo de query para esse método
  		
- 		select * from usuario";
+ 		select * from usuariosnovos";
  		depois busca setor e cargo através do resultado do usuario
  		
 */

@@ -1,3 +1,4 @@
+<!-- Página principal do Gestor Geral -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -15,8 +16,10 @@
 
 </head>
 <body class="aw-layout-page">
-<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
+	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-<jsp:include page="../adds/Rodape.jsp"></jsp:include>
+	<%@ page import="dao.ContratoDAO"%>
+	
+	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

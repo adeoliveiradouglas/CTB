@@ -29,7 +29,7 @@
 			para começar a usar. Te informaremos por email quando seu acesso for aprovado. 
 			<br />
 			<br />
-			Clique <a href="login.html">aqui</a> para voltar para a página principal.
+			Clique <a href="sistema?logica=TelaLogin">aqui</a> para voltar para a página principal.
 		</p>
 
 	</div>

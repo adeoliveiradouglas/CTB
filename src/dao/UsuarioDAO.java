@@ -11,7 +11,8 @@ import entity.Usuario;
 
 public class UsuarioDAO extends DAO {
 	//Nome das colunas no banco de dados
-	private final String colunaMatricula = super.getNomeTabela() + ".matricula", 
+	private final String colunaId = super.getNomeTabela() + "idUsuario",
+						 colunaMatricula = super.getNomeTabela() + ".matricula", 
 						 colunaNome = super.getNomeTabela() + ".nome", 
 						 colunaEmail = super.getNomeTabela() + ".login",
 						 colunaSenha = super.getNomeTabela() + ".senha",
@@ -35,6 +36,11 @@ public class UsuarioDAO extends DAO {
 		super("usuario");
 	}
 	
+	public UsuarioDAO(String nomeTabela){
+//		para uso da tabela usuariosnovos
+		super(nomeTabela);
+	}
+	
 	public void inserir(Usuario usuario){
 		iniciaConexaoComBanco();
 		
@@ -43,8 +49,6 @@ public class UsuarioDAO extends DAO {
 		);
 		
 		int posicao = 0;
-		SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
-		CargoDAO cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
 		
 		try {
 			super.setStatement(
@@ -75,14 +79,16 @@ public class UsuarioDAO extends DAO {
 			
 			super.getStatement().setString(
 				++posicao,
-				sdao.getBySigla( //busca o codigo da sigla na tabela de setores
+				new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp())
+				.getBySigla( //busca o codigo da sigla na tabela de setores
 					usuario.getSetor()
 				).getCodigo()
 			);
 			
 			super.getStatement().setInt(
 				++posicao,
-				cdao.getByNome( //busca o codigo do cargo na tabela de cargos
+				new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp())
+				.getByNome( //busca o codigo do cargo na tabela de cargos
 					usuario.getCargo()
 				).getId()
 			);
@@ -95,13 +101,13 @@ public class UsuarioDAO extends DAO {
 		encerraConexaocomBanco();
 	}
 	
-	public Usuario getByMatricula(int matricula) {
+	public Usuario getById(int id) {
 		iniciaConexaoComBanco();
 		
 		
  	/*	Exemplo de query para esse método
  		
- 		select * from usuario where usuario.login = ?";
+ 		select * from usuario where usuario.id = ?";
  		depois busca setor e cargo através do resultado do usuario*/
  		
 
@@ -109,7 +115,7 @@ public class UsuarioDAO extends DAO {
 		
 //		monta a query
 		super.setSqlQuery(
-			"select * from usuario where " + colunaMatricula +" = ?"
+			"select * from usuario where " + colunaId +" = ?"
 		);
 		
 		try {
@@ -123,7 +129,7 @@ public class UsuarioDAO extends DAO {
 //			Preenche o statement
 			super.getStatement().setInt(
 				1, 
-				matricula
+				id
 			);
 			
 //			executa
@@ -141,6 +147,9 @@ public class UsuarioDAO extends DAO {
 		try{
 			super.getResultado().next();
 			u = new Usuario(
+				super.getResultado().getInt(
+					colunaId
+				),
 				super.getResultado().getInt(
 					colunaMatricula
 				),
@@ -218,6 +227,9 @@ public class UsuarioDAO extends DAO {
 			super.getResultado().next();
 			u = new Usuario(
 				super.getResultado().getInt(
+					colunaId
+				),
+				super.getResultado().getInt(
 					colunaMatricula
 				),
 				super.getResultado().getString(
@@ -290,7 +302,10 @@ public class UsuarioDAO extends DAO {
 			while(super.getResultado().next()){
 				u = new Usuario(
 					super.getResultado().getInt(
-							colunaMatricula
+						colunaId
+					),
+					super.getResultado().getInt(
+						colunaMatricula
 					),
 					super.getResultado().getString(
 						colunaNome
@@ -403,8 +418,9 @@ public class UsuarioDAO extends DAO {
 			colunaSenha + " = ?, " +
 			colunaSetor + " = ?, " +
 			colunaCargo + " = ? " +
-			"where " + colunaMatricula + " = ?"
+			"where " + colunaId + " = ?"
 		);
+		
 		
 		int posicao = 0;
 		SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
@@ -453,7 +469,7 @@ public class UsuarioDAO extends DAO {
 			
 			super.getStatement().setInt(
 				++posicao,
-				usuario.getMatricula()
+				usuario.getId()
 			);
 				
 			super.getStatement().executeUpdate();
