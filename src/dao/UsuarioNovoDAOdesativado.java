@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import entity.Usuario;
 
-public class UsuarioNovoDAO extends DAO {
+public class UsuarioNovoDAOdesativado extends DAO {
 	//Nome das colunas no banco de dados
 	private final String colunaMatricula = super.getNomeTabela() + ".matricula", 
 						 colunaNome = super.getNomeTabela() + ".nome", 
@@ -21,15 +21,15 @@ public class UsuarioNovoDAO extends DAO {
 						 colunaCargo = super.getNomeTabela() + ".cargo_id";
 
 
-	public UsuarioNovoDAO(String nomeDB, String usuarioDB, String senhaDB, String ip) {
+	public UsuarioNovoDAOdesativado(String nomeDB, String usuarioDB, String senhaDB, String ip) {
 		super(nomeDB, usuarioDB, senhaDB, "usuariosnovos", ip);
 	}
 
-	public UsuarioNovoDAO(String nomeDB, String usuarioDB, String senhaDB) {
+	public UsuarioNovoDAOdesativado(String nomeDB, String usuarioDB, String senhaDB) {
 		super(nomeDB, usuarioDB, senhaDB, "usuariosnovos");
 	}
 	
-	public UsuarioNovoDAO(){
+	public UsuarioNovoDAOdesativado(){
 		super("usuariosnovos");
 	}
 

@@ -10,8 +10,8 @@ public class RemoveUsuario implements Logica{
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 //		remove da tabela de usuários
-		new UsuarioDAO().deleteByMatricula(
-			Integer.parseInt(pedido.getParameter("matricula"))
+		new UsuarioDAO().deleteById(
+			Integer.parseInt(pedido.getParameter("id"))
 		);
 		
 		return "sistema?logica=TelaPrincipal";

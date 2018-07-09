@@ -1,3 +1,5 @@
+use gestaodecontratos;
+
 insert into uso (nome) values ("Contínuo");
 insert into uso (nome) values ("Demanda Específica");
 

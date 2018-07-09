@@ -9,9 +9,7 @@ public class TelaPrincipal implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		Usuario u = (Usuario) pedido.getSession().getAttribute("usuario");
-		
-		return "sistema?logica=TelaPrincipal" + u.getCargo();
+		return "sistema?logica=TelaPrincipal" + ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo();
 	}
 
 }

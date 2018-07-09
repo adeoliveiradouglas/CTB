@@ -1,2 +1,10 @@
 
 WebContent/index\.html
+
+*.bak
+
+build/classes/
+
+build/
+
+*.class

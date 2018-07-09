@@ -10,8 +10,8 @@ public class TelaEditarUsuario implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		Usuario u = new UsuarioDAO().getByEmail(
-			pedido.getParameter("email")
+		Usuario u = new UsuarioDAO().getById(
+			Integer.parseInt(pedido.getParameter("id"))
 		);
 		
 		pedido.getSession().setAttribute("usuarioeditar", u);

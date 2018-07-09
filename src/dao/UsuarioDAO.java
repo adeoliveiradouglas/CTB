@@ -11,7 +11,7 @@ import entity.Usuario;
 
 public class UsuarioDAO extends DAO {
 	//Nome das colunas no banco de dados
-	private final String colunaId = super.getNomeTabela() + "idUsuario",
+	private final String colunaId = super.getNomeTabela() + ".idUsuario",
 						 colunaMatricula = super.getNomeTabela() + ".matricula", 
 						 colunaNome = super.getNomeTabela() + ".nome", 
 						 colunaEmail = super.getNomeTabela() + ".login",
@@ -45,7 +45,7 @@ public class UsuarioDAO extends DAO {
 		iniciaConexaoComBanco();
 		
 		super.setSqlQuery(
-			"insert into " + super.getNomeTabela() + " values (?,?,?,?,?,?)"
+			"insert into " + super.getNomeTabela() + " (matricula, nome, login, senha, setor_codigo, cargo_id) values (?,?,?,?,?,?)"
 		);
 		
 		int posicao = 0;
@@ -115,7 +115,7 @@ public class UsuarioDAO extends DAO {
 		
 //		monta a query
 		super.setSqlQuery(
-			"select * from usuario where " + colunaId +" = ?"
+			"select * from " + super.getNomeTabela() + " where " + colunaId +" = ?"
 		);
 		
 		try {
@@ -194,7 +194,7 @@ public class UsuarioDAO extends DAO {
 		
 //		monta a query
 		super.setSqlQuery(
-				"select * from usuario where " + colunaEmail + " = ?"
+			"select * from " + super.getNomeTabela() + " where " + colunaEmail + " = ?"
 		);
 		
 		try {
@@ -270,7 +270,7 @@ public class UsuarioDAO extends DAO {
  		depois busca setor e cargo através do resultado do usuario
  		
 */
-		Usuario u = null;
+		
 		ArrayList<Usuario> lu = new ArrayList<>();
 		
 //		monta a query
@@ -299,6 +299,8 @@ public class UsuarioDAO extends DAO {
 		
 		
 		try{
+			Usuario u = null;
+			
 			while(super.getResultado().next()){
 				u = new Usuario(
 					super.getResultado().getInt(
@@ -373,14 +375,14 @@ public class UsuarioDAO extends DAO {
 		encerraConexaocomBanco();
 	}
 	
-	public void deleteByMatricula(int matricula) {
+	public void deleteById(int id) {
 		iniciaConexaoComBanco();
 		
 		/*Exemplo
 		 * delete from usuario where matricula = ?; 
 		 */
 		super.setSqlQuery(
-			"delete from " + super.getNomeTabela() + " where matricula = ?"
+			"delete from " + super.getNomeTabela() + " where " + colunaId + " = ?"
 		);
 		
 		try {
@@ -392,7 +394,7 @@ public class UsuarioDAO extends DAO {
 			
 			super.getStatement().setInt(
 				1,
-				matricula
+				id
 			);
 			
 			super.getStatement().executeUpdate();

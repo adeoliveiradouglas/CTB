@@ -17,8 +17,7 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<%@ page import="dao.UsuarioNovoDAO,
-					 dao.UsuarioDAO,
+	<%@ page import="dao.UsuarioDAO,
 			         entity.Usuario,
 					 java.util.ArrayList" %>	
  
@@ -38,11 +37,13 @@
 		</thead>
 		<tbody>
 			<%
+				@SuppressWarnings("unchecked") /*GAMBIARRA PARA TIRAR WARNING DA LINHA ABAIXO*/
 				ArrayList<Usuario> lu = (ArrayList<Usuario>) request.getSession().getAttribute("usuariosnovos");
 			
 				for (Usuario u: lu){
 			%>
 			<tr>
+				<%-- <td class="text-center"><%=u.getId() %></td> --%>
 				<td class="text-center"><%=u.getNome() %></td>
 				<td class="text-center"><%=u.getMatricula() %></td>
 				<td class="text-center"><%=u.getCargo() %></td>
@@ -50,12 +51,12 @@
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
 					<form action="sistema?logica=AutorizarNovoUsuario" method="post">
-						<button value="<%=u.getEmail()%>" name="email">Autorizar</button>
+						<button value="<%=u.getId()%>" name="id">Autorizar</button>
 					</form>
 				</td>
 				<td class="text-center">
 					<form action="sistema?logica=RecusarNovoUsuario" method="post">
-						<button value="<%=u.getMatricula()%>" name="matricula">Recusar</button>
+						<button value="<%=u.getId()%>" name="id">Recusar</button>
 					</form>
 				</td>
 			</tr>
@@ -95,7 +96,7 @@
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
 					<form action="sistema?logica=TelaEditarUsuario" method="post">
-						<button value="<%=u.getEmail()%>" name="email">Editar</button>
+						<button value="<%=u.getId()%>" name="id">Editar</button>
 					</form>
 				</td>
 			</tr>

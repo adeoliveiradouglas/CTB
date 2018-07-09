@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="ISO-8859-1">
+<title>Sistema de Gestão de Contratos</title>
+<link rel="stylesheet" type="text/css" href="../css/vendors.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/algaworks.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/application.css" />
 </head>
-<body>
-	ajuda
+
+<body class="aw-layout-simple-page">
+	<jsp:include page="Cabecalho.jsp"></jsp:include>
+	<div class="aw-layout-simple-page__container">
+		Por favor, procure o administrador da sua rede para maiores informações.
+	</div>
 </body>
 </html>

@@ -12,15 +12,15 @@
 
 <nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="sistema?logica=TelaPrincipal"> <!--   	 <img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png"/>  -->
+		<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipal"> <!--   	 <img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png"/>  -->
 			Sistema de Gestão de Contratos
 		</a>
 	</div>
 
 	<div class="container-fluid">
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="ajuda.jsp">Ajuda</a></li>
-			<li><a href="sistema?logica=Logout">Sair</a></li>
+			<li><a href="adds/ajuda.jsp">Ajuda</a></li>
+			<li><a href="/gestaodecontratos/sistema?logica=Logout">Sair</a></li>
 		</ul>
 	</div>
 </nav>

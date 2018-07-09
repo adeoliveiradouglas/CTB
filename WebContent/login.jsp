@@ -27,6 +27,7 @@
 		<form action="sistema?logica=Login" th:object="${userdetails}" method="POST">
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
+				
 					<div class="form-group  has-feedback">
 						<input type="email" class="form-control  input-lg" placeholder="Seu e-mail" name="email" required/> 
 						<span class="glyphicon  glyphicon-envelope  form-control-feedback" aria-hidden="true"></span>
