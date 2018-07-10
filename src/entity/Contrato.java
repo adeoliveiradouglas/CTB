@@ -2,7 +2,6 @@
  * Classe responsável por armazenar um contrato
  *
  *  Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Data"
- *  obs1 - tempoVigenteDias: se verdadeiro, deve calcular o tempo vigente para vencimento como dias. Se falso, calcular como meses.
  *  obs2 - objeto: descricao do contrato
  *  obs3 - recurso, fontePagante e uso: há padrões para os três campos no bd, aqui só será armazenado o campo String/Varchar dos mesmos
  *  obs4 - guarda apenas a matricula da pessoa responsavel pelo contrato
@@ -22,11 +21,8 @@ import lombok.Data;
 public class Contrato {
 	private int numero,
 				portaria,
-				tempoVigente, //vide cabecalho obs1
 				matriculaGestor, //vide cabecalho obs4
 				matriculaFiscal; //vide cabecalho obs4
-	
-	private boolean tempoVigenteDias; //vide cabecalho obs1
 	
 	private String nome,
 				   cnpjEmpresaContratada,
@@ -39,15 +35,40 @@ public class Contrato {
 	private Date dataAssinatura,
 				 dataOrdemServico,
 				 dataGarantia,
-				 dataVencimentoContrato, //vide cabecalho obs1
+				 dataVencimentoContrato,
 				 dataVencimentoGarantia;
 	
 	private BigDecimal valorInicial,
-					   valorAditivos,
+					   valorAditivos = new BigDecimal(0),
 					   valorTotal; //vide cabecalho obs5
 	
 	private ArrayList<Processo> processos;
+
+	public Contrato(int numero, int portaria, int matriculaGestor, int matriculaFiscal, String nome,
+			String cnpjEmpresaContratada, String nomeEmpresaContratada, String objeto, String recurso,
+			String fontePagante, String uso, Date dataAssinatura, Date dataOrdemServico, Date dataGarantia,
+			Date dataVencimentoContrato, Date dataVencimentoGarantia, BigDecimal valorInicial) {
+		super();
+		this.numero = numero;
+		this.portaria = portaria;
+		this.matriculaGestor = matriculaGestor;
+		this.matriculaFiscal = matriculaFiscal;
+		this.nome = nome;
+		this.cnpjEmpresaContratada = cnpjEmpresaContratada;
+		this.nomeEmpresaContratada = nomeEmpresaContratada;
+		this.objeto = objeto;
+		this.recurso = recurso;
+		this.fontePagante = fontePagante;
+		this.uso = uso;
+		this.dataAssinatura = dataAssinatura;
+		this.dataOrdemServico = dataOrdemServico;
+		this.dataGarantia = dataGarantia;
+		this.dataVencimentoContrato = dataVencimentoContrato;
+		this.dataVencimentoGarantia = dataVencimentoGarantia;
+		this.valorInicial = valorInicial;
+		this.valorTotal = valorInicial;
+	}
 	
-	public Contrato(){}
+	
 	
 }

@@ -13,7 +13,7 @@
 <body class="aw-layout-simple-page">
 	<jsp:include page="Cabecalho.jsp"></jsp:include>
 	<div class="aw-layout-simple-page__container">
-		Por favor, procure o administrador da sua rede para maiores informações.
+		<h3>Por favor, procure o administrador da sua rede para maiores informações.</h3>
 	</div>
 </body>
 </html>

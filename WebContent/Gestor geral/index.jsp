@@ -18,8 +18,45 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<%@ page import="dao.ContratoDAO"%>
+	<div align="center">
+		<a href="Gestor geral/novoContrato.jsp">
+			<h1>
+				Novo contrato
+			</h1>			
+		</a>
+	</div>
 	
+	<div style="background-color: #1e94d2; color: white" align="center">
+		<h3>Contratos mais recentes</h3>
+	</div>
+		<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center col-md-1">Número</th>
+				<th class="text-center col-md-2">Empresa</th>
+				<th class="text-center col-md-2">Gestor</th>
+				<th class="text-center col-md-1">Valor</th>
+				<th class="text-center col-md-1">Data</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th class="text-center col-md-1">Número</th>
+				<th class="text-center col-md-2">Empresa</th>
+				<th class="text-center col-md-2">Gestor</th>
+				<th class="text-center col-md-1">Valor</th>
+				<th class="text-center col-md-1">Data vencimento</th>
+			</tr>		
+		</tbody>
+	</table>
+	
+	<div align="center">
+		<a href="sistema?logica=TodosContratos" >Clique aqui para ver todos os contratos</a>
+	</div>
+	<br />
+	<div style="background-color: #1e94d2; color: white" align="center">
+		<h3>Contratos com vencimento dentro de 90 dias</h3>
+	</div>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

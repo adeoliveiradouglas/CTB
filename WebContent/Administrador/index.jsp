@@ -17,8 +17,7 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<%@ page import="dao.UsuarioDAO,
-			         entity.Usuario,
+	<%@ page import="entity.Usuario,
 					 java.util.ArrayList" %>	
  
 	<div style="background-color: #1e94d2; color: white" align="center">
@@ -38,9 +37,9 @@
 		<tbody>
 			<%
 				@SuppressWarnings("unchecked") /*GAMBIARRA PARA TIRAR WARNING DA LINHA ABAIXO*/
-				ArrayList<Usuario> lu = (ArrayList<Usuario>) request.getSession().getAttribute("usuariosnovos");
+				ArrayList<Usuario> lun = (ArrayList<Usuario>) request.getSession().getAttribute("usuariosnovos");
 			
-				for (Usuario u: lu){
+				for (Usuario u: lun){
 			%>
 			<tr>
 				<%-- <td class="text-center"><%=u.getId() %></td> --%>
@@ -86,7 +85,10 @@
 		</thead>
 		<tbody>
 			<%
-				for (Usuario u: new UsuarioDAO().getAll()){
+			@SuppressWarnings("unchecked") /*GAMBIARRA PARA TIRAR WARNING DA LINHA ABAIXO*/
+			ArrayList<Usuario> lu = (ArrayList<Usuario>) request.getSession().getAttribute("usuarios");
+		
+			for (Usuario u: lu){
 			%>
 			<tr>
 				<td class="text-center"><%=u.getNome() %></td>

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.UsuarioDAO;
 import entity.Usuario;
 import utilidades.Cripto;
-import utilidades.Email;
 
 public class CadastrarUsuario implements Logica {
 

@@ -337,6 +337,89 @@ public class UsuarioDAO extends DAO {
 		encerraConexaocomBanco();
 		return lu;
 	}
+	
+	public ArrayList<Usuario> getAllGestor() {
+		iniciaConexaoComBanco();
+		
+/*		
+ 		Exemplo de query para esse método
+ 		
+ 		select * from usuario where cargo = 3";
+ 		depois busca setor e cargo através do resultado do usuario
+ 		
+*/
+		
+		ArrayList<Usuario> lu = new ArrayList<>();
+		
+//		monta a query
+		super.setSqlQuery(
+			"select * from " + super.getNomeTabela() + " where " + colunaCargo + " = ?"
+		);
+		
+		try {
+//			monta o statement
+			super.setStatement(
+				super.getDbConnection().prepareStatement(
+					super.getSqlQuery()
+				)
+			);
+			
+			super.getStatement().setInt(
+				1, 
+				3 //id do cargo gestor
+			);
+						
+//			executa
+			super.setResultado(
+				super.getStatement().executeQuery()
+			);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+			encerraConexaocomBanco();
+			return null;
+		}
+		
+		
+		try{
+			Usuario u = null;
+			
+			while(super.getResultado().next()){
+				u = new Usuario(
+					super.getResultado().getInt(
+						colunaId
+					),
+					super.getResultado().getInt(
+						colunaMatricula
+					),
+					super.getResultado().getString(
+						colunaNome
+					),
+					super.getResultado().getString(
+						colunaEmail
+					),
+					super.getResultado().getString(
+						colunaSenha
+					),
+					
+//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+					new SetorDAO().getByCodigo(
+							super.getResultado().getString(colunaSetor)
+					).getSigla(),
+					new CargoDAO().getByCodigo(
+							super.getResultado().getInt(colunaCargo)
+					).getNome()
+				);
+				lu.add(u);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			lu = null;
+		}
+		
+		encerraConexaocomBanco();
+		return lu;
+	}
 
 	public void atualizarSenha(String senha, String email){
 		iniciaConexaoComBanco();

@@ -41,7 +41,7 @@ public class Login implements Logica{
 //		Muda o tempo de inatividade para 5 minutos (o padrão são 30 minutos)
 		pedido.getSession().setMaxInactiveInterval(300);
 		
-//		Retorna a página do respectivo cargo que deve ser acessada 
+//		Manda mostrar a tela principal 
 		return "sistema?logica=TelaPrincipal";
 	}
 }

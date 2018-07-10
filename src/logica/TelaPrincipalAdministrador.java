@@ -1,7 +1,5 @@
 package logica;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,9 +12,9 @@ public class TelaPrincipalAdministrador implements Logica{
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		Usuario u = (Usuario) pedido.getSession().getAttribute("usuario");
 		
-		ArrayList<Usuario> lunovos = new UsuarioDAO("usuariosnovos").getAll(); 
 		
-		pedido.getSession().setAttribute("usuariosnovos", lunovos);
+		pedido.getSession().setAttribute("usuariosnovos", new UsuarioDAO("usuariosnovos").getAll());
+		pedido.getSession().setAttribute("usuarios", new UsuarioDAO().getAll());
 		
 		return "/" + u.getCargo() + "/index.jsp";
 	}

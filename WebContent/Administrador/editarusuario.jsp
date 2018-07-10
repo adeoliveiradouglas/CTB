@@ -32,7 +32,7 @@
 					</div>
 
 					<div class="form-group  has-feedback">
-						<input type="text" class="form-control input-lg" placeholder="Seu nome completo" name="nome" value=<%=u.getNome() %> required> 
+						<input class="form-control input-lg" placeholder="Seu nome completo" name="nome" value=<%=u.getNome() %> required> 
 						<span class="form-control-feedback" aria-hidden="true"> </span>
 					</div>
 
