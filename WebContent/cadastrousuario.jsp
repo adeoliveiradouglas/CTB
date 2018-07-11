@@ -71,16 +71,13 @@
 					  					 java.util.ArrayList" %>
 					  	
 					  	<%
-					  		CargoDAO cdao = new CargoDAO();
-					  		ArrayList<Cargo> cargos = cdao.getAll();
-					  		
-					  		for (Cargo c: cargos){
+					  	for (Cargo c: new CargoDAO().getAll()){
 					  	%>
 					  	<option value="<%=c.getNome()%>">
 					  		<%=c.getNome() %> - <%=c.getDescricao() %>					  	
 					  	</option>
 					  	<%
-					  		}
+					  	}
 					  	%>
 					  </select> <!-- select cargos -->
 					</div> <!-- fim div select cargos -->
@@ -94,16 +91,13 @@
 					  					 java.util.ArrayList" %>
 					  	
 					  	<%
-					  		SetorDAO sdao = new SetorDAO("gestaodecontratos", "servidorApp", "suporte2017");
-					  		ArrayList<Setor> setores = sdao.getAll();
-					  		
-					  		for (Setor s: setores){
+					  	for (Setor s: new SetorDAO().getAll()){
 					  	%>
 					  	<option value="<%=s.getSigla()%>">
 					  		<%=s.getSigla() %> - <%=s.getNome() %>					  						  	
 					  	</option>
 					  	<%
-					  		}
+					  	}
 					  	%>
 					  </select> <!-- select setores -->
 					</div> <!-- fim div select setores -->

@@ -20,7 +20,6 @@
 		<div align="center">
 			<img
 				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
-			<!--<p>Por favor, faça o login.</p>-->
 		</div>
 
 		<br />
@@ -42,20 +41,16 @@
 					</div>
 
 					<div class="form-group clearfix">
-						<div class="checkbox  pull-left  aw-checkbox-no-margin">
-							<input type="checkbox" id="lembrar" /> 
-							<label for="lembrar">Lembre de mim</label>
+						<div class="pull-left">
+							Novo por aqui? <a href="cadastrousuario.jsp">Cadastre-se</a>.					
 						</div>
-
 						<div class="pull-right">
 							<a href="esqueceuasenha.jsp">Esqueci minha senha</a>
 						</div>
 					</div>
 				</div>
 
-				<div class="aw-simple-panel__footer">
-					Novo por aqui? <a href="cadastrousuario.jsp">Cadastre-se</a>.					
-				</div>
+				
 			</div>
 		</form>
 	</div>

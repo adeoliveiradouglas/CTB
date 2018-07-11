@@ -19,7 +19,7 @@
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
 	<div align="center">
-		<a href="Gestor geral/novoContrato.jsp">
+		<a href="sistema?logica=TelaNovoContrato">
 			<h1>
 				Novo contrato
 			</h1>			
@@ -40,13 +40,21 @@
 			</tr>
 		</thead>
 		<tbody>
+			<%@ page import="entity.Contrato,
+							 java.util.ArrayList" %>
+			<%
+			for (Contrato c: (ArrayList<Contrato>) request.getSession().getAttribute("contratos")){
+			%>
 			<tr>
 				<th class="text-center col-md-1">Número</th>
 				<th class="text-center col-md-2">Empresa</th>
 				<th class="text-center col-md-2">Gestor</th>
 				<th class="text-center col-md-1">Valor</th>
 				<th class="text-center col-md-1">Data vencimento</th>
-			</tr>		
+			</tr>
+			<%
+			}
+			%>	
 		</tbody>
 	</table>
 	
@@ -57,6 +65,39 @@
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Contratos com vencimento dentro de 90 dias</h3>
 	</div>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center col-md-1">Número</th>
+				<th class="text-center col-md-2">Empresa</th>
+				<th class="text-center col-md-2">Gestor</th>
+				<th class="text-center col-md-1">Valor</th>
+				<th class="text-center col-md-1">Data</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%@ page import="entity.Contrato,
+							 java.util.ArrayList" %>
+			<%
+			for (Contrato c: (ArrayList<Contrato>) request.getSession().getAttribute("vencimento90")){
+			%>
+			<tr>
+				<th class="text-center col-md-1">Número</th>
+				<th class="text-center col-md-2">Empresa</th>
+				<th class="text-center col-md-2">Gestor</th>
+				<th class="text-center col-md-1">Valor</th>
+				<th class="text-center col-md-1">Data vencimento</th>
+			</tr>
+			<%
+			}
+			%>	
+		</tbody>
+	</table>
+	
+	<div align="center">
+		<a href="sistema?logica=ContratosVencimento" >Clique aqui para ver todos os contratos</a>
+	</div>
+	<br />
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

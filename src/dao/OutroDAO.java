@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import entity.Outro;
 
 public class OutroDAO extends DAO{
-	private final String colunaId = super.getNomeTabela() + ".id",
+	private String colunaId = super.getNomeTabela() + ".id",
 						 colunaNome = super.getNomeTabela() + ".nome";	
 	
-	OutroDAO(String nomeTabela) {
+	public OutroDAO(String nomeTabela) {
 		super(nomeTabela);
 	}
 
@@ -46,19 +46,14 @@ public class OutroDAO extends DAO{
 		
 		
 		try {
-			super.getResultado().next();
-			
-//			Tipo abstrato para dados das tabelas uso, recurso e fontepagante
-			Outro o = new Outro();
-			o.setId(
-				super.getResultado().getInt(colunaId)
-			);
-			
-			o.setNome(
-				super.getResultado().getString(colunaNome)
-			);
-			
-			lista.add(o);
+			while (super.getResultado().next()){				
+	//			Tipo abstrato para dados das tabelas uso, recurso e fontepagante
+				Outro o = new Outro(
+					super.getResultado().getInt(colunaId),
+					super.getResultado().getString(colunaNome)
+				);
+				lista.add(o);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			encerraConexaocomBanco();
@@ -107,12 +102,8 @@ public class OutroDAO extends DAO{
 		try {
 			super.getResultado().next();
 			
-			o = new Outro();
-			o.setId(
-				super.getResultado().getInt(colunaId)
-			);
-			
-			o.setNome(
+			o = new Outro(
+				super.getResultado().getInt(colunaId),
 				super.getResultado().getString(colunaNome)
 			);
 		} catch (SQLException e) {

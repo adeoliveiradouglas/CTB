@@ -4,6 +4,7 @@
 
 </style>
 	<footer>
+		<br /><br />
 		<div align="center">
 			Companhia de Transportes do Estado da Bahia
 		</div>		

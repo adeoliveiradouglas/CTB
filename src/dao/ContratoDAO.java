@@ -105,4 +105,16 @@ public class ContratoDAO extends DAO{
 		encerraConexaocomBanco();
 		return lista;
 	}
+	
+	public ArrayList<Contrato> getAllRecente(int quantidade){
+		ArrayList<Contrato> recentes = new ArrayList<Contrato>();
+		
+		return recentes;
+	}
+
+	public ArrayList<Contrato> getVencimento90() {
+		ArrayList<Contrato> recentes = new ArrayList<Contrato>();
+		
+		return recentes;
+	}
 }
