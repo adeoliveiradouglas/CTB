@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import entity.Processo;
 
 public class ProcessoDAO extends DAO{
-	private final String colunaNotaFiscal = super.getNomeTabela() + ".notaFiscal",
-						 colunaAditivo = super.getNomeTabela() + ".aditivo",
-						 colunaTipoAditivo = super.getNomeTabela() + ".tipoAditivo",
-						 colunaDataPagamento = super.getNomeTabela() + ".dataPagamento",
-						 colunaContrato = super.getNomeTabela() + ".contratoNumero",
-						 colunaSei = super.getNomeTabela() + ".numeroSei";
+	private final String colunaNotaFiscal = getNomeTabela() + ".notaFiscal",
+						 colunaAditivo = getNomeTabela() + ".aditivo",
+						 colunaTipoAditivo = getNomeTabela() + ".tipoAditivo",
+						 colunaDataPagamento = getNomeTabela() + ".dataPagamento",
+						 colunaContrato = getNomeTabela() + ".contratoNumero",
+						 colunaSei = getNomeTabela() + ".numeroSei";
 
 	public ProcessoDAO() {
 		super("processo");
@@ -20,24 +20,24 @@ public class ProcessoDAO extends DAO{
 	public ArrayList<Processo> getByContrato(int numeroContrato){
 		iniciaConexaoComBanco();
 		
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela() + " where " + colunaContrato + " = ?"
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaContrato + " = ?"
 		);
 		
 		try{
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				1,
 				numeroContrato
 			);
 			
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -48,27 +48,27 @@ public class ProcessoDAO extends DAO{
 		Processo p;
 				
 		try {
-			while(super.getResultado().next()){
+			while(getResultado().next()){
 				p = new Processo();
 				
 				p.setNotaFiscal(
-					super.getResultado().getString(colunaNotaFiscal)
+					getResultado().getString(colunaNotaFiscal)
 				);
 					
 				p.setAditivo(
-					super.getResultado().getBigDecimal(colunaAditivo)
+					getResultado().getBigDecimal(colunaAditivo)
 				);
 					
 				p.setTipoAditivo(
-					super.getResultado().getString(colunaTipoAditivo)
+					getResultado().getString(colunaTipoAditivo)
 				);
 
 				p.setDataPagamento(
-					super.getResultado().getDate(colunaDataPagamento)
+					getResultado().getDate(colunaDataPagamento)
 				);
 				
 				p.setNumeroSei(
-					super.getResultado().getString(colunaSei)
+					getResultado().getString(colunaSei)
 				);
 				
 				lista.add(p);

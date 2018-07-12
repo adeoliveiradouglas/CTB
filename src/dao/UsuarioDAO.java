@@ -11,13 +11,13 @@ import entity.Usuario;
 
 public class UsuarioDAO extends DAO {
 	//Nome das colunas no banco de dados
-	private final String colunaId = super.getNomeTabela() + ".idUsuario",
-						 colunaMatricula = super.getNomeTabela() + ".matricula", 
-						 colunaNome = super.getNomeTabela() + ".nome", 
-						 colunaEmail = super.getNomeTabela() + ".login",
-						 colunaSenha = super.getNomeTabela() + ".senha",
-						 colunaSetor = super.getNomeTabela() + ".setor_codigo",
-						 colunaCargo = super.getNomeTabela() + ".cargo_id";
+	private final String colunaId = getNomeTabela() + ".idUsuario",
+						 colunaMatricula = getNomeTabela() + ".matricula", 
+						 colunaNome = getNomeTabela() + ".nome", 
+						 colunaEmail = getNomeTabela() + ".login",
+						 colunaSenha = getNomeTabela() + ".senha",
+						 colunaSetor = getNomeTabela() + ".setor_codigo",
+						 colunaCargo = getNomeTabela() + ".cargo_id";
 
 	/*
 	 * public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB){
@@ -44,56 +44,50 @@ public class UsuarioDAO extends DAO {
 	public void inserir(Usuario usuario){
 		iniciaConexaoComBanco();
 		
-		super.setSqlQuery(
-			"insert into " + super.getNomeTabela() + " (matricula, nome, login, senha, setor_codigo, cargo_id) values (?,?,?,?,?,?)"
+		setSqlQuery(
+			"insert into " + getNomeTabela() + " (matricula, nome, login, senha, setor_codigo, cargo_id) values (?,?,?,?,?,?)"
 		);
 		
 		int posicao = 0;
 		
 		try {
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				++posicao,
 				usuario.getMatricula()
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao,
 				usuario.getNome()
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao,
 				usuario.getEmail()
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao,
 				usuario.getSenha()
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao,
-				new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp())
-				.getBySigla( //busca o codigo da sigla na tabela de setores
-					usuario.getSetor()
-				).getCodigo()
+				usuario.getSetor().getCodigo()
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				++posicao,
-				new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp())
-				.getByNome( //busca o codigo do cargo na tabela de cargos
-					usuario.getCargo()
-				).getId()
+				usuario.getCargo().getId()
 			);
 			
-			super.getStatement().executeUpdate();
+			getStatement().executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -103,8 +97,7 @@ public class UsuarioDAO extends DAO {
 	
 	public Usuario getById(int id) {
 		iniciaConexaoComBanco();
-		
-		
+				
  	/*	Exemplo de query para esse método
  		
  		select * from usuario where usuario.id = ?";
@@ -114,27 +107,27 @@ public class UsuarioDAO extends DAO {
 		Usuario u;
 		
 //		monta a query
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela() + " where " + colunaId +" = ?"
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaId +" = ?"
 		);
 		
 		try {
 //			monta o statement
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
 //			Preenche o statement
-			super.getStatement().setInt(
+			getStatement().setInt(
 				1, 
 				id
 			);
 			
 //			executa
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 			
 		} catch(SQLException e) {
@@ -145,31 +138,31 @@ public class UsuarioDAO extends DAO {
 		
 		
 		try{
-			super.getResultado().next();
+			getResultado().next();
 			u = new Usuario(
-				super.getResultado().getInt(
+				getResultado().getInt(
 					colunaId
 				),
-				super.getResultado().getInt(
+				getResultado().getInt(
 					colunaMatricula
 				),
-				super.getResultado().getString(
+				getResultado().getString(
 					colunaNome
 				),
-				super.getResultado().getString(
+				getResultado().getString(
 					colunaEmail
 				),
-				super.getResultado().getString(
+				getResultado().getString(
 					colunaSenha
 				),
 				
 //				busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 				new SetorDAO().getByCodigo(
-						super.getResultado().getString(colunaSetor)
-				).getSigla(),
-				new CargoDAO().getByCodigo(
-						super.getResultado().getInt(colunaCargo)
-				).getNome()
+					getResultado().getString(colunaSetor)
+				),
+				new CargoDAO().getById(
+					getResultado().getInt(colunaCargo)
+				)
 			);
 		} catch (SQLException e) {
 			u = null;
@@ -193,27 +186,27 @@ public class UsuarioDAO extends DAO {
 		Usuario u;
 		
 //		monta a query
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela() + " where " + colunaEmail + " = ?"
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaEmail + " = ?"
 		);
 		
 		try {
 //			monta o statement
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
 //			Preenche o statement
-			super.getStatement().setString(
+			getStatement().setString(
 				1, 
 				email
 			);
 			
 //			executa
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 			
 		} catch(SQLException e) {
@@ -224,31 +217,31 @@ public class UsuarioDAO extends DAO {
 		
 		
 		try{
-			super.getResultado().next();
+			getResultado().next();
 			u = new Usuario(
-				super.getResultado().getInt(
+				getResultado().getInt(
 					colunaId
 				),
-				super.getResultado().getInt(
+				getResultado().getInt(
 					colunaMatricula
 				),
-				super.getResultado().getString(
+				getResultado().getString(
 					colunaNome
 				),
-				super.getResultado().getString(
+				getResultado().getString(
 					colunaEmail
 				),
-				super.getResultado().getString(
+				getResultado().getString(
 					colunaSenha
 				),
 				
 //				busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 				new SetorDAO().getByCodigo(
-						super.getResultado().getString(colunaSetor)
-				).getSigla(),
-				new CargoDAO().getByCodigo(
-						super.getResultado().getInt(colunaCargo)
-				).getNome()
+						getResultado().getString(colunaSetor)
+				),
+				new CargoDAO().getById(
+						getResultado().getInt(colunaCargo)
+				)
 			);
 			
 		} catch (SQLException e) {
@@ -274,21 +267,21 @@ public class UsuarioDAO extends DAO {
 		ArrayList<Usuario> lu = new ArrayList<>();
 		
 //		monta a query
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela()
+		setSqlQuery(
+			"select * from " + getNomeTabela()
 		);
 		
 		try {
 //			monta o statement
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 						
 //			executa
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 			
 		} catch(SQLException e) {
@@ -301,31 +294,31 @@ public class UsuarioDAO extends DAO {
 		try{
 			Usuario u = null;
 			
-			while(super.getResultado().next()){
+			while(getResultado().next()){
 				u = new Usuario(
-					super.getResultado().getInt(
+					getResultado().getInt(
 						colunaId
 					),
-					super.getResultado().getInt(
+					getResultado().getInt(
 						colunaMatricula
 					),
-					super.getResultado().getString(
+					getResultado().getString(
 						colunaNome
 					),
-					super.getResultado().getString(
+					getResultado().getString(
 						colunaEmail
 					),
-					super.getResultado().getString(
+					getResultado().getString(
 						colunaSenha
 					),
 					
-//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+//					busca setor de acordo com o resultado do usuario
 					new SetorDAO().getByCodigo(
-							super.getResultado().getString(colunaSetor)
-					).getSigla(),
-					new CargoDAO().getByCodigo(
-							super.getResultado().getInt(colunaCargo)
-					).getNome()
+							getResultado().getString(colunaSetor)
+					),
+					new CargoDAO().getById(
+							getResultado().getInt(colunaCargo)
+					)
 				);
 				lu.add(u);
 			}
@@ -352,26 +345,26 @@ public class UsuarioDAO extends DAO {
 		ArrayList<Usuario> lu = new ArrayList<>();
 		
 //		monta a query
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela() + " where " + colunaCargo + " = ?"
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaCargo + " = ?"
 		);
 		
 		try {
 //			monta o statement
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				1, 
 				3 //id do cargo gestor
 			);
 						
 //			executa
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 			
 		} catch(SQLException e) {
@@ -384,31 +377,31 @@ public class UsuarioDAO extends DAO {
 		try{
 			Usuario u = null;
 			
-			while(super.getResultado().next()){
+			while(getResultado().next()){
 				u = new Usuario(
-					super.getResultado().getInt(
+					getResultado().getInt(
 						colunaId
 					),
-					super.getResultado().getInt(
+					getResultado().getInt(
 						colunaMatricula
 					),
-					super.getResultado().getString(
+					getResultado().getString(
 						colunaNome
 					),
-					super.getResultado().getString(
+					getResultado().getString(
 						colunaEmail
 					),
-					super.getResultado().getString(
+					getResultado().getString(
 						colunaSenha
 					),
 					
 //					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 					new SetorDAO().getByCodigo(
-							super.getResultado().getString(colunaSetor)
-					).getSigla(),
-					new CargoDAO().getByCodigo(
-							super.getResultado().getInt(colunaCargo)
-					).getNome()
+							getResultado().getString(colunaSetor)
+					),
+					new CargoDAO().getById(
+							getResultado().getInt(colunaCargo)
+					)
 				);
 				lu.add(u);
 			}
@@ -428,29 +421,29 @@ public class UsuarioDAO extends DAO {
 		  Exemplo de query
 		  update usuario set senha = senha where usuario.login = email;
 		*/
-		super.setSqlQuery(
-			"update " + super.getNomeTabela() + " set " + colunaSenha + " = ? where " + colunaEmail + " = ?"
+		setSqlQuery(
+			"update " + getNomeTabela() + " set " + colunaSenha + " = ? where " + colunaEmail + " = ?"
 		);
 		
 		try {
 			int posicao = 0;
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao, 
 				senha
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao, 
 				email
 			);
 			
-			super.getStatement().executeUpdate();
+			getStatement().executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -464,23 +457,23 @@ public class UsuarioDAO extends DAO {
 		/*Exemplo
 		 * delete from usuario where matricula = ?; 
 		 */
-		super.setSqlQuery(
-			"delete from " + super.getNomeTabela() + " where " + colunaId + " = ?"
+		setSqlQuery(
+			"delete from " + getNomeTabela() + " where " + colunaId + " = ?"
 		);
 		
 		try {
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				1,
 				id
 			);
 			
-			super.getStatement().executeUpdate();
+			getStatement().executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -495,8 +488,8 @@ public class UsuarioDAO extends DAO {
 		  Exemplo de query
 		  update usuario set todos os parametros where usuario.login = email;
 		*/
-		super.setSqlQuery(
-			"update " + super.getNomeTabela() + " set " + 
+		setSqlQuery(
+			"update " + getNomeTabela() + " set " + 
 			colunaMatricula + " = ?, " + 
 			colunaNome + " = ?, " +
 			colunaEmail + " = ?, " +
@@ -508,56 +501,50 @@ public class UsuarioDAO extends DAO {
 		
 		
 		int posicao = 0;
-		SetorDAO sdao = new SetorDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
-		CargoDAO cdao = new CargoDAO(super.getNomeBanco(), super.getUsuarioBanco(), super.getSenhaBanco(), super.getIp());
 		
 		try {
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				++posicao,
 				usuario.getMatricula()
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao,
 				usuario.getNome()
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao,
 				usuario.getEmail()
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao,
 				usuario.getSenha()
 			);
 			
-			super.getStatement().setString(
+			getStatement().setString(
 				++posicao,
-				sdao.getBySigla( //busca o codigo da sigla na tabela de setores
-					usuario.getSetor()
-				).getCodigo()
+				usuario.getSetor().getCodigo()
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				++posicao,
-				cdao.getByNome( //busca o codigo do cargo na tabela de cargos
-					usuario.getCargo()
-				).getId()
+				usuario.getCargo().getId()
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				++posicao,
 				usuario.getId()
 			);
 				
-			super.getStatement().executeUpdate();
+			getStatement().executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

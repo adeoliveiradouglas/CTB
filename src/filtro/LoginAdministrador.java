@@ -18,13 +18,13 @@ import javax.servlet.http.HttpSession;
 
 import entity.Usuario;
 
-@WebFilter(
+/*@WebFilter(
 	urlPatterns = {"/Administrador/*"}, 
 	dispatcherTypes = {
 		DispatcherType.REQUEST, 
 		DispatcherType.FORWARD
 	}
-)
+)*/
 public class LoginAdministrador implements Filter{
 
 	@Override
@@ -38,7 +38,7 @@ public class LoginAdministrador implements Filter{
 /*		A lógica responsável por autenticar o usuário insere os dados dele na sessão
  * 		Aqui recupera os dados da sessão e verifica se o usuário tem autorização para acessar essa página através do cargo dele
  * */
-		if (((Usuario) sessao.getAttribute("usuario")).getCargo().equals("Administrador"))
+		if (((Usuario) sessao.getAttribute("usuario")).getCargo().getId() == 1)
 			chain.doFilter(pedido, resposta);
 		else
 			res.sendRedirect("sistema?logica=Erro403");			

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import entity.Outro;
 
 public class OutroDAO extends DAO{
-	private String colunaId = super.getNomeTabela() + ".id",
-						 colunaNome = super.getNomeTabela() + ".nome";	
+	private String colunaId = getNomeTabela() + ".id",
+						 colunaNome = getNomeTabela() + ".nome";	
 	
 	public OutroDAO(String nomeTabela) {
 		super(nomeTabela);
@@ -22,21 +22,21 @@ public class OutroDAO extends DAO{
 		
 		/*Exemplo de query
 		  select * from uso/fontepagante/recurso*/
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela()
+		setSqlQuery(
+			"select * from " + getNomeTabela()
 		);
 		
 		try {
 //			Prepara o statement
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
 //			Executa a query
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {			
 			e.printStackTrace();
@@ -46,11 +46,11 @@ public class OutroDAO extends DAO{
 		
 		
 		try {
-			while (super.getResultado().next()){				
+			while (getResultado().next()){				
 	//			Tipo abstrato para dados das tabelas uso, recurso e fontepagante
 				Outro o = new Outro(
-					super.getResultado().getInt(colunaId),
-					super.getResultado().getString(colunaNome)
+					getResultado().getInt(colunaId),
+					getResultado().getString(colunaNome)
 				);
 				lista.add(o);
 			}
@@ -69,26 +69,26 @@ public class OutroDAO extends DAO{
 		
 		/*Exemplo de query
 		  select * from uso/fontepagante/recurso where id = parametro*/
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela() + " where " + colunaId + " = ?"
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaId + " = ?"
 		);
 		
 		try {
 //			Prepara o statement
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				1, 
 				id
 			);
 			
 //			Executa a query
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {			
 			e.printStackTrace();
@@ -100,11 +100,11 @@ public class OutroDAO extends DAO{
 //		Tipo abstrato para dados das tabelas uso, recurso e fontepagante
 		Outro o = null;
 		try {
-			super.getResultado().next();
+			getResultado().next();
 			
 			o = new Outro(
-				super.getResultado().getInt(colunaId),
-				super.getResultado().getString(colunaNome)
+				getResultado().getInt(colunaId),
+				getResultado().getString(colunaNome)
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();

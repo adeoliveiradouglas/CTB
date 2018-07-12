@@ -9,7 +9,7 @@ public class TelaPrincipal implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String cargo = ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo();
+		String cargo = ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo().getNome();
 		
 //		Por causa do nome da servlet de tela principal do gestor geral
 		if (!cargo.equals("Gestor geral"))

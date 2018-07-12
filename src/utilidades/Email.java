@@ -11,8 +11,8 @@ public class Email {
 			emailTo = null,
 			nome = "Gestão de Contratos",
 			smtp = "smtp.office365.com",
-			senha = "-aA#EY^u",
-			emailFrom = "contrato.ctb@ctb.ba.gov.br";
+			senha = "$TEci.2018$",
+			emailFrom = "contratos.ctb@ctb.ba.gov.br";
 	private int smtpPorta = 587;
 
 	public Email(){}

@@ -1,33 +1,31 @@
 package dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entity.Contrato;
 
 public class ContratoDAO extends DAO{
-	private final String colunaNumero = super.getNomeTabela() + ".numero",
-			 			 colunaNome = super.getNomeTabela() + ".nome",
-			 			 colunaEmpresaCnpj = super.getNomeTabela() + ".cnpjEmpresaContratada",
-			 			 colunaEmpresaNome = super.getNomeTabela() + ".nomeEmpresaContratada",
-			 			 colunaPortaria = super.getNomeTabela() + ".portaria",
-			 			 colunaDataAssinatura = super.getNomeTabela() + ".dataAssinatura",
-			 			 colunaDataOrdemServico = super.getNomeTabela() + ".dataOrdemServico",
-			 			 colunaDataGarantia = super.getNomeTabela() + ".dataGarantia",
-			 			 colunaValorInicial = super.getNomeTabela() + ".valorInicial",
-					 	 colunaValorTotal = super.getNomeTabela() + ".valorTotal",
-					 	 colunaValorAditivos = super.getNomeTabela() + ".valorAditivos",
-					 	 colunaDataVencimentoContrato = super.getNomeTabela() + ".dataVencimentoContrato",
-					 	 colunaDataVencimentoGarantia = super.getNomeTabela() + ".dataVencimentoGarantia",
-					 	 colunaObjeto = super.getNomeTabela() + ".objeto",
-					 	 colunaGestor = super.getNomeTabela() + ".gestor",
-					 	 colunaFiscal = super.getNomeTabela() + ".fiscal",
-					 	 colunaRecurso = super.getNomeTabela() + ".recurso_id",
-					 	 colunaFontePagante = super.getNomeTabela() + ".fontePagante_id",
-					 	 colunaUso = super.getNomeTabela() + ".uso_id",
-					 	 tabelaRecurso = "recurso",
-					 	 tabelaFontePagante = "fontepagante",
-					 	 tabelaUso = "uso";
+	private final String colunaNumero = getNomeTabela() + ".numero",
+			 			 colunaNome = getNomeTabela() + ".nome",
+			 			 colunaEmpresaCnpj = getNomeTabela() + ".cnpjEmpresaContratada",
+			 			 colunaEmpresaNome = getNomeTabela() + ".nomeEmpresaContratada",
+			 			 colunaObjeto = getNomeTabela() + ".objeto",
+			 			 colunaPortaria = getNomeTabela() + ".portaria",
+			 			 colunaDataAssinatura = getNomeTabela() + ".dataAssinatura",
+			 			 colunaDataOrdemServico = getNomeTabela() + ".dataOrdemServico",
+			 			 colunaDataGarantia = getNomeTabela() + ".dataGarantia",
+			 			 colunaDataVencimentoContrato = getNomeTabela() + ".dataVencimentoContrato",
+			 			 colunaDataVencimentoGarantia = getNomeTabela() + ".dataVencimentoGarantia",
+					 	 colunaValorInicial = getNomeTabela() + ".valorInicial",
+					 	 colunaValorTotal = getNomeTabela() + ".valorTotal",
+					 	 colunaValorAditivos = getNomeTabela() + ".valorAditivos",
+					 	 colunaGestor = getNomeTabela() + ".gestor",
+					 	 colunaFiscal = getNomeTabela() + ".fiscal",
+					 	 colunaRecurso = getNomeTabela() + ".recurso_id",
+					 	 colunaFontePagante = getNomeTabela() + ".fontePagante_id",
+					 	 colunaUso = getNomeTabela() + ".uso_id";
 	
 	
 	public ContratoDAO() {
@@ -38,24 +36,24 @@ public class ContratoDAO extends DAO{
 		iniciaConexaoComBanco();
 		
 //		Exemplo: select * from contrato where gestor = matricula
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela() + " where " + colunaGestor + " = ?"
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaGestor + " = ?"
 		);
 		
 		try {
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
-			super.getStatement().setInt(
+			getStatement().setInt(
 				1, 
 				matricula
 			);
 			
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,34 +65,34 @@ public class ContratoDAO extends DAO{
 		Contrato c = null;
 		
 		try {
-			while (super.getResultado().next()){
-				c = new Contrato(
-					super.getResultado().getInt(colunaNumero),
-					super.getResultado().getInt(colunaPortaria),
-					super.getResultado().getInt(colunaGestor),
-					super.getResultado().getInt(colunaFiscal),
-					super.getResultado().getString(colunaNome),
-					super.getResultado().getString(colunaEmpresaCnpj),	
-					super.getResultado().getString(colunaEmpresaNome),
-					super.getResultado().getString(colunaObjeto),
+			while (getResultado().next()){
+				/*c = new Contrato(
+					getResultado().getInt(colunaNumero),
+					getResultado().getInt(colunaPortaria),
+					getResultado().getInt(colunaGestor),
+					getResultado().getInt(colunaFiscal),
+					getResultado().getString(colunaNome),
+					getResultado().getString(colunaEmpresaCnpj),	
+					getResultado().getString(colunaEmpresaNome),
+					getResultado().getString(colunaObjeto),
 					new OutroDAO(tabelaRecurso).getById(
-						super.getResultado().getInt(colunaRecurso)
+						getResultado().getInt(colunaRecurso)
 					).getNome(),
 					new OutroDAO(tabelaFontePagante).getById(
-						super.getResultado().getInt(colunaFontePagante)
+						getResultado().getInt(colunaFontePagante)
 					).getNome(),
 					new OutroDAO(tabelaUso).getById(
-						super.getResultado().getInt(colunaUso)
+						getResultado().getInt(colunaUso)
 					).getNome(),
-					super.getResultado().getDate(colunaDataAssinatura),
-					super.getResultado().getDate(colunaDataOrdemServico),
-					super.getResultado().getDate(colunaDataGarantia),
-					super.getResultado().getDate(colunaDataVencimentoContrato),
-					super.getResultado().getDate(colunaDataVencimentoGarantia),
-					super.getResultado().getBigDecimal(colunaValorInicial)
+					getResultado().getDate(colunaDataAssinatura),
+					getResultado().getDate(colunaDataOrdemServico),
+					getResultado().getDate(colunaDataGarantia),
+					getResultado().getDate(colunaDataVencimentoContrato),
+					getResultado().getDate(colunaDataVencimentoGarantia),
+					getResultado().getBigDecimal(colunaValorInicial)
 				);
 				
-				lista.add(c);
+				lista.add(c);*/
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -116,5 +114,124 @@ public class ContratoDAO extends DAO{
 		ArrayList<Contrato> recentes = new ArrayList<Contrato>();
 		
 		return recentes;
+	}
+
+	public void inserir(Contrato c) {
+		iniciaConexaoComBanco();
+		
+		setSqlQuery(
+			"insert into " + getNomeTabela() + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+		);
+		
+		try{
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
+				)
+			);
+			
+			int posicao = 1;
+			
+			getStatement().setInt(
+				posicao, 
+				c.getNumero()
+			);
+			
+			getStatement().setString(
+				++posicao, 
+				c.getNome()
+			);
+			
+			getStatement().setString(
+				++posicao, 
+				c.getCnpjEmpresaContratada()
+			);
+			
+			getStatement().setString(
+				++posicao, 
+				c.getNomeEmpresaContratada()
+			);
+
+			getStatement().setString(
+				++posicao, 
+				c.getObjeto()
+			);
+			
+			getStatement().setInt(
+				++posicao, 
+				c.getPortaria()
+			);
+			
+			getStatement().setDate(
+				++posicao, 
+				new Date(c.getDataAssinatura().getTime())
+			);
+			
+			getStatement().setDate(
+				++posicao, 
+				new Date(c.getDataOrdemServico().getTime())
+			);
+			
+			getStatement().setDate(
+				++posicao, 
+				new Date(c.getDataGarantia().getTime())
+			);
+			
+			getStatement().setDate(
+				++posicao, 
+				new Date(c.getDataVencimentoContrato().getTime())
+			);
+			
+			getStatement().setDate(
+				++posicao, 
+				new Date(c.getDataVencimentoGarantia().getTime())
+			);
+			
+			getStatement().setBigDecimal(
+				++posicao, 
+				c.getValorInicial()
+			);
+			
+			getStatement().setBigDecimal(
+				++posicao, 
+				c.getValorTotal()
+			);
+			
+			getStatement().setBigDecimal(
+				++posicao, 
+				c.getValorAditivos()
+			);
+						
+			getStatement().setInt(
+				++posicao, 
+				c.getGestor()
+			);
+			
+			getStatement().setInt(
+				++posicao, 
+				c.getFiscal()
+			);
+			
+			getStatement().setInt(
+				++posicao, 
+				c.getRecurso().getId()
+			);
+			
+			getStatement().setInt(
+				++posicao, 
+				c.getFontePagante().getId()
+			);
+			
+			getStatement().setInt(
+				++posicao, 
+				c.getUso().getId()
+			);
+			
+			getStatement().executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			encerraConexaocomBanco();
+		}
 	}
 }

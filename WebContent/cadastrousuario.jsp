@@ -23,8 +23,9 @@
 <body class="aw-layout-simple-page">
 	<div class="aw-layout-simple-page__container">
 		<div align="center">
-			<img
-				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
+			<a href="sistema?logica=TelaLogin">
+				<img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
+			</a>			
 		</div>
 		<br />
 		<form action="sistema?logica=CadastrarUsuario" th:object="${userdetails}" method="POST">
@@ -73,7 +74,7 @@
 					  	<%
 					  	for (Cargo c: new CargoDAO().getAll()){
 					  	%>
-					  	<option value="<%=c.getNome()%>">
+					  	<option value="<%=c.getId()%>">
 					  		<%=c.getNome() %> - <%=c.getDescricao() %>					  	
 					  	</option>
 					  	<%
@@ -93,7 +94,7 @@
 					  	<%
 					  	for (Setor s: new SetorDAO().getAll()){
 					  	%>
-					  	<option value="<%=s.getSigla()%>">
+					  	<option value="<%=s.getCodigo()%>">
 					  		<%=s.getSigla() %> - <%=s.getNome() %>					  						  	
 					  	</option>
 					  	<%

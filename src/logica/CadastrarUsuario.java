@@ -3,6 +3,8 @@ package logica;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CargoDAO;
+import dao.SetorDAO;
 import dao.UsuarioDAO;
 import entity.Usuario;
 import utilidades.Cripto;
@@ -25,8 +27,8 @@ public class CadastrarUsuario implements Logica {
 						nome,
 						email, 
 						new Cripto().criptografa(pedido.getParameter("senha")), 
-						pedido.getParameter("setor"), 
-						pedido.getParameter("cargo")
+						new SetorDAO().getByCodigo(pedido.getParameter("setor")), 
+						new CargoDAO().getById(Integer.parseInt(pedido.getParameter("cargo")))
 					)
 				);
 			} catch (NumberFormatException e) {

@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import entity.Setor;
 
 public class SetorDAO extends DAO{
-	private final String colunaNome = super.getNomeTabela() + ".nome",
-						 colunaCodigo = super.getNomeTabela() + ".codigo",
-	   		 			 colunaSigla = super.getNomeTabela() + ".sigla";
+	private final String colunaNome = getNomeTabela() + ".nome",
+						 colunaCodigo = getNomeTabela() + ".codigo",
+	   		 			 colunaSigla = getNomeTabela() + ".sigla";
 
 	public SetorDAO(String nomeDB, String usuarioDB, String senhaDB) {
 		super(nomeDB, usuarioDB, senhaDB, "setor");
@@ -31,10 +31,10 @@ public class SetorDAO extends DAO{
 		iniciaConexaoComBanco();
 		
 //		monta a query
-		super.setSqlQuery(
+		setSqlQuery(
 //			select * from setor where codigo = "codigoInserido" 
 			"select * from " + 
-			super.getNomeTabela() + 
+			getNomeTabela() + 
 			" where "+ 
 			this.colunaCodigo + 
 			" = ?"	
@@ -42,21 +42,21 @@ public class SetorDAO extends DAO{
 		
 		try {
 //			monta o statement
-			super.setStatement( 
+			setStatement( 
 //				pega da conexao
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()	
+				getDbConnection().prepareStatement(
+					getSqlQuery()	
 				)
 			);
 			
 //			preenche o statement
-			super.getStatement().setString(
+			getStatement().setString(
 				1, 
 				codigo
 			);
 //			executa a query
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 			
 		} catch (SQLException e) {
@@ -68,11 +68,11 @@ public class SetorDAO extends DAO{
 //		traduz o resultado para um objeto Setor
 		Setor s = null;
 		try {
-			while (super.getResultado().next()){
+			while (getResultado().next()){
 				s = new Setor(
-					super.getResultado().getString(colunaCodigo),
-					super.getResultado().getString(colunaNome),
-					super.getResultado().getString(colunaSigla)
+					getResultado().getString(colunaCodigo),
+					getResultado().getString(colunaNome),
+					getResultado().getString(colunaSigla)
 				);				
 			}
 		} catch (SQLException e) {
@@ -88,10 +88,10 @@ public class SetorDAO extends DAO{
 		iniciaConexaoComBanco();
 		
 //		monta a query
-		super.setSqlQuery(
+		setSqlQuery(
 //			select * from setor where sigla = "siglaInserida" 
 			"select * from " + 
-			super.getNomeTabela() + 
+			getNomeTabela() + 
 			" where "+ 
 			this.colunaSigla + 
 			" = ?"	
@@ -99,21 +99,21 @@ public class SetorDAO extends DAO{
 		
 		try {
 //			monta o statement
-			super.setStatement( 
+			setStatement( 
 //				pega da conexao
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()	
+				getDbConnection().prepareStatement(
+					getSqlQuery()	
 				)
 			);
 			
 //			preenche o statement
-			super.getStatement().setString(
+			getStatement().setString(
 				1, 
 				sigla
 			);
 //			executa a query
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 			
 		} catch (SQLException e) {
@@ -125,11 +125,11 @@ public class SetorDAO extends DAO{
 //		traduz o resultado para um objeto Setor
 		Setor s = null;
 		try {
-			while (super.getResultado().next()){
+			while (getResultado().next()){
 				s = new Setor(
-					super.getResultado().getString(colunaCodigo),
-					super.getResultado().getString(colunaNome),
-					super.getResultado().getString(colunaSigla)
+					getResultado().getString(colunaCodigo),
+					getResultado().getString(colunaNome),
+					getResultado().getString(colunaSigla)
 				);				
 			}
 		} catch (SQLException e) {
@@ -142,21 +142,21 @@ public class SetorDAO extends DAO{
 	}
 	public ArrayList<Setor> getAll(){
 		iniciaConexaoComBanco();
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela() + " order by sigla"
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " order by sigla"
 		);
 		
 		try {
 //			monta o statement
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
 //			executa a query
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -167,11 +167,11 @@ public class SetorDAO extends DAO{
 		ArrayList<Setor> setores = new ArrayList<Setor>();
 		Setor s;
 		try {
-			while(super.getResultado().next()){
+			while(getResultado().next()){
 				s = new Setor(
-					super.getResultado().getString(colunaCodigo),
-					super.getResultado().getString(colunaNome),
-					super.getResultado().getString(colunaSigla)
+					getResultado().getString(colunaCodigo),
+					getResultado().getString(colunaNome),
+					getResultado().getString(colunaSigla)
 				);	
 				setores.add(s);
 			}

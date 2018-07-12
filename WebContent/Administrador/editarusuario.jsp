@@ -45,7 +45,9 @@
 					<!-- Mostrar as opções de cargos -->
 					<div  class="form-group custom-select has-feedback">
 					  <select name="cargo" id="cargoselect">
-					  	<option style="display: none">Selecione seu cargo:</option>
+					  	<option style="display: none" value="<%=u.getCargo().getId() %>">
+					  		<%=u.getCargo().getNome() %> - <%=u.getCargo().getDescricao() %>					  	
+					  	</option>
 					  	<%@ page import="dao.CargoDAO,
 					  					 entity.Cargo,
 					  					 java.util.ArrayList" %>
@@ -56,7 +58,7 @@
 					  		
 					  		for (Cargo c: cargos){
 					  	%>
-					  	<option value="<%=c.getNome()%>">
+					  	<option value="<%=c.getId() %>">
 					  		<%=c.getNome() %> - <%=c.getDescricao() %>					  	
 					  	</option>
 					  	<%
@@ -68,7 +70,10 @@
 					<!-- Mostrar as opções de setores -->
 					<div class="form-group custom-select has-feedback">
 					  <select name="setor">
-					  	<option style="display: none">Selecione seu setor:</option>
+					  
+					  	<option style="display: none" value="<%=u.getSetor().getCodigo()%>">
+					  		<%=u.getSetor().getSigla() %> - <%=u.getSetor().getNome() %>					  						  	
+					  	</option>
 					  	<%@ page import="dao.SetorDAO,
 					  					 entity.Setor,
 					  					 java.util.ArrayList" %>
@@ -79,7 +84,7 @@
 					  		
 					  		for (Setor s: setores){
 					  	%>
-					  	<option value="<%=s.getSigla()%>">
+					  	<option value="<%=s.getCodigo()%>">
 					  		<%=s.getSigla() %> - <%=s.getNome() %>					  						  	
 					  	</option>
 					  	<%

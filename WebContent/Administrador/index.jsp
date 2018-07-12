@@ -45,8 +45,8 @@
 				<%-- <td class="text-center"><%=u.getId() %></td> --%>
 				<td class="text-center"><%=u.getNome() %></td>
 				<td class="text-center"><%=u.getMatricula() %></td>
-				<td class="text-center"><%=u.getCargo() %></td>
-				<td class="text-center"><%=u.getSetor() %></td>
+				<td class="text-center"><%=u.getCargo().getNome() %></td>
+				<td class="text-center"><%=u.getSetor().getSigla() %></td>
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
 					<form action="sistema?logica=AutorizarNovoUsuario" method="post">
@@ -93,8 +93,8 @@
 			<tr>
 				<td class="text-center"><%=u.getNome() %></td>
 				<td class="text-center"><%=u.getMatricula() %></td>
-				<td class="text-center"><%=u.getCargo() %></td>
-				<td class="text-center"><%=u.getSetor() %></td>
+				<td class="text-center"><%=u.getCargo().getNome() %></td>
+				<td class="text-center"><%=u.getSetor().getSigla() %></td>
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
 					<form action="sistema?logica=TelaEditarUsuario" method="post">

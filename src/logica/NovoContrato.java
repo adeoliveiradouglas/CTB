@@ -1,18 +1,52 @@
 package logica;
 
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.ContratoDAO;
+import dao.OutroDAO;
 import entity.Contrato;
+import entity.Outro;
 
 public class NovoContrato implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		@SuppressWarnings("unused")
-		String s = pedido.getParameter("assinatura");
+		Date assinatura = new SimpleDateFormat("yyyy-MM-dd").parse(
+				pedido.getParameter("dataAssinatura")
+			),
+			ordemDeServico = new SimpleDateFormat("yyyy-MM-dd").parse(
+				pedido.getParameter("dataOs")
+			),
+			garantia = new SimpleDateFormat("yyyy-MM-dd").parse(
+				pedido.getParameter("dataGarantia")
+			),
+			vencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
+				pedido.getParameter("dataVencimento")
+			),
+			vencimentoGarantia = new SimpleDateFormat("yyyy-MM-dd").parse(
+				pedido.getParameter("dataVencimentoGarantia")
+			);
 		
-		/*Contrato c = new Contrato(
+		String va = pedido.getParameter("valor");
+		BigDecimal valor = new BigDecimal(va);
+			
+		Outro recurso = new OutroDAO("recurso").getById(
+			Integer.parseInt(pedido.getParameter("recurso"))
+		),
+		fontepagante = new OutroDAO("fontepagante").getById(
+			Integer.parseInt(pedido.getParameter("fontepagante"))
+		),
+		uso = new OutroDAO("uso").getById(
+			Integer.parseInt(pedido.getParameter("uso"))
+		);
+		
+		Contrato c = new Contrato(
 			Integer.parseInt(pedido.getParameter("numero")),
 			Integer.parseInt(pedido.getParameter("portaria")),
 			Integer.parseInt(pedido.getParameter("gestor")),
@@ -21,17 +55,18 @@ public class NovoContrato implements Logica{
 			pedido.getParameter("cnpjEmpresa"),	
 			pedido.getParameter("nomeEmpresa"),
 			pedido.getParameter("objeto"),
-			pedido.getParameter("recurso"),
-			pedido.getParameter("fontepagante"),
-			pedido.getParameter("uso"),
-			pedido.getParameter("assinatura"),
-			pedido.getParameter("ordemDeServico"),
-			pedido.getParameter("garantia"),
-			pedido.getParameter("vencimento"),
-			pedido.getParameter("vencimentoGarantia"),
-			pedido.getParameter("valor")
-		);*/
+			recurso,
+			fontepagante,
+			uso,
+			assinatura,
+			ordemDeServico,
+			garantia,
+			vencimento,
+			vencimentoGarantia,
+			valor
+		);
 		
+		new ContratoDAO().inserir(c);
 		return "sistema?logica=TelaPrincipalGestorGeral";
 	}
 

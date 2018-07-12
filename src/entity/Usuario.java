@@ -2,8 +2,6 @@
  * Dados de um usuario no banco de dados
  * 
  * Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Data"
- * obs1: guarda apenas a sigla do setor
- * obs2: guarda apenas o nome do cargo. necessário pois existem padrões
  * */
 
 package entity;
@@ -16,15 +14,13 @@ public class Usuario {
 				matricula;
 	private String nome,
 				   email,
-				   senha,
-				   setor, // vide cabecalho obs1
-				   cargo; // vide cabecalho obs2
+				   senha;
+	private Setor setor;
+	private Cargo cargo;
 	
 	public Usuario() {}
-
 	
-	public Usuario(int matricula, String nome, String email, String senha, String setor, String cargo) {
-		super();
+	public Usuario(int matricula, String nome, String email, String senha, Setor setor, Cargo cargo) {
 		this.matricula = matricula;
 		this.nome = nome;
 		this.email = email;
@@ -33,9 +29,7 @@ public class Usuario {
 		this.cargo = cargo;
 	}
 
-
-	public Usuario(int id, int matricula, String nome, String email, String senha, String setor, String cargo) {
-		super();
+	public Usuario(int id, int matricula, String nome, String email, String senha, Setor setor, Cargo cargo) {
 		this.id = id;
 		this.matricula = matricula;
 		this.nome = nome;

@@ -34,7 +34,7 @@
 				<tr>
 					<th class="col-md-1" style="color: blue"><h3><i>Matrícula: <%= u.getMatricula()%> </i></h3></th>
 					<th class="text-center col-md-1" style="color: blue"><h3><i>Nome: <%= u.getNome()%> </i></h3></th>
-					<th class="text-right col-md-1" style="color: blue"><h3><i>Setor: <%= u.getSetor()%> </i></h3></th>
+					<th class="text-right col-md-1" style="color: blue"><h3><i>Setor: <%= u.getSetor().getSigla()%> </i></h3></th>
 				</tr>
 			</table>
 			

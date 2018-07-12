@@ -12,7 +12,7 @@
 package entity;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 import lombok.Data;
@@ -21,16 +21,17 @@ import lombok.Data;
 public class Contrato {
 	private int numero,
 				portaria,
-				matriculaGestor, //vide cabecalho obs4
-				matriculaFiscal; //vide cabecalho obs4
+				gestor, //vide cabecalho obs4
+				fiscal; //vide cabecalho obs4
+	
+	private Outro recurso, //vide cabecalho obs3
+	   			  fontePagante, //vide cabecalho obs3
+	   			  uso; //vide cabecalho obs3
 	
 	private String nome,
 				   cnpjEmpresaContratada,
 				   nomeEmpresaContratada,
-				   objeto, //vide cabecalho obs2
-				   recurso, //vide cabecalho obs3
-				   fontePagante, //vide cabecalho obs3
-				   uso; //vide cabecalho obs3
+				   objeto; //vide cabecalho obs2				   
 	
 	private Date dataAssinatura,
 				 dataOrdemServico,
@@ -45,14 +46,14 @@ public class Contrato {
 	private ArrayList<Processo> processos;
 
 	public Contrato(int numero, int portaria, int matriculaGestor, int matriculaFiscal, String nome,
-			String cnpjEmpresaContratada, String nomeEmpresaContratada, String objeto, String recurso,
-			String fontePagante, String uso, Date dataAssinatura, Date dataOrdemServico, Date dataGarantia,
+			String cnpjEmpresaContratada, String nomeEmpresaContratada, String objeto, Outro recurso,
+			Outro fontePagante, Outro uso, Date dataAssinatura, Date dataOrdemServico, Date dataGarantia,
 			Date dataVencimentoContrato, Date dataVencimentoGarantia, BigDecimal valorInicial) {
 		super();
 		this.numero = numero;
 		this.portaria = portaria;
-		this.matriculaGestor = matriculaGestor;
-		this.matriculaFiscal = matriculaFiscal;
+		this.gestor = matriculaGestor;
+		this.fiscal = matriculaFiscal;
 		this.nome = nome;
 		this.cnpjEmpresaContratada = cnpjEmpresaContratada;
 		this.nomeEmpresaContratada = nomeEmpresaContratada;

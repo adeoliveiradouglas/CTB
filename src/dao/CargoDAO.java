@@ -6,9 +6,9 @@ import entity.Cargo;
 import lombok.Getter;
 public class CargoDAO extends DAO{
 	@Getter
-	private final String colunaId = super.getNomeTabela() + ".id",
-						 colunaNome = super.getNomeTabela() + ".nome",
-						 colunaDescricao = super.getNomeTabela() + ".descricao";
+	private final String colunaId = getNomeTabela() + ".id",
+						 colunaNome = getNomeTabela() + ".nome",
+						 colunaDescricao = getNomeTabela() + ".descricao";
 	
 	public CargoDAO(String nomeDB, String usuarioDB, String senhaDB) {
 		super(nomeDB, usuarioDB, senhaDB, "cargo");
@@ -22,31 +22,31 @@ public class CargoDAO extends DAO{
 		super("cargo");
 	}
 	
-	public Cargo getByCodigo(int codigo){
+	public Cargo getById(int id){
 		iniciaConexaoComBanco();
 		
 		/*Exemplo de query
 		select * from cargo where id = codigo;*/
-		super.setSqlQuery(
+		setSqlQuery(
 			"select * from cargo where " + colunaId + " = ?"
 		);
 		
 		try {
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
 //			Preenche o statement
-			super.getStatement().setInt(
+			getStatement().setInt(
 				1,
-				codigo
+				id
 			);
 			
 //			Executa a query
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,11 +57,11 @@ public class CargoDAO extends DAO{
 //		Traduzir para objeto Cargo
 		Cargo c = null;
 		try {
-			super.getResultado().next();
+			getResultado().next();
 			c = new Cargo(
-				super.getResultado().getInt(colunaId),
-				super.getResultado().getString(colunaNome),
-				super.getResultado().getString(colunaDescricao)
+				getResultado().getInt(colunaId),
+				getResultado().getString(colunaNome),
+				getResultado().getString(colunaDescricao)
 				
 			);
 		} catch (SQLException e) {
@@ -79,19 +79,19 @@ public class CargoDAO extends DAO{
 		
 //		monta a query
 //		select * from cargo 
-		super.setSqlQuery(
-			"select * from " + super.getNomeTabela()
+		setSqlQuery(
+			"select * from " + getNomeTabela()
 		);
 		
 		try {
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {
 			encerraConexaocomBanco();
@@ -103,11 +103,11 @@ public class CargoDAO extends DAO{
 		Cargo c;
 //		traduzir resultSet para uma lista
 		try {
-			while (super.getResultado().next()){
+			while (getResultado().next()){
 				c = new Cargo(
-					super.getResultado().getInt(colunaId),
-					super.getResultado().getString(colunaNome),
-					super.getResultado().getString(colunaDescricao)
+					getResultado().getInt(colunaId),
+					getResultado().getString(colunaNome),
+					getResultado().getString(colunaDescricao)
 				);
 				lc.add(c);
 			}
@@ -126,26 +126,26 @@ public class CargoDAO extends DAO{
 		
 		/*Exemplo de query
 		select * from cargo where id = codigo;*/
-		super.setSqlQuery(
+		setSqlQuery(
 			"select * from cargo where " + colunaNome + " = ?"
 		);
 		
 		try {
-			super.setStatement(
-				super.getDbConnection().prepareStatement(
-					super.getSqlQuery()
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
 				)
 			);
 			
 //			Preenche o statement
-			super.getStatement().setString(
+			getStatement().setString(
 				1,
 				nome
 			);
 			
 //			Executa a query
-			super.setResultado(
-				super.getStatement().executeQuery()
+			setResultado(
+				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -156,11 +156,11 @@ public class CargoDAO extends DAO{
 //		Traduzir para objeto Cargo
 		Cargo c = null;
 		try {
-			super.getResultado().next();
+			getResultado().next();
 			c = new Cargo(
-				super.getResultado().getInt(colunaId),
-				super.getResultado().getString(colunaNome),
-				super.getResultado().getString(colunaDescricao)
+				getResultado().getInt(colunaId),
+				getResultado().getString(colunaNome),
+				getResultado().getString(colunaDescricao)
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();

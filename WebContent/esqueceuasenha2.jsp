@@ -20,8 +20,9 @@
 <body class="aw-layout-simple-page">
 	<div class="aw-layout-simple-page__container">
 		<div align="center">
-			<img
-				src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
+			<a href="sistema?logica=TelaLogin">
+				<img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
+			</a>			
 		</div>
 		<br />
 		<form action="sistema?logica=ValidarToken" method="POST"> 

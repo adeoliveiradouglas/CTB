@@ -17,5 +17,10 @@ public class Cargo {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-	}	
+	}
+	
+	public Cargo(int id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
 }

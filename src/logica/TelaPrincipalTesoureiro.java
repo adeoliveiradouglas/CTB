@@ -9,7 +9,7 @@ public class TelaPrincipalTesoureiro implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		return "/" + ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo() + "/index.jsp";
+		return "/" + ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo().getNome() + "/index.jsp";
 	}
 
 }

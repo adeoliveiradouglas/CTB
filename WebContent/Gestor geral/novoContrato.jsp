@@ -41,7 +41,7 @@
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">
-				<input type="number" class="form-control input-lg" placeholder="Número" name="numero" required> 
+				<input type="text" class="form-control input-lg" placeholder="Nome" name="nome" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">
@@ -52,8 +52,7 @@
 			<div  class="form-group custom-select has-feedback">
 			  <select name="gestor" id="gestor">
 			  	<option style="display: none">Selecione o gestor:</option>
-			  	<%@ page import="dao.UsuarioDAO,
-			  					 entity.Usuario,
+			  	<%@ page import="entity.Usuario,
 			  					 entity.Outro,
 			  					 java.util.ArrayList" %>
 			  	
@@ -63,7 +62,7 @@
 			  		
 			  		for (Usuario c: usuarios){
 			  	%>
-			  	<option value="<%=c.getMatricula() %>">
+			  	<option value="<%=c.getId() %>">
 			  		<%=c.getNome() %>			  	
 			  	</option>
 			  	<%
@@ -78,7 +77,7 @@
 			  	<%
 			  		for (Usuario c: usuarios){
 			  	%>
-			  	<option value="<%=c.getMatricula() %>">
+			  	<option value="<%=c.getId() %>">
 			  		<%=c.getNome() %>			  	
 			  	</option>
 			  	<%
@@ -95,7 +94,7 @@
 			  		ArrayList<Outro> lRecurso = (ArrayList<Outro>) request.getSession().getAttribute("recurso"); 
 			  		for (Outro o: lRecurso){
 			  	%>
-			  	<option value="<%=o.getNome() %>">
+			  	<option value="<%=o.getId() %>">
 			  		<%=o.getNome() %>			  	
 			  	</option>
 			  	<%
@@ -113,7 +112,7 @@
 			  	
 			  		for (Outro o: lUso){
 			  	%>
-			  	<option value="<%=o.getNome() %>">
+			  	<option value="<%=o.getId() %>">
 			  		<%=o.getNome() %>			  	
 			  	</option>
 			  	<%
@@ -131,7 +130,7 @@
 			  	
 			  		for (Outro o: lFonte){
 			  	%>
-			  	<option value="<%=o.getNome() %>">
+			  	<option value="<%=o.getId() %>">
 			  		<%=o.getNome() %>			  	
 			  	</option>
 			  	<%
@@ -141,7 +140,27 @@
 			</div> <!-- fim div select uso -->
 			<div class="form-group  has-feedback">
 				Data de assinatura:
-				<input type="date" class="form-control input-lg" placeholder="Data de assinatura" name="assinatura" required> 
+				<input type="date" class="form-control input-lg" name="dataAssinatura" required> 
+				<span class="form-control-feedback"	aria-hidden="true"> </span>
+			</div>
+			<div class="form-group  has-feedback">
+				Data da ordem de serviço:
+				<input type="date" class="form-control input-lg" name="dataOs" required> 
+				<span class="form-control-feedback"	aria-hidden="true"> </span>
+			</div>
+			<div class="form-group  has-feedback">
+				Data da garantia:
+				<input type="date" class="form-control input-lg" name="dataGarantia" required> 
+				<span class="form-control-feedback"	aria-hidden="true"> </span>
+			</div>
+			<div class="form-group  has-feedback">
+				Data de vencimento:
+				<input type="date" class="form-control input-lg" name="dataVencimento" required> 
+				<span class="form-control-feedback"	aria-hidden="true"> </span>
+			</div>
+			<div class="form-group  has-feedback">
+				Data de vencimento da garantia:
+				<input type="date" class="form-control input-lg" name="dataVencimentoGarantia" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			
