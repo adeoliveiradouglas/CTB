@@ -33,11 +33,7 @@ public class SetorDAO extends DAO{
 //		monta a query
 		setSqlQuery(
 //			select * from setor where codigo = "codigoInserido" 
-			"select * from " + 
-			getNomeTabela() + 
-			" where "+ 
-			this.colunaCodigo + 
-			" = ?"	
+			"select * from " + getNomeTabela() + " where "+ this.colunaCodigo + " = ?"	
 		);
 		
 		try {

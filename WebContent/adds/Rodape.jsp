@@ -3,9 +3,9 @@
 <style>
 
 </style>
-	<footer>
+	<footer class="footer">
 		<br /><br />
-		<div align="center">
+		<div class="container" align="center">
 			Companhia de Transportes do Estado da Bahia
 		</div>		
 	</footer>

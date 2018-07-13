@@ -18,13 +18,13 @@ import javax.servlet.http.HttpSession;
 
 import entity.Usuario;
 
-/*@WebFilter(
+@WebFilter(
 	urlPatterns = {"/Tesoureiro/*"}, 
 	dispatcherTypes = {
 		DispatcherType.REQUEST, 
 		DispatcherType.FORWARD
 	}
-)*/
+)
 public class LoginTesoureiro implements Filter{
 
 	@Override

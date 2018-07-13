@@ -42,8 +42,9 @@ public class ProcessoDAO extends DAO{
 		} catch (SQLException e){
 			e.printStackTrace();
 			encerraConexaocomBanco();
-			return null;
+			return new ArrayList<Processo>();
 		}
+		
 		ArrayList<Processo> lista = new ArrayList<Processo>();
 		Processo p;
 				
@@ -76,7 +77,7 @@ public class ProcessoDAO extends DAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			encerraConexaocomBanco();
-			return null;
+			return new ArrayList<Processo>();
 		}
 		
 		encerraConexaocomBanco();

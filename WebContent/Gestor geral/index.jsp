@@ -43,14 +43,16 @@
 			<%@ page import="entity.Contrato,
 							 java.util.ArrayList" %>
 			<%
-			for (Contrato c: (ArrayList<Contrato>) request.getSession().getAttribute("contratos")){
+			@SuppressWarnings("unchecked")
+			ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession().getAttribute("contratos");
+			for (Contrato c: contratos){
 			%>
 			<tr>
-				<th class="text-center col-md-1">Número</th>
-				<th class="text-center col-md-2">Empresa</th>
-				<th class="text-center col-md-2">Gestor</th>
-				<th class="text-center col-md-1">Valor</th>
-				<th class="text-center col-md-1">Data vencimento</th>
+				<th class="text-center"><a href="sistema?logica=VerContrato"><%=c.getNumero() %></a></th>
+				<th class="text-center"><%=c.getNomeEmpresaContratada() %></th>
+				<th class="text-center"><%=c.getGestor() %></th>
+				<th class="text-center"><%=c.getValorTotal() %></th>
+				<th class="text-center"><%=c.getDataVencimentoContrato() %></th>
 			</tr>
 			<%
 			}
@@ -79,14 +81,20 @@
 			<%@ page import="entity.Contrato,
 							 java.util.ArrayList" %>
 			<%
-			for (Contrato c: (ArrayList<Contrato>) request.getSession().getAttribute("vencimento90")){
+			@SuppressWarnings("unchecked")
+			ArrayList<Contrato> contratos90 = (ArrayList<Contrato>) request.getSession().getAttribute("vencimento90");
+			for (Contrato c: contratos90){
 			%>
 			<tr>
-				<th class="text-center col-md-1">Número</th>
-				<th class="text-center col-md-2">Empresa</th>
-				<th class="text-center col-md-2">Gestor</th>
-				<th class="text-center col-md-1">Valor</th>
-				<th class="text-center col-md-1">Data vencimento</th>
+				<th class="text-center">
+					<form action="sistema?logica=VerContrato" method="post">
+						<button value="<%=c.getNumero()%>" name="numeroContrato"><%=c.getNumero() %></button>
+					</form>
+				</th>
+				<th class="text-center"><%=c.getNomeEmpresaContratada() %></th>
+				<th class="text-center"><%=c.getGestor() %></th>
+				<th class="text-center"><%=c.getValorTotal() %></th>
+				<th class="text-center"><%=c.getDataVencimentoContrato() %></th>
 			</tr>
 			<%
 			}

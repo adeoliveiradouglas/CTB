@@ -19,8 +19,7 @@ import lombok.Data;
 
 @Data
 public class Contrato {
-	private int numero,
-				portaria,
+	private int portaria,
 				gestor, //vide cabecalho obs4
 				fiscal; //vide cabecalho obs4
 	
@@ -29,6 +28,7 @@ public class Contrato {
 	   			  uso; //vide cabecalho obs3
 	
 	private String nome,
+				   numero,
 				   cnpjEmpresaContratada,
 				   nomeEmpresaContratada,
 				   objeto; //vide cabecalho obs2				   
@@ -45,7 +45,7 @@ public class Contrato {
 	
 	private ArrayList<Processo> processos;
 
-	public Contrato(int numero, int portaria, int matriculaGestor, int matriculaFiscal, String nome,
+	public Contrato(String numero, int portaria, int matriculaGestor, int matriculaFiscal, String nome,
 			String cnpjEmpresaContratada, String nomeEmpresaContratada, String objeto, Outro recurso,
 			Outro fontePagante, Outro uso, Date dataAssinatura, Date dataOrdemServico, Date dataGarantia,
 			Date dataVencimentoContrato, Date dataVencimentoGarantia, BigDecimal valorInicial) {
@@ -68,6 +68,32 @@ public class Contrato {
 		this.dataVencimentoGarantia = dataVencimentoGarantia;
 		this.valorInicial = valorInicial;
 		this.valorTotal = valorInicial;
+	}
+	
+	public Contrato(String numero, int portaria, int matriculaGestor, int matriculaFiscal, String nome,
+			String cnpjEmpresaContratada, String nomeEmpresaContratada, String objeto, Outro recurso,
+			Outro fontePagante, Outro uso, Date dataAssinatura, Date dataOrdemServico, Date dataGarantia,
+			Date dataVencimentoContrato, Date dataVencimentoGarantia, BigDecimal valorInicial, BigDecimal valorAditivos, BigDecimal valorTotal, ArrayList<Processo> processos) {
+		super();
+		this.numero = numero;
+		this.portaria = portaria;
+		this.gestor = matriculaGestor;
+		this.fiscal = matriculaFiscal;
+		this.nome = nome;
+		this.cnpjEmpresaContratada = cnpjEmpresaContratada;
+		this.nomeEmpresaContratada = nomeEmpresaContratada;
+		this.objeto = objeto;
+		this.recurso = recurso;
+		this.fontePagante = fontePagante;
+		this.uso = uso;
+		this.dataAssinatura = dataAssinatura;
+		this.dataOrdemServico = dataOrdemServico;
+		this.dataGarantia = dataGarantia;
+		this.dataVencimentoContrato = dataVencimentoContrato;
+		this.dataVencimentoGarantia = dataVencimentoGarantia;
+		this.valorInicial = valorAditivos;
+		this.valorTotal = valorTotal;
+		this.processos = processos;
 	}
 	
 	

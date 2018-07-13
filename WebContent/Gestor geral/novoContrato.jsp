@@ -18,10 +18,10 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<div class="aw-layout-simple-page__container">
+	<div class="aw-layout-simple-page">
 		<form action="sistema?logica=NovoContrato" method="post">
 			<div class="form-group  has-feedback">
-				<input type="number" class="form-control input-lg" placeholder="Número" name="numero" required> 
+				<input type="text" class="form-control input-lg" placeholder="Número" name="numero" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">
@@ -36,12 +36,9 @@
 				<input type="text" class="form-control input-lg" placeholder="Objeto" name="objeto" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
+			<!-- NÃO ESTÁ ACEITANDO NÚMEROS DECIMAIS -->
 			<div class="form-group  has-feedback">
-				<input type="number" class="form-control input-lg" placeholder="Valor" name="valor" required> 
-				<span class="form-control-feedback"	aria-hidden="true"> </span>
-			</div>
-			<div class="form-group  has-feedback">
-				<input type="text" class="form-control input-lg" placeholder="Nome" name="nome" required> 
+				<input type="number" class="form-control input-lg" min="0" step="0.01" placeholder="Valor" name="valor" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">

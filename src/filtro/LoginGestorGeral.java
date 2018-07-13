@@ -18,13 +18,13 @@ import javax.servlet.http.HttpSession;
 
 import entity.Usuario;
 
-/*@WebFilter(
+@WebFilter(
 	urlPatterns = {"/Gestor geral/*"}, 
 	dispatcherTypes = {
 		DispatcherType.REQUEST, 
 		DispatcherType.FORWARD
 	}
-)*/
+)
 public class LoginGestorGeral implements Filter{
 
 	@Override

@@ -17,19 +17,21 @@ public class NovoContrato implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		Date assinatura = new SimpleDateFormat("yyyy-MM-dd").parse(
+		final String formatoData = "yyyy-MM-dd";
+		
+		Date assinatura = new SimpleDateFormat(formatoData).parse(
 				pedido.getParameter("dataAssinatura")
 			),
-			ordemDeServico = new SimpleDateFormat("yyyy-MM-dd").parse(
+			ordemDeServico = new SimpleDateFormat(formatoData).parse(
 				pedido.getParameter("dataOs")
 			),
-			garantia = new SimpleDateFormat("yyyy-MM-dd").parse(
+			garantia = new SimpleDateFormat(formatoData).parse(
 				pedido.getParameter("dataGarantia")
 			),
-			vencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
+			vencimento = new SimpleDateFormat(formatoData).parse(
 				pedido.getParameter("dataVencimento")
 			),
-			vencimentoGarantia = new SimpleDateFormat("yyyy-MM-dd").parse(
+			vencimentoGarantia = new SimpleDateFormat(formatoData).parse(
 				pedido.getParameter("dataVencimentoGarantia")
 			);
 		
@@ -47,7 +49,7 @@ public class NovoContrato implements Logica{
 		);
 		
 		Contrato c = new Contrato(
-			Integer.parseInt(pedido.getParameter("numero")),
+			pedido.getParameter("numero"),
 			Integer.parseInt(pedido.getParameter("portaria")),
 			Integer.parseInt(pedido.getParameter("gestor")),
 			Integer.parseInt(pedido.getParameter("fiscal")),

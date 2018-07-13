@@ -18,13 +18,13 @@ import javax.servlet.http.HttpSession;
 
 import entity.Usuario;
 
-/*@WebFilter(
+@WebFilter(
 	urlPatterns = {"/Administrador/*"}, 
 	dispatcherTypes = {
 		DispatcherType.REQUEST, 
 		DispatcherType.FORWARD
 	}
-)*/
+)
 public class LoginAdministrador implements Filter{
 
 	@Override

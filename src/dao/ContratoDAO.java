@@ -66,8 +66,8 @@ public class ContratoDAO extends DAO{
 		
 		try {
 			while (getResultado().next()){
-				/*c = new Contrato(
-					getResultado().getInt(colunaNumero),
+				c = new Contrato(
+					getResultado().getString(colunaNumero),
 					getResultado().getInt(colunaPortaria),
 					getResultado().getInt(colunaGestor),
 					getResultado().getInt(colunaFiscal),
@@ -75,24 +75,33 @@ public class ContratoDAO extends DAO{
 					getResultado().getString(colunaEmpresaCnpj),	
 					getResultado().getString(colunaEmpresaNome),
 					getResultado().getString(colunaObjeto),
-					new OutroDAO(tabelaRecurso).getById(
-						getResultado().getInt(colunaRecurso)
-					).getNome(),
-					new OutroDAO(tabelaFontePagante).getById(
-						getResultado().getInt(colunaFontePagante)
-					).getNome(),
-					new OutroDAO(tabelaUso).getById(
-						getResultado().getInt(colunaUso)
-					).getNome(),
+					new OutroDAO("recurso").getById(
+						getResultado().getInt(
+							colunaRecurso
+						)
+					),
+					new OutroDAO("fontepagante").getById(
+						getResultado().getInt(
+							colunaFontePagante
+						)
+					),
+					new OutroDAO("uso").getById(
+						getResultado().getInt(
+							colunaUso
+						)
+					),
 					getResultado().getDate(colunaDataAssinatura),
 					getResultado().getDate(colunaDataOrdemServico),
 					getResultado().getDate(colunaDataGarantia),
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
-					getResultado().getBigDecimal(colunaValorInicial)
+					getResultado().getBigDecimal(colunaValorInicial),
+					getResultado().getBigDecimal(colunaValorAditivos),
+					getResultado().getBigDecimal(colunaValorTotal),
+					new ProcessoDAO().getByContrato(getResultado().getInt(colunaNumero))
 				);
 				
-				lista.add(c);*/
+				lista.add(c);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -105,8 +114,99 @@ public class ContratoDAO extends DAO{
 	}
 	
 	public ArrayList<Contrato> getAllRecente(int quantidade){
+		/*
+		 * Retorna uma lista com a quantidade dos contratos mais recentes
+		 * Exemplo: parâmetro quantidade = 5, retorna os 5 mais recentes.  
+		 * 
+		 * Se houver qualquer erro no procedimento, retorna uma lista vazia.
+		 */
+		
+		iniciaConexaoComBanco();
+		
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " order by " + colunaDataAssinatura
+		);
+		
 		ArrayList<Contrato> recentes = new ArrayList<Contrato>();
 		
+		try{
+//			monta o statement
+			setStatement( 
+//				pega prepareStatement da conexao
+				getDbConnection().prepareStatement(
+					getSqlQuery()	
+				)
+			);
+			
+			setResultado(
+				getStatement().executeQuery()
+			);
+		} catch(SQLException e) {
+			e.printStackTrace();
+			encerraConexaocomBanco();
+			return new ArrayList<Contrato>();
+		}
+		
+		try{
+			Contrato c;
+			while (getResultado().next() && quantidade > 0){
+				/*
+				 * Enquanto houverem elementos do resulta de quary e estiver dentro no parâmetro, continua processando
+				 */
+				c = new Contrato(
+					getResultado().getString(colunaNumero),
+					getResultado().getInt(colunaPortaria),
+					getResultado().getInt(colunaGestor),
+					getResultado().getInt(colunaFiscal),
+					getResultado().getString(colunaNome),
+					getResultado().getString(colunaEmpresaCnpj),	
+					getResultado().getString(colunaEmpresaNome),
+					getResultado().getString(colunaObjeto),
+					new OutroDAO("recurso").getById(
+						getResultado().getInt(
+							colunaRecurso
+						)
+					),
+					new OutroDAO("fontepagante").getById(
+						getResultado().getInt(
+							colunaFontePagante
+						)
+					),
+					new OutroDAO("uso").getById(
+						getResultado().getInt(
+							colunaUso
+						)
+					),
+					getResultado().getDate(colunaDataAssinatura),
+					getResultado().getDate(colunaDataOrdemServico),
+					getResultado().getDate(colunaDataGarantia),
+					getResultado().getDate(colunaDataVencimentoContrato),
+					getResultado().getDate(colunaDataVencimentoGarantia),
+					getResultado().getBigDecimal(colunaValorInicial),
+					getResultado().getBigDecimal(colunaValorAditivos),
+					getResultado().getBigDecimal(colunaValorTotal),
+					new ProcessoDAO().getByContrato(getResultado().getInt(colunaNumero))
+				);
+				
+				//Adiciona na lista
+				recentes.add(c);				
+				
+				//Diminui a quantidade restante para processar
+				--quantidade;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+			encerraConexaocomBanco();
+			return new ArrayList<Contrato>();
+		}
+
+			
+			
+		
+		
+		
+		encerraConexaocomBanco();
 		return recentes;
 	}
 
@@ -132,7 +232,7 @@ public class ContratoDAO extends DAO{
 			
 			int posicao = 1;
 			
-			getStatement().setInt(
+			getStatement().setString(
 				posicao, 
 				c.getNumero()
 			);
