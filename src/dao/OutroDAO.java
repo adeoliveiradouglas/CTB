@@ -39,7 +39,7 @@ public class OutroDAO extends DAO{
 				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {			
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		}
@@ -55,7 +55,7 @@ public class OutroDAO extends DAO{
 				lista.add(o);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		}		
@@ -91,7 +91,7 @@ public class OutroDAO extends DAO{
 				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {			
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		}
@@ -107,7 +107,7 @@ public class OutroDAO extends DAO{
 				getResultado().getString(colunaNome)
 			);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		}		

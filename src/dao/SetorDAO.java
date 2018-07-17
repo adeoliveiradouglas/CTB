@@ -56,7 +56,7 @@ public class SetorDAO extends DAO{
 			);
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		} 
@@ -73,7 +73,7 @@ public class SetorDAO extends DAO{
 			}
 		} catch (SQLException e) {
 			s = null;
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 		
 		encerraConexaocomBanco();
@@ -113,7 +113,7 @@ public class SetorDAO extends DAO{
 			);
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		} 
@@ -130,7 +130,7 @@ public class SetorDAO extends DAO{
 			}
 		} catch (SQLException e) {
 			s = null;
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 		
 		encerraConexaocomBanco();
@@ -155,7 +155,7 @@ public class SetorDAO extends DAO{
 				getStatement().executeQuery()
 			);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 		
 		
@@ -173,7 +173,7 @@ public class SetorDAO extends DAO{
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e);;
 			return null;
 		}
 		

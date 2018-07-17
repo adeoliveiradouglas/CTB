@@ -20,9 +20,7 @@
 	
 	<div align="center">
 		<a href="sistema?logica=TelaNovoContrato">
-			<h1>
-				Novo contrato
-			</h1>			
+			<font size="5">Novo contrato</font>
 		</a>
 	</div>
 	
@@ -36,7 +34,8 @@
 				<th class="text-center col-md-2">Empresa</th>
 				<th class="text-center col-md-2">Gestor</th>
 				<th class="text-center col-md-1">Valor</th>
-				<th class="text-center col-md-1">Data</th>
+				<th class="text-center col-md-1">Vencimento</th>
+				<!-- <th class="text-center col-md-1">%</th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -50,9 +49,10 @@
 			<tr>
 				<th class="text-center"><a href="sistema?logica=VerContrato"><%=c.getNumero() %></a></th>
 				<th class="text-center"><%=c.getNomeEmpresaContratada() %></th>
-				<th class="text-center"><%=c.getGestor() %></th>
+				<th class="text-center"><%=c.getGestor().getNome() %></th>
 				<th class="text-center"><%=c.getValorTotal() %></th>
 				<th class="text-center"><%=c.getDataVencimentoContrato() %></th>
+				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%
 			}
@@ -74,7 +74,8 @@
 				<th class="text-center col-md-2">Empresa</th>
 				<th class="text-center col-md-2">Gestor</th>
 				<th class="text-center col-md-1">Valor</th>
-				<th class="text-center col-md-1">Data</th>
+				<th class="text-center col-md-1">Vencimento</th>
+				<!-- <th class="text-center col-md-1">%</th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -92,9 +93,10 @@
 					</form>
 				</th>
 				<th class="text-center"><%=c.getNomeEmpresaContratada() %></th>
-				<th class="text-center"><%=c.getGestor() %></th>
+				<th class="text-center"><%=c.getGestor().getNome() %></th>
 				<th class="text-center"><%=c.getValorTotal() %></th>
 				<th class="text-center"><%=c.getDataVencimentoContrato() %></th>
+				<%-- <th class="text-center"><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%
 			}

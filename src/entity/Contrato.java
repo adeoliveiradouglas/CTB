@@ -4,7 +4,6 @@
  *  Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Data"
  *  obs2 - objeto: descricao do contrato
  *  obs3 - recurso, fontePagante e uso: há padrões para os três campos no bd, aqui só será armazenado o campo String/Varchar dos mesmos
- *  obs4 - guarda apenas a matricula da pessoa responsavel pelo contrato
  *  obs5 - valor total é o valor de todos os aditivos de todos os processos mais o valor inicial do contrato
  *  	   Em beta: calcular dinamicamente toda vez que o usuario pedir a pagina ou guardar o valor no banco e aumentar a cada aditivo 	
  */
@@ -12,23 +11,23 @@
 package entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 import lombok.Data;
 
 @Data
 public class Contrato {
-	private int portaria,
-				gestor, //vide cabecalho obs4
-				fiscal; //vide cabecalho obs4
+	private int portaria;
+	
+	private Usuario	gestor, 
+					fiscal;
 	
 	private Outro recurso, //vide cabecalho obs3
 	   			  fontePagante, //vide cabecalho obs3
 	   			  uso; //vide cabecalho obs3
 	
-	private String nome,
-				   numero,
+	private String numero,
 				   cnpjEmpresaContratada,
 				   nomeEmpresaContratada,
 				   objeto; //vide cabecalho obs2				   
@@ -40,21 +39,33 @@ public class Contrato {
 				 dataVencimentoGarantia;
 	
 	private BigDecimal valorInicial,
-					   valorAditivos = new BigDecimal(0),
-					   valorTotal; //vide cabecalho obs5
+				  	   valorAditivos = new BigDecimal(0),
+				  	   valorTotal = new BigDecimal(0); //vide cabecalho obs5
 	
 	private ArrayList<Processo> processos;
 
-	public Contrato(String numero, int portaria, int matriculaGestor, int matriculaFiscal, String nome,
-			String cnpjEmpresaContratada, String nomeEmpresaContratada, String objeto, Outro recurso,
-			Outro fontePagante, Outro uso, Date dataAssinatura, Date dataOrdemServico, Date dataGarantia,
-			Date dataVencimentoContrato, Date dataVencimentoGarantia, BigDecimal valorInicial) {
-		super();
+	public Contrato(
+			String numero, 
+			int portaria,
+			Usuario gestor, 
+			Usuario fiscal,
+			String cnpjEmpresaContratada, 
+			String nomeEmpresaContratada, 
+			String objeto, 
+			Outro recurso,
+			Outro fontePagante, 
+			Outro uso, 
+			Date dataAssinatura, 
+			Date dataOrdemServico, 
+			Date dataGarantia,
+			Date dataVencimentoContrato, 
+			Date dataVencimentoGarantia, 
+			BigDecimal valorInicial) {
+//		Construtor usado para novos contratos pois não tem entrada de processos
 		this.numero = numero;
 		this.portaria = portaria;
-		this.gestor = matriculaGestor;
-		this.fiscal = matriculaFiscal;
-		this.nome = nome;
+		this.gestor = gestor;
+		this.fiscal = fiscal;
 		this.cnpjEmpresaContratada = cnpjEmpresaContratada;
 		this.nomeEmpresaContratada = nomeEmpresaContratada;
 		this.objeto = objeto;
@@ -67,19 +78,30 @@ public class Contrato {
 		this.dataVencimentoContrato = dataVencimentoContrato;
 		this.dataVencimentoGarantia = dataVencimentoGarantia;
 		this.valorInicial = valorInicial;
-		this.valorTotal = valorInicial;
 	}
 	
-	public Contrato(String numero, int portaria, int matriculaGestor, int matriculaFiscal, String nome,
-			String cnpjEmpresaContratada, String nomeEmpresaContratada, String objeto, Outro recurso,
-			Outro fontePagante, Outro uso, Date dataAssinatura, Date dataOrdemServico, Date dataGarantia,
-			Date dataVencimentoContrato, Date dataVencimentoGarantia, BigDecimal valorInicial, BigDecimal valorAditivos, BigDecimal valorTotal, ArrayList<Processo> processos) {
-		super();
+	public Contrato(
+			String numero, 
+			int portaria, 
+			Usuario gestor, 
+			Usuario fiscal,
+			String cnpjEmpresaContratada, 
+			String nomeEmpresaContratada, 
+			String objeto, 
+			Outro recurso,
+			Outro fontePagante, 
+			Outro uso, 
+			Date dataAssinatura, 
+			Date dataOrdemServico,
+			Date dataGarantia,
+			Date dataVencimentoContrato, 
+			Date dataVencimentoGarantia, 
+			BigDecimal valorInicial,
+			ArrayList<Processo> processos) {
 		this.numero = numero;
 		this.portaria = portaria;
-		this.gestor = matriculaGestor;
-		this.fiscal = matriculaFiscal;
-		this.nome = nome;
+		this.gestor = gestor;
+		this.fiscal = fiscal;
 		this.cnpjEmpresaContratada = cnpjEmpresaContratada;
 		this.nomeEmpresaContratada = nomeEmpresaContratada;
 		this.objeto = objeto;
@@ -91,11 +113,22 @@ public class Contrato {
 		this.dataGarantia = dataGarantia;
 		this.dataVencimentoContrato = dataVencimentoContrato;
 		this.dataVencimentoGarantia = dataVencimentoGarantia;
-		this.valorInicial = valorAditivos;
-		this.valorTotal = valorTotal;
+		this.valorInicial = valorInicial;
 		this.processos = processos;
+		
+//		Calcula valores aditivos e total
+		BigDecimal aditivo = new BigDecimal(0);
+		for (Processo p: processos){
+//			Soma todos os aditivos de todos os processos dos contratos
+			aditivo.add(
+				p.getAditivo()
+			);
+		}
+		
+		this.valorAditivos = aditivo;
+//		Soma o resultado do valor inicial com o valor dos aditivos e põe em valorTotal
+		this.valorTotal = valorInicial.add(aditivo);
 	}
-	
 	
 	
 }

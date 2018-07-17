@@ -41,7 +41,7 @@ public class LoginGestor implements Filter{
 		if (((Usuario) sessao.getAttribute("usuario")).getCargo().getId() == 3)
 			chain.doFilter(pedido, resposta);
 		else
-			res.sendRedirect("sistema?logica=Erro403");			
+			res.sendRedirect("/gestaodecontratos/sistema?logica=Erro403");			
 	}
 
 	@Override

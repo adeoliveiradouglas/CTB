@@ -36,16 +36,14 @@
 				<input type="text" class="form-control input-lg" placeholder="Objeto" name="objeto" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
-			<!-- NÃO ESTÁ ACEITANDO NÚMEROS DECIMAIS -->
-			<div class="form-group  has-feedback">
-				<input type="number" class="form-control input-lg" min="0" step="0.01" placeholder="Valor" name="valor" required> 
-				<span class="form-control-feedback"	aria-hidden="true"> </span>
-			</div>
 			<div class="form-group  has-feedback">
 				<input type="number" class="form-control input-lg" placeholder="Portaria" name="portaria" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
-			
+			<div class="form-group  has-feedback">
+				<input type="text" class="form-control input-lg" placeholder="Valor" id="valor" name="valor" maxlength="14" onkeyup="MascaraMoeda(this)" required/>
+				<span class="form-control-feedback"	aria-hidden="true"> </span>
+			</div>
 			<div  class="form-group custom-select has-feedback">
 			  <select name="gestor" id="gestor">
 			  	<option style="display: none">Selecione o gestor:</option>
@@ -89,6 +87,7 @@
 			  	<%
 			  		@SuppressWarnings("unchecked")
 			  		ArrayList<Outro> lRecurso = (ArrayList<Outro>) request.getSession().getAttribute("recurso"); 
+			  		
 			  		for (Outro o: lRecurso){
 			  	%>
 			  	<option value="<%=o.getId() %>">
@@ -151,7 +150,7 @@
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">
-				Data de vencimento:
+				Data de vencimento do contrato:
 				<input type="date" class="form-control input-lg" name="dataVencimento" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
@@ -160,14 +159,14 @@
 				<input type="date" class="form-control input-lg" name="dataVencimentoGarantia" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
-			
-			
-			
+						
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Concluir</button>
 			</div>
 		</form>
 	</div>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
+	
+	<script type="text/javascript" src="js/campoValor.js"></script>
 </body>
 </html>

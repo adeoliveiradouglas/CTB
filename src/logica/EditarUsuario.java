@@ -13,6 +13,7 @@ public class EditarUsuario implements Logica{
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		Usuario u = new Usuario(
+			((Usuario) pedido.getSession().getAttribute("usuarioeditar")).getId(),
 			Integer.parseInt(pedido.getParameter("matricula")), 
 			pedido.getParameter("nome"),
 			pedido.getParameter("email"), 

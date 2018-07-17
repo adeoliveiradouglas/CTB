@@ -32,7 +32,7 @@ public class CadastrarUsuario implements Logica {
 					)
 				);
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				System.out.println(e);
 			}
 
 			// envia email informando cadastro

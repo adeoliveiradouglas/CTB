@@ -17,7 +17,8 @@ public class UsuarioDAO extends DAO {
 						 colunaEmail = getNomeTabela() + ".login",
 						 colunaSenha = getNomeTabela() + ".senha",
 						 colunaSetor = getNomeTabela() + ".setor_codigo",
-						 colunaCargo = getNomeTabela() + ".cargo_id";
+						 colunaCargo = getNomeTabela() + ".cargo_id",
+						 ordenarPorNome = " order by " + colunaNome;
 
 	/*
 	 * public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB){
@@ -89,7 +90,7 @@ public class UsuarioDAO extends DAO {
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 			
 		encerraConexaocomBanco();
@@ -131,7 +132,7 @@ public class UsuarioDAO extends DAO {
 			);
 			
 		} catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		}
@@ -166,7 +167,7 @@ public class UsuarioDAO extends DAO {
 			);
 		} catch (SQLException e) {
 			u = null;
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 		
 		encerraConexaocomBanco();
@@ -210,7 +211,7 @@ public class UsuarioDAO extends DAO {
 			);
 			
 		} catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		}
@@ -246,7 +247,7 @@ public class UsuarioDAO extends DAO {
 			
 		} catch (SQLException e) {
 			u = null;
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 		
 		encerraConexaocomBanco();
@@ -268,7 +269,7 @@ public class UsuarioDAO extends DAO {
 		
 //		monta a query
 		setSqlQuery(
-			"select * from " + getNomeTabela()
+			"select * from " + getNomeTabela() + ordenarPorNome
 		);
 		
 		try {
@@ -285,7 +286,7 @@ public class UsuarioDAO extends DAO {
 			);
 			
 		} catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		}
@@ -323,7 +324,7 @@ public class UsuarioDAO extends DAO {
 				lu.add(u);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			lu = null;
 		}
 		
@@ -368,7 +369,7 @@ public class UsuarioDAO extends DAO {
 			);
 			
 		} catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		}
@@ -406,7 +407,7 @@ public class UsuarioDAO extends DAO {
 				lu.add(u);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			lu = null;
 		}
 		
@@ -445,7 +446,7 @@ public class UsuarioDAO extends DAO {
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 		
 		encerraConexaocomBanco();
@@ -455,7 +456,7 @@ public class UsuarioDAO extends DAO {
 		iniciaConexaoComBanco();
 		
 		/*Exemplo
-		 * delete from usuario where matricula = ?; 
+		 * delete from usuario where id = ?; 
 		 */
 		setSqlQuery(
 			"delete from " + getNomeTabela() + " where " + colunaId + " = ?"
@@ -475,7 +476,7 @@ public class UsuarioDAO extends DAO {
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 		
 		encerraConexaocomBanco();	
@@ -486,7 +487,7 @@ public class UsuarioDAO extends DAO {
 		
 		/*
 		  Exemplo de query
-		  update usuario set todos os parametros where usuario.login = email;
+		  update usuario set todos os parametros where usuario.id = usuario.getId();
 		*/
 		setSqlQuery(
 			"update " + getNomeTabela() + " set " + 
@@ -498,7 +499,6 @@ public class UsuarioDAO extends DAO {
 			colunaCargo + " = ? " +
 			"where " + colunaId + " = ?"
 		);
-		
 		
 		int posicao = 0;
 		
@@ -546,7 +546,7 @@ public class UsuarioDAO extends DAO {
 				
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 			
 		encerraConexaocomBanco();

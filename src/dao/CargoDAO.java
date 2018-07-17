@@ -23,6 +23,8 @@ public class CargoDAO extends DAO{
 	}
 	
 	public Cargo getById(int id){
+		Cargo c = null;
+		
 		iniciaConexaoComBanco();
 		
 		/*Exemplo de query
@@ -48,15 +50,8 @@ public class CargoDAO extends DAO{
 			setResultado(
 				getStatement().executeQuery()
 			);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			encerraConexaocomBanco();
-			return null;
-		}
-		
-//		Traduzir para objeto Cargo
-		Cargo c = null;
-		try {
+			
+//			Traduzir para objeto Cargo
 			getResultado().next();
 			c = new Cargo(
 				getResultado().getInt(colunaId),
@@ -65,16 +60,20 @@ public class CargoDAO extends DAO{
 				
 			);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
 		}
-				
+
 		encerraConexaocomBanco();
 		return c;
 	}
 	
+
 	public ArrayList<Cargo> getAll(){
+		ArrayList<Cargo> lc = new ArrayList<>();
+		Cargo c;
+		
 		iniciaConexaoComBanco();
 		
 //		monta a query
@@ -93,16 +92,8 @@ public class CargoDAO extends DAO{
 			setResultado(
 				getStatement().executeQuery()
 			);
-		} catch (SQLException e) {
-			encerraConexaocomBanco();
-			e.printStackTrace();
-			return null;
-		}
-		
-		ArrayList<Cargo> lc = new ArrayList<>();
-		Cargo c;
-//		traduzir resultSet para uma lista
-		try {
+			
+//			traduzir resultSet para uma lista
 			while (getResultado().next()){
 				c = new Cargo(
 					getResultado().getInt(colunaId),
@@ -113,15 +104,17 @@ public class CargoDAO extends DAO{
 			}
 		} catch (SQLException e) {
 			encerraConexaocomBanco();
-			e.printStackTrace();
+			System.out.println(e);;
 			return null;
-		}
-		
+		} 
+			
 		encerraConexaocomBanco();
 		return lc;
 	}
 
 	public Cargo getByNome(String nome) {
+		Cargo c = null;
+		
 		iniciaConexaoComBanco();
 		
 		/*Exemplo de query
@@ -147,15 +140,8 @@ public class CargoDAO extends DAO{
 			setResultado(
 				getStatement().executeQuery()
 			);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			encerraConexaocomBanco();
-			return null;
-		}
-		
-//		Traduzir para objeto Cargo
-		Cargo c = null;
-		try {
+			
+//			Traduzir para objeto Cargo
 			getResultado().next();
 			c = new Cargo(
 				getResultado().getInt(colunaId),
@@ -163,11 +149,11 @@ public class CargoDAO extends DAO{
 				getResultado().getString(colunaDescricao)
 			);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return null;
-		}
-				
+		} 
+		
 		encerraConexaocomBanco();
 		return c;
 	}	

@@ -1,6 +1,5 @@
 package logica;
 
-
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,8 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
 import dao.OutroDAO;
+import dao.UsuarioDAO;
 import entity.Contrato;
 import entity.Outro;
+import entity.Usuario;
 
 public class NovoContrato implements Logica{
 
@@ -35,9 +36,15 @@ public class NovoContrato implements Logica{
 				pedido.getParameter("dataVencimentoGarantia")
 			);
 		
-		String va = pedido.getParameter("valor");
-		BigDecimal valor = new BigDecimal(va);
-			
+		Usuario gestor = new UsuarioDAO().getById(Integer.parseInt(pedido.getParameter("gestor"))),
+				fiscal = new UsuarioDAO().getById(Integer.parseInt(pedido.getParameter("fiscal")));
+		
+		BigDecimal valor = new BigDecimal(
+			formatarValor(
+				pedido.getParameter("valor")
+			)
+		);
+		
 		Outro recurso = new OutroDAO("recurso").getById(
 			Integer.parseInt(pedido.getParameter("recurso"))
 		),
@@ -51,9 +58,8 @@ public class NovoContrato implements Logica{
 		Contrato c = new Contrato(
 			pedido.getParameter("numero"),
 			Integer.parseInt(pedido.getParameter("portaria")),
-			Integer.parseInt(pedido.getParameter("gestor")),
-			Integer.parseInt(pedido.getParameter("fiscal")),
-			pedido.getParameter("nome"),
+			gestor,
+			fiscal,
 			pedido.getParameter("cnpjEmpresa"),	
 			pedido.getParameter("nomeEmpresa"),
 			pedido.getParameter("objeto"),
@@ -70,6 +76,14 @@ public class NovoContrato implements Logica{
 		
 		new ContratoDAO().inserir(c);
 		return "sistema?logica=TelaPrincipalGestorGeral";
+	}
+
+	private String formatarValor(String parameter) {
+//		Tirar pontos do valor e mudar vírgula para ponto
+		parameter = parameter.replace(".", "");
+		parameter = parameter.replace(",", ".");
+		
+		return parameter;
 	}
 
 }

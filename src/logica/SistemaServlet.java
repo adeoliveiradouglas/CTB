@@ -31,8 +31,7 @@ public class SistemaServlet extends HttpServlet {
             pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
 
         } catch (Exception e) {
-            throw new ServletException(
-                "A lógica de negócios causou uma exceção", e);
+           System.out.println(e);
         }	
 	}
 }

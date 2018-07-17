@@ -40,7 +40,7 @@ public class ProcessoDAO extends DAO{
 				getStatement().executeQuery()
 			);
 		} catch (SQLException e){
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return new ArrayList<Processo>();
 		}
@@ -75,7 +75,7 @@ public class ProcessoDAO extends DAO{
 				lista.add(p);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e);;
 			encerraConexaocomBanco();
 			return new ArrayList<Processo>();
 		}
