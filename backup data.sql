@@ -59,7 +59,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `recurso` WRITE;
 /*!40000 ALTER TABLE `recurso` DISABLE KEYS */;
-INSERT INTO `recurso` VALUES (1,'Próprio'),(2,'Investimento');
+INSERT INTO `recurso` VALUES (1,'Próprio'),(2,'Investimento'),(3,'Convênio');
 /*!40000 ALTER TABLE `recurso` ENABLE KEYS */;
 UNLOCK TABLES;
 

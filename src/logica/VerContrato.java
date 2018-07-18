@@ -3,15 +3,14 @@ package logica;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ContratoDAO;
+import entity.Usuario;
 
-public class TelaPrincipalGestor implements Logica{
+public class VerContrato implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		pedido.getSession().setAttribute("contratosRecentes", new ContratoDAO().getAllRecente(5));
 		
-		return "/Gestor/index.jsp";
+		return "/" + ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo().getNome() + "/verContrato.jsp";
 	}
 
 }

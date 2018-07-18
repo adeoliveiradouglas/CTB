@@ -18,7 +18,8 @@ import lombok.Data;
 
 @Data
 public class Contrato {
-	private int portaria;
+	private int id,
+				portaria;
 	
 	private Usuario	gestor, 
 					fiscal;
@@ -81,6 +82,7 @@ public class Contrato {
 	}
 	
 	public Contrato(
+			int id,
 			String numero, 
 			int portaria, 
 			Usuario gestor, 
@@ -98,6 +100,7 @@ public class Contrato {
 			Date dataVencimentoGarantia, 
 			BigDecimal valorInicial,
 			ArrayList<Processo> processos) {
+		this.id = id;
 		this.numero = numero;
 		this.portaria = portaria;
 		this.gestor = gestor;

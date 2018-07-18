@@ -5,13 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
 
-public class TelaPrincipalGestor implements Logica{
+public class VerTodosContratos implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		pedido.getSession().setAttribute("contratosRecentes", new ContratoDAO().getAllRecente(5));
-		
-		return "/Gestor/index.jsp";
+		pedido.getSession().setAttribute("contratos", new ContratoDAO().getAll());
+		return "/Gestor geral/todosContratos.jsp";
 	}
 
 }

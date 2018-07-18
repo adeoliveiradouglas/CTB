@@ -46,7 +46,14 @@ public class UsuarioDAO extends DAO {
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
-			"insert into " + getNomeTabela() + " (matricula, nome, login, senha, setor_codigo, cargo_id) values (?,?,?,?,?,?)"
+			"insert into " + getNomeTabela() + " (" +
+			colunaMatricula + ", " + 
+			colunaNome + ", " + 
+			colunaEmail + ", " + 
+			colunaSenha + ", " + 
+			colunaSetor + ", " + 
+			colunaCargo + 
+			") values (?,?,?,?,?,?)"
 		);
 		
 		int posicao = 0;

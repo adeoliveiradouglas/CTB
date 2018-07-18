@@ -40,19 +40,15 @@ DROP TABLE IF EXISTS `contrato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contrato` (
-  `numero` int(11) NOT NULL,
-  `nome` varchar(45) NOT NULL,
+  `idContrato` int(11) NOT NULL AUTO_INCREMENT,
+  `numero` varchar(20) NOT NULL,
   `cnpjEmpresaContratada` varchar(14) NOT NULL,
   `nomeEmpresaContratada` varchar(100) NOT NULL,
   `portaria` int(11) NOT NULL,
   `dataAssinatura` date NOT NULL,
   `dataOrdemServico` date NOT NULL,
   `dataGarantia` date NOT NULL,
-  `tempoVigente` int(11) NOT NULL,
-  `tempoVigenteDias` bit(1) NOT NULL,
-  `valorInicial` decimal(10,0) NOT NULL,
-  `valorTotal` decimal(10,0) NOT NULL,
-  `valorAditivos` float NOT NULL,
+  `valorInicial` decimal(11,2) NOT NULL,
   `dataVencimentoContrato` date NOT NULL,
   `dataVencimentoGarantia` date NOT NULL,
   `objeto` varchar(255) NOT NULL,
@@ -61,7 +57,7 @@ CREATE TABLE `contrato` (
   `recurso_id` int(11) NOT NULL,
   `fontePagante_id` int(11) NOT NULL,
   `uso_id` int(11) NOT NULL,
-  PRIMARY KEY (`numero`),
+  PRIMARY KEY (`idContrato`,`numero`),
   KEY `fk_Contrato_recurso1_idx` (`recurso_id`),
   KEY `fk_Contrato_fontePagante1_idx` (`fontePagante_id`),
   KEY `fk_Contrato_uso1_idx` (`uso_id`),
@@ -72,7 +68,7 @@ CREATE TABLE `contrato` (
   CONSTRAINT `fk_Contrato_uso1` FOREIGN KEY (`uso_id`) REFERENCES `uso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_fiscal` FOREIGN KEY (`fiscal`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_gestor` FOREIGN KEY (`gestor`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +101,7 @@ CREATE TABLE `processo` (
   `contratoNumero` int(11) NOT NULL,
   PRIMARY KEY (`numeroSei`),
   KEY `fk_processo_Contrato1_idx` (`contratoNumero`),
-  CONSTRAINT `fk_processo_Contrato1` FOREIGN KEY (`contratoNumero`) REFERENCES `contrato` (`numero`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_contrato` FOREIGN KEY (`contratoNumero`) REFERENCES `contrato` (`idContrato`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -120,7 +116,7 @@ CREATE TABLE `recurso` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,6 +132,20 @@ CREATE TABLE `setor` (
   `sigla` varchar(30) NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `teste`
+--
+
+DROP TABLE IF EXISTS `teste`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `teste` (
+  `numero` decimal(11,2) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +182,7 @@ CREATE TABLE `usuario` (
   KEY `fk_usuario_cargo1_idx` (`cargo_id`),
   CONSTRAINT `fk_usuario_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +205,7 @@ CREATE TABLE `usuariosnovos` (
   KEY `fk_usuariosNovos_cargo1_idx` (`cargo_id`),
   CONSTRAINT `fk_usuariosNovos_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuariosNovos_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,4 +225,4 @@ CREATE TABLE `usuariosnovos` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-09  9:35:48
+-- Dump completed on 2018-07-18 10:41:30

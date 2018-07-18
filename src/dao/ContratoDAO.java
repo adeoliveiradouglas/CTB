@@ -8,6 +8,7 @@ import entity.Contrato;
 
 public class ContratoDAO extends DAO{
 	private final String colunaNumero = getNomeTabela() + ".numero",
+						 colunaId = getNomeTabela() + ".idContrato",
 			 			 colunaEmpresaCnpj = getNomeTabela() + ".cnpjEmpresaContratada",
 			 			 colunaEmpresaNome = getNomeTabela() + ".nomeEmpresaContratada",
 			 			 colunaObjeto = getNomeTabela() + ".objeto",
@@ -61,6 +62,7 @@ public class ContratoDAO extends DAO{
 //			Traduzir resultado para objeto
 			while (getResultado().next()){
 				c = new Contrato(
+					getResultado().getInt(colunaId),
 					getResultado().getString(colunaNumero),
 					getResultado().getInt(colunaPortaria),
 					new UsuarioDAO().getById(
@@ -123,7 +125,7 @@ public class ContratoDAO extends DAO{
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
-			"select * from " + getNomeTabela() + " order by " + colunaDataAssinatura
+			"select * from " + getNomeTabela() + " order by " + colunaId + " desc"
 		);
 		
 		ArrayList<Contrato> recentes = new ArrayList<Contrato>();
@@ -153,6 +155,7 @@ public class ContratoDAO extends DAO{
 				 * Enquanto houverem elementos do resulta de quary e estiver dentro no parâmetro, continua processando
 				 */
 				c = new Contrato(
+					getResultado().getInt(colunaId),
 					getResultado().getString(colunaNumero),
 					getResultado().getInt(colunaPortaria),
 					new UsuarioDAO().getById(
@@ -219,7 +222,24 @@ public class ContratoDAO extends DAO{
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
-			"insert into " + getNomeTabela() + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+			"insert into " + getNomeTabela() + " (" +
+			colunaNumero + ", " +
+			colunaEmpresaCnpj + ", " +
+			colunaEmpresaNome + ", " +
+			colunaObjeto + ", " +
+			colunaPortaria + ", " +
+			colunaDataAssinatura + ", " +
+			colunaDataOrdemServico + ", " +
+			colunaDataGarantia + ", " +
+			colunaDataVencimentoContrato + ", " +
+			colunaDataVencimentoGarantia + ", " +
+			colunaValorInicial + ", " +
+			colunaGestor + ", " +
+			colunaFiscal + ", " +
+			colunaRecurso + ", " +
+			colunaFontePagante + ", " +
+			colunaUso +
+			") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
 		);
 		
 		try{
@@ -317,5 +337,94 @@ public class ContratoDAO extends DAO{
 		} finally {
 			encerraConexaocomBanco();
 		}
+	}
+
+	public ArrayList<Contrato> getAll() {
+		ArrayList<Contrato> contratos = new ArrayList<Contrato>();
+		
+		iniciaConexaoComBanco();
+		
+		setSqlQuery(
+			"select * from " + getNomeTabela()
+		);
+		
+		try{
+//			monta o statement
+			setStatement( 
+//				pega prepareStatement da conexao
+				getDbConnection().prepareStatement(
+					getSqlQuery()	
+				)
+			);
+			
+			setResultado(
+				getStatement().executeQuery()
+			);
+		} catch(SQLException e) {
+			System.out.println(e);;
+			encerraConexaocomBanco();
+			return new ArrayList<Contrato>();
+		}
+		
+		try{
+			Contrato c;
+			while (getResultado().next()){
+				/*
+				 * Enquanto houverem elementos do resulta de quary e estiver dentro no parâmetro, continua processando
+				 */
+				c = new Contrato(
+					getResultado().getInt(colunaId),
+					getResultado().getString(colunaNumero),
+					getResultado().getInt(colunaPortaria),
+					new UsuarioDAO().getById(
+						getResultado().getInt(
+							colunaGestor
+						)
+					),
+					new UsuarioDAO().getById(
+						getResultado().getInt(
+							colunaFiscal
+						)
+					),
+					getResultado().getString(colunaEmpresaCnpj),	
+					getResultado().getString(colunaEmpresaNome),
+					getResultado().getString(colunaObjeto),
+					new OutroDAO("recurso").getById(
+						getResultado().getInt(
+							colunaRecurso
+						)
+					),
+					new OutroDAO("fontepagante").getById(
+						getResultado().getInt(
+							colunaFontePagante
+						)
+					),
+					new OutroDAO("uso").getById(
+						getResultado().getInt(
+							colunaUso
+						)
+					),
+					getResultado().getDate(colunaDataAssinatura),
+					getResultado().getDate(colunaDataOrdemServico),
+					getResultado().getDate(colunaDataGarantia),
+					getResultado().getDate(colunaDataVencimentoContrato),
+					getResultado().getDate(colunaDataVencimentoGarantia),
+					getResultado().getBigDecimal(colunaValorInicial),
+					new ProcessoDAO().getByContrato(getResultado().getInt(colunaNumero))
+				);
+				
+				//Adiciona na lista
+				contratos.add(c);
+			}
+			
+		} catch(SQLException e) {
+			System.out.println(e);;
+			encerraConexaocomBanco();
+			return new ArrayList<Contrato>();
+		}
+		
+		encerraConexaocomBanco();
+				
+		return contratos;
 	}
 }
