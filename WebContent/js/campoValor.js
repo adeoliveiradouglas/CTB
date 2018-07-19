@@ -89,16 +89,13 @@ function mascaraCampo(campo,formatoMascara) {
     campo.value = resultado;
 }
 
-
-
-
-
 function isNum(caractere) {
 	var strValidos = "0123456789";
 	if (strValidos.indexOf(caractere) == -1)
 		return false;
 	return true;
 }
+
 function validaTecla(campo, event) {
 	var BACKSPACE = 8;
 	var key;
@@ -119,6 +116,7 @@ function validaTecla(campo, event) {
 		return true;
 	return (isNum(key));
 }
+
 function FormataCNPJ(el) {
 	vr = el.value;
 	tam = vr.length;

@@ -19,7 +19,7 @@
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
 	<div class="aw-layout-simple-page">
-		<form action="sistema?logica=NovoContrato" method="post">
+		<form action="sistema?logica=CadastrarContrato" method="post">
 			<div class="form-group  has-feedback">
 				<input type="text" class="form-control input-lg" placeholder="Número" name="numero" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>

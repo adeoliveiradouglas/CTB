@@ -1,4 +1,4 @@
-<!-- Página principal do Gestor Geral -->
+<!-- Página principal do Gestor -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -18,23 +18,19 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<div align="center">
-		<a href="sistema?logica=TelaNovoContrato">
-			<font size="5">Novo contrato</font>
-		</a>
-	</div>
 	<%@ page import="entity.Contrato,
 					 java.util.ArrayList" %>
 							 
-	<%
-	@SuppressWarnings("unchecked")
-	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession().getAttribute("contratosRecentes");
-	if(contratos.size() > 0){
-	%>
+	
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Contratos mais recentes</h3>
+		<h3>Contratos sob minha supervisão</h3>
 	</div>
 	
+	<%
+	@SuppressWarnings("unchecked")
+	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession().getAttribute("contratos");
+	if(contratos.size() > 0){
+	%>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -52,7 +48,7 @@
 			%>
 			<tr>
 				<th class="text-center">
-					<a href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratosRecentes">
+					<a href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratos">
 						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
 						<%=c.getNumero() %>
 					</a>
@@ -67,20 +63,21 @@
 		</tbody>
 	</table>
 	
-	<div align="center">
-		<a href="sistema?logica=VerTodosContratos">Clique aqui para ver todos os contratos</a>
-	</div>
 	<br />
-	<%}%> <!-- fim do if da tabela -->
+	<%}else{%> <!-- fim do if da tabela -->
+	<p>Você não é gestor de nenhum contrato</p>
+	<%} %>
+	
+	<div style="background-color: #1e94d2; color: white" align="center">
+		<h3>Contratos que sou fiscal</h3>
+	</div>
 	
 	<%
 	@SuppressWarnings("unchecked")
-	ArrayList<Contrato> contratos90 = (ArrayList<Contrato>) request.getSession().getAttribute("vencimento90Recentes");
-	if(contratos90.size() > 0){ 
+	ArrayList<Contrato> contratosFiscal = (ArrayList<Contrato>) request.getSession().getAttribute("contratosFiscal");
+					
+	if(contratosFiscal.size() > 0){ 
 	%>
-	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Contratos com vencimento dentro de 90 dias</h3>
-	</div>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -93,12 +90,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%for (Contrato c: contratos90){%>
+			<%for (Contrato c: contratosFiscal){%>
 			<tr>
 				<th class="text-center">
-					<form action="sistema?logica=VerContrato" method="post">
-						<button value="<%=c.getNumero()%>" name="numeroContrato"><%=c.getNumero() %></button>
-					</form>
+					<a href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratosFiscal">
+						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
+						<%=c.getNumero() %>
+					</a>
 				</th>
 				<th class="text-center"><%=c.getNomeEmpresaContratada() %></th>
 				<th class="text-center"><%=c.getGestor().getNome() %></th>
@@ -106,15 +104,16 @@
 				<th class="text-center"><%=c.getDataVencimentoContrato() %></th>
 				<%-- <th class="text-center"><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
-			<%}%> <!-- fim do if do for que mostra os contratos com vencimentos -->
+			<%}%> <!-- fim do for que mostra os contratos com vencimentos -->
 		</tbody>
 	</table>
-	
 	<div align="center">
 		<a href="sistema?logica=ContratosVencimento" >Clique aqui para ver todos os contratos</a>
 	</div>
 	<br />
-	<%}%> <!-- fim do if da tabela -->
+	<%}else{%> <!-- fim do if da tabela -->
+	<p>Você não é fiscal de nenhum contrato</p>
+	<%} %>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

@@ -14,7 +14,7 @@ import entity.Contrato;
 import entity.Outro;
 import entity.Usuario;
 
-public class NovoContrato implements Logica{
+public class CadastrarContrato implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {

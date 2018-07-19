@@ -21,8 +21,8 @@ public class ContratoDAO extends DAO{
 					 	 colunaValorInicial = getNomeTabela() + ".valorInicial",
 //					 	 colunaValorTotal = getNomeTabela() + ".valorTotal",
 //					 	 colunaValorAditivos = getNomeTabela() + ".valorAditivos",
-					 	 colunaGestor = getNomeTabela() + ".gestor",
-					 	 colunaFiscal = getNomeTabela() + ".fiscal",
+					 	 colunaGestor = getNomeTabela() + ".gestor_id",
+					 	 colunaFiscal = getNomeTabela() + ".fiscal_id",
 					 	 colunaRecurso = getNomeTabela() + ".recurso_id",
 					 	 colunaFontePagante = getNomeTabela() + ".fontePagante_id",
 					 	 colunaUso = getNomeTabela() + ".uso_id";
@@ -32,7 +32,7 @@ public class ContratoDAO extends DAO{
 		super("contrato");
 	}
 	
-	public ArrayList<Contrato> getByGestor(int matricula){
+	public ArrayList<Contrato> getByGestor(int id){
 		ArrayList<Contrato> lista = new ArrayList<Contrato>();
 		Contrato c = null;
 		
@@ -52,7 +52,7 @@ public class ContratoDAO extends DAO{
 			
 			getStatement().setInt(
 				1, 
-				matricula
+				id
 			);
 			
 			setResultado(
@@ -426,5 +426,87 @@ public class ContratoDAO extends DAO{
 		encerraConexaocomBanco();
 				
 		return contratos;
+	}
+
+	public Object getByFiscal(int id) {
+		ArrayList<Contrato> lista = new ArrayList<Contrato>();
+		Contrato c = null;
+		
+		iniciaConexaoComBanco();
+		
+//		Exemplo: select * from contrato where gestor = matricula
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaFiscal + " = ?"
+		);
+		
+		try {
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
+				)
+			);
+			
+			getStatement().setInt(
+				1, 
+				id
+			);
+			
+			setResultado(
+				getStatement().executeQuery()
+			);
+			
+//			Traduzir resultado para objeto
+			while (getResultado().next()){
+				c = new Contrato(
+					getResultado().getInt(colunaId),
+					getResultado().getString(colunaNumero),
+					getResultado().getInt(colunaPortaria),
+					new UsuarioDAO().getById(
+						getResultado().getInt(
+							colunaGestor
+						)
+					),
+					new UsuarioDAO().getById(
+						getResultado().getInt(
+							colunaFiscal
+						)
+					),
+					getResultado().getString(colunaEmpresaCnpj),	
+					getResultado().getString(colunaEmpresaNome),
+					getResultado().getString(colunaObjeto),
+					new OutroDAO("recurso").getById(
+						getResultado().getInt(
+							colunaRecurso
+						)
+					),
+					new OutroDAO("fontepagante").getById(
+						getResultado().getInt(
+							colunaFontePagante
+						)
+					),
+					new OutroDAO("uso").getById(
+						getResultado().getInt(
+							colunaUso
+						)
+					),
+					getResultado().getDate(colunaDataAssinatura),
+					getResultado().getDate(colunaDataOrdemServico),
+					getResultado().getDate(colunaDataGarantia),
+					getResultado().getDate(colunaDataVencimentoContrato),
+					getResultado().getDate(colunaDataVencimentoGarantia),
+					getResultado().getBigDecimal(colunaValorInicial),
+					new ProcessoDAO().getByContrato(getResultado().getInt(colunaNumero))
+				);
+				
+				lista.add(c);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);;
+			encerraConexaocomBanco();
+			return null;
+		}
+		
+		encerraConexaocomBanco();
+		return lista;
 	}
 }

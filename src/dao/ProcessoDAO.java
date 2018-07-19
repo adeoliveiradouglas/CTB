@@ -8,16 +8,21 @@ import entity.Processo;
 public class ProcessoDAO extends DAO{
 	private final String colunaNotaFiscal = getNomeTabela() + ".notaFiscal",
 						 colunaAditivo = getNomeTabela() + ".aditivo",
+						 colunaValor = getNomeTabela() + ".valor",
 						 colunaTipoAditivo = getNomeTabela() + ".tipoAditivo",
 						 colunaDataPagamento = getNomeTabela() + ".dataPagamento",
-						 colunaContrato = getNomeTabela() + ".contratoNumero",
-						 colunaSei = getNomeTabela() + ".numeroSei";
+						 colunaDataProcesso = getNomeTabela() + ".dataProcesso", 
+						 colunaContrato = getNomeTabela() + ".contrato_id",
+						 colunaSei = getNomeTabela() + ".numeroSei",
+						 colunaAno = getNomeTabela() + ".ano",
+						 colunaMes = getNomeTabela() + ".mes";
+						 
 
 	public ProcessoDAO() {
 		super("processo");
 	}
 	
-	public ArrayList<Processo> getByContrato(int numeroContrato){
+	public ArrayList<Processo> getByContrato(int id){
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
@@ -33,7 +38,7 @@ public class ProcessoDAO extends DAO{
 			
 			getStatement().setInt(
 				1,
-				numeroContrato
+				id
 			);
 			
 			setResultado(
@@ -50,26 +55,17 @@ public class ProcessoDAO extends DAO{
 				
 		try {
 			while(getResultado().next()){
-				p = new Processo();
-				
-				p.setNotaFiscal(
-					getResultado().getString(colunaNotaFiscal)
-				);
-					
-				p.setAditivo(
-					getResultado().getBigDecimal(colunaAditivo)
-				);
-					
-				p.setTipoAditivo(
-					getResultado().getString(colunaTipoAditivo)
-				);
-
-				p.setDataPagamento(
-					getResultado().getDate(colunaDataPagamento)
-				);
-				
-				p.setNumeroSei(
-					getResultado().getString(colunaSei)
+				p = new Processo(
+					getResultado().getString(colunaNotaFiscal),
+					getResultado().getString(colunaTipoAditivo),
+					getResultado().getString(colunaSei),
+					getResultado().getString(colunaAno),
+					getResultado().getString(colunaMes),
+					getResultado().getBigDecimal(colunaAditivo),
+					getResultado().getBigDecimal(colunaValor),
+					getResultado().getDate(colunaDataPagamento),
+					getResultado().getDate(colunaDataProcesso),
+					id
 				);
 				
 				lista.add(p);
@@ -84,4 +80,10 @@ public class ProcessoDAO extends DAO{
 		return lista;
 	}
 	
+	public void inserir(Processo processo){
+		iniciaConexaoComBanco();
+		
+//		setSqlQuery();
+		encerraConexaocomBanco();
+	}
 }

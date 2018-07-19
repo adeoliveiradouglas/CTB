@@ -5,7 +5,7 @@
  *  obs2 - objeto: descricao do contrato
  *  obs3 - recurso, fontePagante e uso: há padrões para os três campos no bd, aqui só será armazenado o campo String/Varchar dos mesmos
  *  obs5 - valor total é o valor de todos os aditivos de todos os processos mais o valor inicial do contrato
- *  	   Em beta: calcular dinamicamente toda vez que o usuario pedir a pagina ou guardar o valor no banco e aumentar a cada aditivo 	
+ *  	   Calcula somente quando é retorno de resultado do banco 	
  */
 
 package entity;
@@ -62,7 +62,7 @@ public class Contrato {
 			Date dataVencimentoContrato, 
 			Date dataVencimentoGarantia, 
 			BigDecimal valorInicial) {
-//		Construtor usado para novos contratos pois não tem entrada de processos
+//		Construtor usado para novos contratos pois não tem id do banco e nem entrada de processos
 		this.numero = numero;
 		this.portaria = portaria;
 		this.gestor = gestor;
@@ -100,6 +100,7 @@ public class Contrato {
 			Date dataVencimentoGarantia, 
 			BigDecimal valorInicial,
 			ArrayList<Processo> processos) {
+//		Construtor com cálculos de aditivos
 		this.id = id;
 		this.numero = numero;
 		this.portaria = portaria;

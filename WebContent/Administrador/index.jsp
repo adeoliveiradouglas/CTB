@@ -20,6 +20,13 @@
 	<%@ page import="entity.Usuario,
 					 java.util.ArrayList" %>	
  
+ 	<%
+ 	@SuppressWarnings("unchecked") /*GAMBIARRA PARA TIRAR WARNING DA LINHA ABAIXO*/
+ 	ArrayList<Usuario> lun = (ArrayList<Usuario>) request.getSession().getAttribute("usuariosnovos");
+ 	
+ 	if(lun.size() > 0){ //if para mostrar sessão de novos usuários
+	%>
+	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Novos usuários que precisam de autorização</h3>
 	</div>
@@ -35,12 +42,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%
-				@SuppressWarnings("unchecked") /*GAMBIARRA PARA TIRAR WARNING DA LINHA ABAIXO*/
-				ArrayList<Usuario> lun = (ArrayList<Usuario>) request.getSession().getAttribute("usuariosnovos");
-			
-				for (Usuario u: lun){
-			%>
+			<%for (Usuario u: lun){%>
 			<tr>
 				<%-- <td class="text-center"><%=u.getId() %></td> --%>
 				<td class="text-center"><%=u.getNome() %></td>
@@ -65,7 +67,7 @@
 			
 		</tbody>
 	</table>
-	
+	<%} //fim do if de mostrar novos usuários%> 
 	
 	<!-- Mostra opções de todos os usuários do sistema -->
 	<div style="background-color: #1e94d2; color: white" align="center">
@@ -79,7 +81,7 @@
 				<th class="text-center col-md-1">Cargo</th>
 				<th class="text-center col-md-1">Setor</th>
 				<th class="text-center col-md-2">Login</th>
-				<th class="col-md-1"></th>
+				<th class="col-md-1"></th><th class="col-md-1"></th>
 			</tr>
 
 		</thead>
@@ -99,6 +101,11 @@
 				<td class="text-center">
 					<form action="sistema?logica=TelaEditarUsuario" method="post">
 						<button value="<%=u.getId()%>" name="id">Editar</button>
+					</form>
+				</td>
+				<td class="text-center">
+					<form action="sistema?logica=RecusarNovoUsuario" method="post">
+						<button value="<%=u.getId()%>" name="id">Deletar</button>
 					</form>
 				</td>
 			</tr>
