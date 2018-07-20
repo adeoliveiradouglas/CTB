@@ -40,11 +40,6 @@
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			
-			<div class="form-group  has-feedback">
-				<input type="number" class="form-control input-lg" placeholder="Ano" name="ano" maxlength="4" required/>
-				<span class="form-control-feedback"	aria-hidden="true"> </span>
-			</div>
-			
 			<div class="form-group custom-select has-feedback">
 			  <select name="mes" id="mes">
 			  	<option style="display: none">Mês de referência:</option>
@@ -62,6 +57,11 @@
 			  	<option value="Dezembro">Dezembro</option>
 			  </select> <!-- select mês de referência -->
 			</div> <!-- fim div select cargos -->
+			
+			<div class="form-group  has-feedback">
+				<input type="number" class="form-control input-lg" placeholder="Ano" name="ano" maxlength="4" required/>
+				<span class="form-control-feedback"	aria-hidden="true"> </span>
+			</div>
 			
 			<div class="form-group  has-feedback">
 				Data do processo:

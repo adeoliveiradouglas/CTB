@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ProcessoDAO;
 import entity.Processo;
+import utilidades.StringToDecimal;
 
 public class CadastrarProcesso implements Logica{
 
@@ -17,39 +18,35 @@ public class CadastrarProcesso implements Logica{
 		Date dataProcesso = new SimpleDateFormat("yyyy-MM-dd").parse(
 				pedido.getParameter("data")
 			);
-				
-		BigDecimal valor = new BigDecimal(
-				formatarValor(
-					pedido.getParameter("valor")
-				)
-			), 
-			aditivo = new BigDecimal(
-				formatarValor(
-					pedido.getParameter("valorAditivo")
-				)
-			);
+		
+		String v = new StringToDecimal().formatarParaBanco(pedido.getParameter("valor")),
+			   va = new StringToDecimal().formatarParaBanco(pedido.getParameter("valorAditivo"));
+		
+		BigDecimal valor = null, aditivo = null;
+		
+		try{
+			valor = new BigDecimal(v); 
+			aditivo = new BigDecimal(va);
+		} catch (NumberFormatException e){
+			//catch para não dar erro no processo quando não houver aditivo
+			aditivo = new BigDecimal("0.00");
+		}
 		
 		Processo p = new Processo(
-				pedido.getParameter("notaFiscal"),
-				pedido.getParameter("tipoAditivo"),
-				pedido.getParameter("numero"),
-				pedido.getParameter("ano"),
-				pedido.getParameter("mes"),
-				aditivo,
-				valor,
-				dataProcesso,
-				Integer.parseInt(pedido.getParameter("idContrato"))
-			);
+			pedido.getParameter("notaFiscal"),
+			pedido.getParameter("tipoAditivo"),
+			pedido.getParameter("numero"),
+			pedido.getParameter("ano"),
+			pedido.getParameter("mes"),
+			aditivo,
+			valor,
+			dataProcesso,
+			Integer.parseInt(pedido.getParameter("idContrato"))
+		);
 		
 		new ProcessoDAO().inserir(p);
-		return "sistema?logica=TelaPrincipal";
+		return "sistema?logica=TelaPrincipalGestor";
 	}
 	
-	private String formatarValor(String parameter) {
-//		Tirar pontos do valor e mudar vírgula para ponto
-		parameter = parameter.replace(".", "");
-		parameter = parameter.replace(",", ".");
-		
-		return parameter;
-	}
+	
 }

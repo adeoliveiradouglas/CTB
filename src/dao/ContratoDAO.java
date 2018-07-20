@@ -99,7 +99,7 @@ public class ContratoDAO extends DAO{
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaNumero))
+					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId))
 				);
 				
 				lista.add(c);
@@ -192,7 +192,7 @@ public class ContratoDAO extends DAO{
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaNumero))
+					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId))
 				);
 				
 				//Adiciona na lista
@@ -410,7 +410,7 @@ public class ContratoDAO extends DAO{
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaNumero))
+					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId))
 				);
 				
 				//Adiciona na lista
@@ -495,7 +495,7 @@ public class ContratoDAO extends DAO{
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaNumero))
+					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId))
 				);
 				
 				lista.add(c);

@@ -1,3 +1,4 @@
+<!-- Ver contrato do gestor -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -18,14 +19,33 @@
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<%@ page import="entity.Contrato,
 					 entity.Processo,
+					 entity.Usuario,
 					 java.util.ArrayList" %>
-			
+		
+	
 	<%		 
+	//a essa altura, a lista de contratos já foi carregada e está na sessão. Essa página recebe qual lista deve acessar
+	//e qual a posição do contrato nessa lista.
+	String origem = request.getParameter("origem"); //lista que deve acessar 
+	int n = Integer.parseInt(request.getParameter("n")); //posição na lista
+	
+	//carrega a lista para essa página
 	@SuppressWarnings("unchecked")
-	//Pega o objeto contrato da lista de contratos recentes ou de todos os contratos dependendo de quem fez a chamada 
-	Contrato contrato = ((ArrayList<Contrato>) request.getSession().getAttribute(request.getParameter("origem"))).get(Integer.parseInt(request.getParameter("n")));
+	ArrayList<Contrato> contratosLista = (ArrayList<Contrato>) request.getSession().getAttribute(origem);
+	Usuario logado = (Usuario) request.getSession().getAttribute("usuario");
+	//Pega o objeto contrato da lista 
+	Contrato contrato = contratosLista.get(n);
 	%>
 	
+	<%if(logado.getCargo().getId() == 3){ %>
+	<div align="center">
+		<a href="sistema?logica=TelaNovoProcesso&id=<%=contrato.getId() %>">
+			<font size="5">Novo processo</font>
+		</a>
+	</div>
+	<%}%>
+	
+	<p>Id = <%=contrato.getId() %></p>
 	<p>Número: <%=contrato.getNumero() %></p>
 	<p>Empresa: <%=contrato.getNomeEmpresaContratada()%> <%=contrato.getCnpjEmpresaContratada()%></p>
 	<p>Objeto: <%=contrato.getObjeto()%></p>
@@ -41,10 +61,10 @@
 	<p>Uso: <%=contrato.getUso().getNome()%></p>
 	<p>Fonte pagante: <%=contrato.getFontePagante().getNome()%></p>
 	<p>Valor inicial: R$ <%=contrato.getValorInicial()%></p>
+	<p>Valor dos aditivos: R$ <%=contrato.getValorAditivos() %></p>
 	<p>Valor total: R$ <%=contrato.getValorTotal()%></p>
-	
 	<%for(Processo p: contrato.getProcessos()){ %>
-		<%=p.getNumeroSei() %>
+		<%=p %><br />
 	<%}%>
 <jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>

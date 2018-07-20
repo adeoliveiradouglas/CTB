@@ -19,6 +19,7 @@
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<%@ page import="entity.Contrato,
 					 entity.Processo,
+					 entity.Usuario,
 					 java.util.ArrayList" %>
 		
 	
@@ -30,17 +31,20 @@
 	
 	//carrega a lista para essa página
 	@SuppressWarnings("unchecked")
-	ArrayList<Contrato> c = (ArrayList<Contrato>) request.getSession().getAttribute(origem);
-	
+	ArrayList<Contrato> contratosLista = (ArrayList<Contrato>) request.getSession().getAttribute(origem);
+	Usuario logado = (Usuario) request.getSession().getAttribute("usuario");
 	//Pega o objeto contrato da lista 
-	Contrato contrato = c.get(n);
+	Contrato contrato = contratosLista.get(n);
 	%>
+	
+	<%if(logado.getCargo().getId() == 3){ %>
 	<div align="center">
 		<a href="sistema?logica=TelaNovoProcesso&id=<%=contrato.getId() %>">
 			<font size="5">Novo processo</font>
 		</a>
 	</div>
-	<p>ID: <%=contrato.getId() %></p>
+	<%}%>
+	
 	<p>Número: <%=contrato.getNumero() %></p>
 	<p>Empresa: <%=contrato.getNomeEmpresaContratada()%> <%=contrato.getCnpjEmpresaContratada()%></p>
 	<p>Objeto: <%=contrato.getObjeto()%></p>
@@ -56,11 +60,41 @@
 	<p>Uso: <%=contrato.getUso().getNome()%></p>
 	<p>Fonte pagante: <%=contrato.getFontePagante().getNome()%></p>
 	<p>Valor inicial: R$ <%=contrato.getValorInicial()%></p>
+	<p>Valor dos aditivos: R$ <%=contrato.getValorAditivos() %></p>
 	<p>Valor total: R$ <%=contrato.getValorTotal()%></p>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center col-md-1">Ano refer.</th>
+				<th class="text-center col-md-1">Med</th>
+				<th class="text-center col-md-1">Mês refer.</th>
+				<th class="text-center col-md-1">Nota fiscal</th>
+				<th class="text-center col-md-1">N° processo</th>
+				<th class="text-center col-md-1">Data</th>
+				<th class="text-center col-md-1">Valor</th>
+				<th class="text-center col-md-1">Aditivo</th>
+				<th class="text-center col-md-2">Objeto</th>
+				<th class="text-center col-md-1">Pagamento</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%for(Processo p: contrato.getProcessos()){%>
+			<tr>
+				<th class="text-center"><%=p.getAno() %></th>
+				<th class="text-center"><%=contrato.getProcessos().indexOf(p)+1 %></th>
+				<th class="text-center"><%=p.getMes()%></th>
+				<th class="text-center"><%=p.getNotaFiscal() %></th>
+				<th class="text-center"><%=p.getNumeroSei() %></th>
+				<th class="text-center"><%=p.getDataProcesso() %></th>
+				<th class="text-center"><%=p.getValor() %></th>
+				<th class="text-center"><%=p.getAditivo() %></th>
+				<th class="text-center"><%=p.getTipoAditivo() %></th>
+				<th class="text-center"><%=p.getDataPagamento() %></th>
+			</tr>
+			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
+		</tbody>
+	</table>
 	
-	<%for(Processo p: contrato.getProcessos()){ %>
-		<%=p.getNumeroSei() %>
-	<%}%>
 <jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

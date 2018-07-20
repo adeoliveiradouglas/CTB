@@ -23,7 +23,7 @@
 							 
 	
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Contratos sob minha supervisão</h3>
+		<h3>Contratos sob minha gestão</h3>
 	</div>
 	
 	<%
@@ -65,7 +65,7 @@
 	
 	<br />
 	<%}else{%> <!-- fim do if da tabela -->
-	<p>Você não é gestor de nenhum contrato</p>
+	<p>Você não é gestor de nenhum contrato.</p>
 	<%} %>
 	
 	<div style="background-color: #1e94d2; color: white" align="center">
@@ -93,7 +93,7 @@
 			<%for (Contrato c: contratosFiscal){%>
 			<tr>
 				<th class="text-center">
-					<a href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratosFiscal">
+					<a href="sistema?logica=VerContrato&n=<%=contratosFiscal.indexOf(c)%>&origem=contratosFiscal">
 						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
 						<%=c.getNumero() %>
 					</a>
@@ -112,7 +112,7 @@
 	</div>
 	<br />
 	<%}else{%> <!-- fim do if da tabela -->
-	<p>Você não é fiscal de nenhum contrato</p>
+	<p>Você não é fiscal de nenhum contrato.</p>
 	<%} %>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>

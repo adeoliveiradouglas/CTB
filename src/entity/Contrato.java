@@ -121,10 +121,10 @@ public class Contrato {
 		this.processos = processos;
 		
 //		Calcula valores aditivos e total
-		BigDecimal aditivo = new BigDecimal(0);
+		BigDecimal aditivo = new BigDecimal("0");
 		for (Processo p: processos){
 //			Soma todos os aditivos de todos os processos dos contratos
-			aditivo.add(
+			aditivo = aditivo.add(
 				p.getAditivo()
 			);
 		}

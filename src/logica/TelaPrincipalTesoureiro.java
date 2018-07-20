@@ -1,15 +1,23 @@
 package logica;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entity.Usuario;
+import dao.ProcessoDAO;
+import entity.Processo;
 
 public class TelaPrincipalTesoureiro implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		return "/" + ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo().getNome() + "/index.jsp";
+		ProcessoDAO pdao = new ProcessoDAO();
+		
+		ArrayList<Processo> processosPagamento = pdao.getAllSemPagamento();
+		
+		pedido.getSession().setAttribute("processoSemPagamento", processosPagamento);
+		return "/Tesoureiro/index.jsp";
 	}
 
 }

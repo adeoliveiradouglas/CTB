@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,8 +16,8 @@ public class ProcessoDAO extends DAO{
 						 colunaContrato = getNomeTabela() + ".contrato_id",
 						 colunaSei = getNomeTabela() + ".numeroSei",
 						 colunaAno = getNomeTabela() + ".ano",
-						 colunaMes = getNomeTabela() + ".mes";
-						 
+						 colunaMes = getNomeTabela() + ".mes",
+						 ordernarPorData = " order by " + colunaDataProcesso;
 
 	public ProcessoDAO() {
 		super("processo");
@@ -26,7 +27,7 @@ public class ProcessoDAO extends DAO{
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
-			"select * from " + getNomeTabela() + " where " + colunaContrato + " = ?"
+			"select * from " + getNomeTabela() + " where " + colunaContrato + " = ?" + ordernarPorData
 		);
 		
 		try{
@@ -83,7 +84,141 @@ public class ProcessoDAO extends DAO{
 	public void inserir(Processo processo){
 		iniciaConexaoComBanco();
 		
-//		setSqlQuery();
+		setSqlQuery("insert into " + getNomeTabela() + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		
+		try{
+			int posicao = 0;
+			
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
+				)
+			);
+			
+			getStatement().setString(
+				++posicao, 
+				processo.getNotaFiscal()
+			);
+			
+			getStatement().setBigDecimal(
+				++posicao, 
+				processo.getAditivo()
+			);
+			
+			getStatement().setBigDecimal(
+				++posicao, 
+				processo.getValor()
+			);
+			
+			getStatement().setString(
+				++posicao, 
+				processo.getTipoAditivo()
+			);
+			
+			getStatement().setDate(
+				++posicao, 
+				null //data de pagamento no momento é nula pois o processo está sendo cadastrado agora
+			);
+			
+			getStatement().setDate(
+				++posicao, 
+				new Date(processo.getDataProcesso().getTime())
+			);
+			
+			getStatement().setString(
+				++posicao, 
+				processo.getNumeroSei()
+			);
+			
+			getStatement().setInt(
+				++posicao, 
+				processo.getIdContrato()
+			);
+			
+			getStatement().setString(
+				++posicao, 
+				processo.getAno()
+			);
+			
+			getStatement().setString(
+				++posicao, 
+				processo.getMes()
+			);
+			
+			getStatement().executeUpdate();
+		} catch(SQLException e){
+			System.out.println(e);
+		}
+		encerraConexaocomBanco();
+	}
+
+	public ArrayList<Processo> getAllSemPagamento() {
+		iniciaConexaoComBanco();
+		
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaDataPagamento + " is null" + ordernarPorData + " desc"
+		);
+		
+		try{
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
+				)
+			);
+			
+			setResultado(
+				getStatement().executeQuery()
+			);
+		} catch (SQLException e){
+			System.out.println(e);;
+			encerraConexaocomBanco();
+			return new ArrayList<Processo>();
+		}
+		
+		ArrayList<Processo> lista = new ArrayList<Processo>();
+		Processo p;
+				
+		try {
+			while(getResultado().next()){
+				p = new Processo(
+					getResultado().getString(colunaNotaFiscal),
+					getResultado().getString(colunaTipoAditivo),
+					getResultado().getString(colunaSei),
+					getResultado().getString(colunaAno),
+					getResultado().getString(colunaMes),
+					getResultado().getBigDecimal(colunaAditivo),
+					getResultado().getBigDecimal(colunaValor),
+					getResultado().getDate(colunaDataPagamento),
+					getResultado().getDate(colunaDataProcesso),
+					getResultado().getInt(colunaContrato)
+				);
+				
+				lista.add(p);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);;
+			encerraConexaocomBanco();
+			return new ArrayList<Processo>();
+		}
+		
+		encerraConexaocomBanco();
+		return lista;
+	}
+
+	public void atualizarPagamento(String numeroSei) {
+		iniciaConexaoComBanco();
+		
+		setSqlQuery("update "+getNomeTabela()+" set "+colunaDataPagamento+" = NOW() where "+colunaSei+" = ?");
+		
+		try{
+			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
+			
+			getStatement().setString(1, numeroSei);
+			
+			getStatement().executeUpdate();
+		}catch(SQLException e){
+			System.out.println(e);
+		}
 		encerraConexaocomBanco();
 	}
 }

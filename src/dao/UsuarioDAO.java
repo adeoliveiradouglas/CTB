@@ -354,7 +354,7 @@ public class UsuarioDAO extends DAO {
 		
 //		monta a query
 		setSqlQuery(
-			"select * from " + getNomeTabela() + " where " + colunaCargo + " = ?"
+			"select * from " + getNomeTabela() + " where " + colunaCargo + " = ?" + ordenarPorNome
 		);
 		
 		try {

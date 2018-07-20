@@ -13,6 +13,7 @@ import dao.UsuarioDAO;
 import entity.Contrato;
 import entity.Outro;
 import entity.Usuario;
+import utilidades.StringToDecimal;
 
 public class CadastrarContrato implements Logica{
 
@@ -40,7 +41,7 @@ public class CadastrarContrato implements Logica{
 				fiscal = new UsuarioDAO().getById(Integer.parseInt(pedido.getParameter("fiscal")));
 		
 		BigDecimal valor = new BigDecimal(
-			formatarValor(
+			new StringToDecimal().formatarParaBanco(
 				pedido.getParameter("valor")
 			)
 		);
@@ -78,12 +79,6 @@ public class CadastrarContrato implements Logica{
 		return "sistema?logica=TelaPrincipalGestorGeral";
 	}
 
-	private String formatarValor(String parameter) {
-//		Tirar pontos do valor e mudar vírgula para ponto
-		parameter = parameter.replace(".", "");
-		parameter = parameter.replace(",", ".");
-		
-		return parameter;
-	}
+
 
 }
