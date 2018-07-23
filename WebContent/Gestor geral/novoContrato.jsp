@@ -18,8 +18,8 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<div class="aw-layout-simple-page">
-		<form action="sistema?logica=CadastrarContrato" method="post">
+	<form action="sistema?logica=CadastrarContrato" method="post">
+		<div class="aw-simple-panel__box">
 			<div class="form-group  has-feedback">
 				<input type="text" class="form-control input-lg" placeholder="Número" name="numero" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
@@ -52,32 +52,25 @@
 			  					 java.util.ArrayList" %>
 			  	
 			  	<%
-			  		@SuppressWarnings("unchecked")
-			  		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getSession().getAttribute("gestor");
-			  		
-			  		for (Usuario c: usuarios){
-			  	%>
-			  	<option value="<%=c.getId() %>">
-			  		<%=c.getNome() %>			  	
-			  	</option>
-			  	<%
-			  		}
-			  	%>
+		  		@SuppressWarnings("unchecked")
+		  		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getSession().getAttribute("gestores");
+		  		
+		  		for (Usuario c: usuarios){%>
+				  	<option value="<%=usuarios.indexOf(c) %>">
+				  		<%=c.getNome() %> - <%=c.getSetor().getSigla() %>	 		  	
+				  	</option>
+			  	<%}%>
 			  </select> <!-- select gestor -->
 			</div> <!-- fim div select gestor -->
 			
 			<div  class="form-group custom-select has-feedback">
 			  <select name="fiscal" id="fiscal">
 			  	<option style="display: none">Selecione o fiscal:</option>	
-			  	<%
-			  		for (Usuario c: usuarios){
-			  	%>
-			  	<option value="<%=c.getId() %>">
-			  		<%=c.getNome() %>			  	
-			  	</option>
-			  	<%
-			  		}
-			  	%>
+			  	<%for (Usuario c: usuarios){%>
+				  	<option value="<%=usuarios.indexOf(c) %>">
+				  		<%=c.getNome() %> - <%=c.getSetor().getSigla() %>	  	
+				  	</option>
+			  	<%}%>
 			  </select> <!-- select fiscal -->
 			</div> <!-- fim div select fiscal -->
 			
@@ -85,17 +78,14 @@
 			  <select name="recurso" id="recurso">
 			  	<option style="display: none">Recurso:</option>	
 			  	<%
-			  		@SuppressWarnings("unchecked")
-			  		ArrayList<Outro> lRecurso = (ArrayList<Outro>) request.getSession().getAttribute("recurso"); 
-			  		
-			  		for (Outro o: lRecurso){
-			  	%>
-			  	<option value="<%=o.getId() %>">
-			  		<%=o.getNome() %>			  	
-			  	</option>
-			  	<%
-			  		}
-			  	%>
+		  		@SuppressWarnings("unchecked")
+		  		ArrayList<Outro> lRecurso = (ArrayList<Outro>) request.getSession().getAttribute("recurso"); 
+		  		
+		  		for (Outro o: lRecurso){%>
+				  	<option value="<%=lRecurso.indexOf(o) %>">
+				  		<%=o.getNome() %>			  	
+				  	</option>
+			  	<%}%>
 			  </select> <!-- select recurso -->
 			</div> <!-- fim div select recurso -->
 			
@@ -103,17 +93,14 @@
 			  <select name="uso" id="uso">
 			  	<option style="display: none">Uso:</option>	
 			  	<%
-			  		@SuppressWarnings("unchecked")
-			  		ArrayList<Outro> lUso = (ArrayList<Outro>) request.getSession().getAttribute("uso");
-			  	
-			  		for (Outro o: lUso){
-			  	%>
-			  	<option value="<%=o.getId() %>">
-			  		<%=o.getNome() %>			  	
-			  	</option>
-			  	<%
-			  		}
-			  	%>
+		  		@SuppressWarnings("unchecked")
+		  		ArrayList<Outro> lUso = (ArrayList<Outro>) request.getSession().getAttribute("uso");
+		  	
+		  		for (Outro o: lUso){%>
+				  	<option value="<%=lUso.indexOf(o) %>">
+				  		<%=o.getNome() %>			  	
+				  	</option>
+			  	<%}%>
 			  </select> <!-- select uso -->
 			</div> <!-- fim div select uso -->
 			
@@ -121,17 +108,14 @@
 			  <select name="fontepagante" id="fontepagante">
 			  	<option style="display: none">Fonte pagante:</option>	
 			  	<%
-			  		@SuppressWarnings("unchecked")
-			  		ArrayList<Outro> lFonte = (ArrayList<Outro>) request.getSession().getAttribute("fontepagante");
-			  	
-			  		for (Outro o: lFonte){
-			  	%>
-			  	<option value="<%=o.getId() %>">
-			  		<%=o.getNome() %>			  	
-			  	</option>
-			  	<%
-			  		}
-			  	%>
+		  		@SuppressWarnings("unchecked")
+		  		ArrayList<Outro> lFonte = (ArrayList<Outro>) request.getSession().getAttribute("fontepagante");
+		  	
+		  		for (Outro o: lFonte){%>
+			  		<option value="<%=lFonte.indexOf(o) %>">
+				  		<%=o.getNome() %>			  	
+			  		</option>
+			  	<%}%>
 			  </select> <!-- select uso -->
 			</div> <!-- fim div select uso -->
 			<div class="form-group  has-feedback">
@@ -163,8 +147,9 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Concluir</button>
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
+	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 	
 	<script type="text/javascript" src="js/campoValor.js"></script>

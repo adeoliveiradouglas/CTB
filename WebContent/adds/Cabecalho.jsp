@@ -12,7 +12,7 @@
 
 <nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipal"> <!--   	 <img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png"/>  -->
+		<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipal">
 			Sistema de Gestão de Contratos
 		</a>
 	</div>
@@ -20,14 +20,12 @@
 	<div class="container-fluid">
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="adds/ajuda.jsp">Ajuda</a></li>
-			<li><a href="/gestaodecontratos/sistema?logica=Logout">Sair</a></li>
+			<li><a href="/gestaodecontratos/sistema?logica=TelaLogin">Sair</a></li>
 		</ul>
 	</div>
 </nav>
 <%@ page import="entity.Usuario"%>
-<% 
-	Usuario u = (Usuario) session.getAttribute("usuario"); 
-%>
+<% Usuario u = (Usuario) session.getAttribute("usuario");%>
 	<div class="page-header">
 		<div class="container-fluid">
 			<table>
@@ -37,8 +35,6 @@
 					<th class="text-right col-md-1" style="color: blue"><h3><i>Setor: <%= u.getSetor().getSigla()%> </i></h3></th>
 				</tr>
 			</table>
-			
-			
 		</div>
 	</div>
 </html>

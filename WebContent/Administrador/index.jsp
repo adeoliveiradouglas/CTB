@@ -33,11 +33,21 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-2">Nome</th>
-				<th class="text-center col-md-1">Matrícula</th>
-				<th class="text-center col-md-1">Cargo</th>
-				<th class="text-center col-md-1">Setor</th>
-				<th class="text-center col-md-2">Login</th>
+				<th class="text-center col-md-2">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=nome">Nome</a>
+				</th>
+				<th class="text-center col-md-1">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=matricula">Matrícula</a>
+				</th>
+				<th class="text-center col-md-1">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=cargo_id">Cargo</a>
+				</th>
+				<th class="text-center col-md-1">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=setor_codigo">Setor</a>
+				</th>
+				<th class="text-center col-md-2">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=login">Login</a>
+				</th>
 				<th class="col-md-1"></th><th class="col-md-1"></th>
 			</tr>
 		</thead>
@@ -52,19 +62,16 @@
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
 					<form action="sistema?logica=AutorizarNovoUsuario" method="post">
-						<button value="<%=u.getId()%>" name="id">Autorizar</button>
+						<button value="<%=lun.indexOf(u)%>" name="id">Autorizar</button>
 					</form>
 				</td>
 				<td class="text-center">
-					<form action="sistema?logica=RecusarNovoUsuario" method="post">
+					<form action="sistema?logica=RemoveUsuario&tabela=usuariosnovos" method="post">
 						<button value="<%=u.getId()%>" name="id">Recusar</button>
 					</form>
 				</td>
 			</tr>
-			<%
-				} //fim do for
-			%>
-			
+			<%} //fim do for%>			
 		</tbody>
 	</table>
 	<%} //fim do if de mostrar novos usuários%> 
@@ -76,18 +83,27 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-2">Nome</th>
-				<th class="text-center col-md-1">Matrícula</th>
-				<th class="text-center col-md-1">Cargo</th>
-				<th class="text-center col-md-1">Setor</th>
-				<th class="text-center col-md-2">Login</th>
+				<th class="text-center col-md-2">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=nome">Nome</a>
+				</th>
+				<th class="text-center col-md-1">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=matricula">Matrícula</a>
+				</th>
+				<th class="text-center col-md-1">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=cargo_id">Cargo</a>
+				</th>
+				<th class="text-center col-md-1">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=setor_codigo">Setor</a>
+				</th>
+				<th class="text-center col-md-2">
+					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=login">Login</a>
+				</th>
 				<th class="col-md-1"></th><th class="col-md-1"></th>
 			</tr>
-
 		</thead>
 		<tbody>
 			<%
-			@SuppressWarnings("unchecked") /*GAMBIARRA PARA TIRAR WARNING DA LINHA ABAIXO*/
+			@SuppressWarnings("unchecked") 
 			ArrayList<Usuario> lu = (ArrayList<Usuario>) request.getSession().getAttribute("usuarios");
 		
 			for (Usuario u: lu){
@@ -99,12 +115,12 @@
 				<td class="text-center"><%=u.getSetor().getSigla() %></td>
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
-					<form action="sistema?logica=TelaEditarUsuario" method="post">
-						<button value="<%=u.getId()%>" name="id">Editar</button>
+					<form action="sistema?logica=RemoveUsuario&tabela=usuario" method="post">
+						<button value="<%=lu.indexOf(u)%>" name="id">Editar</button>
 					</form>
 				</td>
 				<td class="text-center">
-					<form action="sistema?logica=RecusarNovoUsuario" method="post">
+					<form action="sistema?logica=DeletarUsuario" method="post">
 						<button value="<%=u.getId()%>" name="id">Deletar</button>
 					</form>
 				</td>

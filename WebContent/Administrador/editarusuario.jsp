@@ -19,90 +19,79 @@
 	
 	<%@ page import="entity.Usuario" %>
 	
-	<%
-		Usuario u = (Usuario) request.getSession().getAttribute("usuarioeditar");
-	%>	
+	<%Usuario u = (Usuario) request.getSession().getAttribute("usuarioeditar");%>	
 			 
 	<form action="sistema?logica=EditarUsuario" method="POST">
-			<div class="aw-simple-panel">
-				<div class="aw-simple-panel__box">
-					<div class="form-group  has-feedback">
-						<input type="number" class="form-control input-lg" placeholder="Sua matrícula" name="matricula" value=<%=u.getMatricula() %> required> 
-						<span class="form-control-feedback"	aria-hidden="true"> </span>
-					</div>
-
-					<div class="form-group  has-feedback">
-						<input class="form-control input-lg" placeholder="Seu nome completo" name="nome" value=<%=u.getNome() %> required> 
-						<span class="form-control-feedback" aria-hidden="true"> </span>
-					</div>
-
-					<div class="form-group  has-feedback">
-						<input type="email" class="form-control input-lg" placeholder="Seu e-mail corporativo" name="email" value=<%=u.getEmail() %> required>
-						<span class="form-control-feedback" aria-hidden="true"></span>
-					</div>
-					
-					<br />
-					<!-- Mostrar as opções de cargos -->
-					<div  class="form-group custom-select has-feedback">
-					  <select name="cargo" id="cargoselect">
-					  	<option style="display: none" value="<%=u.getCargo().getId() %>">
-					  		<%=u.getCargo().getNome() %> - <%=u.getCargo().getDescricao() %>					  	
-					  	</option>
-					  	<%@ page import="dao.CargoDAO,
-					  					 entity.Cargo,
-					  					 java.util.ArrayList" %>
-					  	
-					  	<%
-					  		CargoDAO cdao = new CargoDAO();
-					  		ArrayList<Cargo> cargos = cdao.getAll();
-					  		
-					  		for (Cargo c: cargos){
-					  	%>
-					  	<option value="<%=c.getId() %>">
-					  		<%=c.getNome() %> - <%=c.getDescricao() %>					  	
-					  	</option>
-					  	<%
-					  		}
-					  	%>
-					  </select> <!-- select cargos -->
-					</div> <!-- fim div select cargos -->
-					
-					<!-- Mostrar as opções de setores -->
-					<div class="form-group custom-select has-feedback">
-					  <select name="setor">
-					  
-					  	<option style="display: none" value="<%=u.getSetor().getCodigo()%>">
-					  		<%=u.getSetor().getSigla() %> - <%=u.getSetor().getNome() %>					  						  	
-					  	</option>
-					  	<%@ page import="dao.SetorDAO,
-					  					 entity.Setor,
-					  					 java.util.ArrayList" %>
-					  	
-					  	<%
-					  		SetorDAO sdao = new SetorDAO("gestaodecontratos", "servidorApp", "suporte2017");
-					  		ArrayList<Setor> setores = sdao.getAll();
-					  		
-					  		for (Setor s: setores){
-					  	%>
-					  	<option value="<%=s.getCodigo()%>">
-					  		<%=s.getSigla() %> - <%=s.getNome() %>					  						  	
-					  	</option>
-					  	<%
-					  		}
-					  	%>
-					  </select> <!-- select setores -->
-					</div> <!-- fim div select setores -->
-					
-				</div>
-				
-				<br/>
-				<div class="form-group" id="botaocadastrar">
-					<button type="submit"
-						class="btn btn-primary btn-lg aw-btn-full-width">Confimar</button>
-				</div>
-				<div class="aw-simple-panel__footer"><br/></div>
+		<div class="aw-simple-panel__box">
+			<div class="form-group  has-feedback">
+				<input type="number" class="form-control input-lg" placeholder="Sua matrícula" name="matricula" value=<%=u.getMatricula() %> required> 
+				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
-		</form>
+
+			<div class="form-group  has-feedback">
+				<input type="text" class="form-control input-lg" placeholder="Seu nome completo" name="nome" value=<%=u.getNome() %> required> 
+				<span class="form-control-feedback" aria-hidden="true"> </span>
+			</div>
+
+			<div class="form-group  has-feedback">
+				<input type="email" class="form-control input-lg" placeholder="Seu e-mail corporativo" name="email" value=<%=u.getEmail() %> required>
+				<span class="form-control-feedback" aria-hidden="true"></span>
+			</div>
+			
+			<br />
+			<!-- Mostrar as opções de cargos -->
+			<div  class="form-group custom-select has-feedback">
+			  <select name="cargoNovo">
+			  	
+			  	<%@ page import="entity.Cargo,
+			  					 entity.Setor,
+			  					 java.util.ArrayList" %>
+			  	
+			  	<%
+			  	@SuppressWarnings("unchecked")
+			  	ArrayList<Cargo> cargos = ((ArrayList<Cargo>) request.getSession().getAttribute("cargos"));
+			  	%>
+			  	
+			  	<option style="display: none" value="<%=cargos.indexOf(u.getCargo()) %>">
+			  		<%=u.getCargo().getNome() %> - <%=u.getCargo().getDescricao() %>					  	
+			  	</option>
+			  	
+			  	<%for (Cargo c: cargos){%>
+			  	<option value="<%=cargos.indexOf(c)%>">
+			  		<%=c.getNome() %> - <%=c.getDescricao() %>					  	
+			  	</option>
+			  	<%}%>
+			  </select> <!-- select cargos -->
+			</div> <!-- fim div select cargos -->
+			
+			<!-- Mostrar as opções de setores -->
+			<div class="form-group custom-select has-feedback">
+			  <select name="setorNovo">			  
+			  	<%
+				@SuppressWarnings("unchecked")
+			  	ArrayList<Setor> setores = ((ArrayList<Setor>) request.getSession().getAttribute("setores"));
+			  	%>
+			  	
+			  	<option style="display: none" value="<%=setores.indexOf(u.getSetor())%>">
+			  		<%=u.getSetor().getSigla() %> - <%=u.getSetor().getNome() %>					  						  	
+			  	</option>
+			  	
+			  	<%for (Setor s: setores){%>
+			  	<option value="<%=setores.indexOf(s)%>">
+			  		<%=s.getSigla() %> - <%=s.getNome() %>					  						  	
+			  	</option>
+			  	<%}%>
+			  </select> <!-- select setores -->
+			</div> <!-- fim div select setores -->
+			
+		</div>
 		
+		<br/>
+		<div class="form-group" id="botaocadastrar">
+			<button type="submit"
+				class="btn btn-primary btn-lg aw-btn-full-width">Confimar</button>
+		</div>
+		<div class="aw-simple-panel__footer"><br/></div>
+	</form>
 </body>
 </html>

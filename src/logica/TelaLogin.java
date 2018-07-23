@@ -1,3 +1,7 @@
+/*
+ * Limpa todos os dados da sessão e redireciona para tela de login 
+ */
+
 package logica;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +11,7 @@ public class TelaLogin implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+		pedido.getSession().invalidate();
 		return "/login.jsp";
 	}
 

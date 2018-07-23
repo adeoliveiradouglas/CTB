@@ -23,7 +23,7 @@
 		</div>
 
 		<br />
-		<form action="sistema?logica=Login" th:object="${userdetails}" method="POST">
+		<form action="sistema?logica=Login" method="POST">
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 				
@@ -42,7 +42,7 @@
 
 					<div class="form-group clearfix">
 						<div class="pull-left">
-							Novo por aqui? <a href="cadastrousuario.jsp">Cadastre-se</a>.					
+							Novo por aqui? <a href="sistema?logica=TelaCadastroUsuario">Cadastre-se</a>.					
 						</div>
 						<div class="pull-right">
 							<a href="esqueceuasenha.jsp">Esqueci minha senha</a>

@@ -17,7 +17,7 @@ public class Login implements Logica{
 		
 		/* Busca usuario no banco:
 		 * Caso tenha usado usuário administrador geral, vai gerar uma exception de Null e esse usuário fica 
-		 * como nulo. É exatamente isso que deve acontecer pois o adminstrador geral não está cadastrado no banco
+		 * como nulo. É exatamente isso que deve acontecer pois o administrador geral não está cadastrado no banco
 		 */
 		Usuario u = new UsuarioDAO().getByEmail(
 						email

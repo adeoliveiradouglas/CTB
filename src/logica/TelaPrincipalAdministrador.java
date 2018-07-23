@@ -11,10 +11,10 @@ public class TelaPrincipalAdministrador implements Logica{
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		Usuario u = (Usuario) pedido.getSession().getAttribute("usuario");
+		String ordenacao = pedido.getParameter("ordUser");
 		
-		
-		pedido.getSession().setAttribute("usuariosnovos", new UsuarioDAO("usuariosnovos").getAll());
-		pedido.getSession().setAttribute("usuarios", new UsuarioDAO().getAll());
+		pedido.getSession().setAttribute("usuariosnovos", new UsuarioDAO("usuariosnovos").getAllOrdenado(ordenacao));
+		pedido.getSession().setAttribute("usuarios", new UsuarioDAO().getAllOrdenado(ordenacao));
 		
 		return "/" + u.getCargo().getNome() + "/index.jsp";
 	}

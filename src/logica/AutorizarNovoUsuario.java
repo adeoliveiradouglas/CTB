@@ -4,6 +4,8 @@
  */
 package logica;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,19 +16,20 @@ public class AutorizarNovoUsuario implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		int id = Integer.parseInt(pedido.getParameter("id"));
-		UsuarioDAO undao = new UsuarioDAO("usuariosnovos");
+		/*
+		 * Recebe a posição que o usuario está na lista de usuários novos
+		 */
 		
-//		GAMBIARRA PARA TER OBJETO USUARIO ATRAVÉS DO EMAIL
-//		SE RECEBER USUARIO DA JSP, VEM COMO STRING. PARA AGILIZAR O DESENVOLVIMENTO, USEI ESSA GAMBIARRA
-//		MODO CORRETO: FAZER A CONVERSÃO DE STRING PARA UM OBJETO USUÁRIO
-		Usuario u = undao.getById(id);
+		@SuppressWarnings("unchecked")
+		ArrayList<Usuario> us = (ArrayList<Usuario>) pedido.getSession().getAttribute("usuariosnovos");
+		
+		Usuario u = us.get(Integer.parseInt(pedido.getParameter("id")));
 		
 //		Insere na tabela de usuários autorizados
 		new UsuarioDAO().inserir(u);
 		
 //		remove da tabela de novos usuários
-		undao.deleteById(u.getId());
+		new UsuarioDAO("usuariosnovos").deleteById(u.getId());
 		
 		return "sistema?logica=TelaPrincipal";
 	}

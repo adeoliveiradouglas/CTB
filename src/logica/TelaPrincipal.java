@@ -13,7 +13,7 @@ public class TelaPrincipal implements Logica{
 		
 //		Por causa do nome da servlet de tela principal do gestor geral
 		if (!cargo.equals("Gestor geral"))
-			return "sistema?logica=TelaPrincipal" + cargo;
+			return "sistema?logica=TelaPrincipal" + cargo +"&ordUser=nome&ordContrato=numero";
 		else
 			return "sistema?logica=TelaPrincipalGestorGeral";
 	}

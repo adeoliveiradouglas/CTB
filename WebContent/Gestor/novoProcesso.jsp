@@ -19,8 +19,8 @@
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<%@page import="entity.Contrato" %>
 	<%String id = (String) request.getParameter("id"); %>
-	<div class="aw-layout-simple-page">
-		<form action="sistema?logica=CadastrarProcesso" method="post" >
+	<form action="sistema?logica=CadastrarProcesso" method="post">
+		<div class="aw-simple-panel__box">	
 			<div class="form-group  has-feedback" style="display: none">
 				<input type="text" class="form-control input-lg" name="idContrato" value="<%=id %>" required> 
 			</div>
@@ -82,8 +82,9 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Concluir</button>
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
+	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 	
 	<script type="text/javascript" src="js/campoValor.js"></script>

@@ -2,14 +2,13 @@ package logica;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
-import dao.OutroDAO;
-import dao.UsuarioDAO;
 import entity.Contrato;
 import entity.Outro;
 import entity.Usuario;
@@ -18,6 +17,7 @@ import utilidades.StringToDecimal;
 public class CadastrarContrato implements Logica{
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		final String formatoData = "yyyy-MM-dd";
 		
@@ -37,8 +37,17 @@ public class CadastrarContrato implements Logica{
 				pedido.getParameter("dataVencimentoGarantia")
 			);
 		
-		Usuario gestor = new UsuarioDAO().getById(Integer.parseInt(pedido.getParameter("gestor"))),
-				fiscal = new UsuarioDAO().getById(Integer.parseInt(pedido.getParameter("fiscal")));
+		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) pedido.getSession().getAttribute("gestores");
+		Usuario gestor = usuarios.get(
+							Integer.parseInt(
+								pedido.getParameter("gestor")
+							)
+						),
+				fiscal = usuarios.get(
+							Integer.parseInt(
+								pedido.getParameter("fiscal")
+							)
+						);
 		
 		BigDecimal valor = new BigDecimal(
 			new StringToDecimal().formatarParaBanco(
@@ -46,13 +55,17 @@ public class CadastrarContrato implements Logica{
 			)
 		);
 		
-		Outro recurso = new OutroDAO("recurso").getById(
+		ArrayList<Outro> lRecurso = (ArrayList<Outro>) pedido.getSession().getAttribute("recurso");
+		ArrayList<Outro> lUso = (ArrayList<Outro>) pedido.getSession().getAttribute("uso");
+		ArrayList<Outro> lFonte = (ArrayList<Outro>) pedido.getSession().getAttribute("fontepagante");
+		
+		Outro recurso = lRecurso.get(
 			Integer.parseInt(pedido.getParameter("recurso"))
 		),
-		fontepagante = new OutroDAO("fontepagante").getById(
+		fontepagante = lFonte.get(
 			Integer.parseInt(pedido.getParameter("fontepagante"))
 		),
-		uso = new OutroDAO("uso").getById(
+		uso = lUso.get(
 			Integer.parseInt(pedido.getParameter("uso"))
 		);
 		

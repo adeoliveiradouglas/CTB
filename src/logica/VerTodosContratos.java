@@ -9,7 +9,8 @@ public class VerTodosContratos implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		pedido.getSession().setAttribute("contratos", new ContratoDAO().getAll());
+		String ordenacao = pedido.getParameter("ord");
+		pedido.getSession().setAttribute("contratos", new ContratoDAO().getAll(ordenacao));
 		return "/Gestor geral/todosContratos.jsp";
 	}
 

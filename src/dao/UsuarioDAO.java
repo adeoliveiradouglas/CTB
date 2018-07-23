@@ -25,14 +25,6 @@ public class UsuarioDAO extends DAO {
 	 * super(nomeDB, usuarioDB, senhaDB, "usuario"); }
 	 */
 
-	public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB, String ip) {
-		super(nomeDB, usuarioDB, senhaDB, "usuario", ip);
-	}
-
-	public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB) {
-		super(nomeDB, usuarioDB, senhaDB, "usuario");
-	}
-
 	public UsuarioDAO(){
 		super("usuario");
 	}
@@ -557,5 +549,83 @@ public class UsuarioDAO extends DAO {
 		}
 			
 		encerraConexaocomBanco();
+	}
+
+	public ArrayList<Usuario> getAllOrdenado(String ordenacao) {
+		iniciaConexaoComBanco();
+		
+		/*		
+		 		Exemplo de query para esse método
+		 		
+		 		select * from usuario";
+		 		depois busca setor e cargo através do resultado do usuario
+		 		
+		*/
+				
+				ArrayList<Usuario> lu = new ArrayList<>();
+				
+//				monta a query
+				setSqlQuery(
+					"select * from " + getNomeTabela() + " order by " + ordenacao
+				);
+				
+				try {
+//					monta o statement
+					setStatement(
+						getDbConnection().prepareStatement(
+							getSqlQuery()
+						)
+					);
+								
+//					executa
+					setResultado(
+						getStatement().executeQuery()
+					);
+					
+				} catch(SQLException e) {
+					System.out.println(e);;
+					encerraConexaocomBanco();
+					return null;
+				}
+				
+				
+				try{
+					Usuario u = null;
+					
+					while(getResultado().next()){
+						u = new Usuario(
+							getResultado().getInt(
+								colunaId
+							),
+							getResultado().getInt(
+								colunaMatricula
+							),
+							getResultado().getString(
+								colunaNome
+							),
+							getResultado().getString(
+								colunaEmail
+							),
+							getResultado().getString(
+								colunaSenha
+							),
+							
+//							busca setor de acordo com o resultado do usuario
+							new SetorDAO().getByCodigo(
+									getResultado().getString(colunaSetor)
+							),
+							new CargoDAO().getById(
+									getResultado().getInt(colunaCargo)
+							)
+						);
+						lu.add(u);
+					}
+				} catch (SQLException e) {
+					System.out.println(e);;
+					lu = null;
+				}
+				
+				encerraConexaocomBanco();
+				return lu;
 	}
 }

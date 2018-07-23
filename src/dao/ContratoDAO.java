@@ -114,6 +114,88 @@ public class ContratoDAO extends DAO{
 		return lista;
 	}
 	
+	public ArrayList<Contrato> getByGestor(int id, String ordenacao){
+		ArrayList<Contrato> lista = new ArrayList<Contrato>();
+		Contrato c = null;
+		
+		iniciaConexaoComBanco();
+		
+//		Exemplo: select * from contrato where gestor = matricula
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaGestor + " = ? order by " + ordenacao
+		);
+		
+		try {
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
+				)
+			);
+			
+			getStatement().setInt(
+				1, 
+				id
+			);
+			
+			setResultado(
+				getStatement().executeQuery()
+			);
+			
+//			Traduzir resultado para objeto
+			while (getResultado().next()){
+				c = new Contrato(
+					getResultado().getInt(colunaId),
+					getResultado().getString(colunaNumero),
+					getResultado().getInt(colunaPortaria),
+					new UsuarioDAO().getById(
+						getResultado().getInt(
+							colunaGestor
+						)
+					),
+					new UsuarioDAO().getById(
+						getResultado().getInt(
+							colunaFiscal
+						)
+					),
+					getResultado().getString(colunaEmpresaCnpj),	
+					getResultado().getString(colunaEmpresaNome),
+					getResultado().getString(colunaObjeto),
+					new OutroDAO("recurso").getById(
+						getResultado().getInt(
+							colunaRecurso
+						)
+					),
+					new OutroDAO("fontepagante").getById(
+						getResultado().getInt(
+							colunaFontePagante
+						)
+					),
+					new OutroDAO("uso").getById(
+						getResultado().getInt(
+							colunaUso
+						)
+					),
+					getResultado().getDate(colunaDataAssinatura),
+					getResultado().getDate(colunaDataOrdemServico),
+					getResultado().getDate(colunaDataGarantia),
+					getResultado().getDate(colunaDataVencimentoContrato),
+					getResultado().getDate(colunaDataVencimentoGarantia),
+					getResultado().getBigDecimal(colunaValorInicial),
+					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId))
+				);
+				
+				lista.add(c);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);;
+			encerraConexaocomBanco();
+			return null;
+		}
+		
+		encerraConexaocomBanco();
+		return lista;
+	}
+	
 	public ArrayList<Contrato> getAllRecente(int quantidade){
 		/*
 		 * Retorna uma lista com a quantidade dos contratos mais recentes
@@ -340,12 +422,19 @@ public class ContratoDAO extends DAO{
 	}
 
 	public ArrayList<Contrato> getAll() {
+		/*
+		 * Usado quando não necessita de resultado ordenado 
+		 */
+		return getAll("");
+	}
+
+	public ArrayList<Contrato> getAll(String ordenacao) {
 		ArrayList<Contrato> contratos = new ArrayList<Contrato>();
 		
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
-			"select * from " + getNomeTabela()
+			"select * from " + getNomeTabela() + " order by " + ordenacao
 		);
 		
 		try{
@@ -427,8 +516,18 @@ public class ContratoDAO extends DAO{
 				
 		return contratos;
 	}
+	
+	public ArrayList<Contrato> getByFiscal(int id) {
+		/*
+		 * Usado quando não necessita de resultado ordenado
+		 */
+		return getByFiscal(id, "");
+	}
 
-	public Object getByFiscal(int id) {
+	public ArrayList<Contrato> getByFiscal(int id, String ordenacao) {
+		/*
+		 * Retorna a lista com a ordenacao desejada 
+		 */
 		ArrayList<Contrato> lista = new ArrayList<Contrato>();
 		Contrato c = null;
 		
@@ -436,7 +535,7 @@ public class ContratoDAO extends DAO{
 		
 //		Exemplo: select * from contrato where gestor = matricula
 		setSqlQuery(
-			"select * from " + getNomeTabela() + " where " + colunaFiscal + " = ?"
+			"select * from " + getNomeTabela() + " where " + colunaFiscal + " = ? order by " + ordenacao 
 		);
 		
 		try {

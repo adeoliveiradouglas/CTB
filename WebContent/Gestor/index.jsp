@@ -34,10 +34,18 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">Número</th>
-				<th class="text-center col-md-2">Empresa</th>
-				<th class="text-center col-md-2">Gestor</th>
-				<th class="text-center col-md-1">Valor</th>
+				<th class="text-center col-md-1">
+					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=numero">Número</a>
+				</th>
+				<th class="text-center col-md-2">
+					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=nomeEmpresaContratada">Empresa</a>
+				</th>
+				<th class="text-center col-md-2">
+					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=fiscal_id">Fiscal</a>
+				</th>
+				<th class="text-center col-md-1">
+					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=fiscal_id">Valor</a>
+				</th>
 				<th class="text-center col-md-1">Vencimento</th>
 				<!-- <th class="text-center col-md-1">%</th> -->
 			</tr>
@@ -47,16 +55,16 @@
 			for (Contrato c: contratos){
 			%>
 			<tr>
-				<th class="text-center">
+				<td class="text-center">
 					<a href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratos">
 						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
 						<%=c.getNumero() %>
 					</a>
-				</th>
-				<th class="text-center"><%=c.getNomeEmpresaContratada() %></th>
-				<th class="text-center"><%=c.getGestor().getNome() %></th>
-				<th class="text-center"><%=c.getValorTotal() %></th>
-				<th class="text-center"><%=c.getDataVencimentoContrato() %></th>
+				</td>
+				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
+				<td class="text-center"><%=c.getFiscal().getNome() %></td>
+				<td class="text-center"><%=c.getValorTotal() %></td>
+				<td class="text-center"><%=c.getDataVencimentoContrato() %></td>
 				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
@@ -92,16 +100,16 @@
 		<tbody>
 			<%for (Contrato c: contratosFiscal){%>
 			<tr>
-				<th class="text-center">
+				<td class="text-center">
 					<a href="sistema?logica=VerContrato&n=<%=contratosFiscal.indexOf(c)%>&origem=contratosFiscal">
 						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
 						<%=c.getNumero() %>
 					</a>
-				</th>
-				<th class="text-center"><%=c.getNomeEmpresaContratada() %></th>
-				<th class="text-center"><%=c.getGestor().getNome() %></th>
-				<th class="text-center"><%=c.getValorTotal() %></th>
-				<th class="text-center"><%=c.getDataVencimentoContrato() %></th>
+				</td>
+				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
+				<td class="text-center"><%=c.getGestor().getNome() %></td>
+				<td class="text-center"><%=c.getValorTotal() %></td>
+				<td class="text-center"><%=c.getDataVencimentoContrato() %></td>
 				<%-- <th class="text-center"><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%}%> <!-- fim do for que mostra os contratos com vencimentos -->

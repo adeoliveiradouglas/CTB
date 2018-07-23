@@ -51,16 +51,16 @@
 			for (Contrato c: contratos){
 			%>
 			<tr>
-				<th class="text-center">
+				<td class="text-center">
 					<a href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratosRecentes">
 						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
 						<%=c.getNumero() %>
 					</a>
-				</th>
-				<th class="text-center"><%=c.getNomeEmpresaContratada() %></th>
-				<th class="text-center"><%=c.getGestor().getNome() %></th>
-				<th class="text-center"><%=c.getValorTotal() %></th>
-				<th class="text-center"><%=c.getDataVencimentoContrato() %></th>
+				</td>
+				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
+				<td class="text-center"><%=c.getGestor().getNome() %></td>
+				<td class="text-center"><%=c.getValorTotal() %></td>
+				<td class="text-center"><%=c.getDataVencimentoContrato() %></td>
 				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
@@ -95,15 +95,15 @@
 		<tbody>
 			<%for (Contrato c: contratos90){%>
 			<tr>
-				<th class="text-center">
+				<td class="text-center">
 					<form action="sistema?logica=VerContrato" method="post">
 						<button value="<%=c.getNumero()%>" name="numeroContrato"><%=c.getNumero() %></button>
 					</form>
-				</th>
-				<th class="text-center"><%=c.getNomeEmpresaContratada() %></th>
-				<th class="text-center"><%=c.getGestor().getNome() %></th>
-				<th class="text-center"><%=c.getValorTotal() %></th>
-				<th class="text-center"><%=c.getDataVencimentoContrato() %></th>
+				</td>
+				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
+				<td class="text-center"><%=c.getGestor().getNome() %></td>
+				<td class="text-center"><%=c.getValorTotal() %></td>
+				<td class="text-center"><%=c.getDataVencimentoContrato() %></td>
 				<%-- <th class="text-center"><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos com vencimentos -->

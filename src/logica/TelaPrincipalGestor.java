@@ -11,8 +11,10 @@ public class TelaPrincipalGestor implements Logica{
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		int idGestor = ((Usuario) pedido.getSession().getAttribute("usuario")).getId();
-		pedido.getSession().setAttribute("contratos", new ContratoDAO().getByGestor(idGestor));
-		pedido.getSession().setAttribute("contratosFiscal", new ContratoDAO().getByFiscal(idGestor));
+		String ordenacao = pedido.getParameter("ordContrato");
+		
+		pedido.getSession().setAttribute("contratos", new ContratoDAO().getByGestor(idGestor, ordenacao));
+		pedido.getSession().setAttribute("contratosFiscal", new ContratoDAO().getByFiscal(idGestor, ordenacao));
 		
 		return "/Gestor/index.jsp";
 	}

@@ -47,21 +47,21 @@
 		<tbody>
 			<%for(Processo p: processosSemPagamento){%>
 			<tr>
-				<th class="text-center"><%=p.getAno() %></th>
-				<th class="text-center"><%=processosSemPagamento.indexOf(p)+1 %></th>
-				<th class="text-center"><%=p.getMes()%></th>
-				<th class="text-center"><%=p.getNotaFiscal() %></th>
-				<th class="text-center"><%=p.getNumeroSei() %></th>
-				<th class="text-center"><%=p.getDataProcesso() %></th>
-				<th class="text-center"><%=p.getValor() %></th>
-				<th class="text-center"><%=p.getAditivo() %></th>
-				<th class="text-center"><%=p.getTipoAditivo() %></th>
-				<th class="text-center">
+				<td class="text-center"><%=p.getAno() %></td>
+				<td class="text-center"><%=processosSemPagamento.indexOf(p)+1 %></td>
+				<td class="text-center"><%=p.getMes()%></td>
+				<td class="text-center"><%=p.getNotaFiscal() %></td>
+				<td class="text-center"><%=p.getNumeroSei() %></td>
+				<td class="text-center"><%=p.getDataProcesso() %></td>
+				<td class="text-center"><%=p.getValor() %></td>
+				<td class="text-center"><%=p.getAditivo() %></td>
+				<td class="text-center"><%=p.getTipoAditivo() %></td>
+				<td class="text-center">
 					<a href="sistema?logica=PagarProcesso&n=<%=p.getNumeroSei() %>">
 						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
 						Registrar pagamento
 					</a>
-				</th>
+				</td>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
 		</tbody>

@@ -69,17 +69,17 @@
 					  	<option style="display: none">Selecione seu cargo:</option>
 					  	<%@ page import="dao.CargoDAO,
 					  					 entity.Cargo,
+					  					 entity.Setor,
 					  					 java.util.ArrayList" %>
 					  	
 					  	<%
-					  	for (Cargo c: new CargoDAO().getAll()){
-					  	%>
+					  	@SuppressWarnings("unchecked")
+					  	ArrayList<Cargo> cargos = ((ArrayList<Cargo>) request.getSession().getAttribute("cargo"));
+					  	for (Cargo c: cargos){%>
 					  	<option value="<%=c.getId()%>">
 					  		<%=c.getNome() %> - <%=c.getDescricao() %>					  	
 					  	</option>
-					  	<%
-					  	}
-					  	%>
+					  	<%}%>
 					  </select> <!-- select cargos -->
 					</div> <!-- fim div select cargos -->
 					
@@ -87,19 +87,16 @@
 					<div class="form-group custom-select has-feedback">
 					  <select name="setor">
 					  	<option style="display: none">Selecione seu setor:</option>
-					  	<%@ page import="dao.SetorDAO,
-					  					 entity.Setor,
-					  					 java.util.ArrayList" %>
-					  	
+					  
 					  	<%
-					  	for (Setor s: new SetorDAO().getAll()){
+						@SuppressWarnings("unchecked")
+					  	ArrayList<Setor> setores = ((ArrayList<Setor>) request.getSession().getAttribute("setor"));
+					  	for (Setor s: setores){
 					  	%>
 					  	<option value="<%=s.getCodigo()%>">
 					  		<%=s.getSigla() %> - <%=s.getNome() %>					  						  	
 					  	</option>
-					  	<%
-					  	}
-					  	%>
+					  	<%}%>
 					  </select> <!-- select setores -->
 					</div> <!-- fim div select setores -->
 					

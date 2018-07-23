@@ -9,7 +9,7 @@ package entity;
 import lombok.Data;
 
 @Data
-public class Usuario {
+public class Usuario{
 	private int id,
 				matricula;
 	private String nome,
@@ -37,5 +37,5 @@ public class Usuario {
 		this.senha = senha;
 		this.setor = setor;
 		this.cargo = cargo;
-	} 	
+	}
 }
