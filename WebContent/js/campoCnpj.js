@@ -1,50 +1,76 @@
 /*
- * Script retirado de: https://brunobrum.wordpress.com/2010/05/20/mascara-javascript-de-cnpj-e-cpf-no-mesmo-campo-do-formulario/
- * Acesso em 17/07/2018
- * */
+ * CÃ³digo adaptado do site http://forum.wmonline.com.br/topic/125538-formatar-dados-em-real-r/ acesso em 17/07/2018 
+ */
 
-function isNum(caractere) {
-	var strValidos = "0123456789";
-	if (strValidos.indexOf(caractere) == -1)
-		return false;
-	return true;
-}
-function validaTecla(campo, event) {
-	var BACKSPACE = 8;
-	var key;
-	var tecla;
+function MascaraCnpj(campo) {// Cada vez que a tecla é liberada...
+	// Impedimos entrada de letras...
+	SomenteNumeroPontoBarra(campo);
+	// Removemos vírgula e ponto da mácara, se tiver...
+	var valor = limpar(campo.value, "0123456789");
+	// Obtemos o tamanho somente dos números...
+	var tamanho = valor.length;
+	var pronto = "";
 
-	CheckTAB = true;
-	if (navigator.appName.indexOf("Netscape") != -1)
-		tecla = event.which;
-	else
-		tecla = event.keyCode;
+	switch (tamanho) {
+	case 3:
+		pronto = mascaraCampo(campo, "##.#");
+		break;
 
-	key = String.fromCharCode(tecla);
-	//alert( 'key: ' + tecla + '  -> campo: ' + campo.value); 
+	case 4:
+		pronto = mascaraCampo(campo, "##.##");
+		break;
 
-	if (tecla == 13)
-		return false;
-	if (tecla == BACKSPACE)
-		return true;
-	return (isNum(key));
-}
-function FormataCNPJ(el) {
-	vr = el.value;
-	tam = vr.length;
+	case 5:
+		pronto = mascaraCampo(campo, "##.###");
+		break;
 
-	if (vr.indexOf(".") == -1) {
-		if (tam <= 2)
-			el.value = vr;
-		if ((tam > 2) && (tam <= 6))
-			el.value = vr.substr(0, 2) + '.' + vr.substr(2, tam);
-		if ((tam >= 7) && (tam <= 10))
-			el.value = vr.substr(0, 2) + '.' + vr.substr(2, 3) + '.'
-					+ vr.substr(5, 3) + '/';
-		if ((tam >= 11) && (tam <= 18))
-			el.value = vr.substr(0, 2) + '.' + vr.substr(2, 3) + '.'
-					+ vr.substr(5, 3) + '/' + vr.substr(8, 4) + '-'
-					+ vr.substr(12, 2);
+	case 6:
+		pronto = mascaraCampo(campo, "##.###.#");
+		break;
+
+	case 7:
+		pronto = mascaraCampo(campo, "##.###.##");
+		break;
+
+	case 8:
+		pronto = mascaraCampo(campo, "##.###.###");
+		break;
+
+	case 9:
+		pronto = mascaraCampo(campo, "##.###.###/#");
+		break;
+
+	case 10:
+		pronto = mascaraCampo(campo, "##.###.###/##");
+		break;
+
+	case 11:
+		pronto = mascaraCampo(campo, "##.###.###/###");
+		break;
+
+	case 12:
+		pronto = mascaraCampo(campo, "##.###.###/####");
+		break;
+
+	case 13:
+		pronto = mascaraCampo(campo, "##.###.###/####-#");
+		break;
+
+	case 14:
+		pronto = mascaraCampo(campo, "##.###.###/####-##");
+		break;
 	}
-	return true;
+}
+
+//Entrada de números e caracteres específicos apenas
+function SomenteNumeroPontoBarra(campo) {
+	var digits = "0123456789,/-"
+	var campo_temp
+	for (var i = 0; i < campo.length; i++) {
+		campo_temp = campo.substring(i, i + 1)
+		if (digits.indexOf(campo_temp) == -1) {
+			campo = campo.substring(0, i);
+			break;
+		}
+	}
 }

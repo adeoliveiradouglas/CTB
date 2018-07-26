@@ -29,7 +29,7 @@
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">
-				<input type="text" class="form-control input-lg" placeholder="CNPJ da empresa" name="cnpjEmpresa" required> 
+				<input type="text" class="form-control input-lg" placeholder="CNPJ da empresa" name="cnpjEmpresa" onkeyup="MascaraCnpj(this)" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">
@@ -152,6 +152,7 @@
 	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 	
+	<script type="text/javascript" src="js/campoCnpj.js"></script>
 	<script type="text/javascript" src="js/campoValor.js"></script>
 </body>
 </html>

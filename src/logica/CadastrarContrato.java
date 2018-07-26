@@ -12,14 +12,14 @@ import dao.ContratoDAO;
 import entity.Contrato;
 import entity.Outro;
 import entity.Usuario;
-import utilidades.StringToDecimal;
+import utilidades.FormatarCampo;
 
 public class CadastrarContrato implements Logica{
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		final String formatoData = "yyyy-MM-dd";
+		final String formatoData = "dd-mm-yyyy";
 		
 		Date assinatura = new SimpleDateFormat(formatoData).parse(
 				pedido.getParameter("dataAssinatura")
@@ -49,8 +49,10 @@ public class CadastrarContrato implements Logica{
 							)
 						);
 		
+		FormatarCampo format = new FormatarCampo();
+		
 		BigDecimal valor = new BigDecimal(
-			new StringToDecimal().formatarParaBanco(
+			format.stringToDecimal(
 				pedido.getParameter("valor")
 			)
 		);
@@ -69,12 +71,14 @@ public class CadastrarContrato implements Logica{
 			Integer.parseInt(pedido.getParameter("uso"))
 		);
 		
+		String cnpj = format.cnpjToBd(pedido.getParameter("cnpjEmpresa"));
+		
 		Contrato c = new Contrato(
 			pedido.getParameter("numero"),
 			Integer.parseInt(pedido.getParameter("portaria")),
 			gestor,
 			fiscal,
-			pedido.getParameter("cnpjEmpresa"),	
+			cnpj,	
 			pedido.getParameter("nomeEmpresa"),
 			pedido.getParameter("objeto"),
 			recurso,

@@ -38,10 +38,14 @@ public class LoginTesoureiro implements Filter{
 /*		A lógica responsável por autenticar o usuário insere os dados dele na sessão
  * 		Aqui recupera os dados da sessão e verifica se o usuário tem autorização para acessar essa página através do cargo dele
  * */
-		if (((Usuario) sessao.getAttribute("usuario")).getCargo().getId() == 4)
-			chain.doFilter(pedido, resposta);
-		else
-			res.sendRedirect("/gestaodecontratos/sistema?logica=Erro403");			
+		try {
+			if (((Usuario) sessao.getAttribute("usuario")).getCargo().getId() == 4)
+				chain.doFilter(pedido, resposta);
+			else
+				res.sendRedirect("/gestaodecontratos/sistema?logica=Erro403");
+		}catch(Exception e){
+			res.sendRedirect("/gestaodecontratos/sistema?logica=ErroDeslogado");
+		}	
 	}
 
 	@Override

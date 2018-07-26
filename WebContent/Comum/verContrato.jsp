@@ -45,23 +45,42 @@
 	</div>
 	<%}%>
 	
-	<p>Número: <%=contrato.getNumero() %></p>
-	<p>Empresa: <%=contrato.getNomeEmpresaContratada()%> <%=contrato.getCnpjEmpresaContratada()%></p>
-	<p>Objeto: <%=contrato.getObjeto()%></p>
-	<p>Portaria: <%=contrato.getPortaria()%></p>
-	<p>Data de assinatura: <%=contrato.getDataAssinatura()%></p>
-	<p>Data da ordem de serviço: <%=contrato.getDataOrdemServico()%></p>
-	<p>Data da garantia: <%=contrato.getDataGarantia()%></p>
-	<p>Data de vencimento do contrato: <%=contrato.getDataVencimentoContrato()%></p>
-	<p>Data de vencimento da garantia: <%=contrato.getDataVencimentoGarantia()%></p>
-	<p>Gestor: <%=contrato.getGestor().getNome()%></p>
-	<p>Fiscal: <%=contrato.getFiscal().getNome()%></p>
-	<p>Recurso: <%=contrato.getRecurso().getNome()%></p>
-	<p>Uso: <%=contrato.getUso().getNome()%></p>
-	<p>Fonte pagante: <%=contrato.getFontePagante().getNome()%></p>
-	<p>Valor inicial: R$ <%=contrato.getValorInicial()%></p>
-	<p>Valor dos aditivos: R$ <%=contrato.getValorAditivos() %></p>
-	<p>Valor total: R$ <%=contrato.getValorTotal()%></p>
+	<div style="background-color: #1e94d2; color: white" align="center">
+		<h3><%=contrato.getNomeEmpresaContratada()%> - CNPJ: <%=contrato.getCnpjEmpresaContratada()%></h3>
+	</div>
+	
+	<table class="table table-bordered table-striped">
+		<tbody>
+			<tr>
+				<td class="text-center col-md-1">Número: <%=contrato.getNumero() %></td>
+				<td class="text-center col-md-1">Portaria: <%=contrato.getPortaria()%></td>
+				<td class="text-center col-md-1">Gestor: <%=contrato.getGestor().getNome()%></td>
+				<td class="text-center col-md-1">Fiscal: <%=contrato.getFiscal().getNome()%></td>
+				
+			</tr>
+			<tr>
+				<td class="text-center col-md-1">Objeto: <%=contrato.getObjeto()%></td>
+				<td class="text-center col-md-1">Recurso: <%=contrato.getRecurso().getNome()%></td>
+				<td class="text-center col-md-1">Uso: <%=contrato.getUso().getNome()%></td>
+				<td class="text-center col-md-1">Fonte pagante: <%=contrato.getFontePagante().getNome()%></td>
+			</tr>
+			<tr>
+				<td class="text-center col-md-1">Data de assinatura: <%=contrato.getDataAssinatura()%></td>
+				<td class="text-center col-md-1">Valor inicial: R$ <%=contrato.getValorInicial()%></td>
+				<td class="text-center col-md-1">Valor dos aditivos: R$ <%=contrato.getValorAditivos() %></td>
+				<td class="text-center col-md-1">Valor total: R$ <%=contrato.getValorTotal()%></td>
+			</tr>
+			<tr>
+				<td class="text-center col-md-1">Ass. ordem de serviço: <%=contrato.getDataOrdemServico()%></td>
+				<td class="text-center col-md-1">Ass. garantia: <%=contrato.getDataGarantia()%></td>
+				<td class="text-center col-md-1">Vencimento do contrato: <%=contrato.getDataVencimentoContrato()%></td>
+				<td class="text-center col-md-1">Vencimento da garantia: <%=contrato.getDataVencimentoGarantia()%></td>
+			</tr>
+		</tbody>
+	</table>
+	<div style="background-color: #1e94d2; color: white" align="center">
+		<h3>Processos</h3>
+	</div>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>

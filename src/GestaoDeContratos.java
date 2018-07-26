@@ -1,9 +1,9 @@
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import dao.ContratoDAO;
-import entity.Contrato;
-import entity.Processo;
+import utilidades.FormatarCampo;
 
 /*
  * Classe main não utilizada no decorrer do programa
@@ -12,27 +12,11 @@ import entity.Processo;
 
 public class GestaoDeContratos {
 
-	public static void main(String[] args)  {
-		ArrayList<Contrato> cs;
-		ContratoDAO cdao = new ContratoDAO();
+	public static void  main(String[] args) throws ParseException  {
+		FormatarCampo f = new FormatarCampo();
+		BigDecimal b = new BigDecimal("1500050.00");
 		
-		cs = cdao.getByGestor(3);
-		
-		BigDecimal a = new BigDecimal("0"),
-				   b = new BigDecimal("1"),
-				   d = a.add(b);
-		
-		
-		
-		System.out.println(d);
-		for (Contrato c: cs){
-			System.out.println(c.getValorInicial());
-			System.out.println(c.getValorAditivos());
-			System.out.println(c.getValorTotal());
-			for (Processo p: c.getProcessos())
-				System.out.println(p.getAditivo());
-		}
-		
+		f.decimalToString(b);
 	}
-	
+
 }

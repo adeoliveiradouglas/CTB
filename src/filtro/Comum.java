@@ -38,10 +38,14 @@ import entity.Usuario;
 			HttpSession sessao = req.getSession(false);
 			Usuario u = (Usuario) sessao.getAttribute("usuario");
 			
-			if(u != null){
-				chain.doFilter(pedido, resposta);
-			} else {
-				res.sendRedirect("/gestaodecontratos/sistema?logica=Erro403");	
+			try {
+				if (u.getCargo().getId() != 4)
+					//Com exceção do tesoureiro, todos os outros cargos podem ver as páginas dessa pasta
+					chain.doFilter(pedido, resposta);
+				else
+					res.sendRedirect("/gestaodecontratos/sistema?logica=Erro403");
+			}catch(Exception e){
+				res.sendRedirect("/gestaodecontratos/sistema?logica=ErroDeslogado");
 			}
 		}
 		

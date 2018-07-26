@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ProcessoDAO;
 import entity.Processo;
-import utilidades.StringToDecimal;
+import utilidades.FormatarCampo;
 
 public class CadastrarProcesso implements Logica{
 
@@ -19,8 +19,8 @@ public class CadastrarProcesso implements Logica{
 				pedido.getParameter("data")
 			);
 		
-		String v = new StringToDecimal().formatarParaBanco(pedido.getParameter("valor")),
-			   va = new StringToDecimal().formatarParaBanco(pedido.getParameter("valorAditivo"));
+		String v = new FormatarCampo().stringToDecimal(pedido.getParameter("valor")),
+			   va = new FormatarCampo().stringToDecimal(pedido.getParameter("valorAditivo"));
 		
 		BigDecimal valor = null, aditivo = null;
 		
