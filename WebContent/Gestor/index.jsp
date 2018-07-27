@@ -13,13 +13,26 @@
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
 <link rel="stylesheet" type="text/css" href="css/application.css" />
-
+<style>
+	btn-link {
+		border: none;
+		outline: none;
+		background: none;
+		cursor: pointer;
+		color: #0000EE;
+		padding: 0;
+		text-decoration: underline;
+		font-family: inherit;
+		font-size: inherit;
+	}
+</style>
 </head>
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
 	<%@ page import="entity.Contrato,
-					 java.util.ArrayList" %>
+					 java.util.ArrayList,
+					 utilidades.FormatarCampo" %>
 							 
 	
 	<div style="background-color: #1e94d2; color: white" align="center">
@@ -27,6 +40,8 @@
 	</div>
 	
 	<%
+	FormatarCampo format = new FormatarCampo();
+	
 	@SuppressWarnings("unchecked")
 	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession().getAttribute("contratos");
 	if(contratos.size() > 0){
@@ -56,14 +71,22 @@
 			%>
 			<tr>
 				<td class="text-center">
-					<a href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratos">
-						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
-						<%=c.getNumero() %>
-					</a>
+					<form action="sistema?logica=VerContrato" method="post">
+						<div style="display: none">
+							<input name="adicionaProcesso" value="true">
+						</div>
+						<div style="display: none">
+							<input name="origem" value="contratos">
+						</div>
+						<div style="display: none">
+							<input name="n" value="<%=contratos.indexOf(c)%>">
+						</div>
+						<button type="submit" name="your_name" class="btn-link"><%=c.getNumero()%></button>
+					</form>
 				</td>
 				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
 				<td class="text-center"><%=c.getFiscal().getNome() %></td>
-				<td class="text-center"><%=c.getValorTotal() %></td>
+				<td class="text-center"><%=format.decimalToString(c.getValorTotal()) %></td>
 				<td class="text-center"><%=c.getDataVencimentoContrato() %></td>
 				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
@@ -108,7 +131,7 @@
 				</td>
 				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
 				<td class="text-center"><%=c.getGestor().getNome() %></td>
-				<td class="text-center"><%=c.getValorTotal() %></td>
+				<td class="text-center"><%=format.decimalToString(c.getValorTotal()) %></td>
 				<td class="text-center"><%=c.getDataVencimentoContrato() %></td>
 				<%-- <th class="text-center"><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>

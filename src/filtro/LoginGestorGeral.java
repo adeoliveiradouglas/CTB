@@ -34,19 +34,19 @@ public class LoginGestorGeral implements Filter{
 		HttpServletRequest req = (HttpServletRequest) pedido;
 		HttpServletResponse res = (HttpServletResponse) resposta;
 		HttpSession sessao = req.getSession(false);
-
+		Usuario u = ((Usuario) sessao.getAttribute("usuario"));
+		
 /*		A lógica responsável por autenticar o usuário insere os dados dele na sessão
  * 		Aqui recupera os dados da sessão e verifica se o usuário tem autorização para acessar essa página através do cargo dele
  * */
 		try {
-			if (((Usuario) sessao.getAttribute("usuario")).getCargo().getId() == 2)
+			if (u.getCargo().getId() == 2)
 				chain.doFilter(pedido, resposta);
 			else
 				res.sendRedirect("/gestaodecontratos/sistema?logica=Erro403");
 		}catch(Exception e){
 			res.sendRedirect("/gestaodecontratos/sistema?logica=ErroDeslogado");
-		}
-					
+		}	
 	}
 
 	@Override

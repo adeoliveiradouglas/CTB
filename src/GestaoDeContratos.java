@@ -1,7 +1,5 @@
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import utilidades.FormatarCampo;
 
@@ -14,9 +12,10 @@ public class GestaoDeContratos {
 
 	public static void  main(String[] args) throws ParseException  {
 		FormatarCampo f = new FormatarCampo();
-		BigDecimal b = new BigDecimal("1500050.00");
+		BigDecimal b = new BigDecimal("111111111.00");
 		
-		f.decimalToString(b);
+		
+		System.out.println(f.decimalToString(b));
 	}
 
 }

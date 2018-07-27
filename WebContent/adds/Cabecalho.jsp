@@ -13,6 +13,7 @@
 <nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipal">
+			<img align="left" height="20" src="/gestaodecontratos/layout/images/logo-ctb pequeno.png" />
 			Sistema de Gestão de Contratos
 		</a>
 	</div>

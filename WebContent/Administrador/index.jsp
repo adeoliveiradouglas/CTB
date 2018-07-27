@@ -115,12 +115,12 @@
 				<td class="text-center"><%=u.getSetor().getSigla() %></td>
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
-					<form action="sistema?logica=RemoveUsuario&tabela=usuario" method="post">
+					<form action="sistema?logica=TelaEditarUsuario" method="post">
 						<button value="<%=lu.indexOf(u)%>" name="id">Editar</button>
 					</form>
 				</td>
 				<td class="text-center">
-					<form action="sistema?logica=DeletarUsuario" method="post">
+					<form action="sistema?logica=RemoveUsuario&tabela=usuario" method="post">
 						<button value="<%=u.getId()%>" name="id">Deletar</button>
 					</form>
 				</td>

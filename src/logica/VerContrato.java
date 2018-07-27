@@ -7,7 +7,9 @@ public class VerContrato implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		
-		return "/Comum/verContrato.jsp";
+		String adiciona = pedido.getParameter("adicionaProcesso"),
+				origem = pedido.getParameter("origem"),
+				n = pedido.getParameter("n");
+		return "/Comum/verContrato.jsp?adicionaProcesso="+adiciona+"&origem="+origem+"&n="+n;
 	}
 }

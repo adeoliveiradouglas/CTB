@@ -29,7 +29,7 @@
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">
-				<input type="text" class="form-control input-lg" placeholder="CNPJ da empresa" name="cnpjEmpresa" onkeyup="MascaraCnpj(this)" required> 
+				<input type="text" class="form-control input-lg" placeholder="CNPJ da empresa" name="cnpjEmpresa" maxlength="18" onkeyup="MascaraCnpj(this)" required> 
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">
@@ -41,7 +41,7 @@
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback">
-				<input type="text" class="form-control input-lg" placeholder="Valor" id="valor" name="valor" maxlength="14" onkeyup="MascaraMoeda(this)" required/>
+				<input type="text" class="form-control input-lg" placeholder="Valor inicial" id="valor" name="valor" maxlength="14" onkeyup="MascaraMoeda(this)" required/>
 				<span class="form-control-feedback"	aria-hidden="true"> </span>
 			</div>
 			<div  class="form-group custom-select has-feedback">
