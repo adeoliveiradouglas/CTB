@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProcessoDAO;
+import entity.Contrato;
 import entity.Processo;
 
 public class TelaPrincipalTesoureiro implements Logica{
@@ -16,7 +17,9 @@ public class TelaPrincipalTesoureiro implements Logica{
 		
 		ArrayList<Processo> processosPagamento = pdao.getAllSemPagamento();
 		
-		pedido.getSession().setAttribute("processoSemPagamento", processosPagamento);
+		
+		ArrayList<Contrato> contratosSemPagamento = null;
+		pedido.getSession().setAttribute("contratosSemPagamento", contratosSemPagamento);
 		return "/Tesoureiro/index.jsp";
 	}
 

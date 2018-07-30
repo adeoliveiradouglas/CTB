@@ -1,7 +1,5 @@
-import java.math.BigDecimal;
 import java.text.ParseException;
-
-import utilidades.FormatarCampo;
+import java.util.ArrayList;
 
 /*
  * Classe main não utilizada no decorrer do programa
@@ -11,11 +9,7 @@ import utilidades.FormatarCampo;
 public class GestaoDeContratos {
 
 	public static void  main(String[] args) throws ParseException  {
-		FormatarCampo f = new FormatarCampo();
-		BigDecimal b = new BigDecimal("111111111.00");
-		
-		
-		System.out.println(f.decimalToString(b));
+		ArrayList carregados;	
 	}
 
 }

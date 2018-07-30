@@ -22,7 +22,7 @@ public class AlterarSenha implements Logica{
 			(String) pedido.getSession().getAttribute("email")
 		);
 		
-		return "sistema?logica=LoginTela";
+		return "sistema?logica=TelaLogin";
 	}
 
 }

@@ -28,7 +28,7 @@
 		<form action="sistema?logica=ValidarToken" method="POST"> 
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
-					Insira o código que foi enviado para você:
+					Cheque a sua caixa de entrada, enviamos seu código de segurança para lá. Insira esse código aqui:
 					<div class="form-group  has-feedback">
 						<input type="number" class="form-control  input-lg" placeholder="Código" name="codigo" required/> 
 						<span class="glyphicon  glyphicon-envelope  form-control-feedback" aria-hidden="true"></span>

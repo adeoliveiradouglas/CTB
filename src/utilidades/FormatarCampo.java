@@ -54,7 +54,7 @@ public class FormatarCampo{
 	}
 
 	public String cnpjToBd(String cnpj) {
-//		verifica tamanho do campo e afins do cnpj
+//		verifica tamanho do campo do cnpj
 		if(cnpj.length() > 18){
 			cnpj = cnpj.substring(0, 18);
 		}

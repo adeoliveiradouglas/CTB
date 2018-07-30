@@ -26,26 +26,32 @@
 		</div>
 		<br />
 		<form action="sistema?logica=AlterarSenha" th:object="${userdetails}" method="POST">
-			<div class="form-group has-feedback">
-				<input type="password" class="form-control input-lg" placeholder="Crie sua senha" name="senha" id="senha">
-				<span class="form-control-feedback" aria-hidden="true"></span>
-				<div id="mensagemsenha">
-					<label>Senha deve ter mais que 6 caracteres</label>
+			<div class="aw-simple-panel">
+				<div class="aw-simple-panel__box">
+			
+					Pronto! Agora pode inserir sua nova senha:
+					<div class="form-group has-feedback">
+						<input type="password" class="form-control input-lg" placeholder="Crie sua senha" name="senha" id="senha">
+						<span class="form-control-feedback" aria-hidden="true"></span>
+						<div id="mensagemsenha">
+							<label>Senha deve ter mais que 6 caracteres</label>
+						</div>
+					</div>
+		
+					<div class="form-group has-feedback" id="confirmacaosenhadiv">
+						<input type="password" class="form-control input-lg" placeholder="Confirme sua senha" name="confirmacaosenha" id="confirmacaosenha"> 
+						<span class="form-control-feedback" aria-hidden="true"></span>
+						<div id="mensagemconfirmacaosenha">
+							<label>Senhas não conferem</label>
+						</div>
+					</div>
+					<br />
+					<div class="form-group" id="botaocadastrar">
+						<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Confirmar</button>
+					</div>
+					<div class="aw-simple-panel__footer"><br/></div>
 				</div>
 			</div>
-
-			<div class="form-group has-feedback" id="confirmacaosenhadiv">
-				<input type="password" class="form-control input-lg" placeholder="Confirme sua senha" name="confirmacaosenha" id="confirmacaosenha"> 
-				<span class="form-control-feedback" aria-hidden="true"></span>
-				<div id="mensagemconfirmacaosenha">
-					<label>Senhas não conferem</label>
-				</div>
-			</div>
-			<br />
-			<div class="form-group" id="botaocadastrar">
-				<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Confirmar</button>
-			</div>
-			<div class="aw-simple-panel__footer"><br/></div>
 		</form>
 		
 		<script type="text/javascript" src="script.js"></script>

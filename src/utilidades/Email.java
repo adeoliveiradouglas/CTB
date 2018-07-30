@@ -10,10 +10,13 @@ public class Email {
 			mensagem = null,
 			emailTo = null,
 			nome = "Gestão de Contratos",
-			smtp = "smtp.office365.com",
-			senha = "$TEci.2018$",
-			emailFrom = "contratos.ctb@ctb.ba.gov.br";
+			smtp = "smtp.gmail.com",
+			senha = "raspiberrypi",
+			emailFrom = "adeoliveiradouglas@gmail.com";
 	private int smtpPorta = 587;
+			/*smtp = "smtp.office365.com",
+			senha = "$TEci.2018$",
+			emailFrom = "contratos.ctb@ctb.ba.gov.br";*/
 
 	public Email(){}
 	
@@ -32,6 +35,20 @@ public class Email {
 			"da CTB. Agora basta aguardar o administrador liberar o seu acesso " +
 			"para começar a usar. Te enviaremos outro email quando seu acesso for aprovado.";
 		this.enviar();
+	}
+	
+	
+	public void aviso90dias(){
+//		gestor do contrato, fiscal e o gestor geral
+	}
+
+	public void aviso60dias(){
+//		para os acima e mais o diretor
+
+	}
+	
+	public void aviso45dias(){
+//		todos e mais o presidente	
 	}
 	
 	private void enviar(){
