@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
+import entity.Usuario;
 
 public class VerTodosContratos implements Logica {
 
@@ -11,7 +12,7 @@ public class VerTodosContratos implements Logica {
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		String ordenacao = pedido.getParameter("ord");
 		pedido.getSession().setAttribute("contratos", new ContratoDAO().getAll(ordenacao));
-		return "/Gestor geral/todosContratos.jsp";
+		return "/" + ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo().getNome() + "/todosContratos.jsp";
 	}
 
 }

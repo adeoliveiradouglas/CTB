@@ -17,6 +17,7 @@ public class ProcessoDAO extends DAO{
 						 colunaSei = getNomeTabela() + ".numeroSei",
 						 colunaAno = getNomeTabela() + ".ano",
 						 colunaMes = getNomeTabela() + ".mes",
+						 colunaUsuario = getNomeTabela() + ".usuario_id",
 						 ordernarPorData = " order by " + colunaDataProcesso;
 
 	public ProcessoDAO() {
@@ -66,7 +67,8 @@ public class ProcessoDAO extends DAO{
 					getResultado().getBigDecimal(colunaValor),
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaDataProcesso),
-					id
+					id,
+					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))
 				);
 				
 				lista.add(p);
@@ -190,7 +192,8 @@ public class ProcessoDAO extends DAO{
 					getResultado().getBigDecimal(colunaValor),
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaDataProcesso),
-					getResultado().getInt(colunaContrato)
+					getResultado().getInt(colunaContrato),
+					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))					
 				);
 				
 				lista.add(p);
@@ -220,5 +223,59 @@ public class ProcessoDAO extends DAO{
 			System.out.println(e);
 		}
 		encerraConexaocomBanco();
+	}
+
+	public ArrayList<Processo> getByContratoSemPagamento(int idContrato) {
+		iniciaConexaoComBanco();
+
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaDataPagamento + " is null and " + 
+			colunaContrato + " = ?"
+		);
+
+		ArrayList<Processo> lista = new ArrayList<Processo>();
+		Processo p;
+		
+		try{
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
+				)
+			);
+			
+			getStatement().setInt(
+				1, 
+				idContrato
+			);
+			
+			setResultado(
+				getStatement().executeQuery()
+			);
+			
+			while(getResultado().next()){
+				p = new Processo(
+					getResultado().getString(colunaNotaFiscal),
+					getResultado().getString(colunaTipoAditivo),
+					getResultado().getString(colunaSei),
+					getResultado().getString(colunaAno),
+					getResultado().getString(colunaMes),
+					getResultado().getBigDecimal(colunaAditivo),
+					getResultado().getBigDecimal(colunaValor),
+					getResultado().getDate(colunaDataPagamento),
+					getResultado().getDate(colunaDataProcesso),
+					getResultado().getInt(colunaContrato),
+					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))
+				);
+				
+				lista.add(p);
+			}
+		} catch (SQLException e){
+			System.out.println(e);;
+			encerraConexaocomBanco();
+			return new ArrayList<Processo>();
+		}
+		
+		encerraConexaocomBanco();
+		return lista;
 	}
 }

@@ -1,6 +1,3 @@
-import java.text.ParseException;
-import java.util.ArrayList;
-
 /*
  * Classe main não utilizada no decorrer do programa
  * Usada somente para testes durante o desenvolvimento
@@ -8,8 +5,10 @@ import java.util.ArrayList;
 
 public class GestaoDeContratos {
 
-	public static void  main(String[] args) throws ParseException  {
-		ArrayList carregados;	
+	public static void  main(String[] args){
+		
+		
+		
 	}
 
 }

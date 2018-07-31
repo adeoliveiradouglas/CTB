@@ -1,4 +1,4 @@
-<!-- Ver contrato do gestor -->
+<!-- Ver contrato do tesoureiro -->
 <!DOCTYPE html>
 <%@page import="utilidades.FormatarCampo"%>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -26,31 +26,10 @@
 		
 	
 	<%		 
-	//a essa altura, a lista de contratos já foi carregada e está na sessão. Essa página recebe qual lista deve acessar
-	//e qual a posição do contrato nessa lista.
-	String origem = request.getParameter("origem"); //lista que deve acessar 
-	int n = Integer.parseInt(request.getParameter("n")); //posição na lista
 	FormatarCampo format = new FormatarCampo();
 	
-	//carrega a lista para essa página
-	@SuppressWarnings("unchecked")
-	ArrayList<Contrato> contratosLista = (ArrayList<Contrato>) request.getSession().getAttribute(origem);
-	Usuario logado = (Usuario) request.getSession().getAttribute("usuario");
-	//Pega o objeto contrato da lista 
-	Contrato contrato = contratosLista.get(n);
-	String adicionaProcesso = "";
-	
-	try{
-		adicionaProcesso = (String) request.getParameter("adicionaProcesso");
-	}catch(Exception e){}%>
-	
-	<%try{if(adicionaProcesso.equals("true")){ %>
-	<div align="center">
-		<a href="sistema?logica=TelaNovoProcesso&id=<%=contrato.getId() %>">
-			<font size="5">Novo processo</font>
-		</a>
-	</div>
-	<%}}catch(Exception e){}%>
+	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");
+	%>
 	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3><%=contrato.getNomeEmpresaContratada()%> - CNPJ: <%=contrato.getCnpjEmpresaContratada()%></h3>
@@ -86,16 +65,16 @@
 		</tbody>
 	</table>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Processos</h3>
+		<h3>Processos sem pagamento</h3>
 	</div>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">N° processo</th>
 				<th class="text-center col-md-1">Ano refer.</th>
 				<th class="text-center col-md-1">Med</th>
 				<th class="text-center col-md-1">Mês refer.</th>
 				<th class="text-center col-md-1">Nota fiscal</th>
+				<th class="text-center col-md-1">N° processo</th>
 				<th class="text-center col-md-1">Data</th>
 				<th class="text-center col-md-1">Valor</th>
 				<th class="text-center col-md-1">Aditivo</th>
@@ -106,29 +85,21 @@
 		<tbody>
 			<%for(Processo p: contrato.getProcessos()){%>
 			<tr>
-				<td class="text-center">
-					<form action="sistema?logica=VerProcesso" method="post">
-						<div style="display: none">
-							<input name="origem" value="<%=origem%>">
-						</div>
-						<div style="display: none">
-							<input name="idContrato" value="<%=n%>">
-						</div>
-						<div style="display: none">
-							<input name="i" value="<%=contrato.getProcessos().indexOf(p)%>">
-						</div>
-						<button type="submit" name="your_name" class="btn-link"><%=p.getNumeroSei()%></button>
-					</form>
-				</td>
 				<td class="text-center"><%=p.getAno() %></td>
 				<td class="text-center"><%=contrato.getProcessos().indexOf(p)+1 %></td>
 				<td class="text-center"><%=p.getMes()%></td>
 				<td class="text-center"><%=p.getNotaFiscal() %></td>
+				<td class="text-center"><%=p.getNumeroSei() %></td>
 				<td class="text-center"><%=p.getDataProcesso() %></td>
 				<td class="text-center"><%=format.decimalToString(p.getValor()) %></td>
 				<td class="text-center"><%=format.decimalToString(p.getAditivo()) %></td>
 				<td class="text-center"><%=p.getTipoAditivo() %></td>
-				<td class="text-center"><%=p.getDataPagamento() %></td>
+				<td class="text-center">
+					<a href="sistema?logica=PagarProcesso&n=<%=p.getNumeroSei() %>">
+						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
+						Registrar pagamento
+					</a>
+				</td>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
 		</tbody>

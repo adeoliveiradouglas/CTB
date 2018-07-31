@@ -608,4 +608,83 @@ public class ContratoDAO extends DAO{
 		encerraConexaocomBanco();
 		return lista;
 	}
+
+	public Contrato getByIdSemPagamento(int id){		
+		iniciaConexaoComBanco();
+		
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaId + " = ?"
+		);
+		
+		Contrato c = null;
+			
+		try{
+//			monta o statement
+			setStatement( 
+//				pega prepareStatement da conexao
+				getDbConnection().prepareStatement(
+					getSqlQuery()	
+				)
+			);
+			
+			getStatement().setInt(1, id);
+			
+			setResultado(
+				getStatement().executeQuery()
+			);
+			
+			if (getResultado().next()){
+				/*
+				 * Enquanto houverem elementos do resulta de quary e estiver dentro no parâmetro, continua processando
+				 */
+				c = new Contrato(
+					getResultado().getInt(colunaId),
+					getResultado().getString(colunaNumero),
+					getResultado().getInt(colunaPortaria),
+					new UsuarioDAO().getById(
+						getResultado().getInt(
+							colunaGestor
+						)
+					),
+					new UsuarioDAO().getById(
+						getResultado().getInt(
+							colunaFiscal
+						)
+					),
+					getResultado().getString(colunaEmpresaCnpj),	
+					getResultado().getString(colunaEmpresaNome),
+					getResultado().getString(colunaObjeto),
+					new OutroDAO("recurso").getById(
+						getResultado().getInt(
+							colunaRecurso
+						)
+					),
+					new OutroDAO("fontepagante").getById(
+						getResultado().getInt(
+							colunaFontePagante
+						)
+					),
+					new OutroDAO("uso").getById(
+						getResultado().getInt(
+							colunaUso
+						)
+					),
+					getResultado().getDate(colunaDataAssinatura),
+					getResultado().getDate(colunaDataOrdemServico),
+					getResultado().getDate(colunaDataGarantia),
+					getResultado().getDate(colunaDataVencimentoContrato),
+					getResultado().getDate(colunaDataVencimentoGarantia),
+					getResultado().getBigDecimal(colunaValorInicial),
+					new ProcessoDAO().getByContratoSemPagamento(id)
+				);
+			}
+		} catch(SQLException e) {
+			System.out.println(e);;
+			encerraConexaocomBanco();
+			return null;
+		}
+		
+		encerraConexaocomBanco();
+		return c;
+	}
 }
