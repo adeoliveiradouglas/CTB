@@ -87,8 +87,7 @@
 				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
 				<td class="text-center"><%=c.getFiscal().getNome() %></td>
 				<td class="text-center"><%=format.decimalToString(c.getValorTotal()) %></td>
-				<td class="text-center"><%=c.getDataVencimentoContrato() %></td>
-				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
+				<td class="text-center"><%=format.dataToString(c.getDataVencimentoContrato()) %></td>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
 		</tbody>
@@ -132,8 +131,7 @@
 				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
 				<td class="text-center"><%=c.getGestor().getNome() %></td>
 				<td class="text-center"><%=format.decimalToString(c.getValorTotal()) %></td>
-				<td class="text-center"><%=c.getDataVencimentoContrato() %></td>
-				<%-- <th class="text-center"><%=c.getDataVencimentoContrato() %></th> --%>
+				<td class="text-center"><%=format.dataToString(c.getDataVencimentoContrato()) %></td>
 			</tr>
 			<%}%> <!-- fim do for que mostra os contratos com vencimentos -->
 		</tbody>

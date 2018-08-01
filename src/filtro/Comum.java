@@ -1,4 +1,4 @@
-package filtro;
+/*package filtro;
 
 import java.io.IOException;
 
@@ -16,10 +16,10 @@ import javax.servlet.http.HttpSession;
 
 import entity.Usuario;
 
-	/*
+	
 	 * Responsável por bloquear acesso às páginas da pasta Comum
 	 * Comum é uma pasta onde ficam as páginas que são vistas por mais de um tipo de usuário
-	 */
+	 
 
 	@WebFilter(
 		urlPatterns = {"/Comum/*"},
@@ -56,3 +56,4 @@ import entity.Usuario;
 		public void init(FilterConfig arg0) throws ServletException {}
 
 	}
+*/

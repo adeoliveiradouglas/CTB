@@ -30,11 +30,11 @@
 	<p>N° processo = <%=processo.getNumeroSei() %></p>
 	<p>Nota fiscal = <%=processo.getNotaFiscal() %></p>
 	<p><%=processo.getMes() %>/<%=processo.getAno() %></p>
-	<p>Data do processo = <%=processo.getDataProcesso() %></p>
+	<p>Data do processo = <%=fc.dataToString(processo.getDataProcesso()) %></p>
 	<p>Valor = <%=fc.decimalToString(processo.getValor()) %></p>
 	<p>Aditivo = <%=fc.decimalToString(processo.getAditivo()) %></p>
 	<p>Objeto = <%=processo.getTipoAditivo() %></p>
-	<p>Data de pagamento = <%=processo.getDataPagamento() %></p>
+	<p>Data de pagamento = <%=fc.dataToString(processo.getDataPagamento()) %></p>
 	<p>Responsável pelo pagamento = <%=processo.getTesoureiro().getNome() %>
 <jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>

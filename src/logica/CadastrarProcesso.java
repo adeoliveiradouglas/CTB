@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ContratoDAO;
 import dao.ProcessoDAO;
 import entity.Processo;
 import utilidades.FormatarCampo;
@@ -17,12 +18,24 @@ public class CadastrarProcesso implements Logica{
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		Date dataProcesso = new SimpleDateFormat("yyyy-MM-dd").parse(
 				pedido.getParameter("data")
-			);
+			),
+			novaDataVencimento;
 		
 		String v = new FormatarCampo().stringToDecimal(pedido.getParameter("valor")),
 			   va = new FormatarCampo().stringToDecimal(pedido.getParameter("valorAditivo"));
 		
 		BigDecimal valor = null, aditivo = null;
+		
+		int idContrato = Integer.parseInt(pedido.getParameter("idContrato"));
+		
+
+		try {
+			novaDataVencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
+					pedido.getParameter("novaDataVencimento")
+				);
+		} catch (Exception e){
+			novaDataVencimento = null;
+		}
 		
 		try{
 			valor = new BigDecimal(v); 
@@ -41,10 +54,15 @@ public class CadastrarProcesso implements Logica{
 			aditivo,
 			valor,
 			dataProcesso,
-			Integer.parseInt(pedido.getParameter("idContrato"))
+			idContrato
 		);
 		
 		new ProcessoDAO().inserir(p);
+		
+		//se houve atualização na data de vencimento
+		if (novaDataVencimento != null)
+			new ContratoDAO().atualizarDataVencimento(idContrato, novaDataVencimento);
+		
 		return "sistema?logica=TelaPrincipalGestor";
 	}
 	

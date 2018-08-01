@@ -97,7 +97,7 @@
 				</div>
 				<div class="form-group  has-feedback">
 					Nova data de vencimento: <input type="date"
-						class="form-control input-lg" name="data" required> <span
+						class="form-control input-lg" name="novaDataVencimento"> <span
 						class="form-control-feedback" aria-hidden="true"> </span>
 				</div>
 			</div>

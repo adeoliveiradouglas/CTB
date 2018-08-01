@@ -17,11 +17,13 @@
 <body class="aw-layout-page">
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 <%@ page import="entity.Contrato,
-					 java.util.ArrayList" %>
+				 java.util.ArrayList,
+				 utilidades.FormatarCampo" %>
 							 
 	<%
 	@SuppressWarnings("unchecked")
 	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession().getAttribute("contratos");
+	FormatarCampo format = new FormatarCampo();
 	%>
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Todos os contratos</h3>
@@ -50,8 +52,8 @@
 				</td>
 				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
 				<td class="text-center"><%=c.getGestor().getNome() %></td>
-				<td class="text-center"><%=c.getValorTotal() %></td>
-				<td class="text-center"><%=c.getDataVencimentoContrato() %></td>
+				<td class="text-center"><%=format.decimalToString(c.getValorTotal()) %></td>
+				<td class="text-center"><%=format.dataToString(c.getDataVencimentoContrato()) %></td>
 				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->

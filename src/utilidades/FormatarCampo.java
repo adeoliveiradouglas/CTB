@@ -9,6 +9,7 @@
 package utilidades;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class FormatarCampo{
 
@@ -25,31 +26,37 @@ public class FormatarCampo{
 	public String decimalToString(BigDecimal b) {
 //		pontos do valor e mudar vírgula para ponto
 		String parameter = "" + b,
-				aux = null;
-		parameter = parameter.replace(".", ",");
+				aux = "0,0";
 		
-		int ivirgula = parameter.indexOf(","),
-			iaux = 0;
-		
-		aux = parameter.substring(0, ivirgula);
-		
-				
-//		if(aux.length() > 3 && aux.length() < 7 )
-		
-		for (int i = ivirgula; i > 0; --i){
-			switch(iaux){
-				case 3:			
-					aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
-					break;
-				case 6:
-					aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
-					break;
-			}
+		try {
+			parameter = parameter.replace(".", ",");
+					
+			int ivirgula = parameter.indexOf(","),
+				iaux = 0;
 			
-			++iaux;
+			aux = parameter.substring(0, ivirgula);
+			
+					
+//		if(aux.length() > 3 && aux.length() < 7 )
+			
+			for (int i = ivirgula; i > 0; --i){
+				switch(iaux){
+					case 3:			
+						aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
+						break;
+					case 6:
+						aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
+						break;
+				}
+				
+				++iaux;
+			}
+			aux = aux + parameter.substring(ivirgula);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		aux = aux + parameter.substring(ivirgula);
-		
+	
 		return aux;
 	}
 
@@ -59,5 +66,18 @@ public class FormatarCampo{
 			cnpj = cnpj.substring(0, 18);
 		}
 		return cnpj;
+	}
+	
+	public String dataToString(Date data){
+		String antigo = "" + data,
+			   novo = "";
+		
+		try {
+			novo = antigo.substring(8, 10) + "/" + antigo.substring(5, 7) + "/" + antigo.substring(0, 4);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return novo;
 	}
 }

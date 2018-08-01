@@ -28,7 +28,7 @@ public class ProcessoDAO extends DAO{
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
-			"select * from " + getNomeTabela() + " where " + colunaContrato + " = ?" + ordernarPorData
+			"select * from " + getNomeTabela() + " where " + colunaContrato + " = ?" + ordernarPorData + " desc"
 		);
 		
 		try{
@@ -86,7 +86,8 @@ public class ProcessoDAO extends DAO{
 	public void inserir(Processo processo){
 		iniciaConexaoComBanco();
 		
-		setSqlQuery("insert into " + getNomeTabela() + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		setSqlQuery("insert into " + getNomeTabela() + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+		);
 		
 		try{
 			int posicao = 0;
@@ -145,6 +146,11 @@ public class ProcessoDAO extends DAO{
 			getStatement().setString(
 				++posicao, 
 				processo.getMes()
+			);
+			
+			getStatement().setInt(
+				++posicao, 
+				-1
 			);
 			
 			getStatement().executeUpdate();
@@ -208,15 +214,16 @@ public class ProcessoDAO extends DAO{
 		return lista;
 	}
 
-	public void atualizarPagamento(String numeroSei) {
+	public void atualizarPagamento(String numeroSei, int idTesoureiro) {
 		iniciaConexaoComBanco();
 		
-		setSqlQuery("update "+getNomeTabela()+" set "+colunaDataPagamento+" = NOW() where "+colunaSei+" = ?");
+		setSqlQuery("update "+getNomeTabela()+" set "+ colunaDataPagamento + " = NOW() " + colunaUsuario + " = ? where "+colunaSei+" = ?");
 		
 		try{
 			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
 			
-			getStatement().setString(1, numeroSei);
+			getStatement().setInt(1, idTesoureiro);
+			getStatement().setString(2, numeroSei);
 			
 			getStatement().executeUpdate();
 		}catch(SQLException e){

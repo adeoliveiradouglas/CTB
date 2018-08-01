@@ -26,15 +26,15 @@
 	</div>
 	<%@ page
 		import="entity.Contrato,
-					 java.util.ArrayList,
-					 utilidades.FormatarCampo"%>
+				java.util.ArrayList,
+				utilidades.FormatarCampo"%>
 
 	<%
-		FormatarCampo format = new FormatarCampo(); //objeto usado para formatacao de valores
-		@SuppressWarnings("unchecked")
-		ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession()
-				.getAttribute("contratosRecentes");
-		if (contratos.size() > 0) {
+	FormatarCampo format = new FormatarCampo(); //objeto usado para formatacao de valores
+	@SuppressWarnings("unchecked")
+	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession()
+			.getAttribute("contratosRecentes");
+	if (contratos.size() > 0) {
 	%>
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Contratos mais recentes</h3>
@@ -52,9 +52,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%
-				for (Contrato c : contratos) {
-			%>
+			<%for (Contrato c : contratos) {%>
 			<tr>
 				<td class="text-center"><a
 					href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratosRecentes">
@@ -63,13 +61,10 @@
 				</a></td>
 				<td class="text-center"><%=c.getNomeEmpresaContratada()%></td>
 				<td class="text-center"><%=c.getGestor().getNome()%></td>
-				<td class="text-center"><%=c.getValorTotal()%></td>
-				<td class="text-center"><%=c.getDataVencimentoContrato()%></td>
-				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
+				<td class="text-center"><%=format.decimalToString(c.getValorTotal())%></td>
+				<td class="text-center"><%=format.dataToString(c.getDataVencimentoContrato())%></td>
 			</tr>
-			<%
-				}
-			%>
+			<%}%>
 			<!-- fim do if do for que mostra os contratos recentes -->
 		</tbody>
 	</table>
@@ -79,9 +74,7 @@
 			todos os contratos</a>
 	</div>
 	<br />
-	<%
-		}
-	%>
+	<%}%>
 	<!-- fim do if da tabela -->
 
 	<%
@@ -105,9 +98,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%
-				for (Contrato c : contratos90) {
-			%>
+			<%for (Contrato c : contratos90) {%>
 			<tr>
 				<td class="text-center">
 					<form action="sistema?logica=VerContrato" method="post">
@@ -117,12 +108,10 @@
 				<td class="text-center"><%=c.getNomeEmpresaContratada()%></td>
 				<td class="text-center"><%=c.getGestor().getNome()%></td>
 				<td class="text-center"><%=c.getValorTotal()%></td>
-				<td class="text-center"><%=c.getDataVencimentoContrato()%></td>
+				<td class="text-center"><%=format.dataToString(c.getDataVencimentoContrato())%></td>
 				<%-- <th class="text-center"><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
-			<%
-				}
-			%>
+			<%}%>
 			<!-- fim do if do for que mostra os contratos com vencimentos -->
 		</tbody>
 	</table>
