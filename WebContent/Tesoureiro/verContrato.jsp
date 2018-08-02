@@ -20,16 +20,23 @@
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<%@ page import="entity.Contrato,
 					 entity.Processo,
-					 entity.Usuario,
 					 java.util.ArrayList,
 					 utilidades.FormatarCampo" %>
 		
 	
 	<%		 
 	FormatarCampo format = new FormatarCampo();
-	
+
+	String adicionaProcesso = request.getParameter("adicionaProcesso");
 	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");
-	%>
+	
+	if("true".equals(adicionaProcesso)){ %>
+	<div align="center">
+		<a href="sistema?logica=TelaNovoProcesso&id=<%=contrato.getId() %>">
+			<font size="5">Novo processo</font>
+		</a>
+	</div>
+	<%}%>
 	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3><%=contrato.getNomeEmpresaContratada()%> - CNPJ: <%=contrato.getCnpjEmpresaContratada()%></h3>
@@ -51,30 +58,30 @@
 				<td class="text-center col-md-1">Fonte pagante: <%=contrato.getFontePagante().getNome()%></td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Data de assinatura: <%=contrato.getDataAssinatura()%></td>
+				<td class="text-center col-md-1">Data de assinatura: <%=format.dataToString(contrato.getDataAssinatura())%></td>
 				<td class="text-center col-md-1">Valor inicial: R$ <%=format.decimalToString(contrato.getValorInicial())%></td>
 				<td class="text-center col-md-1">Valor dos aditivos: R$ <%=format.decimalToString(contrato.getValorAditivos()) %></td>
 				<td class="text-center col-md-1">Valor total: R$ <%=format.decimalToString(contrato.getValorTotal())%></td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Ass. ordem de serviço: <%=contrato.getDataOrdemServico()%></td>
-				<td class="text-center col-md-1">Ass. garantia: <%=contrato.getDataGarantia()%></td>
-				<td class="text-center col-md-1">Vencimento do contrato: <%=contrato.getDataVencimentoContrato()%></td>
-				<td class="text-center col-md-1">Vencimento da garantia: <%=contrato.getDataVencimentoGarantia()%></td>
+				<td class="text-center col-md-1">Ass. ordem de serviço: <%=format.dataToString(contrato.getDataOrdemServico())%></td>
+				<td class="text-center col-md-1">Ass. garantia: <%=format.dataToString(contrato.getDataGarantia())%></td>
+				<td class="text-center col-md-1">Vencimento do contrato: <%=format.dataToString(contrato.getDataVencimentoContrato())%></td>
+				<td class="text-center col-md-1">Vencimento da garantia: <%=format.dataToString(contrato.getDataVencimentoGarantia())%></td>
 			</tr>
 		</tbody>
 	</table>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Processos sem pagamento</h3>
+		<h3>Processos</h3>
 	</div>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">Ano refer.</th>
+				<th class="text-center col-md-1">N° processo</th>
 				<th class="text-center col-md-1">Med</th>
 				<th class="text-center col-md-1">Mês refer.</th>
+				<th class="text-center col-md-1">Ano refer.</th>
 				<th class="text-center col-md-1">Nota fiscal</th>
-				<th class="text-center col-md-1">N° processo</th>
 				<th class="text-center col-md-1">Data</th>
 				<th class="text-center col-md-1">Valor</th>
 				<th class="text-center col-md-1">Aditivo</th>
@@ -85,20 +92,32 @@
 		<tbody>
 			<%for(Processo p: contrato.getProcessos()){%>
 			<tr>
-				<td class="text-center"><%=p.getAno() %></td>
+				<td class="text-center">
+					<form action="sistema?logica=VerProcesso" method="post">
+						<div style="display: none">
+							<input name="origem" value="contratoVisualizar">
+						</div>
+						<div style="display: none">
+							<input name="i" value="<%=contrato.getProcessos().indexOf(p)%>">
+						</div>
+						<button type="submit" name="your_name" class="btn-link"><%=p.getNumeroSei()%></button>
+					</form>
+				</td>
 				<td class="text-center"><%=contrato.getProcessos().indexOf(p)+1 %></td>
 				<td class="text-center"><%=p.getMes()%></td>
+				<td class="text-center"><%=p.getAno() %></td>
 				<td class="text-center"><%=p.getNotaFiscal() %></td>
-				<td class="text-center"><%=p.getNumeroSei() %></td>
-				<td class="text-center"><%=p.getDataProcesso() %></td>
+				<td class="text-center"><%=format.dataToString(p.getDataProcesso()) %></td>
 				<td class="text-center"><%=format.decimalToString(p.getValor()) %></td>
 				<td class="text-center"><%=format.decimalToString(p.getAditivo()) %></td>
 				<td class="text-center"><%=p.getTipoAditivo() %></td>
 				<td class="text-center">
-					<a href="sistema?logica=PagarProcesso&n=<%=p.getNumeroSei() %>">
-						<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
-						Registrar pagamento
-					</a>
+					<form action="sistema?logica=PagarProcesso" method="post">
+						<div style="display: none">
+							<input name="n" value="<%=p.getNumeroSei() %>">
+						</div>
+						<button type="submit" name="your_name" class="btn-link">Registrar pagamento</button>
+					</form>				
 				</td>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->

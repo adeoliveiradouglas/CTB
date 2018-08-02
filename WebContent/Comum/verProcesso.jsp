@@ -20,8 +20,6 @@
 	<%@ page import="entity.Processo,
 					 utilidades.FormatarCampo,
 					 java.util.ArrayList" %>
-		
-	
 	<%		
 	FormatarCampo fc = new FormatarCampo();
 	Processo processo = (Processo) request.getSession().getAttribute("processoVisualizar");
@@ -29,7 +27,7 @@
 	
 	<p>N° processo = <%=processo.getNumeroSei() %></p>
 	<p>Nota fiscal = <%=processo.getNotaFiscal() %></p>
-	<p><%=processo.getMes() %>/<%=processo.getAno() %></p>
+	<p>Mês de referência = <%=processo.getMes() %>/<%=processo.getAno() %></p>
 	<p>Data do processo = <%=fc.dataToString(processo.getDataProcesso()) %></p>
 	<p>Valor = <%=fc.decimalToString(processo.getValor()) %></p>
 	<p>Aditivo = <%=fc.decimalToString(processo.getAditivo()) %></p>

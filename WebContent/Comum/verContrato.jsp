@@ -1,6 +1,5 @@
 <!-- Ver contrato do gestor -->
 <!DOCTYPE html>
-<%@page import="utilidades.FormatarCampo"%>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">

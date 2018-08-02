@@ -217,7 +217,7 @@ public class ProcessoDAO extends DAO{
 	public void atualizarPagamento(String numeroSei, int idTesoureiro) {
 		iniciaConexaoComBanco();
 		
-		setSqlQuery("update "+getNomeTabela()+" set "+ colunaDataPagamento + " = NOW() " + colunaUsuario + " = ? where "+colunaSei+" = ?");
+		setSqlQuery("update "+getNomeTabela()+" set "+colunaDataPagamento+ " = NOW(), " +colunaUsuario+ " = ? where " +colunaSei+ " = ?");
 		
 		try{
 			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
@@ -237,7 +237,7 @@ public class ProcessoDAO extends DAO{
 
 		setSqlQuery(
 			"select * from " + getNomeTabela() + " where " + colunaDataPagamento + " is null and " + 
-			colunaContrato + " = ?"
+			colunaContrato + " = ?"+ ordernarPorData + " desc"
 		);
 
 		ArrayList<Processo> lista = new ArrayList<Processo>();

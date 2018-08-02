@@ -1,7 +1,5 @@
 package logica;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,14 +11,10 @@ public class VerProcesso implements Logica {
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		String origem = pedido.getParameter("origem");
-		int n = Integer.parseInt(pedido.getParameter("posicaoContrato")),
-				i = Integer.parseInt(pedido.getParameter("i"));
-		
-		@SuppressWarnings("unchecked")
-		ArrayList<Contrato> contratosLista = (ArrayList<Contrato>) pedido.getSession().getAttribute(origem);
-		
-		Contrato c = contratosLista.get(n);
-		
+		int i = Integer.parseInt(pedido.getParameter("i"));
+				
+		Contrato c = (Contrato) pedido.getSession().getAttribute(origem);
+				
 		Processo p = c.getProcessos().get(i);
 		
 		pedido.getSession().setAttribute("processoVisualizar", p);

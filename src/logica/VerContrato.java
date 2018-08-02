@@ -35,7 +35,10 @@ public class VerContrato implements Logica {
 		}
 		
 		pedido.getSession().setAttribute("contratoVisualizar", contrato);
-		pedido.setAttribute("adicionaProcesso", adicionaProcesso);
+		/*Coloca esses dados na sessão*/
+		pedido.getSession().setAttribute("origem", origem);
+		pedido.getSession().setAttribute("n", n);
+		pedido.getSession().setAttribute("adicionaProcesso", adicionaProcesso);
 		
 		return "/Comum/verContrato.jsp";
 	}
