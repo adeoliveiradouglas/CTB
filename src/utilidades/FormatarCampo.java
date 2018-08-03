@@ -75,7 +75,7 @@ public class FormatarCampo{
 		try {
 			novo = antigo.substring(8, 10) + "/" + antigo.substring(5, 7) + "/" + antigo.substring(0, 4);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		
 		return novo;

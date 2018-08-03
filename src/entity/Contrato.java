@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import lombok.Data;
+import utilidades.FormatarCampo;
 
 @Data
 public class Contrato {
@@ -134,5 +135,16 @@ public class Contrato {
 		this.valorTotal = valorInicial.add(aditivo);
 	}
 	
+	public String getValorInicialAsString(){
+		return new FormatarCampo().decimalToString(this.valorInicial);
+	}
+	
+	public String getValorAditivoAsString(){
+		return new FormatarCampo().decimalToString(this.valorAditivos);
+	}
+	
+	public String getValorTotalAsString(){
+		return new FormatarCampo().decimalToString(this.valorTotal);
+	}
 	
 }

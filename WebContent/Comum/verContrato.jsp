@@ -58,9 +58,9 @@
 			</tr>
 			<tr>
 				<td class="text-center col-md-1">Data de assinatura: <%=format.dataToString(contrato.getDataAssinatura())%></td>
-				<td class="text-center col-md-1">Valor inicial: R$ <%=format.decimalToString(contrato.getValorInicial())%></td>
-				<td class="text-center col-md-1">Valor dos aditivos: R$ <%=format.decimalToString(contrato.getValorAditivos()) %></td>
-				<td class="text-center col-md-1">Valor total: R$ <%=format.decimalToString(contrato.getValorTotal())%></td>
+				<td class="text-center col-md-1">Valor inicial: R$ <%=contrato.getValorInicialAsString() %></td>
+				<td class="text-center col-md-1">Valor dos aditivos: R$ <%=contrato.getValorAditivoAsString() %></td>
+				<td class="text-center col-md-1">Valor total: R$ <%=contrato.getValorTotalAsString()%></td>
 			</tr>
 			<tr>
 				<td class="text-center col-md-1">Ass. ordem de serviço: <%=format.dataToString(contrato.getDataOrdemServico())%></td>

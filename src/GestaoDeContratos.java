@@ -1,3 +1,5 @@
+import java.util.Date;
+
 import utilidades.Data;
 
 /*
@@ -8,9 +10,10 @@ import utilidades.Data;
 public class GestaoDeContratos {
 
 	public static void  main(String[] args){
-		Data d = new Data();
+		Date d = new Date();
+		Data teste = new Data(d);
 		
-		System.out.println(d.getData());
+		System.out.println(teste.getData().toString("dd/MM/yyyy"));
 		
 	}
 

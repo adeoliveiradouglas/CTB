@@ -10,9 +10,11 @@
 
 package entity;
 
-import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import lombok.Data;
+import utilidades.FormatarCampo;
 
 @Data
 public class Processo {
@@ -30,8 +32,18 @@ public class Processo {
 	public Processo(){}
 	
 
-	public Processo(String notaFiscal, String tipoAditivo, String numeroSei, String ano, String mes, BigDecimal aditivo,
-			BigDecimal valor, Date dataPagamento, Date dataProcesso, int idContrato, Usuario tesoureiro) {
+	public Processo(
+			String notaFiscal, 
+			String tipoAditivo, 
+			String numeroSei, 
+			String ano, 
+			String mes, 
+			BigDecimal aditivo,
+			BigDecimal valor, 
+			Date dataPagamento, 
+			Date dataProcesso, 
+			int idContrato, 
+			Usuario tesoureiro) {
 		this.notaFiscal = notaFiscal;
 		this.tipoAditivo = tipoAditivo;
 		this.numeroSei = numeroSei;
@@ -61,6 +73,12 @@ public class Processo {
 	}
 	
 
+	public String getAditivoAsString(){
+		return new FormatarCampo().decimalToString(this.aditivo);
+	}
 	
+	public String getValorAsString(){
+		return new FormatarCampo().decimalToString(this.valor);
+	}
 	
 }

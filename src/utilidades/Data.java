@@ -1,17 +1,21 @@
 package utilidades;
 
-import java.util.Calendar;
+import java.util.Date;
+
 import org.joda.time.DateTime;
 
+import lombok.Getter;
+
+@Getter
 public class Data {
-	DateTime hoje;
+	private DateTime data;
 	
-	public Data(){
-		 Calendar cal = Calendar.getInstance();
-		 this.hoje = new DateTime(cal);
+	public Data(Date d){
+		this.data = new DateTime(d);
 	}
 	
-	public DateTime getData(){
-		return hoje;
+	public Data(){
+//		inicia com a hora atual
+		this.data = new DateTime(new Date());
 	}
 }
