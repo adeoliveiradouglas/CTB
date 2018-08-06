@@ -52,13 +52,14 @@ public class CargoDAO extends DAO{
 			);
 			
 //			Traduzir para objeto Cargo
-			getResultado().next();
-			c = new Cargo(
-				getResultado().getInt(colunaId),
-				getResultado().getString(colunaNome),
-				getResultado().getString(colunaDescricao)
-				
-			);
+			if(getResultado().next()){
+				c = new Cargo(
+					getResultado().getInt(colunaId),
+					getResultado().getString(colunaNome),
+					getResultado().getString(colunaDescricao)
+					
+				);
+			}
 		} catch (SQLException e) {
 			System.out.println(e);;
 			encerraConexaocomBanco();
@@ -69,7 +70,6 @@ public class CargoDAO extends DAO{
 		return c;
 	}
 	
-
 	public ArrayList<Cargo> getAll(){
 		ArrayList<Cargo> lc = new ArrayList<>();
 		Cargo c;
@@ -142,12 +142,13 @@ public class CargoDAO extends DAO{
 			);
 			
 //			Traduzir para objeto Cargo
-			getResultado().next();
-			c = new Cargo(
-				getResultado().getInt(colunaId),
-				getResultado().getString(colunaNome),
-				getResultado().getString(colunaDescricao)
-			);
+			if(getResultado().next()){
+				c = new Cargo(
+					getResultado().getInt(colunaId),
+					getResultado().getString(colunaNome),
+					getResultado().getString(colunaDescricao)
+				);
+			}
 		} catch (SQLException e) {
 			System.out.println(e);;
 			encerraConexaocomBanco();

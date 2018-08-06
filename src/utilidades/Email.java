@@ -1,8 +1,12 @@
 package utilidades;
 
+import java.util.ArrayList;
+
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+
+import entity.Usuario;
 
 public class Email {
 	private SimpleEmail email;
@@ -38,17 +42,37 @@ public class Email {
 	}
 	
 	
-	public void aviso90dias(){
+	public void aviso90dias(ArrayList<Usuario> destinos){
 //		gestor do contrato, fiscal e o gestor geral
+		this.assunto = "Faltam 90 dias para vencimento do contrato";
+		this.mensagem = "faltam 90 dias para vencimento do contrato";
+		
+		for (Usuario u: destinos){
+			this.emailTo = u.getEmail();
+			this.enviar();
+		}
 	}
 
-	public void aviso60dias(){
+	public void aviso60dias(ArrayList<Usuario> destinos){
 //		para os acima e mais o diretor
-
+		this.assunto = "Faltam 60 dias para vencimento do contrato";
+		this.mensagem = "faltam 60 dias para vencimento do contrato";
+		
+		for (Usuario u: destinos){
+			this.emailTo = u.getEmail();
+			this.enviar();
+		}
 	}
 	
-	public void aviso45dias(){
+	public void aviso45dias(ArrayList<Usuario> destinos){
 //		todos e mais o presidente	
+		this.assunto = "Faltam 45 dias para vencimento do contrato";
+		this.mensagem = "faltam 45 dias para vencimento do contrato";
+		
+		for (Usuario u: destinos){
+			this.emailTo = u.getEmail();
+			this.enviar();
+		}
 	}
 	
 	private void enviar(){

@@ -125,7 +125,7 @@ public class ProcessoDAO extends DAO{
 			
 			getStatement().setDate(
 				++posicao, 
-				new Date(processo.getDataProcesso().getTime())
+				new Date(processo.getDataProcesso().toDate().getTime())
 			);
 			
 			getStatement().setString(

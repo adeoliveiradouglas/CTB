@@ -13,6 +13,8 @@ public class TelaPrincipalGestorGeral implements Logica{
 		pedido.getSession().setAttribute("contratosRecentes", new ContratoDAO().getAllRecente(5));
 		pedido.getSession().setAttribute("vencimento90Recentes", new ContratoDAO().getVencimento90());
 		
+		
+		
 		return "/" + ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo().getNome() + "/index.jsp";
 	}
 }

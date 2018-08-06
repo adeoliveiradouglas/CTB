@@ -13,6 +13,8 @@ package entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.joda.time.DateTime;
+
 import lombok.Data;
 import utilidades.FormatarCampo;
 
@@ -24,8 +26,8 @@ public class Processo {
 			ano, mes;
 	private BigDecimal aditivo = null,  // vide cabecalho obs2
 					   valor; 
-	private Date dataPagamento = null, // vide cabecalho obs3
-				 dataProcesso;
+	private DateTime dataPagamento = null, // vide cabecalho obs3
+				     dataProcesso;
 	private int idContrato; 
 	private Usuario tesoureiro;
 	
@@ -51,8 +53,8 @@ public class Processo {
 		this.mes = mes;
 		this.aditivo = aditivo;
 		this.valor = valor;
-		this.dataPagamento = dataPagamento;
-		this.dataProcesso = dataProcesso;
+		this.dataPagamento = new DateTime(dataPagamento);
+		this.dataProcesso = new DateTime(dataProcesso);
 		this.idContrato = idContrato;
 		this.tesoureiro = tesoureiro;
 	}
@@ -68,7 +70,7 @@ public class Processo {
 		this.mes = mes;
 		this.aditivo = aditivo;
 		this.valor = valor;
-		this.dataProcesso = dataProcesso;
+		this.dataProcesso = new DateTime(dataProcesso);
 		this.idContrato = idContrato;
 	}
 	

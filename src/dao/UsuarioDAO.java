@@ -89,7 +89,7 @@ public class UsuarioDAO extends DAO {
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);;
+			System.out.println(e);
 		}
 			
 		encerraConexaocomBanco();
@@ -104,7 +104,7 @@ public class UsuarioDAO extends DAO {
  		depois busca setor e cargo através do resultado do usuario*/
  		
 
-		Usuario u;
+		Usuario u = null;
 		
 //		monta a query
 		setSqlQuery(
@@ -130,43 +130,36 @@ public class UsuarioDAO extends DAO {
 				getStatement().executeQuery()
 			);
 			
+			if(getResultado().next()){
+				u = new Usuario(
+					getResultado().getInt(
+						colunaId
+					),
+					getResultado().getInt(
+						colunaMatricula
+					),
+					getResultado().getString(
+						colunaNome
+					),
+					getResultado().getString(
+						colunaEmail
+					),
+					getResultado().getString(
+						colunaSenha
+					),
+					
+//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+					new SetorDAO().getByCodigo(
+						getResultado().getString(colunaSetor)
+					),
+					new CargoDAO().getById(
+						getResultado().getInt(colunaCargo)
+					)
+				);
+			}
 		} catch(SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
-		}
-		
-		
-		try{
-			getResultado().next();
-			u = new Usuario(
-				getResultado().getInt(
-					colunaId
-				),
-				getResultado().getInt(
-					colunaMatricula
-				),
-				getResultado().getString(
-					colunaNome
-				),
-				getResultado().getString(
-					colunaEmail
-				),
-				getResultado().getString(
-					colunaSenha
-				),
-				
-//				busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-				new SetorDAO().getByCodigo(
-					getResultado().getString(colunaSetor)
-				),
-				new CargoDAO().getById(
-					getResultado().getInt(colunaCargo)
-				)
-			);
-		} catch (SQLException e) {
+			e.printStackTrace();
 			u = null;
-			System.out.println(e);;
 		}
 		
 		encerraConexaocomBanco();
@@ -183,7 +176,7 @@ public class UsuarioDAO extends DAO {
  		depois busca setor e cargo através do resultado do usuario
  		
 */
-		Usuario u;
+		Usuario u = null;
 		
 //		monta a query
 		setSqlQuery(
@@ -209,44 +202,36 @@ public class UsuarioDAO extends DAO {
 				getStatement().executeQuery()
 			);
 			
+			if(getResultado().next()){
+				u = new Usuario(
+					getResultado().getInt(
+						colunaId
+					),
+					getResultado().getInt(
+						colunaMatricula
+					),
+					getResultado().getString(
+						colunaNome
+					),
+					getResultado().getString(
+						colunaEmail
+					),
+					getResultado().getString(
+						colunaSenha
+					),
+					
+//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+					new SetorDAO().getByCodigo(
+							getResultado().getString(colunaSetor)
+					),
+					new CargoDAO().getById(
+							getResultado().getInt(colunaCargo)
+					)
+				);
+			}
 		} catch(SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
-		}
-		
-		
-		try{
-			getResultado().next();
-			u = new Usuario(
-				getResultado().getInt(
-					colunaId
-				),
-				getResultado().getInt(
-					colunaMatricula
-				),
-				getResultado().getString(
-					colunaNome
-				),
-				getResultado().getString(
-					colunaEmail
-				),
-				getResultado().getString(
-					colunaSenha
-				),
-				
-//				busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-				new SetorDAO().getByCodigo(
-						getResultado().getString(colunaSetor)
-				),
-				new CargoDAO().getById(
-						getResultado().getInt(colunaCargo)
-				)
-			);
-			
-		} catch (SQLException e) {
+			e.printStackTrace();
 			u = null;
-			System.out.println(e);;
 		}
 		
 		encerraConexaocomBanco();
@@ -285,7 +270,7 @@ public class UsuarioDAO extends DAO {
 			);
 			
 		} catch(SQLException e) {
-			System.out.println(e);;
+			System.out.println(e);
 			encerraConexaocomBanco();
 			return null;
 		}
@@ -323,7 +308,7 @@ public class UsuarioDAO extends DAO {
 				lu.add(u);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);;
+			System.out.println(e);
 			lu = null;
 		}
 		
@@ -368,7 +353,7 @@ public class UsuarioDAO extends DAO {
 			);
 			
 		} catch(SQLException e) {
-			System.out.println(e);;
+			System.out.println(e);
 			encerraConexaocomBanco();
 			return null;
 		}
@@ -406,7 +391,7 @@ public class UsuarioDAO extends DAO {
 				lu.add(u);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);;
+			System.out.println(e);
 			lu = null;
 		}
 		
@@ -445,7 +430,7 @@ public class UsuarioDAO extends DAO {
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);;
+			System.out.println(e);
 		}
 		
 		encerraConexaocomBanco();
@@ -475,7 +460,7 @@ public class UsuarioDAO extends DAO {
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);;
+			System.out.println(e);
 		}
 		
 		encerraConexaocomBanco();	
@@ -545,7 +530,7 @@ public class UsuarioDAO extends DAO {
 				
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);;
+			System.out.println(e);
 		}
 			
 		encerraConexaocomBanco();
@@ -554,78 +539,157 @@ public class UsuarioDAO extends DAO {
 	public ArrayList<Usuario> getAllOrdenado(String ordenacao) {
 		iniciaConexaoComBanco();
 		
-		/*		
-		 		Exemplo de query para esse método
-		 		
-		 		select * from usuario";
-		 		depois busca setor e cargo através do resultado do usuario
-		 		
-		*/
-				
-				ArrayList<Usuario> lu = new ArrayList<>();
-				
+/*		
+ 		Exemplo de query para esse método
+ 		
+ 		select * from usuario";
+ 		depois busca setor e cargo através do resultado do usuario
+ 		
+*/
+		
+		ArrayList<Usuario> lu = new ArrayList<>();
+		
 //				monta a query
-				setSqlQuery(
-					"select * from " + getNomeTabela() + " order by " + ordenacao
-				);
-				
-				try {
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " order by " + ordenacao
+		);
+		
+		try {
 //					monta o statement
-					setStatement(
-						getDbConnection().prepareStatement(
-							getSqlQuery()
-						)
-					);
-								
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
+				)
+			);
+						
 //					executa
-					setResultado(
-						getStatement().executeQuery()
-					);
+			setResultado(
+				getStatement().executeQuery()
+			);
+			
+		} catch(SQLException e) {
+			System.out.println(e);
+			encerraConexaocomBanco();
+			return null;
+		}
+		
+		
+		try{
+			Usuario u = null;
+			
+			while(getResultado().next()){
+				u = new Usuario(
+					getResultado().getInt(
+						colunaId
+					),
+					getResultado().getInt(
+						colunaMatricula
+					),
+					getResultado().getString(
+						colunaNome
+					),
+					getResultado().getString(
+						colunaEmail
+					),
+					getResultado().getString(
+						colunaSenha
+					),
 					
-				} catch(SQLException e) {
-					System.out.println(e);;
-					encerraConexaocomBanco();
-					return null;
-				}
-				
-				
-				try{
-					Usuario u = null;
-					
-					while(getResultado().next()){
-						u = new Usuario(
-							getResultado().getInt(
-								colunaId
-							),
-							getResultado().getInt(
-								colunaMatricula
-							),
-							getResultado().getString(
-								colunaNome
-							),
-							getResultado().getString(
-								colunaEmail
-							),
-							getResultado().getString(
-								colunaSenha
-							),
-							
 //							busca setor de acordo com o resultado do usuario
-							new SetorDAO().getByCodigo(
-									getResultado().getString(colunaSetor)
-							),
-							new CargoDAO().getById(
-									getResultado().getInt(colunaCargo)
-							)
-						);
-						lu.add(u);
-					}
-				} catch (SQLException e) {
-					System.out.println(e);;
-					lu = null;
-				}
-				
-				encerraConexaocomBanco();
-				return lu;
+					new SetorDAO().getByCodigo(
+							getResultado().getString(colunaSetor)
+					),
+					new CargoDAO().getById(
+							getResultado().getInt(colunaCargo)
+					)
+				);
+				lu.add(u);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			lu = null;
+		}
+		
+		encerraConexaocomBanco();
+		return lu;
+	}
+
+	public ArrayList<Usuario> getAllByCargo(String cargo) {
+		int codCargo = new CargoDAO().getByNome(cargo).getId();
+		
+		iniciaConexaoComBanco();
+		
+/*		
+ 		Exemplo de query para esse método
+ 		
+ 		select * from usuario where cargo = 3";
+ 		depois busca setor e cargo através do resultado do usuario
+ 		
+*/
+		
+		ArrayList<Usuario> lu = new ArrayList<>();
+		
+//		monta a query
+		setSqlQuery(
+			"select * from " + getNomeTabela() + " where " + colunaCargo + " = ?" + ordenarPorNome
+		);
+		
+		try {
+//			monta o statement
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
+				)
+			);
+			
+			getStatement().setInt(
+				1, 
+				codCargo //id do cargo 
+			);
+						
+//			executa
+			setResultado(
+				getStatement().executeQuery()
+			);
+			
+			Usuario u = null;
+			
+			while(getResultado().next()){
+				u = new Usuario(
+					getResultado().getInt(
+						colunaId
+					),
+					getResultado().getInt(
+						colunaMatricula
+					),
+					getResultado().getString(
+						colunaNome
+					),
+					getResultado().getString(
+						colunaEmail
+					),
+					getResultado().getString(
+						colunaSenha
+					),
+					
+//							busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+					new SetorDAO().getByCodigo(
+							getResultado().getString(colunaSetor)
+					),
+					new CargoDAO().getById(
+							getResultado().getInt(colunaCargo)
+					)
+				);
+				lu.add(u);
+			}
+		} catch(SQLException e) {
+			System.out.println(e);
+			encerraConexaocomBanco();
+			return null;
+		}
+		
+		
+		encerraConexaocomBanco();
+		return lu;
 	}
 }

@@ -53,7 +53,7 @@
 				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
 				<td class="text-center"><%=c.getGestor().getNome() %></td>
 				<td class="text-center"><%=c.getValorTotal() %></td>
-				<td class="text-center"><%=format.dataToString(c.getDataVencimentoContrato()) %></td>
+				<td class="text-center"><%=c.getDataVencimentoContrato().toString("dd/MM/yyyy") %></td>
 				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->

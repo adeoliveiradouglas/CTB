@@ -8,3 +8,5 @@ build/classes/
 build/
 
 *.class
+
+src/GestaoDeContratos\.java

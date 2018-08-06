@@ -27,7 +27,8 @@
 	<%		 
 	FormatarCampo format = new FormatarCampo();
 
-	String adicionaProcesso = request.getParameter("adicionaProcesso");
+	String adicionaProcesso = request.getParameter("adicionaProcesso"),
+		   formatoData = "dd/MM/yyyy";
 	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");
 	
 	if("true".equals(adicionaProcesso)){ %>
@@ -58,16 +59,16 @@
 				<td class="text-center col-md-1">Fonte pagante: <%=contrato.getFontePagante().getNome()%></td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Data de assinatura: <%=format.dataToString(contrato.getDataAssinatura())%></td>
+				<td class="text-center col-md-1">Data de assinatura: <%=contrato.getDataAssinatura().toString(formatoData)%></td>
 				<td class="text-center col-md-1">Valor inicial: R$ <%=format.decimalToString(contrato.getValorInicial())%></td>
 				<td class="text-center col-md-1">Valor dos aditivos: R$ <%=format.decimalToString(contrato.getValorAditivos()) %></td>
 				<td class="text-center col-md-1">Valor total: R$ <%=format.decimalToString(contrato.getValorTotal())%></td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Ass. ordem de serviço: <%=format.dataToString(contrato.getDataOrdemServico())%></td>
-				<td class="text-center col-md-1">Ass. garantia: <%=format.dataToString(contrato.getDataGarantia())%></td>
-				<td class="text-center col-md-1">Vencimento do contrato: <%=format.dataToString(contrato.getDataVencimentoContrato())%></td>
-				<td class="text-center col-md-1">Vencimento da garantia: <%=format.dataToString(contrato.getDataVencimentoGarantia())%></td>
+				<td class="text-center col-md-1">Ass. ordem de serviço: <%=contrato.getDataOrdemServico().toString(formatoData)%></td>
+				<td class="text-center col-md-1">Ass. garantia: <%=contrato.getDataGarantia().toString(formatoData)%></td>
+				<td class="text-center col-md-1">Vencimento do contrato: <%=contrato.getDataVencimentoContrato().toString(formatoData)%></td>
+				<td class="text-center col-md-1">Vencimento da garantia: <%=contrato.getDataVencimentoGarantia().toString(formatoData)%></td>
 			</tr>
 		</tbody>
 	</table>
@@ -107,7 +108,7 @@
 				<td class="text-center"><%=p.getMes()%></td>
 				<td class="text-center"><%=p.getAno() %></td>
 				<td class="text-center"><%=p.getNotaFiscal() %></td>
-				<td class="text-center"><%=format.dataToString(p.getDataProcesso()) %></td>
+				<td class="text-center"><%=p.getDataProcesso().toString(formatoData) %></td>
 				<td class="text-center"><%=format.decimalToString(p.getValor()) %></td>
 				<td class="text-center"><%=format.decimalToString(p.getAditivo()) %></td>
 				<td class="text-center"><%=p.getTipoAditivo() %></td>

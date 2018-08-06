@@ -24,12 +24,12 @@
 				contrato</font>
 		</a>
 	</div>
-	<%@ page
-		import="entity.Contrato,
-				java.util.ArrayList,
-				utilidades.FormatarCampo"%>
+	<%@ page import="entity.Contrato,
+				     java.util.ArrayList,
+					 utilidades.FormatarCampo"%>
 
 	<%
+	String formatoData = "dd/MM/yyyy";
 	FormatarCampo format = new FormatarCampo(); //objeto usado para formatacao de valores
 	@SuppressWarnings("unchecked")
 	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession()
@@ -62,7 +62,7 @@
 				<td class="text-center"><%=c.getNomeEmpresaContratada()%></td>
 				<td class="text-center"><%=c.getGestor().getNome()%></td>
 				<td class="text-center"><%=format.decimalToString(c.getValorTotal())%></td>
-				<td class="text-center"><%=format.dataToString(c.getDataVencimentoContrato())%></td>
+				<td class="text-center"><%=c.getDataVencimentoContrato().toString(formatoData)%></td>
 			</tr>
 			<%}%>
 			<!-- fim do if do for que mostra os contratos recentes -->
@@ -108,7 +108,7 @@
 				<td class="text-center"><%=c.getNomeEmpresaContratada()%></td>
 				<td class="text-center"><%=c.getGestor().getNome()%></td>
 				<td class="text-center"><%=c.getValorTotal()%></td>
-				<td class="text-center"><%=format.dataToString(c.getDataVencimentoContrato())%></td>
+				<td class="text-center"><%=c.getDataVencimentoContrato().toString(formatoData)%></td>
 				<%-- <th class="text-center"><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%}%>

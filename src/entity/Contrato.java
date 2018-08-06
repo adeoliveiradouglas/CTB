@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.joda.time.DateTime;
+
 import lombok.Data;
 import utilidades.FormatarCampo;
 
@@ -34,7 +36,7 @@ public class Contrato {
 				   nomeEmpresaContratada,
 				   objeto; //vide cabecalho obs2				   
 	
-	private Date dataAssinatura,
+	private DateTime dataAssinatura,
 				 dataOrdemServico,
 				 dataGarantia,
 				 dataVencimentoContrato,
@@ -45,6 +47,11 @@ public class Contrato {
 				  	   valorTotal = new BigDecimal(0); //vide cabecalho obs5
 	
 	private ArrayList<Processo> processos;
+
+	//para ajudar no controle de aviso quando email for enviado avisando sobre vencimento de contrato 
+	public boolean avisado90, 
+				   avisado60, 
+				   avisado45;
 
 	public Contrato(
 			String numero, 
@@ -74,15 +81,16 @@ public class Contrato {
 		this.recurso = recurso;
 		this.fontePagante = fontePagante;
 		this.uso = uso;
-		this.dataAssinatura = dataAssinatura;
-		this.dataOrdemServico = dataOrdemServico;
-		this.dataGarantia = dataGarantia;
-		this.dataVencimentoContrato = dataVencimentoContrato;
-		this.dataVencimentoGarantia = dataVencimentoGarantia;
+		this.dataAssinatura = new DateTime(dataAssinatura);
+		this.dataOrdemServico = new DateTime(dataOrdemServico);
+		this.dataGarantia = new DateTime(dataGarantia);
+		this.dataVencimentoContrato = new DateTime(dataVencimentoContrato);
+		this.dataVencimentoGarantia = new DateTime(dataVencimentoGarantia);
 		this.valorInicial = valorInicial;
+		this.avisado45 = this.avisado60 = this.avisado90 == false;
 	}
 	
-	public Contrato(
+/*	public Contrato(
 			int id,
 			String numero, 
 			int portaria, 
@@ -100,7 +108,8 @@ public class Contrato {
 			Date dataVencimentoContrato, 
 			Date dataVencimentoGarantia, 
 			BigDecimal valorInicial,
-			ArrayList<Processo> processos) {
+			ArrayList<Processo> processos
+			) {
 //		Construtor com cálculos de aditivos
 		this.id = id;
 		this.numero = numero;
@@ -113,11 +122,11 @@ public class Contrato {
 		this.recurso = recurso;
 		this.fontePagante = fontePagante;
 		this.uso = uso;
-		this.dataAssinatura = dataAssinatura;
-		this.dataOrdemServico = dataOrdemServico;
-		this.dataGarantia = dataGarantia;
-		this.dataVencimentoContrato = dataVencimentoContrato;
-		this.dataVencimentoGarantia = dataVencimentoGarantia;
+		this.dataAssinatura = new DateTime(dataAssinatura);
+		this.dataOrdemServico = new DateTime(dataOrdemServico);
+		this.dataGarantia = new DateTime(dataGarantia);
+		this.dataVencimentoContrato = new DateTime(dataVencimentoContrato);
+		this.dataVencimentoGarantia = new DateTime(dataVencimentoGarantia);
 		this.valorInicial = valorInicial;
 		this.processos = processos;
 		
@@ -133,7 +142,7 @@ public class Contrato {
 		this.valorAditivos = aditivo;
 //		Soma o resultado do valor inicial com o valor dos aditivos e põe em valorTotal
 		this.valorTotal = valorInicial.add(aditivo);
-	}
+	}*/
 	
 	public String getValorInicialAsString(){
 		return new FormatarCampo().decimalToString(this.valorInicial);
@@ -145,6 +154,63 @@ public class Contrato {
 	
 	public String getValorTotalAsString(){
 		return new FormatarCampo().decimalToString(this.valorTotal);
+	}
+
+	public Contrato(
+			int id, 
+			int portaria, 
+			Usuario gestor, 
+			Usuario fiscal, 
+			Outro recurso, 
+			Outro fontePagante, 
+			Outro uso,
+			String numero, 
+			String cnpjEmpresaContratada, 
+			String nomeEmpresaContratada, 
+			String objeto,
+			Date dataAssinatura, 
+			Date dataOrdemServico,
+			Date dataGarantia, 
+			Date dataVencimentoContrato,
+			Date dataVencimentoGarantia, 
+			BigDecimal valorInicial,
+			ArrayList<Processo> processos, 
+			boolean avisado90, 
+			boolean avisado60, 
+			boolean avisado45) {
+		super();
+		this.id = id;
+		this.portaria = portaria;
+		this.gestor = gestor;
+		this.fiscal = fiscal;
+		this.recurso = recurso;
+		this.fontePagante = fontePagante;
+		this.uso = uso;
+		this.numero = numero;
+		this.cnpjEmpresaContratada = cnpjEmpresaContratada;
+		this.nomeEmpresaContratada = nomeEmpresaContratada;
+		this.objeto = objeto;
+		this.dataAssinatura = new DateTime(dataAssinatura);
+		this.dataOrdemServico = new DateTime(dataOrdemServico);
+		this.dataGarantia = new DateTime(dataGarantia);
+		this.dataVencimentoContrato = new DateTime(dataVencimentoContrato);
+		this.dataVencimentoGarantia = new DateTime(dataVencimentoGarantia);
+		this.valorInicial = valorInicial;
+		this.processos = processos;
+		this.avisado90 = avisado90;
+		this.avisado60 = avisado60;
+		this.avisado45 = avisado45;
+		
+//		Calcula valores aditivos e total
+		BigDecimal aditivo = new BigDecimal("0");
+		for (Processo p: processos){
+//			Soma todos os aditivos de todos os processos dos contratos
+			aditivo = aditivo.add(p.getAditivo());
+		}
+		
+		this.valorAditivos = aditivo;
+//		Soma o resultado do valor inicial com o valor dos aditivos e põe em valorTotal
+		this.valorTotal = valorInicial.add(aditivo);
 	}
 	
 }

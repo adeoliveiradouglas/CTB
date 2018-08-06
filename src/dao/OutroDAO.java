@@ -100,12 +100,12 @@ public class OutroDAO extends DAO{
 //		Tipo abstrato para dados das tabelas uso, recurso e fontepagante
 		Outro o = null;
 		try {
-			getResultado().next();
-			
-			o = new Outro(
-				getResultado().getInt(colunaId),
-				getResultado().getString(colunaNome)
-			);
+			if(getResultado().next()){
+				o = new Outro(
+					getResultado().getInt(colunaId),
+					getResultado().getString(colunaNome)
+				);
+			}
 		} catch (SQLException e) {
 			System.out.println(e);;
 			encerraConexaocomBanco();

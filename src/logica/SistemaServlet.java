@@ -32,7 +32,7 @@ public class SistemaServlet extends HttpServlet {
 			pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
 
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 }
