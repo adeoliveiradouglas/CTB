@@ -29,7 +29,7 @@ CREATE TABLE `cargo` (
   `nome` varchar(45) NOT NULL,
   `descricao` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `contrato`;
 CREATE TABLE `contrato` (
   `idContrato` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(20) NOT NULL,
-  `cnpjEmpresaContratada` varchar(14) NOT NULL,
+  `cnpjEmpresaContratada` varchar(18) NOT NULL,
   `nomeEmpresaContratada` varchar(100) NOT NULL,
   `portaria` int(11) NOT NULL,
   `dataAssinatura` date NOT NULL,
@@ -57,7 +57,10 @@ CREATE TABLE `contrato` (
   `recurso_id` int(11) NOT NULL,
   `fontePagante_id` int(11) NOT NULL,
   `uso_id` int(11) NOT NULL,
-  PRIMARY KEY (`idContrato`,`numero`),
+  `avisado90` tinyint(4) NOT NULL DEFAULT '0',
+  `avisado60` tinyint(4) NOT NULL DEFAULT '0',
+  `avisado45` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idContrato`),
   KEY `fk_Contrato_recurso1_idx` (`recurso_id`),
   KEY `fk_Contrato_fontePagante1_idx` (`fontePagante_id`),
   KEY `fk_Contrato_uso1_idx` (`uso_id`),
@@ -68,7 +71,7 @@ CREATE TABLE `contrato` (
   CONSTRAINT `fk_Contrato_uso1` FOREIGN KEY (`uso_id`) REFERENCES `uso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_fiscal` FOREIGN KEY (`fiscal_id`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_gestor` FOREIGN KEY (`gestor_id`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,11 +101,17 @@ CREATE TABLE `processo` (
   `valor` decimal(11,2) NOT NULL,
   `tipoAditivo` varchar(45) DEFAULT NULL,
   `dataPagamento` date DEFAULT NULL,
+  `dataProcesso` date NOT NULL,
   `numeroSei` varchar(20) NOT NULL,
   `contrato_id` int(11) NOT NULL,
+  `ano` varchar(4) NOT NULL,
+  `mes` varchar(9) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`numeroSei`),
   KEY `fk_processo_Contrato1_idx` (`contrato_id`),
-  CONSTRAINT `fk_contrato` FOREIGN KEY (`contrato_id`) REFERENCES `contrato` (`idContrato`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_tesoureiro_idx` (`usuario_id`),
+  CONSTRAINT `fk_contrato` FOREIGN KEY (`contrato_id`) REFERENCES `contrato` (`idContrato`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tesoureiro` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -183,7 +192,7 @@ CREATE TABLE `usuario` (
   KEY `fk_usuario_cargo1_idx` (`cargo_id`),
   CONSTRAINT `fk_usuario_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -206,7 +215,7 @@ CREATE TABLE `usuariosnovos` (
   KEY `fk_usuariosNovos_cargo1_idx` (`cargo_id`),
   CONSTRAINT `fk_usuariosNovos_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuariosNovos_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,4 +235,4 @@ CREATE TABLE `usuariosnovos` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-19 10:26:24
+-- Dump completed on 2018-08-07 11:51:08
