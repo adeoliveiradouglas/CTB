@@ -21,9 +21,9 @@ public class ContratoDAO extends DAO {
 			colunaGestor = getNomeTabela() + ".gestor_id", colunaFiscal = getNomeTabela() + ".fiscal_id",
 			colunaRecurso = getNomeTabela() + ".recurso_id", colunaFontePagante = getNomeTabela() + ".fontePagante_id",
 			colunaUso = getNomeTabela() + ".uso_id",
-			coluna90 = getNomeTabela() + ".uso_id",
-			coluna60 =getNomeTabela() + ".uso_id",
-			coluna45 = getNomeTabela() + ".uso_id";
+			coluna90 = getNomeTabela() + ".avisado90",
+			coluna60 =getNomeTabela() + ".avisado60",
+			coluna45 = getNomeTabela() + ".avisado45";
 
 	public ContratoDAO() {
 		super("contrato");
@@ -481,7 +481,34 @@ public class ContratoDAO extends DAO {
 			getStatement().setInt(2, idContrato);
 			
 			getStatement().executeUpdate();
+			
+			atualizarAvisoDeVencimento(new Contrato(idContrato, false, false, false));
 		} catch (SQLException e) {}
+
+		encerraConexaocomBanco();
+	}
+
+	public void atualizarAvisoDeVencimento(Contrato c){
+		iniciaConexaoComBanco();
+		
+		setSqlQuery("update " + getNomeTabela() + " set " + coluna45 + " = ?, " + coluna60 + " = ?, "
+				+ coluna90 + " = ? where " + colunaId + " = ?");
+
+		try {
+			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
+			int posicao = 0;
+			
+			getStatement().setBoolean(++posicao, c.isAvisado45());
+			getStatement().setBoolean(++posicao, c.isAvisado60());
+			getStatement().setBoolean(++posicao, c.isAvisado90());
+			getStatement().setInt(++posicao, c.getId());
+			
+			getStatement().executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 
 		encerraConexaocomBanco();
 	}

@@ -10,3 +10,5 @@ build/
 *.class
 
 src/GestaoDeContratos\.java
+
+backup data\.sql

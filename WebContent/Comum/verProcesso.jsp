@@ -26,6 +26,11 @@
 	String formatoData = "dd/MM/yyyy";
 	Processo processo = (Processo) request.getSession().getAttribute("processoVisualizar");
 	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");
+	String pagamento = "";
+	
+	if(processo.getDataPagamento() != null){
+		pagamento = processo.getDataPagamento().toString(formatoData);
+	}
 	%>
 	
 	
@@ -39,7 +44,7 @@
 	<p>Valor = <%=fc.decimalToString(processo.getValor()) %></p>
 	<p>Aditivo = <%=fc.decimalToString(processo.getAditivo()) %></p>
 	<p>Objeto = <%=processo.getTipoAditivo() %></p>
-	<p>Data de pagamento = <%=processo.getDataPagamento().toString(formatoData) %></p>
+	<p>Data de pagamento = <%=pagamento %></p>
 	<p>Responsável pelo pagamento = <%=processo.getTesoureiro().getNome() %>
 <jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>

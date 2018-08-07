@@ -90,7 +90,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%for(Processo p: contrato.getProcessos()){%>
+			<%for(Processo p: contrato.getProcessos()){
+			String pagamento = "";
+			
+			if(p.getDataPagamento() != null){
+				pagamento = p.getDataPagamento().toString(formatoData);
+			}
+			%>
 			<tr>
 				<td class="text-center">
 					<form action="sistema?logica=VerProcesso" method="post">
@@ -111,7 +117,7 @@
 				<td class="text-center"><%=format.decimalToString(p.getValor()) %></td>
 				<td class="text-center"><%=format.decimalToString(p.getAditivo()) %></td>
 				<td class="text-center"><%=p.getTipoAditivo() %></td>
-				<td class="text-center"><%=p.getDataPagamento().toString(formatoData)  %></td>
+				<td class="text-center"><%=pagamento  %></td>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
 		</tbody>

@@ -21,6 +21,7 @@
 				 utilidades.FormatarCampo" %>
 							 
 	<%
+	String formatoData = "dd/MM/yyyy";
 	@SuppressWarnings("unchecked")
 	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession().getAttribute("contratos");
 	FormatarCampo format = new FormatarCampo();
@@ -53,7 +54,7 @@
 				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
 				<td class="text-center"><%=c.getGestor().getNome() %></td>
 				<td class="text-center"><%=format.decimalToString(c.getValorTotal()) %></td>
-				<td class="text-center"><%=format.dataToString(c.getDataVencimentoContrato()) %></td>
+				<td class="text-center"><%=c.getDataVencimentoContrato().toString(formatoData) %></td>
 				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			<%}%> <!-- fim do if do for que mostra os contratos recentes -->

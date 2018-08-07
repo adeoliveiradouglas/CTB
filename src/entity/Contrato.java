@@ -21,6 +21,14 @@ import utilidades.FormatarCampo;
 
 @Data
 public class Contrato {
+	public Contrato(int id, boolean avisado90, boolean avisado60, boolean avisado45) {
+		super();
+		this.id = id;
+		this.avisado90 = avisado90;
+		this.avisado60 = avisado60;
+		this.avisado45 = avisado45;
+	}
+
 	private int id,
 				portaria;
 	

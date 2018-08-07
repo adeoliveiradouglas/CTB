@@ -8,6 +8,7 @@ import dao.SetorDAO;
 import dao.UsuarioDAO;
 import entity.Usuario;
 import utilidades.Cripto;
+import utilidades.Email;
 
 public class CadastrarUsuario implements Logica {
 
@@ -36,7 +37,7 @@ public class CadastrarUsuario implements Logica {
 			}
 
 			// envia email informando cadastro
-//			new Email().enviarConfirmacaoCadastro(email, nome);
+			new Email().enviarConfirmacaoCadastro(email, nome);
 
 			// mostra página informando confirmação do cadastro
 			return "/confirmacaocadastro.jsp";

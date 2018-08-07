@@ -53,10 +53,13 @@ public class Processo {
 		this.mes = mes;
 		this.aditivo = aditivo;
 		this.valor = valor;
-		this.dataPagamento = new DateTime(dataPagamento);
 		this.dataProcesso = new DateTime(dataProcesso);
 		this.idContrato = idContrato;
 		this.tesoureiro = tesoureiro;
+		
+		if(dataPagamento != null){
+			this.dataPagamento = new DateTime(dataPagamento);
+		}
 	}
 
 
