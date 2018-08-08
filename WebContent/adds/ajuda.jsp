@@ -5,9 +5,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Sistema de Gestão de Contratos</title>
-<link rel="stylesheet" type="text/css" href="../css/vendors.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/algaworks.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/application.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.standalone.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
+<link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
+<link rel="stylesheet" type="text/css" href="css/application.css" />
 </head>
 
 <body class="aw-layout-simple-page">

@@ -16,6 +16,7 @@
 
 </head>
 <body class="aw-layout-page">
+
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<%@ page import="entity.Processo,
 					 entity.Contrato,
@@ -32,11 +33,11 @@
 		pagamento = processo.getDataPagamento().toString(formatoData);
 	}
 	%>
-	
-	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3><%=contrato.getNomeEmpresaContratada()%> - Processo n°: <%=processo.getNumeroSei() %></h3>
 	</div>
+	
+<div class="aw-layout-content">
 	
 	<p>Nota fiscal = <%=processo.getNotaFiscal() %></p>
 	<p>Mês de referência = <%=processo.getMes() %>/<%=processo.getAno() %></p>
@@ -46,6 +47,9 @@
 	<p>Objeto = <%=processo.getTipoAditivo() %></p>
 	<p>Data de pagamento = <%=pagamento %></p>
 	<p>Responsável pelo pagamento = <%=processo.getTesoureiro().getNome() %>
+	
+</div>
+
 <jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

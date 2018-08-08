@@ -117,7 +117,7 @@
 						<div style="display: none">
 							<input name="n" value="<%=p.getNumeroSei() %>">
 						</div>
-						<button type="submit" name="your_name" class="btn-link">Registrar pagamento</button>
+						<button type="submit" name="your_name" class="btn-link">Pagar</button>
 					</form>				
 				</td>
 			</tr>
