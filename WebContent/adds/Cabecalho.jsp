@@ -5,9 +5,11 @@
 <head>
 <meta charset="ISO-8859-1" />
 <title>SGC</title>
-<link rel="stylesheet" type="text/css" href="/layout/stylesheets/vendors.min.css" />
-<link rel="stylesheet" type="text/css" href="/layout/stylesheets/algaworks.min.css" />
-<link rel="stylesheet" type="text/css" href="/layout/stylesheets/application.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.standalone.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
+<link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
+<link rel="stylesheet" type="text/css" href="css/application.css" />
 </head>
 
 <nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
