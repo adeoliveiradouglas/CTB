@@ -7,6 +7,7 @@ package logica;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entity.Usuario;
 import utilidades.AvisoVencimento;
 
 public class TelaLogin implements Logica{
@@ -14,7 +15,11 @@ public class TelaLogin implements Logica{
 	
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		pedido.getSession().invalidate();
+		Usuario logado = (Usuario) pedido.getSession().getAttribute("usuario");
+		
+		if(logado != null){
+			return "sistema?logica=TelaPrincipal";
+		}
 		
 		if(!monitorandoVencimento){
 //			para monitorar os vencimentos de contratos e avisar seus responsáveis

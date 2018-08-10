@@ -20,8 +20,13 @@ public class SistemaServlet extends HttpServlet {
 	protected void service(HttpServletRequest pedido, HttpServletResponse resposta)
 			throws ServletException, IOException {
 		final String pacote = "logica.";
-
-		String nomeDaClasse = pacote + pedido.getParameter("logica");
+		String acao = pedido.getParameter("logica");
+		
+		if(acao == null){
+			acao = "TelaLogin";
+		}
+		
+		String nomeDaClasse = pacote + acao;
 
 		try {
 			Class<?> classe = Class.forName(nomeDaClasse);

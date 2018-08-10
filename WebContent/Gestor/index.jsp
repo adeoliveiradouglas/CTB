@@ -6,7 +6,6 @@
 
 <head>
 <meta charset="ISO-8859-1" />
-<title>Sistema de Gestão de Contratos da CTB</title>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.standalone.min.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
@@ -59,7 +58,7 @@
 					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=fiscal_id">Fiscal</a>
 				</th>
 				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=fiscal_id">Valor</a>
+					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=valor">Valor</a>
 				</th>
 				<th class="text-center col-md-1">Vencimento</th>
 				<!-- <th class="text-center col-md-1">%</th> -->

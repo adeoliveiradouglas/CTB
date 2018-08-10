@@ -1,6 +1,7 @@
 package logica;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,13 +11,19 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import entity.Contrato;
+
 public class EnviarPlanilha implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-	/*	String origem = (String) pedido.getSession().getAttribute("origem");
+		final String formatoArquivo = ".xlsx";
+		
+		String origem = (String) pedido.getSession().getAttribute("origem");
 		int n = Integer.parseInt((String) pedido.getSession().getAttribute("n"));
-		*/
+		@SuppressWarnings("unchecked")
+		int idContrato = ((ArrayList<Contrato>) pedido.getSession().getAttribute(origem)).get(n).getId();
+		
 		/*Identifica se o formulario é do tipo multipart/form-data*/
         if (ServletFileUpload.isMultipartContent(pedido)) {
             try {
@@ -26,8 +33,12 @@ public class EnviarPlanilha implements Logica{
                 /*Escreve a o arquivo na pasta img*/
                 for (FileItem item : multiparts) {
                     if (!item.isFormField()) {
-                    	String arquivo = "/" + item.getName();
-                        item.write(new File(arquivo));
+                    	String formatoArquivoRecebido = item.getName().substring(item.getName().length() - 5, item.getName().length());
+                    	
+                    	if(formatoArquivoRecebido.contains(formatoArquivo)){
+                    		//para processar somente arquivos excel
+                    		item.write(new File("/home/server/" + item.getName()));
+                    	}                    	
                     }
                 }
  
@@ -41,7 +52,7 @@ public class EnviarPlanilha implements Logica{
             pedido.setAttribute("message","Desculpe este Servlet lida apenas com pedido de upload de arquivos");
         }
  
-       return "/adds/ajuda.jsp";
+       return "sistema?logica=VerO";
 	}
 
 }

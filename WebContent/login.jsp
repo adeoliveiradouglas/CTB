@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1" />
 
-<title>Sistema de Gestão de Contratos</title>
+<title>SGC</title>
 
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
@@ -63,13 +63,10 @@
 	</div>
 
 	<footer class="footer">
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<div class="container" align="center">Companhia de Transportes
-			do Estado da Bahia</div>
+		<br /><br /><br /><br /><br /><br /><br /><br /><br />
+		<div align="center">
+			SGC - Sistema de Gestão de Contratos - Versão 1.0 BETA	
+		</div>	
 	</footer>
 </body>
 </html>
