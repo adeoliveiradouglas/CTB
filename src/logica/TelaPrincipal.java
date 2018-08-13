@@ -12,10 +12,11 @@ public class TelaPrincipal implements Logica{
 		String cargo = ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo().getNome();
 		
 //		Por causa do nome da servlet de tela principal do gestor geral
-		if (!cargo.equals("Gestor geral"))
+		if (!cargo.equals("Gestor geral")) {
 			return "sistema?logica=TelaPrincipal" + cargo +"&ordUser=nome&ordContrato=numero";
-		else
+		} else {
 			return "sistema?logica=TelaPrincipalGestorGeral";
+		}
 	}
 
 }

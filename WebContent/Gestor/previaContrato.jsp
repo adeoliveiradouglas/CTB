@@ -1,4 +1,4 @@
-<!-- Ver contrato do gestor -->
+<!-- Ver previa de contrato do gestor -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -17,6 +17,9 @@
 </head>
 <body class="aw-layout-page">
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
+	<div style="background-color: #1e94d2; color: white" align="center">
+		<h1>Prévia do contrato</h1>
+	</div>
 	<%@ page import="entity.Contrato,
 					 entity.Processo,
 					 java.util.ArrayList,
@@ -28,15 +31,11 @@
 
 	String adicionaProcesso = request.getParameter("adicionaProcesso"),
 		   formatoData = "dd/MM/yyyy";
-	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");
+	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");	
 	
-	if("true".equals(adicionaProcesso)){ %>
-	<div align="center">
-		<a href="sistema?logica=TelaNovoProcesso&id=<%=contrato.getId() %>">
-			<font size="5">Novo processo</font>
-		</a>
-	</div>
-	<%}%>
+	@SuppressWarnings("unchecked")
+	ArrayList<Processo> previaProcessos = (ArrayList<Processo>) request.getSession().getAttribute("previaProcessos");
+	%>
 	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3><%=contrato.getNomeEmpresaContratada()%> - CNPJ: <%=contrato.getCnpjEmpresaContratada()%></h3>
@@ -86,17 +85,16 @@
 				<th class="text-center col-md-1">Valor</th>
 				<th class="text-center col-md-1">Aditivo</th>
 				<th class="text-center col-md-2">Objeto</th>
-				<th class="text-center col-md-1">Pagamento</th>
+				<th class="text-center col-md-1"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<%for(Processo p: contrato.getProcessos()){
+		<%for(Processo p: previaProcessos){
 			String pagamento = "";
 			
 			if(p.getDataPagamento() != null){
 				pagamento = p.getDataPagamento().toString(formatoData);
-			}
-			%>
+			}%>
 			<tr>
 				<td class="text-center">
 					<form action="sistema?logica=VerProcesso" method="post">
@@ -104,12 +102,12 @@
 							<input name="origem" value="contratoVisualizar">
 						</div>
 						<div style="display: none">
-							<input name="i" value="<%=contrato.getProcessos().indexOf(p)%>">
+							<input name="i" value="<%=previaProcessos.indexOf(p)%>">
 						</div>
 						<button type="submit" name="your_name" class="btn-link"><%=p.getNumeroSei()%></button>
 					</form>
 				</td>
-				<td class="text-center"><%=contrato.getProcessos().indexOf(p)+1 %></td>
+				<td class="text-center"><%=previaProcessos.indexOf(p)+1 %></td>
 				<td class="text-center"><%=p.getMes()%></td>
 				<td class="text-center"><%=p.getAno() %></td>
 				<td class="text-center"><%=p.getNotaFiscal() %></td>
@@ -117,20 +115,18 @@
 				<td class="text-center"><%=format.decimalToString(p.getValor()) %></td>
 				<td class="text-center"><%=format.decimalToString(p.getAditivo()) %></td>
 				<td class="text-center"><%=p.getTipoAditivo() %></td>
-				<td class="text-center"><%=pagamento  %></td>
+				<td class="text-center">
+					<form action="sistema?logica=EditarPrevia" method="post">
+						<div style="display: none">
+							<input name="i" value="<%=previaProcessos.indexOf(p)%>">
+						</div>
+						<button type="submit" name="your_name" class="btn-link">Remover</button>
+					</form>
+				</td>
 			</tr>
-			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
+		<%}%> <!-- fim do if do for que mostra os contratos recentes -->
 		</tbody>
 	</table>
-
-	<%if ("true".equals(adicionaProcesso)) {%>
-	<div align="center">
-		<font size="3">Importar planilha para esse contrato</font>
-		<form action="sistema?logica=EnviarPlanilha" method="post" enctype="multipart/form-data">
-			<input type="file" name="file" id="file" /> <input type="submit" value="Enviar" />
-		</form>
-	</div>
-	<%}%>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

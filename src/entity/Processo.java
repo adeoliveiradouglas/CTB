@@ -28,13 +28,14 @@ public class Processo {
 					   valor; 
 	private DateTime dataPagamento = null, // vide cabecalho obs3
 				     dataProcesso;
-	private int idContrato; 
+	private int idContrato, idProcesso; 
 	private Usuario tesoureiro;
 	
 	public Processo(){}
 	
 
 	public Processo(
+			int idProcesso,
 			String notaFiscal, 
 			String tipoAditivo, 
 			String numeroSei, 
@@ -46,6 +47,7 @@ public class Processo {
 			Date dataProcesso, 
 			int idContrato, 
 			Usuario tesoureiro) {
+		this.idProcesso = idProcesso;
 		this.notaFiscal = notaFiscal;
 		this.tipoAditivo = tipoAditivo;
 		this.numeroSei = numeroSei;

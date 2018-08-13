@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `gestaodecontratos` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `gestaodecontratos`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: gestaodecontratos
@@ -96,6 +94,7 @@ DROP TABLE IF EXISTS `processo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `processo` (
+  `idProcesso` int(11) NOT NULL AUTO_INCREMENT,
   `notaFiscal` varchar(10) NOT NULL,
   `aditivo` decimal(11,2) DEFAULT NULL,
   `valor` decimal(11,2) NOT NULL,
@@ -107,12 +106,12 @@ CREATE TABLE `processo` (
   `ano` varchar(4) NOT NULL,
   `mes` varchar(9) NOT NULL,
   `usuario_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`numeroSei`),
+  PRIMARY KEY (`idProcesso`),
   KEY `fk_processo_Contrato1_idx` (`contrato_id`),
   KEY `fk_tesoureiro_idx` (`usuario_id`),
   CONSTRAINT `fk_contrato` FOREIGN KEY (`contrato_id`) REFERENCES `contrato` (`idContrato`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_tesoureiro` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +214,7 @@ CREATE TABLE `usuariosnovos` (
   KEY `fk_usuariosNovos_cargo1_idx` (`cargo_id`),
   CONSTRAINT `fk_usuariosNovos_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuariosNovos_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,4 +234,4 @@ CREATE TABLE `usuariosnovos` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-07 11:51:08
+-- Dump completed on 2018-08-13 16:23:38

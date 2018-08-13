@@ -21,12 +21,14 @@ public class Planilha {
 			  posicaoMes = 2,
 			  posicaoValor = 6,
 			  posicaoValorAditivo = 9,
-			  posicaoTipoAditivo = 10,
+			  posicaoObjeto = 10,
 			  posicaoDataProcesso = 5;
 	
 	public Planilha(){}
 	
 	public ArrayList<Processo> carregar(File planilha, int contrato){
+		FormatarCampo fc = new FormatarCampo();
+		
 		Workbook workbook = null;
 		try {
 			workbook = Workbook.getWorkbook(planilha);
@@ -42,16 +44,26 @@ public class Planilha {
 		for (int i = 14; i < linhas; i++) {
 			
 			BigDecimal aditivo = null, valor = null;
+			
 			try {
 				aditivo = new BigDecimal(
-					sheet.getCell(posicaoValorAditivo, i).getContents()
-				);
-				valor = new BigDecimal(
-					sheet.getCell(posicaoValor, i).getContents()
+					fc.stringToDecimal(
+						sheet.getCell(posicaoValorAditivo, i).getContents()
+					)
 				);
 			} catch (Exception e) {
 //				Se o campo estiver vazio põe zero no lugar
 				aditivo = new BigDecimal("0");
+			}
+			
+			try {
+				valor = new BigDecimal(
+					fc.stringToDecimal(
+						sheet.getCell(posicaoValor, i).getContents()
+					)
+				);
+			} catch (Exception e) {
+//				Se o campo estiver vazio põe zero no lugar
 				valor = new BigDecimal("0");
 			}
 			
@@ -64,7 +76,7 @@ public class Planilha {
 			
 			Processo p = new Processo(
 				sheet.getCell(posicaoNotaFiscal, i).getContents(), 
-				sheet.getCell(posicaoTipoAditivo, i).getContents(), 
+				sheet.getCell(posicaoObjeto, i).getContents(), 
 				sheet.getCell(posicaoNumeroSei, i).getContents(), 
 				sheet.getCell(posicaoAno, i).getContents(), 
 				sheet.getCell(posicaoMes, i).getContents(), 
@@ -74,7 +86,9 @@ public class Planilha {
 				contrato
 			);
 			
-			lp.add(p);
+//			linhas vazias do arquivo não são inseridas
+			if((!p.getNotaFiscal().equals("") || !p.getTipoAditivo().equals("") || !p.getNumeroSei().equals("")) && !p.getTipoAditivo().equals("#REF!"))
+				lp.add(p);
 		}
 		
 		return lp;

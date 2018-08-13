@@ -32,9 +32,9 @@ public class VerContrato implements Logica {
 		if ((String) pedido.getParameter("adicionaProcesso") != null){
 			adicionaProcesso = (String) pedido.getParameter("adicionaProcesso");
 		}
-		
-		pedido.getSession().setAttribute("contratoVisualizar", contrato);
+
 		/*Coloca esses dados na sessão*/
+		pedido.getSession().setAttribute("contratoVisualizar", contrato);
 		pedido.getSession().setAttribute("origem", origem);
 		pedido.getSession().setAttribute("n", n);
 		pedido.getSession().setAttribute("adicionaProcesso", adicionaProcesso);

@@ -18,6 +18,7 @@ public class ProcessoDAO extends DAO{
 						 colunaAno = getNomeTabela() + ".ano",
 						 colunaMes = getNomeTabela() + ".mes",
 						 colunaUsuario = getNomeTabela() + ".usuario_id",
+						 colunaIdProcesso = getNomeTabela() + ".idProcesso",
 						 ordernarPorData = " order by " + colunaDataProcesso;
 
 	public ProcessoDAO() {
@@ -58,6 +59,7 @@ public class ProcessoDAO extends DAO{
 		try {
 			while(getResultado().next()){
 				p = new Processo(
+					getResultado().getInt(colunaIdProcesso),
 					getResultado().getString(colunaNotaFiscal),
 					getResultado().getString(colunaTipoAditivo),
 					getResultado().getString(colunaSei),
@@ -189,6 +191,7 @@ public class ProcessoDAO extends DAO{
 		try {
 			while(getResultado().next()){
 				p = new Processo(
+					getResultado().getInt(colunaIdProcesso),
 					getResultado().getString(colunaNotaFiscal),
 					getResultado().getString(colunaTipoAditivo),
 					getResultado().getString(colunaSei),
@@ -261,6 +264,7 @@ public class ProcessoDAO extends DAO{
 			
 			while(getResultado().next()){
 				p = new Processo(
+					getResultado().getInt(colunaIdProcesso),
 					getResultado().getString(colunaNotaFiscal),
 					getResultado().getString(colunaTipoAditivo),
 					getResultado().getString(colunaSei),

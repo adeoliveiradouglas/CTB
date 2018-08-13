@@ -20,24 +20,33 @@ public class SistemaServlet extends HttpServlet {
 	protected void service(HttpServletRequest pedido, HttpServletResponse resposta)
 			throws ServletException, IOException {
 		final String pacote = "logica.";
-		String acao = pedido.getParameter("logica");
-		
-		if(acao == null){
-			acao = "TelaLogin";
-		}
-		
+		String acao = pedido.getParameter("logica"),
+			   pagina;
+				
 		String nomeDaClasse = pacote + acao;
-
+		Class<?> classe;
+		Logica logica;
+		
 		try {
-			Class<?> classe = Class.forName(nomeDaClasse);
+			classe = Class.forName(nomeDaClasse);
 
-			Logica logica = (Logica) classe.newInstance();
-			String pagina = logica.executa(pedido, resposta);
+			logica = (Logica) classe.newInstance();
+			pagina = logica.executa(pedido, resposta);
 //			System.out.println(pagina + " solicitada");
 			pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
 
 		} catch (Exception e) {
+			nomeDaClasse = pacote + "TelaLogin";
+			try {
+				classe = Class.forName(nomeDaClasse);
+				logica = (Logica) classe.newInstance();
+				pagina = logica.executa(pedido, resposta);
+				pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}			
 			e.printStackTrace();
-		}
+		} 
 	}
 }

@@ -44,7 +44,7 @@ public class LoginGestor implements Filter{
 			else
 				res.sendRedirect("/gestaodecontratos/sistema?logica=Erro403");
 		}catch(Exception e){
-			res.sendRedirect("/gestaodecontratos/sistema?logica=ErroDeslogado");
+			res.sendRedirect("/gestaodecontratos/sistema?logica=Erro404");
 		}			
 	}
 
