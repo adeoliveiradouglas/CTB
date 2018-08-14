@@ -12,7 +12,19 @@
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
 <link rel="stylesheet" type="text/css" href="css/application.css" />
-
+<style>
+	btn-link {
+		border: none;
+		outline: none;
+		background: none;
+		cursor: pointer;
+		color: #0000EE;
+		padding: 0;
+		text-decoration: underline;
+		font-family: inherit;
+		font-size: inherit;
+	}
+</style>
 </head>
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
@@ -62,12 +74,12 @@
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
 					<form action="sistema?logica=AutorizarNovoUsuario" method="post">
-						<button value="<%=lun.indexOf(u)%>" name="id">Autorizar</button>
+						<button class="btn-link" value="<%=lun.indexOf(u)%>" name="id">Autorizar</button>
 					</form>
 				</td>
 				<td class="text-center">
 					<form action="sistema?logica=RemoveUsuario&tabela=usuariosnovos" method="post">
-						<button value="<%=u.getId()%>" name="id">Recusar</button>
+						<button class="btn-link" value="<%=u.getId()%>" name="id">Recusar</button>
 					</form>
 				</td>
 			</tr>
@@ -116,12 +128,12 @@
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
 					<form action="sistema?logica=TelaEditarUsuario" method="post">
-						<button value="<%=lu.indexOf(u)%>" name="id">Editar</button>
+						<button class="btn-link" value="<%=lu.indexOf(u)%>" name="id">Editar</button>
 					</form>
 				</td>
 				<td class="text-center">
 					<form action="sistema?logica=RemoveUsuario&tabela=usuario" method="post">
-						<button value="<%=u.getId()%>" name="id">Deletar</button>
+						<button class="btn-link" value="<%=u.getId()%>" name="id">Deletar</button>
 					</form>
 				</td>
 			</tr>

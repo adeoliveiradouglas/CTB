@@ -1,12 +1,8 @@
 package main;
 
-import java.io.File;
 import java.text.ParseException;
-import java.util.ArrayList;
 
-import entity.Processo;
 import utilidades.FormatarCampo;
-import utilidades.Planilha;
 
 public class testes {
 

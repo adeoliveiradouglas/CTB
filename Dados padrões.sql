@@ -70,7 +70,7 @@ INSERT INTO `setor` VALUES ('09140000','Companhia de Transportes do Estado da Ba
 						   ('09140247','Diretoria Administrativa e Financeira','CTB/ DIRAF'),
 						   ('09140255','Coordenadoria de Desenvolvimento da Gestao','CTB/ CODGE'),
 						   ('09140263','Subcoordenadoria de Gestao e Qualidade dos Servicos','CTB/ QUAS'),
-						   ('09140271','Subcoordenadoria de Tecnologia da Informação','CTB/ TECI'),
+						   ('09140271','Subcoordenadoria de Tecnologia da InformaÃ§ão','CTB/ TECI'),
 						   ('09140280','Subcoordenadoria de Gestao de Pessoas','CTB/ GESP'),
 						   ('09140298','Coordenadoria Administrativa','CTB/ COADM'),
 						   ('09140301','Subcoordenadoria de Suprimentos e Patrimonio','CTB/ SPAT'),
@@ -119,7 +119,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (-1,101010,'Não houve pagamento','N�O REMOVER ESSE USUARIO. NECESS�RIO PARA O SISTEMA FUNCIONAR','','09140271',4);
+INSERT INTO `usuario` VALUES (-1,101010,'Não houve pagamento','NÃO REMOVER ESSE USUARIO. NECESSÁRIO PARA O SISTEMA FUNCIONAR','','09140271',4);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 

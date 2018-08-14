@@ -85,7 +85,7 @@
 				<th class="text-center col-md-1">Valor</th>
 				<th class="text-center col-md-1">Aditivo</th>
 				<th class="text-center col-md-2">Objeto</th>
-				<th class="text-center col-md-1"></th>
+				<th class="text-center col-md-1"></th><th class="text-center col-md-1"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -104,7 +104,7 @@
 						<div style="display: none">
 							<input name="i" value="<%=previaProcessos.indexOf(p)%>">
 						</div>
-						<button type="submit" name="your_name" class="btn-link"><%=p.getNumeroSei()%></button>
+						<button type="submit" class="btn-link"><%=p.getNumeroSei()%></button>
 					</form>
 				</td>
 				<td class="text-center"><%=previaProcessos.indexOf(p)+1 %></td>
@@ -120,13 +120,33 @@
 						<div style="display: none">
 							<input name="i" value="<%=previaProcessos.indexOf(p)%>">
 						</div>
-						<button type="submit" name="your_name" class="btn-link">Remover</button>
+						<div style="display: none">
+							<input name="acao" value="telaEditar">
+						</div>
+						<button type="submit" class="btn-link">Editar</button>
+					</form>
+				</td>
+				<td class="text-center">
+					<form action="sistema?logica=EditarPrevia" method="post">
+						<div style="display: none">
+							<input name="i" value="<%=previaProcessos.indexOf(p)%>">
+						</div>
+						<div style="display: none">
+							<input name="acao" value="remover">
+						</div>
+						<button type="submit" class="btn-link">Remover</button>
 					</form>
 				</td>
 			</tr>
 		<%}%> <!-- fim do if do for que mostra os contratos recentes -->
 		</tbody>
 	</table>
+	<form action="sistema?logica=EditarPrevia" method="post">
+		<div style="display: none">
+			<input name="acao" value="aprovar">
+		</div>
+		<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Aprovar</button>
+	</form>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>
