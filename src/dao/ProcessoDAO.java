@@ -88,7 +88,15 @@ public class ProcessoDAO extends DAO{
 	public void inserir(Processo processo){
 		iniciaConexaoComBanco();
 		
-		setSqlQuery("insert into " + getNomeTabela() + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+		setSqlQuery("insert into " + getNomeTabela() + " (" +
+				colunaNotaFiscal + ", " +
+				colunaAditivo + ", " +
+				colunaValor + ", " +
+				colunaTipoAditivo + ", " +
+				colunaDataProcesso + ", " +
+				colunaSei + ", " +
+				
+				") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		);
 		
 		try{
@@ -118,11 +126,6 @@ public class ProcessoDAO extends DAO{
 			getStatement().setString(
 				++posicao, 
 				processo.getTipoAditivo()
-			);
-			
-			getStatement().setDate(
-				++posicao, 
-				null //data de pagamento no momento é nula pois o processo está sendo cadastrado agora
 			);
 			
 			getStatement().setDate(

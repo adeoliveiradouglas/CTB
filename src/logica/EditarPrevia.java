@@ -21,40 +21,56 @@ public class EditarPrevia implements Logica{
 		@SuppressWarnings("unchecked")
 		ArrayList<Processo> previaProcessos = (ArrayList<Processo>) pedido.getSession().getAttribute("previaProcessos");
 		
-		int i = Integer.parseInt(pedido.getParameter("i"));
+//		indice da lista do processo que está sendo manipulado
+		int i;
+		
+//		recebe o que deve ser feito
 		String acao = pedido.getParameter("acao");
 		
 		if(acao.equals("remover")){
+			i = Integer.parseInt(pedido.getParameter("i"));
+			
+//			remove processo da lista previa
 			previaProcessos.remove(i);
 			
 			pedido.getSession().setAttribute("previaProcessos", previaProcessos);		
 			return "/Gestor/previaContrato.jsp";
+			
 		} else if (acao.equals("aprovar")){
+//			grava todos os dados no banco
 			ProcessoDAO pdao = new ProcessoDAO();
+			
 			for (Processo p : previaProcessos){
 				pdao.inserir(p);
 			}
+			
 			return "sistema?logica=TelaPrincipalGestor";
+			
 		}else if (acao.equals("editar")){
-			Date dataProcesso,
-				novaDataVencimento;
+//			altera um processo da lista previa
+			
+			Date dataProcesso;
+			
+			i = Integer.parseInt(pedido.getParameter("i"));
 			
 			String v = new FormatarCampo().stringToDecimal(pedido.getParameter("valor")),
 				   va = new FormatarCampo().stringToDecimal(pedido.getParameter("valorAditivo"));
 			
 			BigDecimal valor = null, aditivo = null;
 						
-
 			try {
 				dataProcesso = new SimpleDateFormat("yyyy-MM-dd").parse(
-						pedido.getParameter("data")
-					);
-				novaDataVencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
-					pedido.getParameter("novaDataVencimento")
+					pedido.getParameter("data")
 				);
 			} catch (Exception e){
 				dataProcesso = null;
-				novaDataVencimento = null;
+			}
+			
+			try{
+				valor = new BigDecimal(v); 
+			} catch (NumberFormatException e){
+				//catch para não dar erro no processo quando não houver aditivo
+				valor = new BigDecimal("0.00");
 			}
 			
 			try{
@@ -76,7 +92,9 @@ public class EditarPrevia implements Logica{
 			
 			pedido.getSession().setAttribute("previaProcessos", previaProcessos);
 			return "/Gestor/previaContrato.jsp";
-		} else {			
+			
+		} else {		
+//			envia para a página de editar dados de um processo
 			return "/Gestor/editarPreviaContrato.jsp";
 		}  
 	}

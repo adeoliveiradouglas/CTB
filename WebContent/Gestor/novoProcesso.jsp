@@ -6,7 +6,7 @@
 
 <head>
 <meta charset="ISO-8859-1" />
-<title>Sistema de Gestão de Contratos da CTB</title>
+<title>SGC</title>
 
 <link rel="stylesheet" type="text/css"
 	href="css/bootstrap-datepicker.standalone.min.css" />

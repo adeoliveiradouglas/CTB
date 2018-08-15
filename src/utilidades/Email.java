@@ -75,7 +75,7 @@ public class Email {
 		    email.setDebug(true);
 		    email.setMsg(mensagem);
 		    email.addTo(emailTo);
-		    email.send();
+//		    email.send();
 		} catch (EmailException e) {
 		    e.printStackTrace();
 		}

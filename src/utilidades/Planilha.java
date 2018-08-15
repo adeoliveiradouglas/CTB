@@ -27,6 +27,9 @@ public class Planilha {
 	public Planilha(){}
 	
 	public ArrayList<Processo> carregar(File planilha, int contrato){
+		int mesesConsecutivosSemDados = 0, //se esse valor chegar a 12 (1 ano) o loop para
+			i = 14; //primeira linha de dados da planilha
+		
 		FormatarCampo fc = new FormatarCampo();
 		
 		Workbook workbook = null;
@@ -41,8 +44,7 @@ public class Planilha {
 
 		ArrayList<Processo> lp = new ArrayList<>();
 		
-		for (int i = 14; i < linhas; i++) {
-			
+		while (i < linhas && mesesConsecutivosSemDados <= 12){			
 			BigDecimal aditivo = null, valor = null;
 			
 			try {
@@ -86,9 +88,15 @@ public class Planilha {
 				contrato
 			);
 			
+			++i;
+			
 //			linhas vazias do arquivo não são inseridas
-			if((!p.getNotaFiscal().equals("") || !p.getTipoAditivo().equals("") || !p.getNumeroSei().equals("")) && !p.getTipoAditivo().equals("#REF!"))
+			if((!p.getNotaFiscal().equals("") || !p.getTipoAditivo().equals("") || !p.getNumeroSei().equals("")) && !p.getTipoAditivo().equals("#REF!")){
 				lp.add(p);
+				mesesConsecutivosSemDados = 0;
+			} else {
+				++mesesConsecutivosSemDados;
+			}
 		}
 		
 		return lp;

@@ -22,31 +22,47 @@ public class AvisoVencimento implements Runnable {
 			DateTime hoje = new DateTime();
 			Days d;
 
-			ArrayList<Contrato> cs = new ContratoDAO().getAll();
+			//todos os contratos cadastrados
+			ArrayList<Contrato> todosOsContratos = new ContratoDAO().getAll();
+			
+			//lista com os usuários que receberão os emails
 			ArrayList<Usuario> destinos;
-			for (Contrato c : cs) {
+			
+			for (Contrato c : todosOsContratos) {
+				//dias que faltam para o vencimento do contrato
 				d = Days.daysBetween(hoje, c.getDataVencimentoContrato());
+				
 				destinos = new ArrayList<Usuario>();
-				System.out.println("Analisando contrato " + c.getNumero() + " faltam " + d.getDays() + " dias para vencer");
+//				System.out.println("Analisando contrato " + c.getNumero() + " faltam " + d.getDays() + " dias para vencer");
+				
+//				adiciona gestor e fiscal na lista de destinos pois eles sempre são avisados
 				destinos.add(c.getFiscal());
 				destinos.add(c.getGestor());
 
+//				procura todos os gestores gerais e coloca na lista de destino também
 				for (Usuario u : new UsuarioDAO().getAllByCargo("Gestor geral"))
 					destinos.add(u);
 
-				if(d.getDays() <= 45 && !c.avisado45){
+				
+				if(d.getDays() > 0 && d.getDays() <= 45 && !c.avisado45){
+//					se estiver faltando menos de 45 dias, avisar para diretor e presidente	
 					for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor"))
 						destinos.add(u);
 
 					for (Usuario u : new UsuarioDAO().getAllByCargo("Presidente"))
 						destinos.add(u);
 
+//					avisa todos os usuários da lista de destino
 					for (Usuario u: destinos)
 						new Email().aviso45dias(u.getEmail());
 					
+//					marca que foi avisado
+//					marcar as três pois pode ocorrer de um contrato ser inserido e já ter menos de 90 dias para vencer
 					c.setAvisado45(true);
 					c.setAvisado60(true);
 					c.setAvisado90(true);
+					
+//					atualiza o banco de dados
 					new ContratoDAO().atualizarAvisoDeVencimento(c);
 				}
 				else if(d.getDays() <= 60 && !c.avisado60){
@@ -67,47 +83,9 @@ public class AvisoVencimento implements Runnable {
 					c.setAvisado90(true);
 					new ContratoDAO().atualizarAvisoDeVencimento(c);
 				}
-				
-				/*if (!c.isAvisado90() || !c.isAvisado60() || !c.isAvisado45()) {
-					switch (d.getDays()) {
-					case 45:
-						for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor"))
-							destinos.add(u);
-
-						for (Usuario u : new UsuarioDAO().getAllByCargo("Presidente"))
-							destinos.add(u);
-
-						for (Usuario u: destinos)
-							new Email().aviso45dias(u.getEmail());
-						
-						c.setAvisado45(true);
-						c.setAvisado60(true);
-						c.setAvisado90(true);
-						new ContratoDAO().atualizarAvisoDeVencimento(c);
-						break;
-					case 60:
-						for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor"))
-							destinos.add(u);
-
-						for (Usuario u: destinos)
-							new Email().aviso45dias(u.getEmail());
-						
-						c.setAvisado60(true);
-						c.setAvisado90(true);
-						new ContratoDAO().atualizarAvisoDeVencimento(c);
-						break;
-					case 90:
-						for (Usuario u: destinos)
-							new Email().aviso45dias(u.getEmail());
-						
-						c.setAvisado90(true);
-						new ContratoDAO().atualizarAvisoDeVencimento(c);
-						break;
-					}
-				}*/
 			}
 			try {
-//				de 6 em 6 horas: 21600000
+//				daqui a tanto tempo, fazer novamente: 21600000
 				Thread.sleep(10800000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
