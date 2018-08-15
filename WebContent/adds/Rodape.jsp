@@ -4,7 +4,7 @@
 </style>
 	<footer class="footer">
 		<div align="center">
-			SGC - Sistema de Gestão de Contratos - Versão 1.0 BETA	
+			Sistema de Gestão de Contratos - Versão 1.0 BETA	
 		</div>	
 	</footer>
 	<!-- <footer class="aw-layout-footer">

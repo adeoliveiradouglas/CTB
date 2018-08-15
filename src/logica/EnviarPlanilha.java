@@ -58,6 +58,8 @@ public class EnviarPlanilha implements Logica {
 			ArrayList<Processo> previaProcessos = pl.carregar(new File(System.getProperty("user.home"), teste),
 					idContrato);
 			pedido.getSession().setAttribute("previaProcessos", previaProcessos);
+			
+			planilha.delete();
 		}
 
 		return "/Gestor/previaContrato.jsp";

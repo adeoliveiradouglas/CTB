@@ -11,7 +11,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="ISO-8859-1">
-<title>Sistema de Gestão de Contratos da CTB - Recuperar senha</title>
+<title>SGC - Recuperar senha</title>
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
 <link rel="stylesheet" type="text/css" href="css/application.css" />
@@ -21,11 +21,11 @@
 	<div class="aw-layout-simple-page__container">
 		<div align="center">
 			<a href="sistema?logica=TelaLogin">
-				<img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
+				<img src="/gestaodecontratos/layout/images/logo.png" />
 			</a>			
 		</div>
 		<br />
-		<form action="sistema?logica=AlterarSenha" th:object="${userdetails}" method="POST">
+		<form action="sistema?logica=AlterarSenha" method="POST">
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 			
