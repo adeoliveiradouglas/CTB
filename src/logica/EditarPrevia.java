@@ -16,9 +16,9 @@ import utilidades.FormatarCampo;
 
 public class EditarPrevia implements Logica{
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		@SuppressWarnings("unchecked")
 		ArrayList<Processo> previaProcessos = (ArrayList<Processo>) pedido.getSession().getAttribute("previaProcessos");
 		
 //		indice da lista do processo que está sendo manipulado
@@ -31,9 +31,9 @@ public class EditarPrevia implements Logica{
 			i = Integer.parseInt(pedido.getParameter("i"));
 			
 //			remove processo da lista previa
-			previaProcessos.remove(i);
+			((ArrayList<Processo>) pedido.getSession().getAttribute("previaProcessos")).remove(i);
 			
-			pedido.getSession().setAttribute("previaProcessos", previaProcessos);		
+			//pedido.getSession().setAttribute("previaProcessos", previaProcessos);		
 			return "/Gestor/previaContrato.jsp";
 			
 		} else if (acao.equals("aprovar")){

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import entity.Processo;
+import jxl.Cell;
+import jxl.DateCell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -69,9 +71,10 @@ public class Planilha {
 				valor = new BigDecimal("0");
 			}
 			
-			Date processo = null;
+			Date processo;
+			
 			try {
-				processo = new SimpleDateFormat("yyyy-MM-dd").parse(sheet.getCell(posicaoDataProcesso, i).getContents());
+				processo = ((DateCell) sheet.getCell(posicaoDataProcesso, i)).getDate();
 			} catch (Exception e) {
 				processo = new Date();
 			}

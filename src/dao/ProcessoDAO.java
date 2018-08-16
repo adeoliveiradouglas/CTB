@@ -95,8 +95,10 @@ public class ProcessoDAO extends DAO{
 				colunaTipoAditivo + ", " +
 				colunaDataProcesso + ", " +
 				colunaSei + ", " +
-				
-				") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+				colunaContrato + ", " +
+				colunaAno + ", " +
+				colunaMes +
+				") values (?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		);
 		
 		try{
@@ -153,14 +155,9 @@ public class ProcessoDAO extends DAO{
 				processo.getMes()
 			);
 			
-			getStatement().setInt(
-				++posicao, 
-				-1
-			);
-			
 			getStatement().executeUpdate();
 		} catch(SQLException e){
-			System.out.println(e);
+			System.out.println("processo: " + processo.getMes() + processo.getAno() + e);
 		}
 		encerraConexaocomBanco();
 	}
