@@ -78,8 +78,8 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">N° processo</th>
 				<th class="text-center col-md-1">Med</th>
+				<th class="text-center col-md-1">N° processo</th>
 				<th class="text-center col-md-1">Mês refer.</th>
 				<th class="text-center col-md-1">Ano refer.</th>
 				<th class="text-center col-md-1">Nota fiscal</th>
@@ -101,10 +101,10 @@
 						<div style="display: none">
 							<input name="i" value="<%=contrato.getProcessos().indexOf(p)%>">
 						</div>
-						<button type="submit" name="your_name" class="btn-link"><%=p.getNumeroSei()%></button>
+						<button type="submit" name="your_name" class="btn-link"><%=contrato.getProcessos().indexOf(p)+1 %></button>
 					</form>
 				</td>
-				<td class="text-center"><%=contrato.getProcessos().indexOf(p)+1 %></td>
+				<td class="text-center"><%=p.getNumeroSei()%></td>
 				<td class="text-center"><%=p.getMes()%></td>
 				<td class="text-center"><%=p.getAno() %></td>
 				<td class="text-center"><%=p.getNotaFiscal() %></td>
@@ -115,7 +115,7 @@
 				<td class="text-center">
 					<form action="sistema?logica=PagarProcesso" method="post">
 						<div style="display: none">
-							<input name="n" value="<%=p.getNumeroSei() %>">
+							<input name="n" value="<%=p.getIdProcesso() %>">
 						</div>
 						<button type="submit" name="your_name" class="btn-link">Pagar</button>
 					</form>				

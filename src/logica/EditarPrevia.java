@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.DateTime;
 
+import dao.ContratoDAO;
 import dao.ProcessoDAO;
 import entity.Processo;
 import utilidades.FormatarCampo;
@@ -37,11 +38,24 @@ public class EditarPrevia implements Logica{
 			return "/Gestor/previaContrato.jsp";
 			
 		} else if (acao.equals("aprovar")){
-//			grava todos os dados no banco
-			ProcessoDAO pdao = new ProcessoDAO();
+			Date novaDataVencimento;
 			
+			try {
+				novaDataVencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
+						pedido.getParameter("novaDataVencimento")
+					);
+			} catch (Exception e){
+				novaDataVencimento = null;
+			}
+			
+			//se houve atualização na data de vencimento
+			if (novaDataVencimento != null)
+				new ContratoDAO().atualizarDataVencimento(previaProcessos.get(0).getIdContrato(), novaDataVencimento);
+			
+			
+//			grava todos os dados no banco
 			for (Processo p : previaProcessos){
-				pdao.inserir(p);
+				new ProcessoDAO().inserir(p);
 			}
 			
 			return "sistema?logica=TelaPrincipalGestor";

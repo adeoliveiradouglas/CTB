@@ -4,12 +4,10 @@ package utilidades;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import entity.Processo;
-import jxl.Cell;
 import jxl.DateCell;
 import jxl.Sheet;
 import jxl.Workbook;

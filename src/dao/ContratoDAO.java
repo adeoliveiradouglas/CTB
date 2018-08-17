@@ -90,7 +90,7 @@ public class ContratoDAO extends DAO {
 		iniciaConexaoComBanco();
 
 		// Exemplo: select * from contrato where gestor = matricula
-		setSqlQuery("select * from " + getNomeTabela() + " where " + colunaGestor + " = ? order by " + ordenacao);
+		setSqlQuery("select * from " + getNomeTabela() + " where " + colunaGestor + " = ? order by " + ordenacao + " desc");
 
 		try {
 			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
@@ -451,7 +451,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId)),
+					new ProcessoDAO().getByContratoSemPagamento(id),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
@@ -459,7 +459,6 @@ public class ContratoDAO extends DAO {
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
-			;
 			encerraConexaocomBanco();
 			return null;
 		}

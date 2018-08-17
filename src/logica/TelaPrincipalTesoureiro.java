@@ -17,9 +17,9 @@ public class TelaPrincipalTesoureiro implements Logica{
 		ProcessoDAO pdao = new ProcessoDAO();
 		ArrayList<Processo> processosSemPagamento = pdao.getAllSemPagamento();
 		ArrayList<Integer> carregados = new ArrayList<>();
-		
+
+//		Vai procurar por todos os contratos que tem processos sem pagamento
 		for (Processo p: processosSemPagamento){
-//			Vai procurar por todos os contratos que tem processos sem pagamento
 			int idContrato = p.getIdContrato();
 			
 //			se o contrato ainda não está na lista, será adicionado

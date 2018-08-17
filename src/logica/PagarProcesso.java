@@ -10,10 +10,10 @@ public class PagarProcesso implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String numeroSei = pedido.getParameter("n");
+		String idProcesso = pedido.getParameter("n");
 		int idTesoureiro = ((Usuario) pedido.getSession().getAttribute("usuario")).getId();
 		
-		new ProcessoDAO().atualizarPagamento(numeroSei, idTesoureiro);
+		new ProcessoDAO().atualizarPagamento(idProcesso, idTesoureiro);
 		
 		return "sistema?logica=TelaPrincipal";
 	}

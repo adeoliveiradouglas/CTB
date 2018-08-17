@@ -145,6 +145,12 @@
 		<div style="display: none">
 			<input name="acao" value="aprovar">
 		</div>
+		<div class="form-group  has-feedback">
+			Nova data de vencimento (deixe vazia se não for necessário alterar): 
+			<input type="date"
+				class="form-control input-lg" name="novaDataVencimento"> <span
+				class="form-control-feedback" aria-hidden="true"> </span>
+		</div>
 		<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Aprovar</button>
 	</form>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>

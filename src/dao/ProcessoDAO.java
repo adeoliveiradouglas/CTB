@@ -19,8 +19,8 @@ public class ProcessoDAO extends DAO{
 						 colunaMes = getNomeTabela() + ".mes",
 						 colunaUsuario = getNomeTabela() + ".usuario_id",
 						 colunaIdProcesso = getNomeTabela() + ".idProcesso",
-						 ordernarPorData = " order by " + colunaDataProcesso;
-
+						 ordernarPorData = " order by " + colunaDataProcesso,
+						 ordernarPorId = " order by " + colunaIdProcesso;
 	public ProcessoDAO() {
 		super("processo");
 	}
@@ -29,7 +29,7 @@ public class ProcessoDAO extends DAO{
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
-			"select * from " + getNomeTabela() + " where " + colunaContrato + " = ?" + ordernarPorData + " desc"
+			"select * from " + getNomeTabela() + " where " + colunaContrato + " = ?" + ordernarPorId + " desc"
 		);
 		
 		try{
@@ -166,7 +166,7 @@ public class ProcessoDAO extends DAO{
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
-			"select * from " + getNomeTabela() + " where " + colunaDataPagamento + " is null" + ordernarPorData + " desc"
+			"select * from " + getNomeTabela() + " where " + colunaDataPagamento + " is null" + ordernarPorId + " desc"
 		);
 		
 		try{
@@ -220,7 +220,7 @@ public class ProcessoDAO extends DAO{
 	public void atualizarPagamento(String numeroSei, int idTesoureiro) {
 		iniciaConexaoComBanco();
 		
-		setSqlQuery("update "+getNomeTabela()+" set "+colunaDataPagamento+ " = NOW(), " +colunaUsuario+ " = ? where " +colunaSei+ " = ?");
+		setSqlQuery("update "+getNomeTabela()+" set "+colunaDataPagamento+ " = NOW(), " +colunaUsuario+ " = ? where " +colunaIdProcesso+ " = ?");
 		
 		try{
 			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
