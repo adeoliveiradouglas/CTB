@@ -39,26 +39,27 @@ public class Processo {
 			String notaFiscal, 
 			String tipoAditivo, 
 			String numeroSei, 
-			String ano, 
-			String mes, 
 			BigDecimal aditivo,
 			BigDecimal valor, 
 			Date dataPagamento, 
 			Date dataProcesso, 
+			Date referencia,
 			int idContrato, 
 			Usuario tesoureiro) {
+		DateTime r = new DateTime(referencia);	
+		
 		this.idProcesso = idProcesso;
 		this.notaFiscal = notaFiscal;
 		this.tipoAditivo = tipoAditivo;
 		this.numeroSei = numeroSei;
-		this.ano = ano;
-		this.mes = mes;
+		this.ano = "" + r.getYear();
+		this.mes = new FormatarCampo().intToMonth(r.getMonthOfYear());
 		this.aditivo = aditivo;
 		this.valor = valor;
 		this.dataProcesso = new DateTime(dataProcesso);
 		this.idContrato = idContrato;
 		this.tesoureiro = tesoureiro;
-		
+					
 		if(dataPagamento != null){
 			this.dataPagamento = new DateTime(dataPagamento);
 		}
@@ -88,4 +89,11 @@ public class Processo {
 		return new FormatarCampo().decimalToString(this.valor);
 	}
 	
+	public String getDataPagamentoAsString(){
+		return this.dataPagamento.toString("dd/MM/yyyy");
+	}
+	
+	public String getDataProcessoAsString(){
+		return this.dataProcesso.toString("dd/MM/yyyy");
+	}	
 }

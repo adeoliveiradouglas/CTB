@@ -21,7 +21,7 @@ public class DAO {
 				   nomeBanco = "gestaodecontratos",
 				   usuarioBanco = "gestaodecontratos", 
 				   senhaBanco = "suporte2017",
-				   ip = "10.95.1.247";
+				   ip = "localhost";
 	private ResultSet resultado = null;
 	private PreparedStatement statement = null;
 	

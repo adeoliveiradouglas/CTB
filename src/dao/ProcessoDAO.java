@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import entity.Processo;
@@ -15,11 +17,10 @@ public class ProcessoDAO extends DAO{
 						 colunaDataProcesso = getNomeTabela() + ".dataProcesso", 
 						 colunaContrato = getNomeTabela() + ".contrato_id",
 						 colunaSei = getNomeTabela() + ".numeroSei",
-						 colunaAno = getNomeTabela() + ".ano",
-						 colunaMes = getNomeTabela() + ".mes",
+						 colunaReferencia = getNomeTabela() + ".referencia",
 						 colunaUsuario = getNomeTabela() + ".usuario_id",
 						 colunaIdProcesso = getNomeTabela() + ".idProcesso",
-						 ordernarPorData = " order by " + colunaDataProcesso,
+						 ordernarPorDataReferencia = " order by " + colunaReferencia,
 						 ordernarPorId = " order by " + colunaIdProcesso;
 	public ProcessoDAO() {
 		super("processo");
@@ -58,17 +59,17 @@ public class ProcessoDAO extends DAO{
 				
 		try {
 			while(getResultado().next()){
+				
 				p = new Processo(
 					getResultado().getInt(colunaIdProcesso),
 					getResultado().getString(colunaNotaFiscal),
 					getResultado().getString(colunaTipoAditivo),
 					getResultado().getString(colunaSei),
-					getResultado().getString(colunaAno),
-					getResultado().getString(colunaMes),
 					getResultado().getBigDecimal(colunaAditivo),
 					getResultado().getBigDecimal(colunaValor),
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaDataProcesso),
+					getResultado().getDate(colunaReferencia),
 					id,
 					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))
 				);
@@ -86,6 +87,7 @@ public class ProcessoDAO extends DAO{
 	}
 	
 	public void inserir(Processo processo){
+		//o mes de referencia do processo deve estar no formato de numero
 		iniciaConexaoComBanco();
 		
 		setSqlQuery("insert into " + getNomeTabela() + " (" +
@@ -96,13 +98,15 @@ public class ProcessoDAO extends DAO{
 				colunaDataProcesso + ", " +
 				colunaSei + ", " +
 				colunaContrato + ", " +
-				colunaAno + ", " +
-				colunaMes +
-				") values (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+				colunaReferencia +
+				") values (?, ?, ?, ?, ?, ?, ?, ?)"
 		);
 		
 		try{
 			int posicao = 0;
+			
+			String d = "01/" + processo.getMes() + "/" + processo.getAno();
+			java.util.Date referencia = new SimpleDateFormat("yyyy-MM-dd").parse(d);
 			
 			setStatement(
 				getDbConnection().prepareStatement(
@@ -145,19 +149,16 @@ public class ProcessoDAO extends DAO{
 				processo.getIdContrato()
 			);
 			
-			getStatement().setString(
+			getStatement().setDate(
 				++posicao, 
-				processo.getAno()
-			);
-			
-			getStatement().setString(
-				++posicao, 
-				processo.getMes()
+				new Date(referencia.getTime())
 			);
 			
 			getStatement().executeUpdate();
 		} catch(SQLException e){
-			System.out.println("processo: " + processo.getMes() + processo.getAno() + e);
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 		encerraConexaocomBanco();
 	}
@@ -190,17 +191,17 @@ public class ProcessoDAO extends DAO{
 				
 		try {
 			while(getResultado().next()){
+				
 				p = new Processo(
 					getResultado().getInt(colunaIdProcesso),
 					getResultado().getString(colunaNotaFiscal),
 					getResultado().getString(colunaTipoAditivo),
 					getResultado().getString(colunaSei),
-					getResultado().getString(colunaAno),
-					getResultado().getString(colunaMes),
 					getResultado().getBigDecimal(colunaAditivo),
 					getResultado().getBigDecimal(colunaValor),
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaDataProcesso),
+					getResultado().getDate(colunaReferencia),
 					getResultado().getInt(colunaContrato),
 					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))					
 				);
@@ -240,7 +241,7 @@ public class ProcessoDAO extends DAO{
 
 		setSqlQuery(
 			"select * from " + getNomeTabela() + " where " + colunaDataPagamento + " is null and " + 
-			colunaContrato + " = ?"+ ordernarPorData + " desc"
+			colunaContrato + " = ?" + ordernarPorDataReferencia + " desc"
 		);
 
 		ArrayList<Processo> lista = new ArrayList<Processo>();
@@ -268,12 +269,11 @@ public class ProcessoDAO extends DAO{
 					getResultado().getString(colunaNotaFiscal),
 					getResultado().getString(colunaTipoAditivo),
 					getResultado().getString(colunaSei),
-					getResultado().getString(colunaAno),
-					getResultado().getString(colunaMes),
 					getResultado().getBigDecimal(colunaAditivo),
 					getResultado().getBigDecimal(colunaValor),
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaDataProcesso),
+					getResultado().getDate(colunaReferencia),
 					getResultado().getInt(colunaContrato),
 					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))
 				);
@@ -281,7 +281,7 @@ public class ProcessoDAO extends DAO{
 				lista.add(p);
 			}
 		} catch (SQLException e){
-			System.out.println(e);;
+			System.out.println(e);
 			encerraConexaocomBanco();
 			return new ArrayList<Processo>();
 		}
