@@ -15,7 +15,7 @@ public class PagarProcesso implements Logica{
 		
 		new ProcessoDAO().atualizarPagamento(idProcesso, idTesoureiro);
 		
-		return "sistema?logica=TelaPrincipal";
+		return "/Tesoureiro/verContrato.jsp";
 	}
 
 }

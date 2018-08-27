@@ -54,7 +54,7 @@ public class AvisoVencimento implements Runnable {
 
 //					avisa todos os usuários da lista de destino
 					for (Usuario u: destinos)
-						new Email().aviso45dias(u.getEmail());
+						new Email().aviso45dias(u.getEmail(), c);
 					
 //					marca que foi avisado
 //					marcar as três pois pode ocorrer de um contrato ser inserido e já ter menos de 90 dias para vencer
@@ -70,7 +70,7 @@ public class AvisoVencimento implements Runnable {
 						destinos.add(u);
 
 					for (Usuario u: destinos)
-						new Email().aviso60dias(u.getEmail());
+						new Email().aviso60dias(u.getEmail(), c);
 					
 					c.setAvisado60(true);
 					c.setAvisado90(true);
@@ -78,7 +78,7 @@ public class AvisoVencimento implements Runnable {
 				}
 				else if(d.getDays() <= 90 && !c.avisado90){
 					for (Usuario u: destinos)
-						new Email().aviso90dias(u.getEmail());
+						new Email().aviso90dias(u.getEmail(), c);
 					
 					c.setAvisado90(true);
 					new ContratoDAO().atualizarAvisoDeVencimento(c);

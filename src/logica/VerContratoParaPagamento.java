@@ -11,7 +11,7 @@ public class VerContratoParaPagamento implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String  origem = pedido.getParameter("origem");
+		String origem = pedido.getParameter("origem");
 		int n = Integer.parseInt(pedido.getParameter("n"));
 		
 		

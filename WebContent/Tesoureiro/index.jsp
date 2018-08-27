@@ -50,16 +50,16 @@
 		<thead>
 			<tr>
 				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=numero">Número</a>
+					<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=numero">Número</a>
 				</th>
 				<th class="text-center col-md-2">
-					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=nomeEmpresaContratada">Empresa</a>
+					<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=nomeEmpresaContratada">Empresa</a>
 				</th>
 				<th class="text-center col-md-2">
-					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=fiscal_id">Fiscal</a>
+					<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Fiscal</a>
 				</th>
 				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalGestor&ordContrato=fiscal_id">Valor</a>
+					<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Valor</a>
 				</th>
 				<th class="text-center col-md-1">Vencimento</th>
 				<!-- <th class="text-center col-md-1">%</th> -->

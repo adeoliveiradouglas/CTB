@@ -22,9 +22,10 @@
 					 entity.Contrato,
 					 utilidades.FormatarCampo,
 					 java.util.ArrayList" %>
-	<%		
-	Processo processo = (Processo) request.getSession().getAttribute("processoVisualizar");
+	<%
 	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");
+	Processo processo = (Processo) request.getSession().getAttribute("processoVisualizar");
+	
 	String pagamento = "";
 	
 	if(processo.getDataPagamento() != null){
@@ -45,8 +46,20 @@
 	<p>Objeto = <%=processo.getTipoAditivo() %></p>
 	<p>Data de pagamento = <%=pagamento %></p>
 	<p>Responsável pelo pagamento = <%=processo.getTesoureiro().getNome() %>
-	
 </div>
+
+<form action="sistema?logica=EditarPrevia" method="post">
+	<div class="aw-simple-panel__box">
+		<div class="form-group  has-feedback">
+			Insira data de pagamento: <input type="date"
+			class="form-control input-lg" name="dataPagamento"> <span
+			class="form-control-feedback" aria-hidden="true"> </span>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Pagar</button>
+		</div>
+	</div>
+</form>
 
 <jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>

@@ -2,15 +2,18 @@ package main;
 
 import java.text.ParseException;
 
-import utilidades.FormatarCampo;
+import dao.ContratoDAO;
+import entity.Contrato;
+import utilidades.Email;
 
 public class testes {
 
 	public static void main(String[] args) throws ParseException{
-		FormatarCampo fc = new FormatarCampo();
+		Email e = new Email();
 		
+		Contrato c = new ContratoDAO().getByIdSemPagamento(13);
 		
-		System.out.println(fc.stringToDecimal("145,00"));
+		e.aviso90dias("anderson.araujo@ctb.ba.gov.br", c);
 	}
 
 }

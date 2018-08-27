@@ -4,6 +4,8 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
+import entity.Contrato;
+
 public class Email {
 	private SimpleEmail email;
 	private String  assunto = null,
@@ -38,15 +40,18 @@ public class Email {
 	}
 	
 	
-	public void aviso90dias(String emailTo){
+	public void aviso90dias(String emailTo, Contrato c){
 //		gestor do contrato, fiscal e o gestor geral
 		this.assunto = "Faltam 90 dias para vencimento do contrato";
-		this.mensagem = "faltam 90 dias para vencimento do contrato";
+		this.mensagem = "Prezado(a) Gestor(a), " +
+		"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do Estado da Bahia faltam 90 (noventa) dias para o fim de vigência do contrato.\n" +
+		"Considerando ainda que qualquer prorrogação dos contratos de prestação a serem executado de forma continua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento, solicitamos abertura do processo de prorrogação, devendo assim o processo ser encaminhando a QUAS para conhecimento.\n" +
+		"Anderson";
 		this.emailTo = emailTo;
 		this.enviar();
 	}
 
-	public void aviso60dias(String emailTo){
+	public void aviso60dias(String emailTo, Contrato c){
 //		para os acima e mais o diretor
 		this.assunto = "Faltam 60 dias para vencimento do contrato";
 		this.mensagem = "faltam 60 dias para vencimento do contrato";
@@ -54,7 +59,7 @@ public class Email {
 		this.enviar();
 	}
 	
-	public void aviso45dias(String emailTo){
+	public void aviso45dias(String emailTo, Contrato c){
 //		todos e mais o presidente	
 		this.assunto = "Faltam 45 dias para vencimento do contrato";
 		this.mensagem = "faltam 45 dias para vencimento do contrato";
@@ -75,7 +80,7 @@ public class Email {
 		    email.setDebug(true);
 		    email.setMsg(mensagem);
 		    email.addTo(emailTo);
-//		    email.send();
+		    email.send();
 		} catch (EmailException e) {
 		    e.printStackTrace();
 		}

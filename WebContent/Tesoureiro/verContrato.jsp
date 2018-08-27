@@ -31,13 +31,7 @@
 		   formatoData = "dd/MM/yyyy";
 	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");
 	
-	if("true".equals(adicionaProcesso)){ %>
-	<div align="center">
-		<a href="sistema?logica=TelaNovoProcesso&id=<%=contrato.getId() %>">
-			<font size="5">Novo processo</font>
-		</a>
-	</div>
-	<%}%>
+	%>
 	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3><%=contrato.getNomeEmpresaContratada()%> - CNPJ: <%=contrato.getCnpjEmpresaContratada()%></h3>
@@ -73,7 +67,7 @@
 		</tbody>
 	</table>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Processos</h3>
+		<h3>Processos com pagamentos pendentes</h3>
 	</div>
 	<table class="table table-bordered table-striped">
 		<thead>
@@ -115,7 +109,10 @@
 				<td class="text-center">
 					<form action="sistema?logica=PagarProcesso" method="post">
 						<div style="display: none">
-							<input name="n" value="<%=p.getIdProcesso() %>">
+							<input name="origem" value="contratoVisualizar">
+						</div>
+						<div style="display: none">
+							<input name="i" value="<%=contrato.getProcessos().indexOf(p)%>">
 						</div>
 						<button type="submit" name="your_name" class="btn-link">Pagar</button>
 					</form>				
