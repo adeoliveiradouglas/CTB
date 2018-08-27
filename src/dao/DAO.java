@@ -19,9 +19,9 @@ public class DAO {
 	private String sqlQuery = null, 
 				   nomeTabela = null, 
 				   nomeBanco = "gestaodecontratos",
-				   usuarioBanco = "servidorApp", 
+				   usuarioBanco = "gestaodecontratos", 
 				   senhaBanco = "suporte2017",
-				   ip = "localhost";
+				   ip = "10.95.1.247";
 	private ResultSet resultado = null;
 	private PreparedStatement statement = null;
 	

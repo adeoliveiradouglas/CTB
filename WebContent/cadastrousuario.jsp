@@ -24,7 +24,7 @@
 	<div class="aw-layout-simple-page__container">
 		<div align="center">
 			<a href="sistema?logica=TelaLogin">
-				<img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" />
+				<img src="/gestaodecontratos/layout/images/logo.png" />
 			</a>			
 		</div>
 		<br />

@@ -17,12 +17,6 @@ public class DBConnection {
 		this.usuarioBanco = usuarioBanco;
 		this.senhaBanco = senhaBanco;
 	}
-
-	public DBConnection(String nomeBanco, String usuarioBanco, String senhaBanco) {
-		this.nomeBanco = nomeBanco;
-		this.usuarioBanco = usuarioBanco;
-		this.senhaBanco = senhaBanco;
-	}
 	
 	public Connection getConnection() {
 		try {
@@ -31,7 +25,7 @@ public class DBConnection {
 			/*Exemplo de url
 			jdbc:mysql://ip:porta/nomeDoBanco?autoReconnect=true&useSSL=false*/			
 			return DriverManager.getConnection(
-				"jdbc:mysql://" + ip + ":" + porta +"/" + nomeBanco + "?autoReconnect=true&useSSL=false", 
+				"jdbc:mysql://" + ip + ":" + porta +"/" + nomeBanco + "?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true", 
 				usuarioBanco, 
 				senhaBanco
 			);
