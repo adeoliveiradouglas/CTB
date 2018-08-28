@@ -33,7 +33,7 @@ public class AvisoVencimento implements Runnable {
 				d = Days.daysBetween(hoje, c.getDataVencimentoContrato());
 				
 				destinos = new ArrayList<Usuario>();
-//				System.out.println("Analisando contrato " + c.getNumero() + " faltam " + d.getDays() + " dias para vencer");
+				System.out.println("Analisando contrato " + c.getNumero() + " faltam " + d.getDays() + " dias para vencer");
 				
 //				adiciona gestor e fiscal na lista de destinos pois eles sempre são avisados
 				destinos.add(c.getFiscal());
@@ -85,7 +85,7 @@ public class AvisoVencimento implements Runnable {
 				}
 			}
 			try {
-//				daqui a tanto tempo, fazer novamente: 21600000
+//				daqui a tanto tempo, fazer novamente
 				Thread.sleep(10800000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

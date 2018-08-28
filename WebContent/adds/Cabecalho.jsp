@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
 <link rel="stylesheet" type="text/css" href="css/application.css" />
+<link rel="shortcut icon" type="image/png" href="/gestaodecontratos/layout/images/logo pequeno.png" />
 </head>
 
 <nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">

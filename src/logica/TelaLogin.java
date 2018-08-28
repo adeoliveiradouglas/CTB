@@ -1,5 +1,6 @@
 /*
- * Limpa todos os dados da sessão e redireciona para tela de login 
+ * Redireciona para tela de login
+ * inicia monitoramento de vencimento dos contratos 
  */
 
 package logica;

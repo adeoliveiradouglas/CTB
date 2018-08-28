@@ -43,10 +43,11 @@ public class FormatarCampo{
 				switch(iaux){
 					case 3:			
 						aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
+						break;
 						
 					case 6:
 						aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
-						
+						break;
 				}
 				
 				++iaux;

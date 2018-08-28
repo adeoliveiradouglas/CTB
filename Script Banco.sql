@@ -1,15 +1,15 @@
 CREATE DATABASE  IF NOT EXISTS `gestaodecontratos` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `gestaodecontratos`;
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: gestaodecontratos
 -- ------------------------------------------------------
--- Server version	5.7.18-log
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +23,7 @@ USE `gestaodecontratos`;
 
 DROP TABLE IF EXISTS `cargo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `cargo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE `cargo` (
 
 DROP TABLE IF EXISTS `contrato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `contrato` (
   `idContrato` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(20) NOT NULL,
@@ -66,12 +66,12 @@ CREATE TABLE `contrato` (
   KEY `fk_Contrato_uso1_idx` (`uso_id`),
   KEY `fk_Usuario_gestor_idx` (`gestor_id`),
   KEY `fk_Usuario_fiscal_idx` (`fiscal_id`),
-  CONSTRAINT `fk_Contrato_fontePagante1` FOREIGN KEY (`fontePagante_id`) REFERENCES `fontepagante` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Contrato_recurso1` FOREIGN KEY (`recurso_id`) REFERENCES `recurso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Contrato_uso1` FOREIGN KEY (`uso_id`) REFERENCES `uso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Usuario_fiscal` FOREIGN KEY (`fiscal_id`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Usuario_gestor` FOREIGN KEY (`gestor_id`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_Contrato_fontePagante1` FOREIGN KEY (`fontePagante_id`) REFERENCES `fontepagante` (`id`),
+  CONSTRAINT `fk_Contrato_recurso1` FOREIGN KEY (`recurso_id`) REFERENCES `recurso` (`id`),
+  CONSTRAINT `fk_Contrato_uso1` FOREIGN KEY (`uso_id`) REFERENCES `uso` (`id`),
+  CONSTRAINT `fk_Usuario_fiscal` FOREIGN KEY (`fiscal_id`) REFERENCES `usuario` (`idusuario`),
+  CONSTRAINT `fk_Usuario_gestor` FOREIGN KEY (`gestor_id`) REFERENCES `usuario` (`idusuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +80,7 @@ CREATE TABLE `contrato` (
 
 DROP TABLE IF EXISTS `fontepagante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `fontepagante` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE `fontepagante` (
 
 DROP TABLE IF EXISTS `processo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `processo` (
   `idProcesso` int(11) NOT NULL AUTO_INCREMENT,
   `notaFiscal` varchar(10) NOT NULL,
@@ -105,15 +105,14 @@ CREATE TABLE `processo` (
   `dataProcesso` date NOT NULL,
   `numeroSei` varchar(20) NOT NULL,
   `contrato_id` int(11) NOT NULL,
-  `ano` varchar(4) NOT NULL,
-  `mes` varchar(9) NOT NULL,
+  `referencia` date NOT NULL,
   `usuario_id` int(11) DEFAULT '-1',
   PRIMARY KEY (`idProcesso`),
   KEY `fk_processo_Contrato1_idx` (`contrato_id`),
   KEY `fk_tesoureiro_idx` (`usuario_id`),
-  CONSTRAINT `fk_contrato` FOREIGN KEY (`contrato_id`) REFERENCES `contrato` (`idContrato`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tesoureiro` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_contrato` FOREIGN KEY (`contrato_id`) REFERENCES `contrato` (`idcontrato`),
+  CONSTRAINT `fk_tesoureiro` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`idusuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +121,7 @@ CREATE TABLE `processo` (
 
 DROP TABLE IF EXISTS `recurso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `recurso` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
@@ -136,7 +135,7 @@ CREATE TABLE `recurso` (
 
 DROP TABLE IF EXISTS `setor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `setor` (
   `codigo` varchar(8) NOT NULL,
   `nome` varchar(100) NOT NULL,
@@ -151,7 +150,7 @@ CREATE TABLE `setor` (
 
 DROP TABLE IF EXISTS `teste`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `teste` (
   `numero` decimal(11,2) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -165,7 +164,7 @@ CREATE TABLE `teste` (
 
 DROP TABLE IF EXISTS `uso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `uso` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) NOT NULL,
@@ -179,7 +178,7 @@ CREATE TABLE `uso` (
 
 DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` int(11) NOT NULL,
@@ -191,8 +190,8 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`idUsuario`,`matricula`,`setor_codigo`,`cargo_id`),
   KEY `fk_usuario_setor1_idx` (`setor_codigo`),
   KEY `fk_usuario_cargo1_idx` (`cargo_id`),
-  CONSTRAINT `fk_usuario_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_usuario_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`),
+  CONSTRAINT `fk_usuario_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -202,7 +201,7 @@ CREATE TABLE `usuario` (
 
 DROP TABLE IF EXISTS `usuariosnovos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `usuariosnovos` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` int(11) NOT NULL,
@@ -214,18 +213,10 @@ CREATE TABLE `usuariosnovos` (
   PRIMARY KEY (`idUsuario`,`matricula`,`setor_codigo`,`cargo_id`),
   KEY `fk_usuariosNovos_setor1_idx` (`setor_codigo`),
   KEY `fk_usuariosNovos_cargo1_idx` (`cargo_id`),
-  CONSTRAINT `fk_usuariosNovos_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuariosNovos_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_usuariosNovos_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`),
+  CONSTRAINT `fk_usuariosNovos_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping events for database 'gestaodecontratos'
---
-
---
--- Dumping routines for database 'gestaodecontratos'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -236,4 +227,4 @@ CREATE TABLE `usuariosnovos` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-17 10:07:55
+-- Dump completed on 2018-08-28 11:37:22

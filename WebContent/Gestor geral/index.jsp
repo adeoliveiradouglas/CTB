@@ -5,36 +5,32 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-<meta charset="ISO-8859-1" />
-<title>Sistema de Gestão de Contratos da CTB</title>
-
-<link rel="stylesheet" type="text/css"
-	href="css/bootstrap-datepicker.standalone.min.css" />
+<link rel="stylesheet" type="text/css"href="css/bootstrap-datepicker.standalone.min.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
 <link rel="stylesheet" type="text/css" href="css/application.css" />
-
 </head>
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 
 	<div align="center">
-		<a href="sistema?logica=TelaNovoContrato"> <font size="5">Novo
-				contrato</font>
+		<a href="sistema?logica=TelaNovoContrato"> 
+			<font size="5">Novo contrato</font>
 		</a>
 	</div>
-	<%@ page import="entity.Contrato,
+	<%@ page
+		import="entity.Contrato,
 				     java.util.ArrayList,
 					 utilidades.FormatarCampo"%>
 
 	<%
-	String formatoData = "dd/MM/yyyy";
-	FormatarCampo format = new FormatarCampo(); //objeto usado para formatacao de valores
-	@SuppressWarnings("unchecked")
-	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession()
-			.getAttribute("contratosRecentes");
-	if (contratos.size() > 0) {
+		String formatoData = "dd/MM/yyyy";
+		FormatarCampo format = new FormatarCampo(); //objeto usado para formatacao de valores
+		@SuppressWarnings("unchecked")
+		ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession()
+				.getAttribute("contratosRecentes");
+		if (contratos.size() > 0) {
 	%>
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Contratos mais recentes</h3>
@@ -52,7 +48,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%for (Contrato c : contratos) {%>
+			<%
+				for (Contrato c : contratos) {
+			%>
 			<tr>
 				<td class="text-center"><a
 					href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratosRecentes">
@@ -64,7 +62,9 @@
 				<td class="text-center"><%=format.decimalToString(c.getValorTotal())%></td>
 				<td class="text-center"><%=c.getDataVencimentoContrato().toString(formatoData)%></td>
 			</tr>
-			<%}%>
+			<%
+				}
+			%>
 			<!-- fim do if do for que mostra os contratos recentes -->
 		</tbody>
 	</table>
@@ -74,7 +74,9 @@
 			todos os contratos</a>
 	</div>
 	<br />
-	<%}%>
+	<%
+		}
+	%>
 	<!-- fim do if da tabela -->
 
 	<%
@@ -98,7 +100,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%for (Contrato c : contratos90) {%>
+			<%
+				for (Contrato c : contratos90) {
+			%>
 			<tr>
 				<td class="text-center">
 					<form action="sistema?logica=VerContrato" method="post">
@@ -111,7 +115,9 @@
 				<td class="text-center"><%=c.getDataVencimentoContrato().toString(formatoData)%></td>
 				<%-- <th class="text-center"><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
-			<%}%>
+			<%
+				}
+			%>
 			<!-- fim do if do for que mostra os contratos com vencimentos -->
 		</tbody>
 	</table>
