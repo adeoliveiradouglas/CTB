@@ -4,6 +4,7 @@
 
 package dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -27,6 +28,10 @@ public class UsuarioDAO extends DAO {
 
 	public UsuarioDAO(){
 		super("usuario");
+	}
+	
+	public UsuarioDAO(Connection conexao){
+		super("usuario", conexao);
 	}
 	
 	public UsuarioDAO(String nomeTabela){
@@ -149,10 +154,10 @@ public class UsuarioDAO extends DAO {
 					),
 					
 //					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-					new SetorDAO().getByCodigo(
+					new SetorDAO(getDbConnection()).getByCodigo(
 						getResultado().getString(colunaSetor)
 					),
-					new CargoDAO().getById(
+					new CargoDAO(getDbConnection()).getById(
 						getResultado().getInt(colunaCargo)
 					)
 				);
@@ -221,10 +226,10 @@ public class UsuarioDAO extends DAO {
 					),
 					
 //					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-					new SetorDAO().getByCodigo(
+					new SetorDAO(getDbConnection()).getByCodigo(
 							getResultado().getString(colunaSetor)
 					),
-					new CargoDAO().getById(
+					new CargoDAO(getDbConnection()).getById(
 							getResultado().getInt(colunaCargo)
 					)
 				);
@@ -298,10 +303,10 @@ public class UsuarioDAO extends DAO {
 					),
 					
 //					busca setor de acordo com o resultado do usuario
-					new SetorDAO().getByCodigo(
+					new SetorDAO(getDbConnection()).getByCodigo(
 							getResultado().getString(colunaSetor)
 					),
-					new CargoDAO().getById(
+					new CargoDAO(getDbConnection()).getById(
 							getResultado().getInt(colunaCargo)
 					)
 				);
@@ -381,10 +386,10 @@ public class UsuarioDAO extends DAO {
 					),
 					
 //					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-					new SetorDAO().getByCodigo(
+					new SetorDAO(getDbConnection()).getByCodigo(
 							getResultado().getString(colunaSetor)
 					),
-					new CargoDAO().getById(
+					new CargoDAO(getDbConnection()).getById(
 							getResultado().getInt(colunaCargo)
 					)
 				);
@@ -596,10 +601,10 @@ public class UsuarioDAO extends DAO {
 					),
 					
 //							busca setor de acordo com o resultado do usuario
-					new SetorDAO().getByCodigo(
+					new SetorDAO(getDbConnection()).getByCodigo(
 							getResultado().getString(colunaSetor)
 					),
-					new CargoDAO().getById(
+					new CargoDAO(getDbConnection()).getById(
 							getResultado().getInt(colunaCargo)
 					)
 				);
@@ -672,11 +677,11 @@ public class UsuarioDAO extends DAO {
 						colunaSenha
 					),
 					
-//							busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-					new SetorDAO().getByCodigo(
+//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+					new SetorDAO(getDbConnection()).getByCodigo(
 							getResultado().getString(colunaSetor)
 					),
-					new CargoDAO().getById(
+					new CargoDAO(getDbConnection()).getById(
 							getResultado().getInt(colunaCargo)
 					)
 				);

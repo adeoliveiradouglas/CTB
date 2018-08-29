@@ -7,19 +7,22 @@ import java.util.ArrayList;
 import entity.Contrato;
 
 public class ContratoDAO extends DAO {
-	private final String colunaNumero = getNomeTabela() + ".numero", colunaId = getNomeTabela() + ".idContrato",
+	private final String colunaNumero = getNomeTabela() + ".numero", 
+			colunaId = getNomeTabela() + ".idContrato",
 			colunaEmpresaCnpj = getNomeTabela() + ".cnpjEmpresaContratada",
-			colunaEmpresaNome = getNomeTabela() + ".nomeEmpresaContratada", colunaObjeto = getNomeTabela() + ".objeto",
-			colunaPortaria = getNomeTabela() + ".portaria", colunaDataAssinatura = getNomeTabela() + ".dataAssinatura",
+			colunaEmpresaNome = getNomeTabela() + ".nomeEmpresaContratada", 
+			colunaObjeto = getNomeTabela() + ".objeto",
+			colunaPortaria = getNomeTabela() + ".portaria", 
+			colunaDataAssinatura = getNomeTabela() + ".dataAssinatura",
 			colunaDataOrdemServico = getNomeTabela() + ".dataOrdemServico",
 			colunaDataGarantia = getNomeTabela() + ".dataGarantia",
 			colunaDataVencimentoContrato = getNomeTabela() + ".dataVencimentoContrato",
 			colunaDataVencimentoGarantia = getNomeTabela() + ".dataVencimentoGarantia",
 			colunaValorInicial = getNomeTabela() + ".valorInicial",
-			// colunaValorTotal = getNomeTabela() + ".valorTotal",
-			// colunaValorAditivos = getNomeTabela() + ".valorAditivos",
-			colunaGestor = getNomeTabela() + ".gestor_id", colunaFiscal = getNomeTabela() + ".fiscal_id",
-			colunaRecurso = getNomeTabela() + ".recurso_id", colunaFontePagante = getNomeTabela() + ".fontePagante_id",
+			colunaGestor = getNomeTabela() + ".gestor_id", 
+			colunaFiscal = getNomeTabela() + ".fiscal_id",
+			colunaRecurso = getNomeTabela() + ".recurso_id", 
+			colunaFontePagante = getNomeTabela() + ".fontePagante_id",
 			colunaUso = getNomeTabela() + ".uso_id",
 			coluna90 = getNomeTabela() + ".avisado90",
 			coluna60 =getNomeTabela() + ".avisado60",
@@ -30,57 +33,7 @@ public class ContratoDAO extends DAO {
 	}
 
 	public ArrayList<Contrato> getByGestor(int id) {
-		/*ArrayList<Contrato> lista = new ArrayList<Contrato>();
-		Contrato c = null;
-
-		iniciaConexaoComBanco();
-
-		// Exemplo: select * from contrato where gestor = matricula
-		setSqlQuery("select * from " + getNomeTabela() + " where " + colunaGestor + " = ?");
-
-		try {
-			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
-
-			getStatement().setInt(1, id);
-
-			setResultado(getStatement().executeQuery());
-
-			// Traduzir resultado para objeto
-			while (getResultado().next()) {
-				c = new Contrato(
-					getResultado().getInt(colunaId), 
-					getResultado().getString(colunaNumero),
-					getResultado().getInt(colunaPortaria),
-					new UsuarioDAO().getById(getResultado().getInt(colunaGestor)),
-					new UsuarioDAO().getById(getResultado().getInt(colunaFiscal)),
-					getResultado().getString(colunaEmpresaCnpj), 
-					getResultado().getString(colunaEmpresaNome),
-					getResultado().getString(colunaObjeto),
-					new OutroDAO("recurso").getById(getResultado().getInt(colunaRecurso)),
-					new OutroDAO("fontepagante").getById(getResultado().getInt(colunaFontePagante)),
-					new OutroDAO("uso").getById(getResultado().getInt(colunaUso)),
-					getResultado().getDate(colunaDataAssinatura), 
-					getResultado().getDate(colunaDataOrdemServico),
-					getResultado().getDate(colunaDataGarantia),
-					getResultado().getDate(colunaDataVencimentoContrato),
-					getResultado().getDate(colunaDataVencimentoGarantia),
-					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId)),
-					getResultado().getBoolean(coluna90),
-					getResultado().getBoolean(coluna60),
-					getResultado().getBoolean(coluna45)
-				);
-
-				lista.add(c);
-			}
-		} catch (SQLException e) {
-			System.out.println(e);
-			encerraConexaocomBanco();
-			return null;
-		}
-
-		encerraConexaocomBanco();
-*/		return getByGestor(id, colunaId);
+		return getByGestor(id, colunaId);
 	}
 
 	public ArrayList<Contrato> getByGestor(int id, String ordenacao) {
@@ -119,7 +72,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId)),
+					new ProcessoDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
@@ -129,7 +82,6 @@ public class ContratoDAO extends DAO {
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
-			;
 			encerraConexaocomBanco();
 			return null;
 		}

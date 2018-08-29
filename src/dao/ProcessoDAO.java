@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -24,6 +25,10 @@ public class ProcessoDAO extends DAO{
 						 ordernarPorId = " order by " + colunaIdProcesso;
 	public ProcessoDAO() {
 		super("processo");
+	}
+	
+	public ProcessoDAO(Connection conexao) {
+		super("processo", conexao);
 	}
 	
 	public ArrayList<Processo> getByContrato(int id){
