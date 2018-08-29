@@ -48,7 +48,7 @@ public class Email {
 		"Considerando ainda que qualquer prorrogação dos contratos de prestação a serem executado de forma continua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento, solicitamos abertura do processo de prorrogação, devendo assim o processo ser encaminhando a QUAS para conhecimento.\n" +
 		"Anderson";
 		this.emailTo = emailTo;
-		this.enviar();
+//		this.enviar();
 	}
 
 	public void aviso60dias(String emailTo, Contrato c){
@@ -56,7 +56,7 @@ public class Email {
 		this.assunto = "Faltam 60 dias para vencimento do contrato";
 		this.mensagem = "faltam 60 dias para vencimento do contrato";
 		this.emailTo = emailTo;
-		this.enviar();
+//		this.enviar();
 	}
 	
 	public void aviso45dias(String emailTo, Contrato c){
@@ -64,7 +64,7 @@ public class Email {
 		this.assunto = "Faltam 45 dias para vencimento do contrato";
 		this.mensagem = "faltam 45 dias para vencimento do contrato";
 		this.emailTo = emailTo;
-		this.enviar();
+//		this.enviar();
 	}
 	
 	private void enviar(){

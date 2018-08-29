@@ -105,7 +105,7 @@ public class ProcessoDAO extends DAO{
 		try{
 			int posicao = 0;
 			
-			String d = "01/" + processo.getMes() + "/" + processo.getAno();
+			String d = "01/" + processo.getMesAsInt() + "/" + processo.getAno();
 			java.util.Date referencia = new SimpleDateFormat("yyyy-MM-dd").parse(d);
 			
 			setStatement(

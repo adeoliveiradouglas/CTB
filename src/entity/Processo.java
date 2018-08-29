@@ -95,5 +95,9 @@ public class Processo {
 	
 	public String getDataProcessoAsString(){
 		return this.dataProcesso.toString("dd/MM/yyyy");
+	}
+
+	public String getMesAsInt() {
+		return new FormatarCampo().mesToInt(mes);
 	}	
 }

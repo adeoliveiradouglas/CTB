@@ -82,6 +82,48 @@ public class FormatarCampo{
 		return novo;
 	}
 	
+	public String mesToInt(String mes){
+		switch(mes){
+			case "Janeiro":
+				return "01";
+				
+			case "Feveiro":
+				return "02";
+				
+			case "Março":
+				return "03";
+				
+			case "Abril":
+				return "04";
+				
+			case "Maio":
+				return "05";
+			
+			case "Junho":
+				return "06";
+				
+			case "Julho":
+				return "07";
+				
+			case "Agosto":
+				return "08";
+				
+			case "Setembro":
+				return "09";
+				
+			case "Outubro":
+				return "10";
+				
+			case "Novembro":
+				return "11";
+				
+			case "Dezembro":
+				return "12";
+		}
+		
+		return "";
+	}
+	
 	public String intToMonth(int m){
 		switch(m){
 			case 1:
@@ -120,6 +162,6 @@ public class FormatarCampo{
 			case 12:
 				return "Dezembro";
 		}
-		return null;
+		return "";
 	}
 }

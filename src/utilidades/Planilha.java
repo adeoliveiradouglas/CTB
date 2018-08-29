@@ -15,20 +15,20 @@ import jxl.read.biff.BiffException;
 
 
 public class Planilha {
-	final int posicaoNotaFiscal = 3,
-			  posicaoNumeroSei = 4,
-			  posicaoAno = 0,
+	final int posicaoAno = 0,
 			  posicaoMes = 2,
+			  posicaoNotaFiscal = 3,
+			  posicaoNumeroSei = 4,
+			  posicaoDataProcesso = 5,
 			  posicaoValor = 6,
 			  posicaoValorAditivo = 9,
-			  posicaoObjeto = 10,
-			  posicaoDataProcesso = 5;
+			  posicaoObjeto = 10;
 	
 	public Planilha(){}
 	
 	public ArrayList<Processo> carregar(File planilha, int contrato){
 		int mesesConsecutivosSemDados = 0, //se esse valor chegar a 12 (1 ano) o loop para
-			i = 14; //primeira linha de dados da planilha
+			linhaLeitura = 0;
 		
 		FormatarCampo fc = new FormatarCampo();
 		
@@ -36,21 +36,30 @@ public class Planilha {
 		try {
 			workbook = Workbook.getWorkbook(planilha);
 		} catch (BiffException | IOException e) {
-			return null;
+			e.printStackTrace();
+			return new ArrayList<Processo>();
 		}
 		
 		Sheet sheet = workbook.getSheet(0);
-		int linhas = sheet.getRows();
+		int quantLinhas = sheet.getRows();
 
 		ArrayList<Processo> lp = new ArrayList<>();
 		
-		while (i < linhas && mesesConsecutivosSemDados <= 12){			
+		for (int i = 1; i <= quantLinhas; ++i){
+			//Busca pela primeira linha de processos desse arquivo
+			if(sheet.getCell(posicaoAno, i).getContents().equals("ANO REFER.")){
+				linhaLeitura = i + 1;
+				i += quantLinhas;
+			}
+		}
+		
+		while (linhaLeitura < quantLinhas && mesesConsecutivosSemDados <= 12){			
 			BigDecimal aditivo = null, valor = null;
 			
 			try {
 				aditivo = new BigDecimal(
 					fc.stringToDecimal(
-						sheet.getCell(posicaoValorAditivo, i).getContents()
+						sheet.getCell(posicaoValorAditivo, linhaLeitura).getContents()
 					)
 				);
 			} catch (Exception e) {
@@ -61,7 +70,7 @@ public class Planilha {
 			try {
 				valor = new BigDecimal(
 					fc.stringToDecimal(
-						sheet.getCell(posicaoValor, i).getContents()
+						sheet.getCell(posicaoValor, linhaLeitura).getContents()
 					)
 				);
 			} catch (Exception e) {
@@ -72,24 +81,24 @@ public class Planilha {
 			Date processo;
 			
 			try {
-				processo = ((DateCell) sheet.getCell(posicaoDataProcesso, i)).getDate();
+				processo = ((DateCell) sheet.getCell(posicaoDataProcesso, linhaLeitura)).getDate();
 			} catch (Exception e) {
 				processo = new Date();
 			}
 			
 			Processo p = new Processo(
-				sheet.getCell(posicaoNotaFiscal, i).getContents(), 
-				sheet.getCell(posicaoObjeto, i).getContents(), 
-				sheet.getCell(posicaoNumeroSei, i).getContents(), 
-				sheet.getCell(posicaoAno, i).getContents(), 
-				sheet.getCell(posicaoMes, i).getContents(), 
+				sheet.getCell(posicaoNotaFiscal, linhaLeitura).getContents(), 
+				sheet.getCell(posicaoObjeto, linhaLeitura).getContents(), 
+				sheet.getCell(posicaoNumeroSei, linhaLeitura).getContents(), 
+				sheet.getCell(posicaoAno, linhaLeitura).getContents(), 
+				sheet.getCell(posicaoMes, linhaLeitura).getContents(), 
 				aditivo, 
 				valor, 
 				processo, 
 				contrato
 			);
 			
-			++i;
+			++linhaLeitura;
 			
 //			linhas vazias do arquivo não são inseridas
 			if((!p.getNotaFiscal().equals("") || !p.getTipoAditivo().equals("") || !p.getNumeroSei().equals("")) && !p.getTipoAditivo().equals("#REF!")){
