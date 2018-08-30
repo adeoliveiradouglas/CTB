@@ -153,8 +153,7 @@ public class ContratoDAO extends DAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			encerraConexaocomBanco();
-			return new ArrayList<Contrato>();
+			recentes = new ArrayList<Contrato>();
 		}
 
 		encerraConexaocomBanco();
@@ -410,9 +409,8 @@ public class ContratoDAO extends DAO {
 				);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			c = null;
 		}
 
 		encerraConexaocomBanco();
