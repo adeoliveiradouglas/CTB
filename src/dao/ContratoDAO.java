@@ -30,57 +30,7 @@ public class ContratoDAO extends DAO {
 	}
 
 	public ArrayList<Contrato> getByGestor(int id) {
-		/*ArrayList<Contrato> lista = new ArrayList<Contrato>();
-		Contrato c = null;
-
-		iniciaConexaoComBanco();
-
-		// Exemplo: select * from contrato where gestor = matricula
-		setSqlQuery("select * from " + getNomeTabela() + " where " + colunaGestor + " = ?");
-
-		try {
-			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
-
-			getStatement().setInt(1, id);
-
-			setResultado(getStatement().executeQuery());
-
-			// Traduzir resultado para objeto
-			while (getResultado().next()) {
-				c = new Contrato(
-					getResultado().getInt(colunaId), 
-					getResultado().getString(colunaNumero),
-					getResultado().getInt(colunaPortaria),
-					new UsuarioDAO().getById(getResultado().getInt(colunaGestor)),
-					new UsuarioDAO().getById(getResultado().getInt(colunaFiscal)),
-					getResultado().getString(colunaEmpresaCnpj), 
-					getResultado().getString(colunaEmpresaNome),
-					getResultado().getString(colunaObjeto),
-					new OutroDAO("recurso").getById(getResultado().getInt(colunaRecurso)),
-					new OutroDAO("fontepagante").getById(getResultado().getInt(colunaFontePagante)),
-					new OutroDAO("uso").getById(getResultado().getInt(colunaUso)),
-					getResultado().getDate(colunaDataAssinatura), 
-					getResultado().getDate(colunaDataOrdemServico),
-					getResultado().getDate(colunaDataGarantia),
-					getResultado().getDate(colunaDataVencimentoContrato),
-					getResultado().getDate(colunaDataVencimentoGarantia),
-					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId)),
-					getResultado().getBoolean(coluna90),
-					getResultado().getBoolean(coluna60),
-					getResultado().getBoolean(coluna45)
-				);
-
-				lista.add(c);
-			}
-		} catch (SQLException e) {
-			System.out.println(e);
-			encerraConexaocomBanco();
-			return null;
-		}
-
-		encerraConexaocomBanco();
-*/		return getByGestor(id, colunaId);
+		return getByGestor(id, colunaId);
 	}
 
 	public ArrayList<Contrato> getByGestor(int id, String ordenacao) {
@@ -201,8 +151,7 @@ public class ContratoDAO extends DAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			encerraConexaocomBanco();
-			return new ArrayList<Contrato>();
+			recentes = new ArrayList<Contrato>();
 		}
 
 		encerraConexaocomBanco();
@@ -458,9 +407,8 @@ public class ContratoDAO extends DAO {
 				);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			c = null;
 		}
 
 		encerraConexaocomBanco();
