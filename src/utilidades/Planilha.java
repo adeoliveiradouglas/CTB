@@ -2,16 +2,17 @@ package utilidades;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import entity.Processo;
-import jxl.DateCell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
 
 
 public class Planilha {
@@ -27,29 +28,41 @@ public class Planilha {
 	public Planilha(){}
 	
 	public ArrayList<Processo> carregar(File planilha, int contrato){
+		
 		int mesesConsecutivosSemDados = 0, //se esse valor chegar a 12 (1 ano) o loop para
 			linhaLeitura = 0;
 		
 		FormatarCampo fc = new FormatarCampo();
 		
-		Workbook workbook = null;
+		XSSFWorkbook workbook = null;
+		FileInputStream fisPlanilha = null;
+		
 		try {
-			workbook = Workbook.getWorkbook(planilha);
-		} catch (BiffException | IOException e) {
+//			Cria objeto de input stream
+			fisPlanilha = new FileInputStream(planilha);
+			
+//			cria workbook
+			workbook = new XSSFWorkbook(fisPlanilha);
+		} catch (FileNotFoundException e){
 			e.printStackTrace();
 			return new ArrayList<Processo>();
-		}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ArrayList<Processo>();
+		} 
 		
-		Sheet sheet = workbook.getSheet(0);
-		int quantLinhas = sheet.getRows();
+//		Recupera a primeira aba (Plan1) da planilha e põe em sheet
+		XSSFSheet sheet = workbook.getSheetAt(0);
+		int quantLinhas = sheet.getPhysicalNumberOfRows();
 
+		
  		ArrayList<Processo> lp = new ArrayList<>();
 		
 		for (int i = 1; i <= quantLinhas; ++i){
 			//Busca pela primeira linha de processos desse arquivo
 			int valor = 0;
 			try {
-				valor = Integer.parseInt(sheet.getCell(posicaoAno, i).getContents());
+				valor = Integer.parseInt(sheet.getRow(i).getCell(posicaoAno).toString());
 			} catch (NumberFormatException e) {}
 			
 			if(valor > 2000){
@@ -64,7 +77,7 @@ public class Planilha {
 			try {
 				aditivo = new BigDecimal(
 					fc.stringToDecimal(
-						sheet.getCell(posicaoValorAditivo, linhaLeitura).getContents()
+						sheet.getRow(linhaLeitura).getCell(posicaoValorAditivo).toString()
 					)
 				);
 			} catch (Exception e) {
@@ -75,7 +88,7 @@ public class Planilha {
 			try {
 				valor = new BigDecimal(
 					fc.stringToDecimal(
-						sheet.getCell(posicaoValor, linhaLeitura).getContents()
+						sheet.getRow(linhaLeitura).getCell(posicaoValor).toString()
 					)
 				);
 			} catch (Exception e) {
@@ -86,17 +99,17 @@ public class Planilha {
 			Date processo;
 			
 			try {
-				processo = ((DateCell) sheet.getCell(posicaoDataProcesso, linhaLeitura)).getDate();
+				processo = sheet.getRow(linhaLeitura).getCell(posicaoDataProcesso).getDateCellValue();
 			} catch (Exception e) {
 				processo = new Date();
 			}
 			
 			Processo p = new Processo(
-				sheet.getCell(posicaoNotaFiscal, linhaLeitura).getContents(), 
-				sheet.getCell(posicaoObjeto, linhaLeitura).getContents(), 
-				sheet.getCell(posicaoNumeroSei, linhaLeitura).getContents(), 
-				sheet.getCell(posicaoAno, linhaLeitura).getContents(), 
-				sheet.getCell(posicaoMes, linhaLeitura).getContents(), 
+				sheet.getRow(linhaLeitura).getCell(posicaoNotaFiscal).toString(), 
+				sheet.getRow(linhaLeitura).getCell(posicaoObjeto).toString(), 
+				sheet.getRow(linhaLeitura).getCell(posicaoNumeroSei).toString(), 
+				sheet.getRow(linhaLeitura).getCell(posicaoAno).toString(), 
+				sheet.getRow(linhaLeitura).getCell(posicaoMes).toString(), 
 				aditivo, 
 				valor, 
 				processo, 

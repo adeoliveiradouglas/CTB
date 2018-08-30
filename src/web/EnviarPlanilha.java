@@ -19,7 +19,7 @@ public class EnviarPlanilha implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		final String formatoArquivo = ".xls";
+		final String formatoArquivo = ".xlsx";
 		File planilha = null;
 
 		String origem = "" + pedido.getSession().getAttribute("origem"), teste = null;
@@ -38,7 +38,7 @@ public class EnviarPlanilha implements Logica {
 				/* Escreve a o arquivo na pasta img */
 				for (FileItem item : multiparts) {
 					if (!item.isFormField()) {
-						String formatoArquivoRecebido = item.getName().substring(item.getName().length() - 4,
+						String formatoArquivoRecebido = item.getName().substring(item.getName().length() - 5,
 								item.getName().length());
 
 						if (formatoArquivoRecebido.contains(formatoArquivo)) {
