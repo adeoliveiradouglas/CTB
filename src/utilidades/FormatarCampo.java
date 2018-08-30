@@ -26,7 +26,7 @@ public class FormatarCampo{
 	public String decimalToString(BigDecimal b) {
 //		pontos do valor e mudar vírgula para ponto
 		String parameter = "" + b,
-				aux = "0,0";
+				aux = "0,00";
 		
 		try {
 			parameter = parameter.replace(".", ",");
@@ -35,9 +35,6 @@ public class FormatarCampo{
 				iaux = 0;
 			
 			aux = parameter.substring(0, ivirgula);
-			
-					
-//		if(aux.length() > 3 && aux.length() < 7 )
 			
 			for (int i = ivirgula; i > 0; --i){
 				switch(iaux){
@@ -53,10 +50,7 @@ public class FormatarCampo{
 				++iaux;
 			}
 			aux = aux + parameter.substring(ivirgula);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (Exception e) {	}
 	
 		return aux;
 	}
