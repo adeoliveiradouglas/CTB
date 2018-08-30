@@ -4,6 +4,7 @@
 
 package dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import entity.Outro;
@@ -14,6 +15,10 @@ public class OutroDAO extends DAO{
 	
 	public OutroDAO(String nomeTabela) {
 		super(nomeTabela);
+	}
+	
+	public OutroDAO(String nomeTabela, Connection conexao) {
+		super(nomeTabela, conexao);
 	}
 
 	public ArrayList<Outro> getAll(){
@@ -38,14 +43,7 @@ public class OutroDAO extends DAO{
 			setResultado(
 				getStatement().executeQuery()
 			);
-		} catch (SQLException e) {			
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
-		}
-		
-		
-		try {
+			
 			while (getResultado().next()){				
 	//			Tipo abstrato para dados das tabelas uso, recurso e fontepagante
 				Outro o = new Outro(
@@ -55,9 +53,8 @@ public class OutroDAO extends DAO{
 				lista.add(o);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			lista = new ArrayList<Outro>();
 		}		
 		
 		encerraConexaocomBanco();
@@ -72,6 +69,9 @@ public class OutroDAO extends DAO{
 		setSqlQuery(
 			"select * from " + getNomeTabela() + " where " + colunaId + " = ?"
 		);
+		
+//		Tipo abstrato para dados das tabelas uso, recurso e fontepagante
+		Outro o = null;
 		
 		try {
 //			Prepara o statement
@@ -89,17 +89,8 @@ public class OutroDAO extends DAO{
 //			Executa a query
 			setResultado(
 				getStatement().executeQuery()
-			);
-		} catch (SQLException e) {			
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
-		}
+			);	
 		
-		
-//		Tipo abstrato para dados das tabelas uso, recurso e fontepagante
-		Outro o = null;
-		try {
 			if(getResultado().next()){
 				o = new Outro(
 					getResultado().getInt(colunaId),
@@ -107,9 +98,8 @@ public class OutroDAO extends DAO{
 				);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			o = null;
 		}		
 		
 		encerraConexaocomBanco();

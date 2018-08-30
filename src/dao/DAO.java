@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data 
 public class DAO {
-	private Connection dbConnection;
+	private Connection dbConnection = null;
 	private String sqlQuery = null, 
 				   nomeTabela = null, 
 				   nomeBanco = "gestaodecontratos",
@@ -24,21 +24,14 @@ public class DAO {
 				   ip = "localhost";
 	private ResultSet resultado = null;
 	private PreparedStatement statement = null;
-	
-	protected DAO(String nomeDB, String usuarioDB, String senhaDB, String tabelaBD, String ip) {
-		this.nomeBanco = nomeDB;
-		this.usuarioBanco = usuarioDB;
-		this.senhaBanco = senhaDB;
-		this.nomeTabela = tabelaBD;
-		this.ip = ip;
+	private boolean fecharConexao = true;
+			
+	protected DAO (String tabelaDB, Connection conexao){
+//		recebe a conexao de outra classe. É usada quando um DAO chama outro para evitar abertura de novas conexões
+		this.nomeTabela = tabelaDB;
+		this.dbConnection = conexao;
+		this.fecharConexao = false;
 	}
-
-	protected DAO(String nomeDB, String usuarioDB, String senhaDB, String tabelaBD) {
-		this.nomeBanco = nomeDB;
-		this.usuarioBanco = usuarioDB;
-		this.senhaBanco = senhaDB;
-		this.nomeTabela = tabelaBD;		
-	}	
 	
 	protected DAO (String tabelaDB){
 		this.nomeTabela = tabelaDB;
@@ -46,13 +39,22 @@ public class DAO {
 
 	protected void iniciaConexaoComBanco() {
 		// inicia a conexão com o banco de dados
-		this.dbConnection = new DBConnection(ip, nomeBanco, usuarioBanco, senhaBanco).getConnection();
+		if (dbConnection == null)
+//			só inicia uma nova conexão caso ela ainda não exista
+			this.dbConnection = new DBConnection(ip, nomeBanco, usuarioBanco, senhaBanco).getConnection();		
 	}
 
 	protected void encerraConexaocomBanco() {
 		// fecha a conexão com o banco e limpa as variáveis para "liberar memória"
 		try {
-			this.dbConnection.close();
+			if (fecharConexao)
+				/*
+				 * só fecha a conexão caso o DAO não seja dependente de outros
+				 * exemplo: UsuarioDAO chama SetorDAO. SetorDAO não fecha a conexao, então essa variável de controle
+				 * fica como falsa pois UsuarioDAO ainda pode fazer novos acessos ao banco
+				*/
+				this.dbConnection.close();
+			
 			this.statement.close();
 			this.limpaVariaveis();
 		} catch (SQLException e) {
