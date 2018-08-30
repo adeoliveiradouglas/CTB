@@ -12,3 +12,5 @@ build/
 src/GestaoDeContratos\.java
 
 backup data\.sql
+
+src/main/testes\.java
