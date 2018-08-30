@@ -35,7 +35,7 @@ public class SistemaServlet extends HttpServlet {
 //			System.out.println(pagina + " solicitada");
 			pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
 
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e){
 			nomeDaClasse = pacote + "TelaLogin";
 			try {
 				classe = Class.forName(nomeDaClasse);
@@ -45,8 +45,9 @@ public class SistemaServlet extends HttpServlet {
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}			
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 }
