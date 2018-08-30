@@ -87,7 +87,7 @@ public class FormatarCampo{
 			case "Janeiro":
 				return "01";
 				
-			case "Feveiro":
+			case "Fevereiro":
 				return "02";
 				
 			case "Março":
