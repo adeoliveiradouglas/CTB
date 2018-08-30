@@ -70,7 +70,7 @@ public class ProcessoDAO extends DAO{
 					getResultado().getDate(colunaDataProcesso),
 					getResultado().getDate(colunaReferencia),
 					id,
-					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaUsuario))
 				);
 				
 				lista.add(p);
@@ -173,9 +173,10 @@ public class ProcessoDAO extends DAO{
 			getStatement().setString(2, numeroSei);
 			
 			getStatement().executeUpdate();
-		}catch(SQLException e){
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
 		encerraConexaocomBanco();
 	}
 
@@ -218,7 +219,7 @@ public class ProcessoDAO extends DAO{
 					getResultado().getDate(colunaDataProcesso),
 					getResultado().getDate(colunaReferencia),
 					getResultado().getInt(colunaContrato),
-					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaUsuario))
 				);
 				
 				lista.add(p);
@@ -266,7 +267,7 @@ public class ProcessoDAO extends DAO{
 					getResultado().getDate(colunaDataProcesso),
 					getResultado().getDate(colunaReferencia),
 					getResultado().getInt(colunaContrato),
-					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))					
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaUsuario))					
 				);
 				
 				lista.add(p);

@@ -38,8 +38,7 @@ public class ContratoDAO extends DAO {
 
 	public ArrayList<Contrato> getByGestor(int id, String ordenacao) {
 		ArrayList<Contrato> lista = new ArrayList<Contrato>();
-		Contrato c = null;
-
+		
 		iniciaConexaoComBanco();
 
 		// Exemplo: select * from contrato where gestor = matricula
@@ -51,17 +50,18 @@ public class ContratoDAO extends DAO {
 			getStatement().setInt(1, id);
 
 			setResultado(getStatement().executeQuery());
+			Contrato c = null;
 
 			// Traduzir resultado para objeto
 			while (getResultado().next()) {
 				c = new Contrato(
 					getResultado().getInt(colunaId), 
 					getResultado().getInt(colunaPortaria),
-					new UsuarioDAO().getById(getResultado().getInt(colunaGestor)),
-					new UsuarioDAO().getById(getResultado().getInt(colunaFiscal)),
-					new OutroDAO("recurso").getById(getResultado().getInt(colunaRecurso)),
-					new OutroDAO("fontepagante").getById(getResultado().getInt(colunaFontePagante)),
-					new OutroDAO("uso").getById(getResultado().getInt(colunaUso)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaGestor)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaFiscal)),
+					new OutroDAO("recurso", getDbConnection()).getById(getResultado().getInt(colunaRecurso)),
+					new OutroDAO("fontepagante", getDbConnection()).getById(getResultado().getInt(colunaFontePagante)),
+					new OutroDAO("uso", getDbConnection()).getById(getResultado().getInt(colunaUso)),
 					getResultado().getString(colunaNumero),
 					getResultado().getString(colunaEmpresaCnpj), 
 					getResultado().getString(colunaEmpresaNome),
@@ -81,9 +81,8 @@ public class ContratoDAO extends DAO {
 				lista.add(c);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			lista = new ArrayList<Contrato>();
 		}
 
 		encerraConexaocomBanco();
@@ -124,11 +123,11 @@ public class ContratoDAO extends DAO {
 				c = new Contrato(
 					getResultado().getInt(colunaId), 
 					getResultado().getInt(colunaPortaria),
-					new UsuarioDAO().getById(getResultado().getInt(colunaGestor)),
-					new UsuarioDAO().getById(getResultado().getInt(colunaFiscal)),
-					new OutroDAO("recurso").getById(getResultado().getInt(colunaRecurso)),
-					new OutroDAO("fontepagante").getById(getResultado().getInt(colunaFontePagante)),
-					new OutroDAO("uso").getById(getResultado().getInt(colunaUso)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaGestor)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaFiscal)),
+					new OutroDAO("recurso", getDbConnection()).getById(getResultado().getInt(colunaRecurso)),
+					new OutroDAO("fontepagante", getDbConnection()).getById(getResultado().getInt(colunaFontePagante)),
+					new OutroDAO("uso", getDbConnection()).getById(getResultado().getInt(colunaUso)),
 					getResultado().getString(colunaNumero),
 					getResultado().getString(colunaEmpresaCnpj), 
 					getResultado().getString(colunaEmpresaNome),
@@ -139,7 +138,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId)),
+					new ProcessoDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
@@ -215,11 +214,10 @@ public class ContratoDAO extends DAO {
 
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);
-			;
-		} finally {
-			encerraConexaocomBanco();
+			e.printStackTrace();
 		}
+		
+		encerraConexaocomBanco();
 	}
 
 	public ArrayList<Contrato> getAll() {
@@ -239,18 +237,12 @@ public class ContratoDAO extends DAO {
 		try {
 			// monta o statement
 			setStatement(
-					// pega prepareStatement da conexao
-					getDbConnection().prepareStatement(getSqlQuery()));
+				// pega prepareStatement da conexao
+				getDbConnection().prepareStatement(getSqlQuery())
+			);
 
 			setResultado(getStatement().executeQuery());
-		} catch (SQLException e) {
-			System.out.println(e);
-			;
-			encerraConexaocomBanco();
-			return new ArrayList<Contrato>();
-		}
-
-		try {
+			
 			Contrato c;
 			while (getResultado().next()) {
 				/*
@@ -260,11 +252,11 @@ public class ContratoDAO extends DAO {
 				c = new Contrato(
 					getResultado().getInt(colunaId), 
 					getResultado().getInt(colunaPortaria),
-					new UsuarioDAO().getById(getResultado().getInt(colunaGestor)),
-					new UsuarioDAO().getById(getResultado().getInt(colunaFiscal)),
-					new OutroDAO("recurso").getById(getResultado().getInt(colunaRecurso)),
-					new OutroDAO("fontepagante").getById(getResultado().getInt(colunaFontePagante)),
-					new OutroDAO("uso").getById(getResultado().getInt(colunaUso)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaGestor)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaFiscal)),
+					new OutroDAO("recurso", getDbConnection()).getById(getResultado().getInt(colunaRecurso)),
+					new OutroDAO("fontepagante", getDbConnection()).getById(getResultado().getInt(colunaFontePagante)),
+					new OutroDAO("uso", getDbConnection()).getById(getResultado().getInt(colunaUso)),
 					getResultado().getString(colunaNumero),
 					getResultado().getString(colunaEmpresaCnpj), 
 					getResultado().getString(colunaEmpresaNome),
@@ -275,7 +267,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId)),
+					new ProcessoDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
@@ -286,14 +278,11 @@ public class ContratoDAO extends DAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println(e);
-			;
-			encerraConexaocomBanco();
-			return new ArrayList<Contrato>();
+			e.printStackTrace();
+			contratos = new ArrayList<Contrato>();
 		}
 
 		encerraConexaocomBanco();
-
 		return contratos;
 	}
 
@@ -328,11 +317,11 @@ public class ContratoDAO extends DAO {
 				c = new Contrato(
 					getResultado().getInt(colunaId), 
 					getResultado().getInt(colunaPortaria),
-					new UsuarioDAO().getById(getResultado().getInt(colunaGestor)),
-					new UsuarioDAO().getById(getResultado().getInt(colunaFiscal)),
-					new OutroDAO("recurso").getById(getResultado().getInt(colunaRecurso)),
-					new OutroDAO("fontepagante").getById(getResultado().getInt(colunaFontePagante)),
-					new OutroDAO("uso").getById(getResultado().getInt(colunaUso)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaGestor)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaFiscal)),
+					new OutroDAO("recurso", getDbConnection()).getById(getResultado().getInt(colunaRecurso)),
+					new OutroDAO("fontepagante", getDbConnection()).getById(getResultado().getInt(colunaFontePagante)),
+					new OutroDAO("uso", getDbConnection()).getById(getResultado().getInt(colunaUso)),
 					getResultado().getString(colunaNumero),
 					getResultado().getString(colunaEmpresaCnpj), 
 					getResultado().getString(colunaEmpresaNome),
@@ -343,7 +332,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContrato(getResultado().getInt(colunaId)),
+					new ProcessoDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
@@ -387,11 +376,11 @@ public class ContratoDAO extends DAO {
 				c = new Contrato(
 					getResultado().getInt(colunaId), 
 					getResultado().getInt(colunaPortaria),
-					new UsuarioDAO().getById(getResultado().getInt(colunaGestor)),
-					new UsuarioDAO().getById(getResultado().getInt(colunaFiscal)),
-					new OutroDAO("recurso").getById(getResultado().getInt(colunaRecurso)),
-					new OutroDAO("fontepagante").getById(getResultado().getInt(colunaFontePagante)),
-					new OutroDAO("uso").getById(getResultado().getInt(colunaUso)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaGestor)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaFiscal)),
+					new OutroDAO("recurso", getDbConnection()).getById(getResultado().getInt(colunaRecurso)),
+					new OutroDAO("fontepagante", getDbConnection()).getById(getResultado().getInt(colunaFontePagante)),
+					new OutroDAO("uso", getDbConnection()).getById(getResultado().getInt(colunaUso)),
 					getResultado().getString(colunaNumero),
 					getResultado().getString(colunaEmpresaCnpj), 
 					getResultado().getString(colunaEmpresaNome),
@@ -402,7 +391,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO().getByContratoSemPagamento(id),
+					new ProcessoDAO(getDbConnection()).getByContratoSemPagamento(id),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)

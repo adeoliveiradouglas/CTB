@@ -94,7 +94,7 @@ public class UsuarioDAO extends DAO {
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 			
 		encerraConexaocomBanco();
@@ -152,6 +152,7 @@ public class UsuarioDAO extends DAO {
 					getResultado().getString(
 						colunaSenha
 					),
+					
 					
 //					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 					new SetorDAO(getDbConnection()).getByCodigo(
@@ -274,14 +275,6 @@ public class UsuarioDAO extends DAO {
 				getStatement().executeQuery()
 			);
 			
-		} catch(SQLException e) {
-			System.out.println(e);
-			encerraConexaocomBanco();
-			return null;
-		}
-		
-		
-		try{
 			Usuario u = null;
 			
 			while(getResultado().next()){
@@ -313,8 +306,8 @@ public class UsuarioDAO extends DAO {
 				lu.add(u);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);
-			lu = null;
+			e.printStackTrace();
+			lu = new ArrayList<>();
 		}
 		
 		encerraConexaocomBanco();
@@ -357,14 +350,6 @@ public class UsuarioDAO extends DAO {
 				getStatement().executeQuery()
 			);
 			
-		} catch(SQLException e) {
-			System.out.println(e);
-			encerraConexaocomBanco();
-			return null;
-		}
-		
-		
-		try{
 			Usuario u = null;
 			
 			while(getResultado().next()){
@@ -396,8 +381,8 @@ public class UsuarioDAO extends DAO {
 				lu.add(u);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);
-			lu = null;
+			e.printStackTrace();
+			lu = new ArrayList<>();
 		}
 		
 		encerraConexaocomBanco();
@@ -435,7 +420,7 @@ public class UsuarioDAO extends DAO {
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		
 		encerraConexaocomBanco();
@@ -465,7 +450,7 @@ public class UsuarioDAO extends DAO {
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		
 		encerraConexaocomBanco();	
@@ -535,7 +520,7 @@ public class UsuarioDAO extends DAO {
 				
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 			
 		encerraConexaocomBanco();
@@ -572,14 +557,6 @@ public class UsuarioDAO extends DAO {
 				getStatement().executeQuery()
 			);
 			
-		} catch(SQLException e) {
-			System.out.println(e);
-			encerraConexaocomBanco();
-			return null;
-		}
-		
-		
-		try{
 			Usuario u = null;
 			
 			while(getResultado().next()){
@@ -611,8 +588,8 @@ public class UsuarioDAO extends DAO {
 				lu.add(u);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);
-			lu = null;
+			e.printStackTrace();
+			lu = new ArrayList<>() ;
 		}
 		
 		encerraConexaocomBanco();
@@ -688,9 +665,8 @@ public class UsuarioDAO extends DAO {
 				lu.add(u);
 			}
 		} catch(SQLException e) {
-			System.out.println(e);
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			lu = new ArrayList<Usuario>();
 		}
 		
 		

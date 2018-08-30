@@ -66,9 +66,8 @@ public class CargoDAO extends DAO{
 				);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			c = null;
 		}
 
 		encerraConexaocomBanco();
@@ -108,9 +107,8 @@ public class CargoDAO extends DAO{
 				lc.add(c);
 			}
 		} catch (SQLException e) {
-			encerraConexaocomBanco();
-			System.out.println(e);;
-			return null;
+			e.printStackTrace();
+			c = null;
 		} 
 			
 		encerraConexaocomBanco();
@@ -155,9 +153,8 @@ public class CargoDAO extends DAO{
 				);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			c = null;
 		} 
 		
 		encerraConexaocomBanco();
