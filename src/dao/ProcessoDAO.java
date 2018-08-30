@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -24,6 +25,10 @@ public class ProcessoDAO extends DAO{
 	
 	public ProcessoDAO() {
 		super("processo");
+	}
+	
+	public ProcessoDAO(Connection conexao) {
+		super("processo", conexao);
 	}
 	
 	public ArrayList<Processo> getByContrato(int id){
@@ -65,7 +70,7 @@ public class ProcessoDAO extends DAO{
 					getResultado().getDate(colunaDataProcesso),
 					getResultado().getDate(colunaReferencia),
 					id,
-					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaUsuario))
 				);
 				
 				lista.add(p);
@@ -168,9 +173,10 @@ public class ProcessoDAO extends DAO{
 			getStatement().setString(2, numeroSei);
 			
 			getStatement().executeUpdate();
-		}catch(SQLException e){
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
 		encerraConexaocomBanco();
 	}
 
@@ -213,7 +219,7 @@ public class ProcessoDAO extends DAO{
 					getResultado().getDate(colunaDataProcesso),
 					getResultado().getDate(colunaReferencia),
 					getResultado().getInt(colunaContrato),
-					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaUsuario))
 				);
 				
 				lista.add(p);
@@ -261,7 +267,7 @@ public class ProcessoDAO extends DAO{
 					getResultado().getDate(colunaDataProcesso),
 					getResultado().getDate(colunaReferencia),
 					getResultado().getInt(colunaContrato),
-					new UsuarioDAO().getById(getResultado().getInt(colunaUsuario))					
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaUsuario))					
 				);
 				
 				lista.add(p);

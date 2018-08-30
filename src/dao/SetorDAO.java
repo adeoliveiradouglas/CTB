@@ -5,6 +5,7 @@
 
 package dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,16 +16,12 @@ public class SetorDAO extends DAO{
 						 colunaCodigo = getNomeTabela() + ".codigo",
 	   		 			 colunaSigla = getNomeTabela() + ".sigla";
 
-	public SetorDAO(String nomeDB, String usuarioDB, String senhaDB) {
-		super(nomeDB, usuarioDB, senhaDB, "setor");
-	}
-	
-	public SetorDAO(String nomeDB, String usuarioDB, String senhaDB, String ip) {
-		super(nomeDB, usuarioDB, senhaDB, "setor", ip);
-	}
-
 	public SetorDAO(){
 		super("setor");
+	}
+	
+	public SetorDAO(Connection conexao){
+		super("setor", conexao);
 	}
 	
 	public Setor getByCodigo(String codigo){
@@ -35,6 +32,8 @@ public class SetorDAO extends DAO{
 //			select * from setor where codigo = "codigoInserido" 
 			"select * from " + getNomeTabela() + " where "+ this.colunaCodigo + " = ?"	
 		);
+		
+		Setor s = null;
 		
 		try {
 //			monta o statement
@@ -55,15 +54,8 @@ public class SetorDAO extends DAO{
 				getStatement().executeQuery()
 			);
 			
-		} catch (SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
-		} 
-		
-//		traduz o resultado para um objeto Setor
-		Setor s = null;
-		try {
+			
+//			traduz o resultado para um objeto Setor
 			while (getResultado().next()){
 				s = new Setor(
 					getResultado().getString(colunaCodigo),
@@ -71,10 +63,11 @@ public class SetorDAO extends DAO{
 					getResultado().getString(colunaSigla)
 				);				
 			}
+			
 		} catch (SQLException e) {
+			e.printStackTrace();
 			s = null;
-			System.out.println(e);;
-		}
+		} 
 		
 		encerraConexaocomBanco();
 		return s;
@@ -86,13 +79,11 @@ public class SetorDAO extends DAO{
 //		monta a query
 		setSqlQuery(
 //			select * from setor where sigla = "siglaInserida" 
-			"select * from " + 
-			getNomeTabela() + 
-			" where "+ 
-			this.colunaSigla + 
-			" = ?"	
+			"select * from " + getNomeTabela() + " where "+ this.colunaSigla + " = ?"	
 		);
 		
+		Setor s = null;
+
 		try {
 //			monta o statement
 			setStatement( 
@@ -112,15 +103,7 @@ public class SetorDAO extends DAO{
 				getStatement().executeQuery()
 			);
 			
-		} catch (SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
-		} 
-		
-//		traduz o resultado para um objeto Setor
-		Setor s = null;
-		try {
+//			traduz o resultado para um objeto Setor
 			while (getResultado().next()){
 				s = new Setor(
 					getResultado().getString(colunaCodigo),
@@ -129,18 +112,22 @@ public class SetorDAO extends DAO{
 				);				
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			s = null;
-			System.out.println(e);;
 		}
 		
 		encerraConexaocomBanco();
 		return s;
 	}
+	
 	public ArrayList<Setor> getAll(){
 		iniciaConexaoComBanco();
 		setSqlQuery(
 			"select * from " + getNomeTabela() + " order by sigla"
 		);
+		
+		ArrayList<Setor> setores = new ArrayList<Setor>();
+		Setor s;
 		
 		try {
 //			monta o statement
@@ -154,15 +141,8 @@ public class SetorDAO extends DAO{
 			setResultado(
 				getStatement().executeQuery()
 			);
-		} catch (SQLException e) {
-			System.out.println(e);;
-		}
 		
-		
-//		traduzir o resultado
-		ArrayList<Setor> setores = new ArrayList<Setor>();
-		Setor s;
-		try {
+//			traduzir o resultado
 			while(getResultado().next()){
 				s = new Setor(
 					getResultado().getString(colunaCodigo),
@@ -172,9 +152,8 @@ public class SetorDAO extends DAO{
 				setores.add(s);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);;
-			return null;
+			e.printStackTrace();
+			setores = new ArrayList<Setor>();
 		}
 		
 		encerraConexaocomBanco();

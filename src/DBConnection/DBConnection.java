@@ -22,10 +22,14 @@ public class DBConnection {
 		try {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 			
+			String parametro1 = "autoReconnect=true",
+				   parametro2 = "&useSSL=false",
+				   parametro3 = "&allowPublicKeyRetrieval=true"; //bug resolvido ao adicionar esse parâmetro na url
+			
 			/*Exemplo de url
 			jdbc:mysql://ip:porta/nomeDoBanco?autoReconnect=true&useSSL=false*/			
 			return DriverManager.getConnection(
-				"jdbc:mysql://" + ip + ":" + porta +"/" + nomeBanco + "?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true", 
+				"jdbc:mysql://" + ip + ":" + porta +"/" + nomeBanco + "?" + parametro1 + parametro2 + parametro3, 
 				usuarioBanco, 
 				senhaBanco
 			);

@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import entity.Cargo;
@@ -10,16 +11,20 @@ public class CargoDAO extends DAO{
 						 colunaNome = getNomeTabela() + ".nome",
 						 colunaDescricao = getNomeTabela() + ".descricao";
 	
-	public CargoDAO(String nomeDB, String usuarioDB, String senhaDB) {
+	/*public CargoDAO(String nomeDB, String usuarioDB, String senhaDB) {
 		super(nomeDB, usuarioDB, senhaDB, "cargo");
 	}
 	
 	public CargoDAO(String nomeDB, String usuarioDB, String senhaDB, String ip) {
 		super(nomeDB, usuarioDB, senhaDB, "cargo", ip);
-	}
+	}*/
 	
 	public CargoDAO(){
 		super("cargo");
+	}
+	
+	public CargoDAO(Connection conexao){
+		super("cargo", conexao);
 	}
 	
 	public Cargo getById(int id){
@@ -61,9 +66,8 @@ public class CargoDAO extends DAO{
 				);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			c = null;
 		}
 
 		encerraConexaocomBanco();
@@ -103,9 +107,8 @@ public class CargoDAO extends DAO{
 				lc.add(c);
 			}
 		} catch (SQLException e) {
-			encerraConexaocomBanco();
-			System.out.println(e);;
-			return null;
+			e.printStackTrace();
+			c = null;
 		} 
 			
 		encerraConexaocomBanco();
@@ -150,9 +153,8 @@ public class CargoDAO extends DAO{
 				);
 			}
 		} catch (SQLException e) {
-			System.out.println(e);;
-			encerraConexaocomBanco();
-			return null;
+			e.printStackTrace();
+			c = null;
 		} 
 		
 		encerraConexaocomBanco();
