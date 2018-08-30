@@ -21,6 +21,8 @@ import utilidades.FormatarCampo;
 
 @Data
 public class Contrato {
+	private final String formatoData = "dd/MM/yyyy";
+	
 	private int id,
 				portaria;
 	
@@ -52,6 +54,40 @@ public class Contrato {
 	public boolean avisado90, 
 				   avisado60, 
 				   avisado45;
+	/*MÉTODOS*/
+	
+	public String getValorInicialAsString(){
+		return new FormatarCampo().decimalToString(this.valorInicial);
+	}
+	
+	public String getValorAditivoAsString(){
+		return new FormatarCampo().decimalToString(this.valorAditivos);
+	}
+	
+	public String getValorTotalAsString(){
+		return new FormatarCampo().decimalToString(this.valorTotal);
+	}
+	
+	public String getDataAssinaturaAsString(){
+		return this.dataAssinatura.toString(formatoData);
+	}
+	
+	public String getDataOrdemServicoAsString(){
+		return this.dataOrdemServico.toString(formatoData);
+	}
+	
+	public String getDataGarantiaAsString(){
+		return this.dataGarantia.toString(formatoData);
+	}
+	
+	public String getDataVencimentoContratoAsString(){
+		return this.dataVencimentoContrato.toString(formatoData);
+	}
+	
+	public String getDataVencimentoGarantiaAsString(){
+		return this.dataVencimentoGarantia.toString(formatoData);
+	}
+	
 	public Contrato(int id, boolean avisado90, boolean avisado60, boolean avisado45) {
 		super();
 		this.id = id;
@@ -59,6 +95,7 @@ public class Contrato {
 		this.avisado60 = avisado60;
 		this.avisado45 = avisado45;
 	}
+	
 	public Contrato(
 			String numero, 
 			int portaria,
@@ -150,18 +187,6 @@ public class Contrato {
 		this.valorTotal = valorInicial.add(aditivo);
 	}*/
 	
-	public String getValorInicialAsString(){
-		return new FormatarCampo().decimalToString(this.valorInicial);
-	}
-	
-	public String getValorAditivoAsString(){
-		return new FormatarCampo().decimalToString(this.valorAditivos);
-	}
-	
-	public String getValorTotalAsString(){
-		return new FormatarCampo().decimalToString(this.valorTotal);
-	}
-
 	public Contrato(
 			int id, 
 			int portaria, 

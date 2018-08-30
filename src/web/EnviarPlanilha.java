@@ -55,8 +55,11 @@ public class EnviarPlanilha implements Logica {
 				ex.printStackTrace();
 			}
 
-			ArrayList<Processo> previaProcessos = new Planilha().carregar(new File(System.getProperty("user.home"), teste),
-					idContrato);
+			ArrayList<Processo> previaProcessos = new Planilha().
+					carregar(
+						planilha,
+						idContrato
+					);
 			pedido.getSession().setAttribute("previaProcessos", previaProcessos);
 			
 			planilha.delete();

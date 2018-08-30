@@ -62,3 +62,8 @@ Classes DAO:
 	- recupera um contrato com processos sem pagamento através da id
 	- atualiza data de vencimento 
 	- atualiza informações de aviso por email
+	
+	
+Bugs encontrados:
+	- planilhas devem estar no formato .xls 97- 2003
+	- planilhas protegidas por senha não são lidas (BiffException)

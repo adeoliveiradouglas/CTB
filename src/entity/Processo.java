@@ -20,6 +20,8 @@ import utilidades.FormatarCampo;
 
 @Data
 public class Processo {
+	private final String formatoData = "dd/MM/yyyy";
+	
 	private String notaFiscal,
 			tipoAditivo = null, // vide cabecalho obs2
 			numeroSei, // vide cabecalho obs1
@@ -90,11 +92,11 @@ public class Processo {
 	}
 	
 	public String getDataPagamentoAsString(){
-		return this.dataPagamento.toString("dd/MM/yyyy");
+		return this.dataPagamento.toString(formatoData);
 	}
 	
 	public String getDataProcessoAsString(){
-		return this.dataProcesso.toString("dd/MM/yyyy");
+		return this.dataProcesso.toString(formatoData);
 	}
 
 	public String getMesAsInt() {

@@ -27,10 +27,7 @@
 		
 	
 	<%		 
-	FormatarCampo format = new FormatarCampo();
-
-	String adicionaProcesso = request.getParameter("adicionaProcesso"),
-		   formatoData = "dd/MM/yyyy";
+	String adicionaProcesso = request.getParameter("adicionaProcesso");
 	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");	
 	
 	@SuppressWarnings("unchecked")
@@ -57,16 +54,16 @@
 				<td class="text-center col-md-1">Fonte pagante: <%=contrato.getFontePagante().getNome()%></td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Data de assinatura: <%=contrato.getDataAssinatura().toString(formatoData) %></td>
+				<td class="text-center col-md-1">Data de assinatura: <%=contrato.getDataAssinaturaAsString() %></td>
 				<td class="text-center col-md-1">Valor inicial: R$ <%=contrato.getValorInicialAsString() %></td>
 				<td class="text-center col-md-1">Valor dos aditivos: R$ <%=contrato.getValorAditivoAsString() %></td>
 				<td class="text-center col-md-1">Valor total: R$ <%=contrato.getValorTotalAsString()%></td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Ass. ordem de serviço: <%=contrato.getDataOrdemServico().toString(formatoData) %></td>
-				<td class="text-center col-md-1">Ass. garantia: <%=contrato.getDataGarantia().toString(formatoData) %></td>
-				<td class="text-center col-md-1">Vencimento do contrato: <%=contrato.getDataVencimentoContrato().toString(formatoData) %></td>
-				<td class="text-center col-md-1">Vencimento da garantia: <%=contrato.getDataVencimentoGarantia().toString(formatoData) %></td>
+				<td class="text-center col-md-1">Ass. ordem de serviço: <%=contrato.getDataOrdemServicoAsString() %></td>
+				<td class="text-center col-md-1">Ass. garantia: <%=contrato.getDataGarantiaAsString() %></td>
+				<td class="text-center col-md-1">Vencimento do contrato: <%=contrato.getDataVencimentoContratoAsString() %></td>
+				<td class="text-center col-md-1">Vencimento da garantia: <%=contrato.getDataVencimentoGarantiaAsString() %></td>
 			</tr>
 		</tbody>
 	</table>
@@ -93,7 +90,7 @@
 			String pagamento = "";
 			
 			if(p.getDataPagamento() != null){
-				pagamento = p.getDataPagamento().toString(formatoData);
+				pagamento = p.getDataPagamentoAsString();
 			}%>
 			<tr>
 				<td class="text-center">
@@ -111,9 +108,9 @@
 				<td class="text-center"><%=p.getMes()%></td>
 				<td class="text-center"><%=p.getAno() %></td>
 				<td class="text-center"><%=p.getNotaFiscal() %></td>
-				<td class="text-center"><%=p.getDataProcesso().toString(formatoData)  %></td>
-				<td class="text-center"><%=format.decimalToString(p.getValor()) %></td>
-				<td class="text-center"><%=format.decimalToString(p.getAditivo()) %></td>
+				<td class="text-center"><%=p.getDataProcessoAsString()  %></td>
+				<td class="text-center"><%=p.getValorAsString() %></td>
+				<td class="text-center"><%=p.getAditivoAsString() %></td>
 				<td class="text-center"><%=p.getTipoAditivo() %></td>
 				<td class="text-center">
 					<form action="sistema?logica=EditarPrevia" method="post">

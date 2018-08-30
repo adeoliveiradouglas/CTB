@@ -43,12 +43,17 @@ public class Planilha {
 		Sheet sheet = workbook.getSheet(0);
 		int quantLinhas = sheet.getRows();
 
-		ArrayList<Processo> lp = new ArrayList<>();
+ 		ArrayList<Processo> lp = new ArrayList<>();
 		
 		for (int i = 1; i <= quantLinhas; ++i){
 			//Busca pela primeira linha de processos desse arquivo
-			if(sheet.getCell(posicaoAno, i).getContents().equals("ANO REFER.")){
-				linhaLeitura = i + 1;
+			int valor = 0;
+			try {
+				valor = Integer.parseInt(sheet.getCell(posicaoAno, i).getContents());
+			} catch (NumberFormatException e) {}
+			
+			if(valor > 2000){
+				linhaLeitura = i;
 				i += quantLinhas;
 			}
 		}
