@@ -29,7 +29,7 @@ public class AutorizarNovoUsuario implements Logica{
 		new UsuarioDAO().inserir(u);
 		
 //		remove da tabela de novos usuários
-		new UsuarioDAO("usuariosnovos").deleteById(u.getId());
+		new UsuarioDAO(true).deleteById(u.getId());
 		
 		return "sistema?logica=TelaPrincipal";
 	}

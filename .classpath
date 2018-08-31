@@ -57,34 +57,34 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/dom4j-1.6.1.jar">
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/dom4j-1.6.1.jar">
 		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-3.9.jar">
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-3.9.jar">
 		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-ooxml-3.9.jar">
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-ooxml-3.9.jar">
 		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-ooxml-schemas-3.9.jar">
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-ooxml-schemas-3.9.jar">
 		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/stax-api-1.0.1.jar">
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/stax-api-1.0.1.jar">
 		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/xmlbeans-2.6.0.jar">
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/xmlbeans-2.6.0.jar">
 		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>

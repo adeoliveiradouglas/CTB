@@ -61,9 +61,10 @@ public class Planilha {
 		for (int i = 1; i <= quantLinhas; ++i){
 			//Busca pela primeira linha de processos desse arquivo
 			int valor = 0;
+			
 			try {
-				valor = Integer.parseInt(sheet.getRow(i).getCell(posicaoAno).toString());
-			} catch (NumberFormatException e) {}
+				valor = (int) sheet.getRow(i).getCell(posicaoAno).getNumericCellValue();
+			} catch (NumberFormatException | IllegalStateException e) {}
 			
 			if(valor > 2000){
 				linhaLeitura = i;
@@ -108,7 +109,7 @@ public class Planilha {
 				sheet.getRow(linhaLeitura).getCell(posicaoNotaFiscal).toString(), 
 				sheet.getRow(linhaLeitura).getCell(posicaoObjeto).toString(), 
 				sheet.getRow(linhaLeitura).getCell(posicaoNumeroSei).toString(), 
-				sheet.getRow(linhaLeitura).getCell(posicaoAno).toString(), 
+				"" + sheet.getRow(linhaLeitura).getCell(posicaoAno).getNumericCellValue(), 
 				sheet.getRow(linhaLeitura).getCell(posicaoMes).toString(), 
 				aditivo, 
 				valor, 
