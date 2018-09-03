@@ -15,22 +15,31 @@ import java.util.Date;
 
 import org.joda.time.DateTime;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import utilidades.FormatarCampo;
 
-@Data
 public class Processo {
-	private final String formatoData = "dd/MM/yyyy";
-	
+	private static final String formatoData = "dd/MM/yyyy";
+
+	@Getter @Setter
 	private String notaFiscal,
 			tipoAditivo = null, // vide cabecalho obs2
 			numeroSei, // vide cabecalho obs1
 			ano, mes;
+	
+	@Getter @Setter
 	private BigDecimal aditivo = null,  // vide cabecalho obs2
-					   valor; 
+					   valor;
+	
+	@Getter @Setter
 	private DateTime dataPagamento = null, // vide cabecalho obs3
 				     dataProcesso;
-	private int idContrato, idProcesso; 
+	
+	@Getter @Setter
+	private int idContrato, idProcesso;
+	
+	@Getter @Setter
 	private Usuario tesoureiro;
 	
 	public Processo(){}

@@ -1,6 +1,7 @@
 package web;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +20,19 @@ public class EnviarPlanilha implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		final String formatoArquivo = ".xlsx";
+		final String formatoArquivoXLSX = ".xlsx",
+					 formatoArquivoXLS = ".xls";
 		File planilha = null;
 
-		String origem = "" + pedido.getSession().getAttribute("origem"), teste = null;
+		String origem = "" + pedido.getSession().getAttribute("origem"), nomeDoArquivo = null;
 		int n = Integer.parseInt("" + pedido.getSession().getAttribute("n"));
 
 		@SuppressWarnings("unchecked")
 		ArrayList<Contrato> contratos = ((ArrayList<Contrato>) pedido.getSession().getAttribute(origem));
 		int idContrato = contratos.get(n).getId();
 
+		ArrayList<Processo> previaProcessos = null;
+		
 		/* Identifica se o formulario é do tipo multipart/form-data */
 		if (ServletFileUpload.isMultipartContent(pedido)) {
 			try {
@@ -41,25 +45,34 @@ public class EnviarPlanilha implements Logica {
 						String formatoArquivoRecebido = item.getName().substring(item.getName().length() - 5,
 								item.getName().length());
 
-						if (formatoArquivoRecebido.contains(formatoArquivo)) {
-							// para processar somente arquivos excel
-							teste = item.getName();
-							planilha = new File(new File(System.getProperty("user.home")), teste);
-							item.write(planilha);
+						// para processar somente arquivos excel
+						nomeDoArquivo = item.getName();
+						planilha = new File(new File(System.getProperty("user.home")), nomeDoArquivo);
+						item.write(planilha);
+						
+						if (formatoArquivoRecebido.contains(formatoArquivoXLSX)) {
+							previaProcessos = new Planilha().
+								carregarXLSX( 
+									planilha,
+									idContrato
+								);
+						} else if (formatoArquivoRecebido.contains(formatoArquivoXLS)) {
+							previaProcessos = new Planilha().
+								carregarXLS( 
+									planilha,
+									idContrato
+								);
 						} else {
 							return "sistema?logica=ErroFormato";
 						}
 					}
 				}
+			} catch (FileNotFoundException e) {
+				return "sistema?logica=ErroArquivoInexistente";
 			} catch (Exception ex) {
 				ex.printStackTrace();
-			}
-
-			ArrayList<Processo> previaProcessos = new Planilha().
-					carregar(
-						planilha,
-						idContrato
-					);
+			} 
+			
 			pedido.getSession().setAttribute("previaProcessos", previaProcessos);
 			
 			planilha.delete();
