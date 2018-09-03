@@ -16,8 +16,6 @@ public class Email {
 			senha = "$TEci.2018$",
 			emailFrom = "contratos.ctb@ctb.ba.gov.br";
 //			smtp = "smtp.gmail.com",
-//			senha = "raspiberrypi",
-//			emailFrom = "adeoliveiradouglas@gmail.com";
 	private int smtpPorta = 587;
 
 	public Email(){}
@@ -43,28 +41,52 @@ public class Email {
 	public void aviso90dias(String emailTo, Contrato c){
 //		gestor do contrato, fiscal e o gestor geral
 		this.assunto = "Faltam 90 dias para vencimento do contrato";
-		this.mensagem = "Prezado(a) Gestor(a), " +
-		"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do Estado da Bahia faltam 90 (noventa) dias para o fim de vigência do contrato.\n" +
-		"Considerando ainda que qualquer prorrogação dos contratos de prestação a serem executado de forma continua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento, solicitamos abertura do processo de prorrogação, devendo assim o processo ser encaminhando a QUAS para conhecimento.\n" +
-		"Anderson";
+		this.mensagem = 
+			"Prezado(a) Gestor(a),\n" +
+			"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
+			+ "Estado da Bahia faltam 90 (sessenta) dias para o fim de vigência do contrato.\n"+
+			"Conforme o art. 142 e o parágrafo único da Lei 9.433/2005 qualquer prorrogação dos contratos de prestação a "
+			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
+			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
+			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogação, devendo "
+			+ "assim o processo ser encaminhando a QUAS para conhecimento.";
+		
 		this.emailTo = emailTo;
-//		this.enviar();
+		this.enviar();
 	}
 
 	public void aviso60dias(String emailTo, Contrato c){
 //		para os acima e mais o diretor
 		this.assunto = "Faltam 60 dias para vencimento do contrato";
-		this.mensagem = "faltam 60 dias para vencimento do contrato";
+		this.mensagem = 
+			"Prezado(a) Gestor(a),\n" +
+			"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
+			+ "Estado da Bahia faltam 60 (sessenta) dias para o fim de vigência do contrato.\n"+
+			"Conforme o art. 142 e o parágrafo único da Lei 9.433/2005 qualquer prorrogação dos contratos de prestação a "
+			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
+			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
+			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogação, devendo "
+			+ "assim o processo ser encaminhando a QUAS para conhecimento.";
+			
 		this.emailTo = emailTo;
-//		this.enviar();
+		this.enviar();
 	}
 	
 	public void aviso45dias(String emailTo, Contrato c){
 //		todos e mais o presidente	
 		this.assunto = "Faltam 45 dias para vencimento do contrato";
-		this.mensagem = "faltam 45 dias para vencimento do contrato";
+		this.mensagem = 
+			"Prezado(a) Gestor(a),\n" +
+			"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
+			+ "Estado da Bahia faltam 45 (sessenta) dias para o fim de vigência do contrato.\n"+
+			"Conforme o art. 142 e o parágrafo único da Lei 9.433/2005 qualquer prorrogação dos contratos de prestação a "
+			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
+			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
+			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogação, devendo "
+			+ "assim o processo ser encaminhando a QUAS para conhecimento.";
+			
 		this.emailTo = emailTo;
-//		this.enviar();
+		this.enviar();
 	}
 	
 	private void enviar(){
@@ -80,7 +102,7 @@ public class Email {
 		    email.setDebug(true);
 		    email.setMsg(mensagem);
 		    email.addTo(emailTo);
-//		    email.send();
+		    email.send();
 		} catch (EmailException e) {
 		    e.printStackTrace();
 		}

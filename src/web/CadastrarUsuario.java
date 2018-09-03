@@ -16,7 +16,7 @@ public class CadastrarUsuario implements Logica {
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		String nome = pedido.getParameter("nome");
 		String email = pedido.getParameter("email");
-		UsuarioDAO undao = new UsuarioDAO("usuariosnovos");
+		UsuarioDAO undao = new UsuarioDAO(true); //DAO para acesso à tabela de novos usuários
 		
 		if (undao.getByEmail(email) == null && new UsuarioDAO().getByEmail(email) == null) {
 			//se usuário com esse email NÃO existe no sistema (usuário autorizado ou usuário a ser autorizado), então pode ser adicionado			
@@ -32,12 +32,12 @@ public class CadastrarUsuario implements Logica {
 						new CargoDAO().getById(Integer.parseInt(pedido.getParameter("cargo")))
 					)
 				);
+				
+				// envia email informando cadastro
+				new Email().enviarConfirmacaoCadastro(email, nome);
 			} catch (NumberFormatException e) {
-				System.out.println(e);
+				e.printStackTrace();
 			}
-
-			// envia email informando cadastro
-			new Email().enviarConfirmacaoCadastro(email, nome);
 
 			// mostra página informando confirmação do cadastro
 			return "/confirmacaocadastro.jsp";

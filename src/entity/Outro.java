@@ -6,15 +6,11 @@
 
 package entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
+@Data @AllArgsConstructor
 public class Outro {
 	int id;
 	String nome;
-	
-	public Outro(int id, String nome) {
-		this.id = id;
-		this.nome = nome;
-	}
 }

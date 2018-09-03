@@ -1,21 +1,16 @@
 /*
  * Classe responsável por armazenar em memória a tabela Setor
- * Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Data"
+ * Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Data" e construtores com "@AllArgs..."
  */
 
 package entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
+@Data @AllArgsConstructor
 public class Setor {
 	private String codigo,
 				   nome,
 				   sigla;
-
-	public Setor(String codigo, String nome, String sigla) {
-		this.codigo = codigo;
-		this.nome = nome;
-		this.sigla = sigla;
-	}
 }

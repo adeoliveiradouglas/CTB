@@ -1,16 +1,12 @@
 package main;
 
-import java.util.ArrayList;
-
 import dao.ContratoDAO;
-import entity.Contrato;
+import utilidades.Email;
 
 public class Teste {
 
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		ArrayList<Contrato> clist = new ContratoDAO().getAll();
-
+		
+		new Email().aviso45dias("contratos.ctb@ctb.ba.gov.br", new ContratoDAO().getAll().get(1));
 	}
-
 }
