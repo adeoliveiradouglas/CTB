@@ -1,16 +1,14 @@
 package main;
 
-import java.util.ArrayList;
+import java.io.File;
 
-import dao.ContratoDAO;
-import entity.Contrato;
+import utilidades.Planilha;
 
 public class Teste {
 
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		ArrayList<Contrato> clist = new ContratoDAO().getAll();
-
+		File planilha = new File(new File(System.getProperty("user.home")), "Contrato PRODEB 2014_2018xlsx - Editável.xlsx");
+				
+		System.out.println(new Planilha().carregarXLSX(planilha, 1));
 	}
-
 }

@@ -1,7 +1,7 @@
 /*
  * Classe responsável por armazenar um contrato
  *
- *  Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Data"
+ *  Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Getter" e "@Setter"  
  *  obs2 - objeto: descricao do contrato
  *  obs3 - recurso, fontePagante e uso: há padrões para os três campos no bd, aqui só será armazenado o campo String/Varchar dos mesmos
  *  obs5 - valor total é o valor de todos os aditivos de todos os processos mais o valor inicial do contrato
@@ -16,40 +16,48 @@ import java.util.Date;
 
 import org.joda.time.DateTime;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import utilidades.FormatarCampo;
 
-@Data
 public class Contrato {
-	private final String formatoData = "dd/MM/yyyy";
+	private static final String formatoData = "dd/MM/yyyy";
 	
+	@Getter @Setter 
 	private int id,
 				portaria;
 	
+	@Getter @Setter
 	private Usuario	gestor, 
 					fiscal;
 	
+	@Getter @Setter
 	private Outro recurso, //vide cabecalho obs3
 	   			  fontePagante, //vide cabecalho obs3
 	   			  uso; //vide cabecalho obs3
 	
+	@Getter @Setter
 	private String numero,
 				   cnpjEmpresaContratada,
 				   nomeEmpresaContratada,
 				   objeto; //vide cabecalho obs2				   
 	
+	@Getter @Setter
 	private DateTime dataAssinatura,
 				 dataOrdemServico,
 				 dataGarantia,
 				 dataVencimentoContrato,
 				 dataVencimentoGarantia;
 	
+	@Getter @Setter
 	private BigDecimal valorInicial,
 				  	   valorAditivos = new BigDecimal(0),
 				  	   valorTotal = new BigDecimal(0); //vide cabecalho obs5
 	
+	@Getter @Setter
 	private ArrayList<Processo> processos;
 
+	@Getter @Setter
 	//para ajudar no controle de aviso quando email for enviado avisando sobre vencimento de contrato 
 	public boolean avisado90, 
 				   avisado60, 

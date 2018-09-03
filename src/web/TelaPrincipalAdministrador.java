@@ -13,7 +13,7 @@ public class TelaPrincipalAdministrador implements Logica{
 		Usuario u = (Usuario) pedido.getSession().getAttribute("usuario");
 		String ordenacao = pedido.getParameter("ordUser");
 		
-		pedido.getSession().setAttribute("usuariosnovos", new UsuarioDAO("usuariosnovos").getAllOrdenado(ordenacao));
+		pedido.getSession().setAttribute("usuariosnovos", new UsuarioDAO(true).getAllOrdenado(ordenacao));
 		pedido.getSession().setAttribute("usuarios", new UsuarioDAO().getAllOrdenado(ordenacao));
 		
 		return "/" + u.getCargo().getNome() + "/index.jsp";

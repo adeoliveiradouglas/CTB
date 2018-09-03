@@ -11,9 +11,14 @@ public class RemoveUsuario implements Logica{
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		String tabela = pedido.getParameter("tabela");
 //		remove da tabela de usuários
-		new UsuarioDAO(tabela).deleteById(
-			Integer.parseInt(pedido.getParameter("id"))
-		);
+		if(tabela.equals("usuariosnovos"))
+			new UsuarioDAO(true).deleteById(
+				Integer.parseInt(pedido.getParameter("id"))
+			);
+		else
+			new UsuarioDAO().deleteById(
+				Integer.parseInt(pedido.getParameter("id"))
+			);
 		
 		return "sistema?logica=TelaPrincipal";
 	}

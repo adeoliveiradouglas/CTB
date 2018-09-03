@@ -34,9 +34,13 @@ public class UsuarioDAO extends DAO {
 		super("usuario", conexao);
 	}
 	
-	public UsuarioDAO(String nomeTabela){
-//		para uso da tabela usuariosnovos
-		super(nomeTabela);
+	public UsuarioDAO(boolean novosUsuarios){
+/*		para uso da tabela usuariosnovos
+ *		acessa tabela de novos usuários não importando qual o valor do parãmetro 
+ */		
+		super("usuariosnovos");
+		
+		
 	}
 	
 	public void inserir(Usuario usuario){
