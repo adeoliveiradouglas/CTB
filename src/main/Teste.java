@@ -1,12 +1,12 @@
 package main;
 
-import dao.ContratoDAO;
-import utilidades.Email;
+import dao.UsuarioDAO;
+import entity.Usuario;
 
 public class Teste {
 
 	public static void main(String[] args) {
-		
-		new Email().aviso45dias("contratos.ctb@ctb.ba.gov.br", new ContratoDAO().getAll().get(1));
+		for(Usuario u: new UsuarioDAO().getAllByCargo("Presidente"))
+			System.out.println(u.getNome());
 	}
 }

@@ -1,5 +1,7 @@
 package web;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,9 +37,17 @@ public class Login implements Logica {
 			// importando o que há no banco de dados
 
 			// Cria um objeto usuario para Administrador
-			u = new Usuario(0, "Administrador", email, senha,
-					new Setor("09140271", "Subcoordenadoria de Tecnologia da Informação", "CTB/ TECI"),
-					new Cargo(1, "Administrador"));
+			ArrayList<Cargo> c = new ArrayList<Cargo>();
+			c.add(new Cargo(1, "Administrador", ""));
+			
+			u = new Usuario(
+				0, 
+				0,
+				"Administrador", 
+				email, 
+				senha, new Setor("09140271", "Subcoordenadoria de Tecnologia da Informação", "CTB/ TECI"),
+				c
+			);
 		} else {
 			// Senha errada, usuário inexistente...
 			return "sistema?logica=Erro403";

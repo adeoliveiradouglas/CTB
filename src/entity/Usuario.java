@@ -6,10 +6,12 @@
 
 package entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import java.util.ArrayList;
 
-@Data @AllArgsConstructor
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter @AllArgsConstructor
 public class Usuario{
 	private int id,
 				matricula;
@@ -17,16 +19,5 @@ public class Usuario{
 				   email,
 				   senha;
 	private Setor setor;
-	private Cargo cargo;
-	
-	public Usuario() {}
-	
-	public Usuario(int matricula, String nome, String email, String senha, Setor setor, Cargo cargo) {
-		this.matricula = matricula;
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
-		this.setor = setor;
-		this.cargo = cargo;
-	}
+	private ArrayList<Cargo> cargo;
 }

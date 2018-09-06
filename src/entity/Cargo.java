@@ -5,22 +5,15 @@
 
 package entity;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Data
+@Getter @AllArgsConstructor
 public class Cargo {
+	public Cargo() {
+		// TODO Auto-generated constructor stub
+	}
 	int id;
 	String nome,
-		   descricao;
-		
-	public Cargo(int id, String nome, String descricao) {
-		this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
-	}
-	
-	public Cargo(int id, String nome) {
-		this.id = id;
-		this.nome = nome;
-	}
+		   descricao;	
 }

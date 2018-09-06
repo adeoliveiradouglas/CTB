@@ -11,18 +11,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import DBConnection.DBConnection;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data 
 public class DAO {
+	@Getter
 	private Connection dbConnection = null;
-	private String sqlQuery = null, 
-				   nomeTabela = null, 
-				   nomeBanco = "gestaodecontratos",
-				   usuarioBanco = "gestaodecontratos", 
-				   senhaBanco = "suporte2017",
-				   ip = "localhost";
+	@Getter @Setter
+	private String sqlQuery = null; 
+	@Getter
+	private String nomeTabela = null; 
+	private String nomeBanco = "gestaodecontratos";
+	private String usuarioBanco = "gestaodecontratos"; 
+	private String senhaBanco = "suporte2017";
+	private String ip = "localhost";
+	@Getter @Setter
 	private ResultSet resultado = null;
+	@Getter @Setter
 	private PreparedStatement statement = null;
 	private boolean fecharConexao = true;
 			
@@ -45,27 +50,22 @@ public class DAO {
 	}
 
 	protected void encerraConexaocomBanco() {
-		// fecha a conexão com o banco e limpa as variáveis para "liberar memória"
+		// fecha a conexão com o banco
 		try {
-			if (fecharConexao)
+			if(this.statement != null)
+				this.statement.close();
+			
+			if (fecharConexao){
 				/*
 				 * só fecha a conexão caso o DAO não seja dependente de outros
 				 * exemplo: UsuarioDAO chama SetorDAO. SetorDAO não fecha a conexao, então essa variável de controle
-				 * fica como falsa pois UsuarioDAO ainda pode fazer novos acessos ao banco
+				 * fica como falsa pois UsuarioDAO ainda precisa fazer novos acessos ao banco
 				*/
 				this.dbConnection.close();
-			
-			this.statement.close();
-			this.limpaVariaveis();
+				this.dbConnection = null;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	protected void limpaVariaveis() {
-		// reseta o conteúdo de todas as variáveis desse objeto
-		this.resultado = null;
-		this.sqlQuery = null;
-//		this.statement = null;
 	}
 }

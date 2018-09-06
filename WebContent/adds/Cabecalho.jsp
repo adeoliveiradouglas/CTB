@@ -14,6 +14,8 @@
 </head>
 
 <nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
+<%@ page import="entity.Usuario"%>
+<% Usuario u = (Usuario) session.getAttribute("usuario");%>
 	<div class="navbar-header">
 		<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipal">
 			<img align="left" height="20" src="/gestaodecontratos/layout/images/logo pequeno.png" />
@@ -23,13 +25,12 @@
 
 	<div class="container-fluid">
 		<ul class="nav navbar-nav navbar-right">
+			<li><a href="<%=u.getCargo().getNome() %>/index.jsp"><%=u.getCargo().getNome() %></a></li>
 			<li><a href="adds/ajuda.jsp">Ajuda</a></li>
 			<li><a href="/gestaodecontratos/sistema?logica=Logout">Sair</a></li>
 		</ul>
 	</div>
 </nav>
-<%@ page import="entity.Usuario"%>
-<% Usuario u = (Usuario) session.getAttribute("usuario");%>
 	<div class="page-header">
 		<div class="container-fluid">
 			<table>

@@ -11,14 +11,6 @@ public class CargoDAO extends DAO{
 						 colunaNome = getNomeTabela() + ".nome",
 						 colunaDescricao = getNomeTabela() + ".descricao";
 	
-	/*public CargoDAO(String nomeDB, String usuarioDB, String senhaDB) {
-		super(nomeDB, usuarioDB, senhaDB, "cargo");
-	}
-	
-	public CargoDAO(String nomeDB, String usuarioDB, String senhaDB, String ip) {
-		super(nomeDB, usuarioDB, senhaDB, "cargo", ip);
-	}*/
-	
 	public CargoDAO(){
 		super("cargo");
 	}

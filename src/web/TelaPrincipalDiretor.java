@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
-import entity.Usuario;
 
 public class TelaPrincipalDiretor implements Logica{
 
@@ -13,6 +12,6 @@ public class TelaPrincipalDiretor implements Logica{
 		pedido.getSession().setAttribute("contratosRecentes", new ContratoDAO().getAllRecente(5));
 		pedido.getSession().setAttribute("vencimento90Recentes", new ContratoDAO().getVencimento90());
 		
-		return "/" + ((Usuario) pedido.getSession().getAttribute("usuario")).getCargo().getNome() + "/index.jsp";
+		return "/Diretor/index.jsp";
 	}
 }

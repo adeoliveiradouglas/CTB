@@ -6,9 +6,9 @@
 package entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
-@Data @AllArgsConstructor
+@Getter @AllArgsConstructor
 public class Setor {
 	private String codigo,
 				   nome,

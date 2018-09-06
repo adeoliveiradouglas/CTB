@@ -18,7 +18,6 @@ public class UsuarioDAO extends DAO {
 						 colunaEmail = getNomeTabela() + ".login",
 						 colunaSenha = getNomeTabela() + ".senha",
 						 colunaSetor = getNomeTabela() + ".setor_codigo",
-						 colunaCargo = getNomeTabela() + ".cargo_id",
 						 ordenarPorNome = " order by " + colunaNome;
 
 	/*
@@ -39,8 +38,6 @@ public class UsuarioDAO extends DAO {
  *		acessa tabela de novos usuários não importando qual o valor do parãmetro 
  */		
 		super("usuariosnovos");
-		
-		
 	}
 	
 	public void inserir(Usuario usuario){
@@ -53,8 +50,7 @@ public class UsuarioDAO extends DAO {
 			colunaEmail + ", " + 
 			colunaSenha + ", " + 
 			colunaSetor + ", " + 
-			colunaCargo + 
-			") values (?,?,?,?,?,?)"
+			") values (?,?,?,?,?)"
 		);
 		
 		int posicao = 0;
@@ -90,12 +86,7 @@ public class UsuarioDAO extends DAO {
 				++posicao,
 				usuario.getSetor().getCodigo()
 			);
-			
-			getStatement().setInt(
-				++posicao,
-				usuario.getCargo().getId()
-			);
-			
+						
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -155,15 +146,14 @@ public class UsuarioDAO extends DAO {
 					),
 					getResultado().getString(
 						colunaSenha
-					),
-					
+					),					
 					
 //					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 					new SetorDAO(getDbConnection()).getByCodigo(
 						getResultado().getString(colunaSetor)
 					),
-					new CargoDAO(getDbConnection()).getById(
-						getResultado().getInt(colunaCargo)
+					new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+						getResultado().getInt(colunaId)
 					)
 				);
 			}
@@ -234,8 +224,8 @@ public class UsuarioDAO extends DAO {
 					new SetorDAO(getDbConnection()).getByCodigo(
 							getResultado().getString(colunaSetor)
 					),
-					new CargoDAO(getDbConnection()).getById(
-							getResultado().getInt(colunaCargo)
+					new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+						getResultado().getInt(colunaId)
 					)
 				);
 			}
@@ -303,8 +293,8 @@ public class UsuarioDAO extends DAO {
 					new SetorDAO(getDbConnection()).getByCodigo(
 							getResultado().getString(colunaSetor)
 					),
-					new CargoDAO(getDbConnection()).getById(
-							getResultado().getInt(colunaCargo)
+					new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+						getResultado().getInt(colunaId)
 					)
 				);
 				lu.add(u);
@@ -318,81 +308,6 @@ public class UsuarioDAO extends DAO {
 		return lu;
 	}
 	
-	public ArrayList<Usuario> getAllGestor() {
-		iniciaConexaoComBanco();
-		
-/*		
- 		Exemplo de query para esse método
- 		
- 		select * from usuario where cargo = 3";
- 		depois busca setor e cargo através do resultado do usuario
- 		
-*/
-		
-		ArrayList<Usuario> lu = new ArrayList<>();
-		
-//		monta a query
-		setSqlQuery(
-			"select * from " + getNomeTabela() + " where " + colunaCargo + " = ?" + ordenarPorNome
-		);
-		
-		try {
-//			monta o statement
-			setStatement(
-				getDbConnection().prepareStatement(
-					getSqlQuery()
-				)
-			);
-			
-			getStatement().setInt(
-				1, 
-				3 //id do cargo gestor
-			);
-						
-//			executa
-			setResultado(
-				getStatement().executeQuery()
-			);
-			
-			Usuario u = null;
-			
-			while(getResultado().next()){
-				u = new Usuario(
-					getResultado().getInt(
-						colunaId
-					),
-					getResultado().getInt(
-						colunaMatricula
-					),
-					getResultado().getString(
-						colunaNome
-					),
-					getResultado().getString(
-						colunaEmail
-					),
-					getResultado().getString(
-						colunaSenha
-					),
-					
-//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-					new SetorDAO(getDbConnection()).getByCodigo(
-							getResultado().getString(colunaSetor)
-					),
-					new CargoDAO(getDbConnection()).getById(
-							getResultado().getInt(colunaCargo)
-					)
-				);
-				lu.add(u);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			lu = new ArrayList<>();
-		}
-		
-		encerraConexaocomBanco();
-		return lu;
-	}
-
 	public void atualizarSenha(String senha, String email){
 		iniciaConexaoComBanco();
 		
@@ -474,7 +389,6 @@ public class UsuarioDAO extends DAO {
 			colunaEmail + " = ?, " +
 			colunaSenha + " = ?, " +
 			colunaSetor + " = ?, " +
-			colunaCargo + " = ? " +
 			"where " + colunaId + " = ?"
 		);
 		
@@ -510,11 +424,6 @@ public class UsuarioDAO extends DAO {
 			getStatement().setString(
 				++posicao,
 				usuario.getSetor().getCodigo()
-			);
-			
-			getStatement().setInt(
-				++posicao,
-				usuario.getCargo().getId()
 			);
 			
 			getStatement().setInt(
@@ -583,10 +492,10 @@ public class UsuarioDAO extends DAO {
 					
 //							busca setor de acordo com o resultado do usuario
 					new SetorDAO(getDbConnection()).getByCodigo(
-							getResultado().getString(colunaSetor)
+						getResultado().getString(colunaSetor)
 					),
-					new CargoDAO(getDbConnection()).getById(
-							getResultado().getInt(colunaCargo)
+					new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+						getResultado().getInt(colunaId)
 					)
 				);
 				lu.add(u);
@@ -600,80 +509,34 @@ public class UsuarioDAO extends DAO {
 		return lu;
 	}
 
+	public ArrayList<Usuario> getAllGestor() {
+		iniciaConexaoComBanco();
+		
+		/*
+		 * Passo a passo desse método:
+		 * 1º: busca na tabela cargo_has_usuario por todos os ids de usuarios que tem o idCargo = 3
+		 * 2º: tranforma todos os ids em um objeto Usuario pelo método UsuarioDAO.getById
+		 */
+		
+		ArrayList<Usuario> lu = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByCargo(3);
+				
+		encerraConexaocomBanco();
+		return lu;
+	}
+	
 	public ArrayList<Usuario> getAllByCargo(String cargo) {
 		int codCargo = new CargoDAO().getByNome(cargo).getId();
 		
 		iniciaConexaoComBanco();
 		
-/*		
- 		Exemplo de query para esse método
- 		
- 		select * from usuario where cargo = 3";
- 		depois busca setor e cargo através do resultado do usuario
- 		
-*/
+		/*
+		 * Passo a passo desse método:
+		 * 1º: busca na tabela cargo_has_usuario por todos os ids de usuarios que tem o idCargo = 3
+		 * 2º: tranforma todos os ids em um objeto Usuario pelo método UsuarioDAO.getById
+		 */
 		
-		ArrayList<Usuario> lu = new ArrayList<>();
-		
-//		monta a query
-		setSqlQuery(
-			"select * from " + getNomeTabela() + " where " + colunaCargo + " = ?" + ordenarPorNome
-		);
-		
-		try {
-//			monta o statement
-			setStatement(
-				getDbConnection().prepareStatement(
-					getSqlQuery()
-				)
-			);
-			
-			getStatement().setInt(
-				1, 
-				codCargo //id do cargo 
-			);
-						
-//			executa
-			setResultado(
-				getStatement().executeQuery()
-			);
-			
-			Usuario u = null;
-			
-			while(getResultado().next()){
-				u = new Usuario(
-					getResultado().getInt(
-						colunaId
-					),
-					getResultado().getInt(
-						colunaMatricula
-					),
-					getResultado().getString(
-						colunaNome
-					),
-					getResultado().getString(
-						colunaEmail
-					),
-					getResultado().getString(
-						colunaSenha
-					),
-					
-//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-					new SetorDAO(getDbConnection()).getByCodigo(
-							getResultado().getString(colunaSetor)
-					),
-					new CargoDAO(getDbConnection()).getById(
-							getResultado().getInt(colunaCargo)
-					)
-				);
-				lu.add(u);
-			}
-		} catch(SQLException e) {
-			e.printStackTrace();
-			lu = new ArrayList<Usuario>();
-		}
-		
-		
+		ArrayList<Usuario> lu = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByCargo(codCargo);
+				
 		encerraConexaocomBanco();
 		return lu;
 	}

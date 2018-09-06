@@ -24,6 +24,7 @@ public class CadastrarUsuario implements Logica {
 				// insere no banco na tabela de novos usuarios
 				undao.inserir(
 					new Usuario(
+						0,
 						Integer.parseInt(pedido.getParameter("matricula")), 
 						nome,
 						email, 
