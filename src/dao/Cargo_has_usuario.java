@@ -15,28 +15,35 @@ public class Cargo_has_usuario extends DAO{
 	private final String colunaUsuario = getNomeTabela() + ".idUsuario",
 						 colunaCargo = getNomeTabela() + ".cargo_id";
 	
-	protected Cargo_has_usuario(String segundaTabela) {
-		super("cargo_has_" + segundaTabela);
+	public Cargo_has_usuario(String tabela) {
+		super("cargo_has_" + tabela);
 	}
 	
-	protected Cargo_has_usuario(String segundaTabela, Connection conexao) {
-		super("cargo_has_" + segundaTabela, conexao);
+	public Cargo_has_usuario(String tabela, Connection conexao) {
+		super("cargo_has_" + tabela, conexao);
 	}
-
-	public void inserir(Usuario u, Cargo c){
+	
+	public void inserir(Usuario u){
 		iniciaConexaoComBanco();
 		
 		setSqlQuery("insert into " + getNomeTabela() + " values (?,?)");
 		
 		try{
-			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
+			int cargosParaProcessar = 2;
 			
-			int posicao = 1;
+			if(u.getCargo().get(0).getId() != u.getCargo().get(1).getId())
+				cargosParaProcessar = 1;
 			
-			getStatement().setInt(posicao, u.getId());
-			getStatement().setInt(++posicao, c.getId());
-			
-			getStatement().executeUpdate();
+			for (int i = 0; i < cargosParaProcessar; ++i){
+				setStatement(getDbConnection().prepareStatement(getSqlQuery()));
+				
+				int posicao = 1;
+				
+				getStatement().setInt(posicao, u.getId());
+				getStatement().setInt(++posicao, u.getCargo().get(i).getId());
+				
+				getStatement().executeUpdate();
+			}
 		} catch (SQLException e){
 			e.printStackTrace();
 		}

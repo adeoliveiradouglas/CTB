@@ -30,6 +30,7 @@
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
 	<%@ page import="entity.Usuario,
+					 entity.Cargo,
 					 java.util.ArrayList" %>	
  
  	<%
@@ -69,7 +70,7 @@
 				<%-- <td class="text-center"><%=u.getId() %></td> --%>
 				<td class="text-center"><%=u.getNome() %></td>
 				<td class="text-center"><%=u.getMatricula() %></td>
-				<td class="text-center"><%=u.getCargo().getNome() %></td>
+				<td class="text-center"><%=u.getCargo().get(0).getNome() %></td>
 				<td class="text-center"><%=u.getSetor().getSigla() %></td>
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">
@@ -117,13 +118,12 @@
 			<%
 			@SuppressWarnings("unchecked") 
 			ArrayList<Usuario> lu = (ArrayList<Usuario>) request.getSession().getAttribute("usuarios");
-		
 			for (Usuario u: lu){
 			%>
 			<tr>
 				<td class="text-center"><%=u.getNome() %></td>
 				<td class="text-center"><%=u.getMatricula() %></td>
-				<td class="text-center"><%=u.getCargo().getNome() %></td>
+				<td class="text-center"><%=u.getCargo().get(0).getNome() %> <%=u.getCargo().get(1).getNome() %></td>
 				<td class="text-center"><%=u.getSetor().getSigla() %></td>
 				<td class="text-center"><%=u.getEmail() %></td>
 				<td class="text-center">

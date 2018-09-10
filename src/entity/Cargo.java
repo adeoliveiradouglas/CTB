@@ -6,13 +6,10 @@
 package entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter @AllArgsConstructor
+@Data @AllArgsConstructor 
 public class Cargo {
-	public Cargo() {
-		// TODO Auto-generated constructor stub
-	}
 	int id;
 	String nome,
 		   descricao;	

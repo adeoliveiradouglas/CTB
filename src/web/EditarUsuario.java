@@ -15,14 +15,17 @@ public class EditarUsuario implements Logica{
 	@Override
 	@SuppressWarnings("unchecked")
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		ArrayList<Cargo> cargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("cargos"));
-		ArrayList<Setor> setores = ((ArrayList<Setor>) pedido.getSession().getAttribute("setores"));
+		ArrayList<Cargo> todosOsCargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("todososcargos")),
+						 cargosDoUsuario = new ArrayList<Cargo>();
+		ArrayList<Setor> todosOsSetores = ((ArrayList<Setor>) pedido.getSession().getAttribute("todosossetores"));
 		int posicao = Integer.parseInt(pedido.getParameter("setorNovo"));
-		Setor setor = setores.get(posicao);
+		Setor setor = todosOsSetores.get(posicao);
 		
-		posicao = Integer.parseInt(pedido.getParameter("cargoNovo"));
-		Cargo cargo = cargos.get(posicao);
+		posicao = Integer.parseInt(pedido.getParameter("cargoNovo0"));
+		Cargo cargo = todosOsCargos.get(posicao);
 		
+		posicao = Integer.parseInt(pedido.getParameter("cargoNovo1"));
+		cargosDoUsuario.add(cargo);
 		Usuario u = new Usuario(
 			((Usuario) pedido.getSession().getAttribute("usuarioeditar")).getId(),
 			Integer.parseInt(pedido.getParameter("matricula")), 
@@ -30,7 +33,7 @@ public class EditarUsuario implements Logica{
 			pedido.getParameter("email"), 
 			((Usuario) pedido.getSession().getAttribute("usuarioeditar")).getSenha(), 
 			setor, 
-			cargo
+			cargosDoUsuario
 		);
 		
 		new UsuarioDAO().atualizar(u);

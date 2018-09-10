@@ -3,6 +3,7 @@
 package filtro;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entity.Cargo;
 import entity.Usuario;
 
 @WebFilter(
@@ -25,7 +27,7 @@ import entity.Usuario;
 		DispatcherType.FORWARD
 	}
 )
-public class LoginAdministrador implements Filter{
+public class Administrador implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest pedido, ServletResponse resposta, FilterChain chain)
@@ -34,16 +36,18 @@ public class LoginAdministrador implements Filter{
 		HttpServletRequest req = (HttpServletRequest) pedido;
 		HttpServletResponse res = (HttpServletResponse) resposta;
 		HttpSession sessao = req.getSession(false);
-
+		
 /*		A lógica responsável por autenticar o usuário insere os dados dele na sessão
  * 		Aqui recupera os dados da sessão e verifica se o usuário tem autorização para acessar essa página através do cargo dele
- * */
+ */
+		ArrayList<Cargo> cargosDoUsuario = ((Usuario) sessao.getAttribute("usuario")).getCargo();
 		try {
-			if (((Usuario) sessao.getAttribute("usuario")).getCargo().getId() == 1)
+			if (cargosDoUsuario.get(0).getId() == 1 || cargosDoUsuario.get(1).getId() == 1)
 				chain.doFilter(pedido, resposta);
 			else
 				res.sendRedirect("/gestaodecontratos/sistema?logica=Erro403");
 		}catch(Exception e){
+			e.printStackTrace();
 			res.sendRedirect("/gestaodecontratos/sistema?logica=ErroDeslogado");
 		}		
 	}

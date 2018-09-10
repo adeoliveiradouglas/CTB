@@ -8,8 +8,11 @@ package entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
-@Getter @AllArgsConstructor
+@ToString
+@Getter
+@AllArgsConstructor
 public class Outro {
 	int id;
 	String nome;

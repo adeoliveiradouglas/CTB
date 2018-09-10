@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import entity.Cargo;
 import entity.Usuario;
 
 public class UsuarioDAO extends DAO {
@@ -35,7 +36,7 @@ public class UsuarioDAO extends DAO {
 	
 	public UsuarioDAO(boolean novosUsuarios){
 /*		para uso da tabela usuariosnovos
- *		acessa tabela de novos usuários não importando qual o valor do parãmetro 
+ *		acessa tabela de novos usuários não importando qual o valor do parâmetro 
  */		
 		super("usuariosnovos");
 	}
@@ -88,6 +89,9 @@ public class UsuarioDAO extends DAO {
 			);
 						
 			getStatement().executeUpdate();
+			
+			//inserir a referência dos cargos na tabela de cargo_has_usuariosnovos
+			new Cargo_has_usuario(getNomeTabela(), getDbConnection()).inserir(usuario);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -131,6 +135,14 @@ public class UsuarioDAO extends DAO {
 			);
 			
 			if(getResultado().next()){
+				ArrayList<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+					getResultado().getInt(colunaId)
+				);
+				
+				if(cargos.size() == 1){
+					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
+				}
+				
 				u = new Usuario(
 					getResultado().getInt(
 						colunaId
@@ -146,15 +158,12 @@ public class UsuarioDAO extends DAO {
 					),
 					getResultado().getString(
 						colunaSenha
-					),					
-					
+					),				
 //					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 					new SetorDAO(getDbConnection()).getByCodigo(
 						getResultado().getString(colunaSetor)
 					),
-					new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
-						getResultado().getInt(colunaId)
-					)
+					cargos
 				);
 			}
 		} catch(SQLException e) {
@@ -203,6 +212,14 @@ public class UsuarioDAO extends DAO {
 			);
 			
 			if(getResultado().next()){
+				ArrayList<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+					getResultado().getInt(colunaId)
+				);
+				
+				if(cargos.size() == 1){
+					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
+				}
+				
 				u = new Usuario(
 					getResultado().getInt(
 						colunaId
@@ -218,15 +235,12 @@ public class UsuarioDAO extends DAO {
 					),
 					getResultado().getString(
 						colunaSenha
-					),
-					
-//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+					),				
+//						busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 					new SetorDAO(getDbConnection()).getByCodigo(
-							getResultado().getString(colunaSetor)
+						getResultado().getString(colunaSetor)
 					),
-					new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
-						getResultado().getInt(colunaId)
-					)
+					cargos
 				);
 			}
 		} catch(SQLException e) {
@@ -272,6 +286,14 @@ public class UsuarioDAO extends DAO {
 			Usuario u = null;
 			
 			while(getResultado().next()){
+				ArrayList<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+					getResultado().getInt(colunaId)
+				);
+				
+				if(cargos.size() == 1){
+					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
+				}
+				
 				u = new Usuario(
 					getResultado().getInt(
 						colunaId
@@ -287,15 +309,12 @@ public class UsuarioDAO extends DAO {
 					),
 					getResultado().getString(
 						colunaSenha
-					),
-					
-//					busca setor de acordo com o resultado do usuario
+					),				
+//						busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 					new SetorDAO(getDbConnection()).getByCodigo(
-							getResultado().getString(colunaSetor)
+						getResultado().getString(colunaSetor)
 					),
-					new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
-						getResultado().getInt(colunaId)
-					)
+					cargos
 				);
 				lu.add(u);
 			}
@@ -452,20 +471,20 @@ public class UsuarioDAO extends DAO {
 		
 		ArrayList<Usuario> lu = new ArrayList<>();
 		
-//				monta a query
+//		monta a query
 		setSqlQuery(
 			"select * from " + getNomeTabela() + " order by " + ordenacao
 		);
 		
 		try {
-//					monta o statement
+//			monta o statement
 			setStatement(
 				getDbConnection().prepareStatement(
 					getSqlQuery()
 				)
 			);
 						
-//					executa
+//			executa
 			setResultado(
 				getStatement().executeQuery()
 			);
@@ -473,6 +492,14 @@ public class UsuarioDAO extends DAO {
 			Usuario u = null;
 			
 			while(getResultado().next()){
+				ArrayList<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+					getResultado().getInt(colunaId)
+				);
+				
+				if(cargos.size() == 1){
+					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
+				}
+				
 				u = new Usuario(
 					getResultado().getInt(
 						colunaId
@@ -488,15 +515,12 @@ public class UsuarioDAO extends DAO {
 					),
 					getResultado().getString(
 						colunaSenha
-					),
-					
-//							busca setor de acordo com o resultado do usuario
+					),				
+//						busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 					new SetorDAO(getDbConnection()).getByCodigo(
 						getResultado().getString(colunaSetor)
 					),
-					new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
-						getResultado().getInt(colunaId)
-					)
+					cargos
 				);
 				lu.add(u);
 			}

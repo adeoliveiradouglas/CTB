@@ -39,26 +39,30 @@ public class Login implements Logica {
 			// Cria um objeto usuario para Administrador
 			ArrayList<Cargo> c = new ArrayList<Cargo>();
 			c.add(new Cargo(1, "Administrador", ""));
+			c.add(new Cargo(1, "", ""));
 			
 			u = new Usuario(
 				0, 
 				0,
 				"Administrador", 
 				email, 
-				senha, new Setor("09140271", "Subcoordenadoria de Tecnologia da Informação", "CTB/ TECI"),
+				senha, 
+				new Setor("09140271", "Subcoordenadoria de Tecnologia da Informação", "CTB/ TECI"),
 				c
 			);
 		} else {
 			// Senha errada, usuário inexistente...
 			return "sistema?logica=Erro403";
 		}
-
 		// Coloca os dados do usuário na sessão
 		pedido.getSession().setAttribute("usuario", u);
 
 		// Muda o tempo de inatividade (o padrão são 30 minutos)
-		pedido.getSession().setMaxInactiveInterval(18000);
-
+//		pedido.getSession().setMaxInactiveInterval(18000);
+		
+		// Põe cargo em uso como o primeiro da lista do usuário
+		pedido.getSession().setAttribute("cargoParaLogin", u.getCargo().get(0));
+		
 		// Manda mostrar a tela principal
 		return "sistema?logica=TelaPrincipal";
 	}

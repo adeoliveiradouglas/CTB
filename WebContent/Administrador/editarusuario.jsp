@@ -18,8 +18,10 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 
-	<%@ page import="entity.Usuario"%>
-
+	<%@ page import="entity.Usuario,
+					 entity.Cargo,
+			  		 entity.Setor,
+  					 java.util.ArrayList"%>
 	<%Usuario u = (Usuario) request.getSession().getAttribute("usuarioeditar");
 	String nome = u.getNome();
 	%>
@@ -48,56 +50,64 @@
 			</div>
 
 			<br />
+			
 			<!-- Mostrar as opções de cargos -->
+			<%
+				@SuppressWarnings("unchecked")
+				ArrayList<Cargo> cargos = ((ArrayList<Cargo>) request.getSession().getAttribute("todososcargos"));
+
+				for (Cargo cargoDoUsuario : u.getCargo()) {
+			%>
 			<div class="form-group custom-select has-feedback">
-				<select name="cargoNovo">
-					<%@ page
-						import="entity.Cargo,
-			  					 entity.Setor,
-			  					 java.util.ArrayList"%>
+				<select name="cargoNovo<%=u.getCargo().indexOf(cargoDoUsuario)%>">
+					<option style="display: none"
+						value="<%=cargos.indexOf(u.getCargo())%>">
+						<%=cargoDoUsuario.getNome()%> -
+						<%=cargoDoUsuario.getDescricao()%>
+					</option>
 
 					<%
-			  	@SuppressWarnings("unchecked")
-			  	ArrayList<Cargo> cargos = ((ArrayList<Cargo>) request.getSession().getAttribute("cargos"));
-			  	%>
-
-					<option style="display: none"
-						value="<%=cargos.indexOf(u.getCargo()) %>">
-						<%=u.getCargo().getNome() %> -
-						<%=u.getCargo().getDescricao() %>
-					</option>
-
-					<%for (Cargo c: cargos){%>
+						for (Cargo c : cargos) {
+					%>
 					<option value="<%=cargos.indexOf(c)%>">
-						<%=c.getNome() %> -
-						<%=c.getDescricao() %>
+						<%=c.getNome()%> -
+						<%=c.getDescricao()%>
 					</option>
-					<%}%>
+					<%
+						}
+					%>
+
 				</select>
 				<!-- select cargos -->
 			</div>
+			<%
+				}
+			%>
 			<!-- fim div select cargos -->
 
 			<!-- Mostrar as opções de setores -->
 			<div class="form-group custom-select has-feedback">
 				<select name="setorNovo">
 					<%
-				@SuppressWarnings("unchecked")
-			  	ArrayList<Setor> setores = ((ArrayList<Setor>) request.getSession().getAttribute("setores"));
-			  	%>
-
+						@SuppressWarnings("unchecked")
+						ArrayList<Setor> setores = ((ArrayList<Setor>) request.getSession().getAttribute("todosossetores"));
+					%>
 					<option style="display: none"
 						value="<%=setores.indexOf(u.getSetor())%>">
-						<%=u.getSetor().getSigla() %> -
-						<%=u.getSetor().getNome() %>
+						<%=u.getSetor().getSigla()%> -
+						<%=u.getSetor().getNome()%>
 					</option>
 
-					<%for (Setor s: setores){%>
+					<%
+						for (Setor s : setores) {
+					%>
 					<option value="<%=setores.indexOf(s)%>">
-						<%=s.getSigla() %> -
-						<%=s.getNome() %>
+						<%=s.getSigla()%> -
+						<%=s.getNome()%>
 					</option>
-					<%}%>
+					<%
+						}
+					%>
 				</select>
 				<!-- select setores -->
 			</div>

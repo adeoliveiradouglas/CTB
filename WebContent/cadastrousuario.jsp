@@ -13,107 +13,149 @@
 <link rel="stylesheet" type="text/css" href="css/application.css" />
 
 <style>
-	select{
-		width:100%;
-	}
+select {
+	width: 100%;
+}
 </style>
 
 </head>
 
 <body class="aw-layout-simple-page">
+	<%@ page
+		import="entity.Cargo,
+  					 entity.Setor,
+  					 java.util.ArrayList"%>
+
 	<div class="aw-layout-simple-page__container">
 		<div align="center">
-			<a href="sistema?logica=TelaLogin">
-				<img src="/gestaodecontratos/layout/images/logo.png" />
-			</a>			
+			<a href="sistema?logica=TelaLogin"> <img
+				src="/gestaodecontratos/layout/images/logo.png" />
+			</a>
 		</div>
 		<br />
-		<form action="sistema?logica=CadastrarUsuario" th:object="${userdetails}" method="POST">
+		<form action="sistema?logica=CadastrarUsuario" method="POST">
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 					<div class="form-group  has-feedback">
-						<input type="number" class="form-control input-lg" placeholder="Sua matrícula" name="matricula" required> 
-						<span class="form-control-feedback"	aria-hidden="true"> </span>
+						<input type="number" class="form-control input-lg"
+							placeholder="Sua matrícula" name="matricula" required> <span
+							class="form-control-feedback" aria-hidden="true"> </span>
 					</div>
 
 					<div class="form-group  has-feedback">
-						<input type="text" class="form-control input-lg" placeholder="Seu nome completo" name="nome" required> 
-						<span class="form-control-feedback" aria-hidden="true"> </span>
+						<input type="text" class="form-control input-lg"
+							placeholder="Seu nome completo" name="nome" required> <span
+							class="form-control-feedback" aria-hidden="true"> </span>
 					</div>
 
 					<div class="form-group  has-feedback">
-						<input type="email" class="form-control input-lg" placeholder="Seu e-mail corporativo" name="email" required>
+						<input type="email" class="form-control input-lg"
+							placeholder="Seu e-mail corporativo" name="email" required>
 						<span class="form-control-feedback" aria-hidden="true"></span>
 					</div>
 
 					<div class="form-group has-feedback">
-						<input type="password" class="form-control input-lg" placeholder="Crie sua senha" name="senha" id="senha">
-						<span class="form-control-feedback" aria-hidden="true"></span>
+						<input type="password" class="form-control input-lg"
+							placeholder="Crie sua senha" name="senha" id="senha"> <span
+							class="form-control-feedback" aria-hidden="true"></span>
 						<div id="mensagemsenha">
 							<label>Senha deve ter mais que 6 caracteres</label>
 						</div>
 					</div>
-					
+
 					<div class="form-group has-feedback" id="confirmacaosenhadiv">
-						<input type="password" class="form-control input-lg" placeholder="Confirme sua senha" name="confirmacaosenha" id="confirmacaosenha">
-						<span class="form-control-feedback" aria-hidden="true"></span>
+						<input type="password" class="form-control input-lg"
+							placeholder="Confirme sua senha" name="confirmacaosenha"
+							id="confirmacaosenha"> <span
+							class="form-control-feedback" aria-hidden="true"></span>
 						<div id="mensagemconfirmacaosenha">
 							<label>Senhas não conferem</label>
 						</div>
 					</div>
-					
+
 					<br />
 					<!-- Mostrar as opções de cargos -->
-					<div  class="form-group custom-select has-feedback">
-					  <select name="cargo" id="cargoselect">
-					  	<option style="display: none">Selecione seu cargo:</option>
-					  	<%@ page import="dao.CargoDAO,
-					  					 entity.Cargo,
-					  					 entity.Setor,
-					  					 java.util.ArrayList" %>
-					  	
-					  	<%
-					  	@SuppressWarnings("unchecked")
-					  	ArrayList<Cargo> cargos = ((ArrayList<Cargo>) request.getSession().getAttribute("cargo"));
-					  	for (Cargo c: cargos){%>
-					  	<option value="<%=c.getId()%>">
-					  		<%=c.getNome() %> - <%=c.getDescricao() %>					  	
-					  	</option>
-					  	<%}%>
-					  </select> <!-- select cargos -->
-					</div> <!-- fim div select cargos -->
-					
+					<div class="form-group custom-select has-feedback">
+						<select name="cargo1">
+							<option style="display: none">Selecione seu cargo:</option>
+							<%
+								@SuppressWarnings("unchecked")
+								ArrayList<Cargo> cargos = ((ArrayList<Cargo>) request.getSession().getAttribute("cargo"));
+								for (Cargo c : cargos) {
+							%>
+							<option value="<%=cargos.indexOf(c)%>">
+								<%=c.getNome()%> -
+								<%=c.getDescricao()%>
+							</option>
+							<%
+								}
+							%>
+						</select>
+						<!-- select do primeiro cargo -->
+						
+						<input type="checkbox" id="chkBox" onClick="segundoCargo()">Tenho um segundo cargo
+					</div>
+					<!-- fim div select do primeiro cargo -->
+
+					<div class="form-group custom-select has-feedback"
+						id="cargoselectopcional" style="display: none">
+						<select name="cargo2">
+							<option style="display: none">Selecione seu segundo cargo:</option>
+							<%
+								for (Cargo c : cargos) {
+							%>
+							<option value="<%=cargos.indexOf(c)%>">
+								<%=c.getNome()%> -
+								<%=c.getDescricao()%>
+							</option>
+							<%
+								}
+							%>
+
+						</select>
+						<!-- select do segundo cargo (opcional) -->
+					</div>
+					<!-- fim div select do segundo cargo (opcional) -->
+
 					<!-- Mostrar as opções de setores -->
 					<div class="form-group custom-select has-feedback">
-					  <select name="setor">
-					  	<option style="display: none">Selecione seu setor:</option>
-					  
-					  	<%
-						@SuppressWarnings("unchecked")
-					  	ArrayList<Setor> setores = ((ArrayList<Setor>) request.getSession().getAttribute("setor"));
-					  	for (Setor s: setores){
-					  	%>
-					  	<option value="<%=s.getCodigo()%>">
-					  		<%=s.getSigla() %> - <%=s.getNome() %>					  						  	
-					  	</option>
-					  	<%}%>
-					  </select> <!-- select setores -->
-					</div> <!-- fim div select setores -->
-					
+						<select name="setor">
+							<option style="display: none">Selecione seu setor:</option>
+
+							<%
+								@SuppressWarnings("unchecked")
+								ArrayList<Setor> setores = ((ArrayList<Setor>) request.getSession().getAttribute("setor"));
+								for (Setor s : setores) {
+							%>
+							<option value="<%=setores.indexOf(s)%>">
+								<%=s.getSigla()%> -
+								<%=s.getNome()%>
+							</option>
+							<%
+								}
+							%>
+						</select>
+						<!-- select setores -->
+					</div>
+					<!-- fim div select setores -->
+
 				</div>
-				
-				<br/>
+
+				<br />
 				<div class="form-group" id="botaocadastrar">
 					<button type="submit"
 						class="btn btn-primary btn-lg aw-btn-full-width">Cadastrar</button>
 				</div>
-				<div class="aw-simple-panel__footer"><br/></div>
+				<div class="aw-simple-panel__footer">
+					<br />
+				</div>
 			</div>
 		</form>
-		
-	<script type="text/javascript" src="js/validarsenha.js"></script>
+
+		<script type="text/javascript" src="js/validarsenha.js"></script>
+		<script type="text/javascript" src="js/mostraropcaodecargo.js"></script>
 	</div>
-	
+
 	<jsp:include page="adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

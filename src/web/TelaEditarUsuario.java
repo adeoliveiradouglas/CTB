@@ -24,10 +24,10 @@ public class TelaEditarUsuario implements Logica{
 		
 		pedido.getSession().setAttribute("usuarioeditar", u);
 		
-		if(pedido.getSession().getAttribute("cargos") == null){
+		if(pedido.getSession().getAttribute("todososcargos") == null){
 //			Para não repetir a operação de buscar no banco toda vez que abrir a página
-			pedido.getSession().setAttribute("cargos", new CargoDAO().getAll());
-			pedido.getSession().setAttribute("setores", new SetorDAO().getAll());
+			pedido.getSession().setAttribute("todososcargos", new CargoDAO().getAll());
+			pedido.getSession().setAttribute("todosossetores", new SetorDAO().getAll());
 		}
 		
 		return "/Administrador/editarusuario.jsp";

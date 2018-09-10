@@ -18,8 +18,9 @@ import org.joda.time.DateTime;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import utilidades.FormatarCampo;
-
+@ToString
 public class Contrato {
 	private static final String formatoData = "dd/MM/yyyy";
 	
