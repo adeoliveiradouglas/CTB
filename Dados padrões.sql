@@ -119,14 +119,19 @@ UNLOCK TABLES;
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (-1,101010,'Não houve pagamento','NÃO REMOVER ESSE USUARIO. NECESSÁRIO PARA O SISTEMA FUNCIONAR','','09140271',4);
+INSERT INTO `usuario` VALUES (-1,101010,'Não houve pagamento','NÃO REMOVER ESSE USUARIO. NECESSÁRIO PARA O SISTEMA FUNCIONAR','','09140271');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'gestaodecontratos'
+-- Dumping data for table 'cargo_has_usuario'
 --
 
+LOCK TABLES `cargo_has_usuario` WRITE;
+/*!40000 ALTER TABLE `cargo_has_usuario` DISABLE KEYS */;
+INSERT INTO `cargo_has_usuario` VALUES (-1,4);
+/*!40000 ALTER TABLE `cargo_has_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
 --
 -- Dumping routines for database 'gestaodecontratos'
 --

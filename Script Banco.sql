@@ -33,6 +33,41 @@ CREATE TABLE `cargo` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `cargo_has_usuario`
+--
+
+DROP TABLE IF EXISTS `cargo_has_usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `cargo_has_usuario` (
+  `idUsuario` int(11) NOT NULL,
+  `cargo_id` int(11) NOT NULL,
+  PRIMARY KEY (`idUsuario`,`cargo_id`),
+  KEY `fk_usuario_has_cargo_cargo1_idx` (`cargo_id`),
+  KEY `fk_usuario_has_cargo_usuario1_idx` (`idUsuario`),
+  CONSTRAINT `fk_usuario_has_cargo_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`),
+  CONSTRAINT `fk_usuario_has_cargo_usuario1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cargo_has_usuariosnovos`
+--
+
+DROP TABLE IF EXISTS `cargo_has_usuariosnovos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `cargo_has_usuariosnovos` (
+  `idUsuario` int(11) NOT NULL,
+  `cargo_id` int(11) NOT NULL,
+  PRIMARY KEY (`idUsuario`,`cargo_id`),
+  KEY `fk_cargo_idx` (`cargo_id`),
+  CONSTRAINT `fk_cargo` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`),
+  CONSTRAINT `fk_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuariosnovos` (`idusuario`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `contrato`
 --
 
@@ -71,7 +106,7 @@ CREATE TABLE `contrato` (
   CONSTRAINT `fk_Contrato_uso1` FOREIGN KEY (`uso_id`) REFERENCES `uso` (`id`),
   CONSTRAINT `fk_Usuario_fiscal` FOREIGN KEY (`fiscal_id`) REFERENCES `usuario` (`idusuario`),
   CONSTRAINT `fk_Usuario_gestor` FOREIGN KEY (`gestor_id`) REFERENCES `usuario` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +147,7 @@ CREATE TABLE `processo` (
   KEY `fk_tesoureiro_idx` (`usuario_id`),
   CONSTRAINT `fk_contrato` FOREIGN KEY (`contrato_id`) REFERENCES `contrato` (`idcontrato`),
   CONSTRAINT `fk_tesoureiro` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,20 +180,6 @@ CREATE TABLE `setor` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `teste`
---
-
-DROP TABLE IF EXISTS `teste`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `teste` (
-  `numero` decimal(11,2) NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `uso`
 --
 
@@ -186,11 +207,8 @@ CREATE TABLE `usuario` (
   `login` varchar(100) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `setor_codigo` varchar(8) NOT NULL,
-  `cargo_id` int(11) NOT NULL,
-  PRIMARY KEY (`idUsuario`,`matricula`,`setor_codigo`,`cargo_id`),
+  PRIMARY KEY (`idUsuario`,`matricula`,`setor_codigo`),
   KEY `fk_usuario_setor1_idx` (`setor_codigo`),
-  KEY `fk_usuario_cargo1_idx` (`cargo_id`),
-  CONSTRAINT `fk_usuario_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`),
   CONSTRAINT `fk_usuario_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -209,13 +227,10 @@ CREATE TABLE `usuariosnovos` (
   `login` varchar(100) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `setor_codigo` varchar(8) NOT NULL,
-  `cargo_id` int(11) NOT NULL,
-  PRIMARY KEY (`idUsuario`,`matricula`,`setor_codigo`,`cargo_id`),
+  PRIMARY KEY (`idUsuario`,`matricula`,`setor_codigo`),
   KEY `fk_usuariosNovos_setor1_idx` (`setor_codigo`),
-  KEY `fk_usuariosNovos_cargo1_idx` (`cargo_id`),
-  CONSTRAINT `fk_usuariosNovos_cargo1` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`),
   CONSTRAINT `fk_usuariosNovos_setor1` FOREIGN KEY (`setor_codigo`) REFERENCES `setor` (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -227,4 +242,4 @@ CREATE TABLE `usuariosnovos` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-28 11:37:22
+-- Dump completed on 2018-09-11 10:34:15
