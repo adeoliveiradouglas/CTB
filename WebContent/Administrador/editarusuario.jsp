@@ -37,8 +37,7 @@
 
 			<div class="form-group  has-feedback">
 				<input type="text" class="form-control input-lg"
-					placeholder="Seu nome completo" name="nome" value=<%=nome %>
-					required> <span class="form-control-feedback"
+					placeholder="<%=nome %>" name="nome"> <span class="form-control-feedback"
 					aria-hidden="true"> </span>
 			</div>
 
@@ -61,7 +60,7 @@
 			<div class="form-group custom-select has-feedback">
 				<select name="cargoNovo<%=u.getCargo().indexOf(cargoDoUsuario)%>">
 					<option style="display: none"
-						value="<%=cargos.indexOf(u.getCargo())%>">
+						value="<%=cargos.indexOf(cargoDoUsuario)%>">
 						<%=cargoDoUsuario.getNome()%> -
 						<%=cargoDoUsuario.getDescricao()%>
 					</option>
@@ -77,6 +76,9 @@
 						}
 					%>
 
+					<option value="-1">
+						Não tem segundo cargo
+					</option>
 				</select>
 				<!-- select cargos -->
 			</div>

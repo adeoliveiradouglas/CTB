@@ -31,16 +31,23 @@ public class Cargo_has_usuario extends DAO{
 		try{
 			int cargosParaProcessar = 2;
 			
-			if(u.getCargo().get(0).getId() != u.getCargo().get(1).getId())
+			if(u.getCargo().get(0).getId() == u.getCargo().get(1).getId())
 				cargosParaProcessar = 1;
 			
+			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
+			
 			for (int i = 0; i < cargosParaProcessar; ++i){
-				setStatement(getDbConnection().prepareStatement(getSqlQuery()));
-				
 				int posicao = 1;
 				
-				getStatement().setInt(posicao, u.getId());
-				getStatement().setInt(++posicao, u.getCargo().get(i).getId());
+				getStatement().setInt(
+					posicao, 
+					u.getId()
+				);
+				
+				getStatement().setInt(
+					++posicao, 
+					u.getCargo().get(i).getId()
+				);
 				
 				getStatement().executeUpdate();
 			}
@@ -90,6 +97,8 @@ public class Cargo_has_usuario extends DAO{
 		} catch (SQLException e){
 			e.printStackTrace();
 			cargos = new ArrayList<Cargo>();
+			cargos.add(new Cargo());
+			cargos.add(new Cargo());
 		}
 		
 		encerraConexaocomBanco();
@@ -139,6 +148,40 @@ public class Cargo_has_usuario extends DAO{
 		encerraConexaocomBanco();
 		return usuarios;
 	}
+
+	public void atualizar(Usuario usuario) {
+		deletar(usuario);
+		inserir(usuario);		
+	}
 	
+	public void deletar(Usuario usuario){
+		iniciaConexaoComBanco();
+		
+		/*Exemplo
+		 * delete from usuario where id = ?; 
+		 */
+		setSqlQuery(
+			"delete from " + getNomeTabela() + " where " + colunaUsuario + " = ?"
+		);
+		
+		try {
+			setStatement(
+				getDbConnection().prepareStatement(
+					getSqlQuery()
+				)
+			);
+			
+			getStatement().setInt(
+				1,
+				usuario.getId()
+			);
+			
+			getStatement().executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		encerraConexaocomBanco();	
+	}
 
 }

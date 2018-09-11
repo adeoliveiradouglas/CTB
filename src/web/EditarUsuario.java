@@ -16,20 +16,34 @@ public class EditarUsuario implements Logica{
 	@SuppressWarnings("unchecked")
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		ArrayList<Cargo> todosOsCargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("todososcargos")),
-						 cargosDoUsuario = new ArrayList<Cargo>();
+						 cargosDoUsuario = new ArrayList<>();
 		ArrayList<Setor> todosOsSetores = ((ArrayList<Setor>) pedido.getSession().getAttribute("todosossetores"));
-		int posicao = Integer.parseInt(pedido.getParameter("setorNovo"));
-		Setor setor = todosOsSetores.get(posicao);
+		int posicaoSetor = Integer.parseInt(pedido.getParameter("setorNovo")),
+			posicaoCargo1 = Integer.parseInt(pedido.getParameter("cargoNovo0")),
+			posicaoCargo2 = Integer.parseInt(pedido.getParameter("cargoNovo1"));
+		String nome = pedido.getParameter("nome");
+		Usuario usuarioEditar = (Usuario) pedido.getSession().getAttribute("usuarioeditar");
+		Setor setor = null;
+//		Quando o usuário não tem segundo cargo e não foi alterado, essa variável vem como -1
+		if(posicaoCargo2 == -1)
+			posicaoCargo2 = posicaoCargo1;
+			
+		if(posicaoSetor == -1)
+			setor = usuarioEditar.getSetor();
+		else
+			setor = todosOsSetores.get(posicaoSetor);
 		
-		posicao = Integer.parseInt(pedido.getParameter("cargoNovo0"));
-		Cargo cargo = todosOsCargos.get(posicao);
+//		Consertado bug que só aparecia o primeiro nome do usuário
+		if(nome.equals(""))
+			nome = usuarioEditar.getNome();
+	
+		cargosDoUsuario.add(todosOsCargos.get(posicaoCargo1));
+		cargosDoUsuario.add(todosOsCargos.get(posicaoCargo2));
 		
-		posicao = Integer.parseInt(pedido.getParameter("cargoNovo1"));
-		cargosDoUsuario.add(cargo);
 		Usuario u = new Usuario(
 			((Usuario) pedido.getSession().getAttribute("usuarioeditar")).getId(),
 			Integer.parseInt(pedido.getParameter("matricula")), 
-			pedido.getParameter("nome"),
+			nome,
 			pedido.getParameter("email"), 
 			((Usuario) pedido.getSession().getAttribute("usuarioeditar")).getSenha(), 
 			setor, 

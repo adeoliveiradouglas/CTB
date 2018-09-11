@@ -18,8 +18,7 @@ public class UsuarioDAO extends DAO {
 						 colunaNome = getNomeTabela() + ".nome", 
 						 colunaEmail = getNomeTabela() + ".login",
 						 colunaSenha = getNomeTabela() + ".senha",
-						 colunaSetor = getNomeTabela() + ".setor_codigo",
-						 ordenarPorNome = " order by " + colunaNome;
+						 colunaSetor = getNomeTabela() + ".setor_codigo";
 
 	/*
 	 * public UsuarioDAO(String nomeDB, String usuarioDB, String senhaDB){
@@ -50,11 +49,11 @@ public class UsuarioDAO extends DAO {
 			colunaNome + ", " + 
 			colunaEmail + ", " + 
 			colunaSenha + ", " + 
-			colunaSetor + ", " + 
+			colunaSetor +
 			") values (?,?,?,?,?)"
 		);
 		
-		int posicao = 0;
+		int posicao = 1;
 		
 		try {
 			setStatement(
@@ -64,7 +63,7 @@ public class UsuarioDAO extends DAO {
 			);
 			
 			getStatement().setInt(
-				++posicao,
+				posicao,
 				usuario.getMatricula()
 			);
 			
@@ -90,6 +89,8 @@ public class UsuarioDAO extends DAO {
 						
 			getStatement().executeUpdate();
 			
+			usuario.setId(getByEmail(usuario.getEmail()).getId());
+			
 			//inserir a referência dos cargos na tabela de cargo_has_usuariosnovos
 			new Cargo_has_usuario(getNomeTabela(), getDbConnection()).inserir(usuario);
 		} catch (SQLException e) {
@@ -109,6 +110,7 @@ public class UsuarioDAO extends DAO {
  		
 
 		Usuario u = null;
+		ArrayList<Cargo> cargos = null;
 		
 //		monta a query
 		setSqlQuery(
@@ -134,11 +136,11 @@ public class UsuarioDAO extends DAO {
 				getStatement().executeQuery()
 			);
 			
-			if(getResultado().next()){
-				ArrayList<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
-					getResultado().getInt(colunaId)
-				);
+			if (getResultado().next()) {
+				cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection())
+						.getByUsuario(getResultado().getInt(colunaId));
 				
+//				Se o usuário só tiver 1 cargo, a posição do segundo fica somente com o id para não gerar erros mais tarde
 				if(cargos.size() == 1){
 					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
 				}
@@ -159,7 +161,7 @@ public class UsuarioDAO extends DAO {
 					getResultado().getString(
 						colunaSenha
 					),				
-//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+//					busca setor de acordo com o resultado do usuario
 					new SetorDAO(getDbConnection()).getByCodigo(
 						getResultado().getString(colunaSetor)
 					),
@@ -168,7 +170,7 @@ public class UsuarioDAO extends DAO {
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
-			u = null;
+			u = new Usuario();
 		}
 		
 		encerraConexaocomBanco();
@@ -216,6 +218,7 @@ public class UsuarioDAO extends DAO {
 					getResultado().getInt(colunaId)
 				);
 				
+//				Se o usuário só tiver 1 cargo, a posição do segundo fica somente com o id para não gerar erros mais tarde 
 				if(cargos.size() == 1){
 					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
 				}
@@ -245,88 +248,13 @@ public class UsuarioDAO extends DAO {
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
-			u = null;
+			u = new Usuario();
 		}
 		
 		encerraConexaocomBanco();
 		return u;
 	}
 
-	public ArrayList<Usuario> getAll() {
-		iniciaConexaoComBanco();
-		
-/*		
- 		Exemplo de query para esse método
- 		
- 		select * from usuario";
- 		depois busca setor e cargo através do resultado do usuario
- 		
-*/
-		
-		ArrayList<Usuario> lu = new ArrayList<>();
-		
-//		monta a query
-		setSqlQuery(
-			"select * from " + getNomeTabela() + ordenarPorNome
-		);
-		
-		try {
-//			monta o statement
-			setStatement(
-				getDbConnection().prepareStatement(
-					getSqlQuery()
-				)
-			);
-						
-//			executa
-			setResultado(
-				getStatement().executeQuery()
-			);
-			
-			Usuario u = null;
-			
-			while(getResultado().next()){
-				ArrayList<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
-					getResultado().getInt(colunaId)
-				);
-				
-				if(cargos.size() == 1){
-					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
-				}
-				
-				u = new Usuario(
-					getResultado().getInt(
-						colunaId
-					),
-					getResultado().getInt(
-						colunaMatricula
-					),
-					getResultado().getString(
-						colunaNome
-					),
-					getResultado().getString(
-						colunaEmail
-					),
-					getResultado().getString(
-						colunaSenha
-					),				
-//						busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
-					new SetorDAO(getDbConnection()).getByCodigo(
-						getResultado().getString(colunaSetor)
-					),
-					cargos
-				);
-				lu.add(u);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			lu = new ArrayList<>();
-		}
-		
-		encerraConexaocomBanco();
-		return lu;
-	}
-	
 	public void atualizarSenha(String senha, String email){
 		iniciaConexaoComBanco();
 		
@@ -407,7 +335,7 @@ public class UsuarioDAO extends DAO {
 			colunaNome + " = ?, " +
 			colunaEmail + " = ?, " +
 			colunaSenha + " = ?, " +
-			colunaSetor + " = ?, " +
+			colunaSetor + " = ? " +
 			"where " + colunaId + " = ?"
 		);
 		
@@ -451,6 +379,8 @@ public class UsuarioDAO extends DAO {
 			);
 				
 			getStatement().executeUpdate();
+			
+			new Cargo_has_usuario(getNomeTabela(), getDbConnection()).atualizar(usuario);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -458,7 +388,11 @@ public class UsuarioDAO extends DAO {
 		encerraConexaocomBanco();
 	}
 
-	public ArrayList<Usuario> getAllOrdenado(String ordenacao) {
+	public ArrayList<Usuario> getAll() {
+		return getAll(colunaNome);
+	}
+	
+	public ArrayList<Usuario> getAll(String ordenacao) {
 		iniciaConexaoComBanco();
 		
 /*		
@@ -496,8 +430,13 @@ public class UsuarioDAO extends DAO {
 					getResultado().getInt(colunaId)
 				);
 				
+//				Se o usuário só tiver 1 cargo, a posição do segundo fica somente com o id para não gerar erros mais tarde
 				if(cargos.size() == 1){
 					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
+//				Se, por algum erro do banco, o usuário não possuir cargos, é setado a ele dois cargos vazios seguindo a mesma ideia acima
+				} else if (cargos.size() == 0){
+					cargos.add(new Cargo());
+					cargos.add(new Cargo());
 				}
 				
 				u = new Usuario(

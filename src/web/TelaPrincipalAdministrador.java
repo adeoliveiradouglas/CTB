@@ -11,8 +11,8 @@ public class TelaPrincipalAdministrador implements Logica{
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		String ordenacao = pedido.getParameter("ordUser");
 		
-		pedido.getSession().setAttribute("usuariosnovos", new UsuarioDAO(true).getAllOrdenado(ordenacao));
-		pedido.getSession().setAttribute("usuarios", new UsuarioDAO().getAllOrdenado(ordenacao));
+		pedido.getSession().setAttribute("usuariosnovos", new UsuarioDAO(true).getAll(ordenacao));
+		pedido.getSession().setAttribute("usuarios", new UsuarioDAO().getAll(ordenacao));
 		
 		return "/Administrador/index.jsp";
 	}
