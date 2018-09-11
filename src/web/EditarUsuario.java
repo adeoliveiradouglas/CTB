@@ -18,10 +18,11 @@ public class EditarUsuario implements Logica{
 		ArrayList<Cargo> todosOsCargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("todososcargos")),
 						 cargosDoUsuario = new ArrayList<>();
 		ArrayList<Setor> todosOsSetores = ((ArrayList<Setor>) pedido.getSession().getAttribute("todosossetores"));
+		String nome = pedido.getParameter("nome");
 		int posicaoSetor = Integer.parseInt(pedido.getParameter("setorNovo")),
 			posicaoCargo1 = Integer.parseInt(pedido.getParameter("cargoNovo0")),
 			posicaoCargo2 = Integer.parseInt(pedido.getParameter("cargoNovo1"));
-		String nome = pedido.getParameter("nome");
+		
 		Usuario usuarioEditar = (Usuario) pedido.getSession().getAttribute("usuarioeditar");
 		Setor setor = null;
 //		Quando o usuário não tem segundo cargo e não foi alterado, essa variável vem como -1

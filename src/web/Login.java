@@ -57,11 +57,12 @@ public class Login implements Logica {
 		// Coloca os dados do usuário na sessão
 		pedido.getSession().setAttribute("usuario", u);
 
-		// Muda o tempo de inatividade (o padrão são 30 minutos)
-//		pedido.getSession().setMaxInactiveInterval(18000);
-		
-		// Põe cargo em uso como o primeiro da lista do usuário
-		pedido.getSession().setAttribute("cargoParaLogin", u.getCargo().get(0));
+		try{
+			// Põe cargo em uso como o primeiro da lista do usuário
+			pedido.getSession().setAttribute("cargoParaLogin", u.getCargo().get(0));
+		}catch (IndexOutOfBoundsException e){
+			return "sistema?logica=Erro403";
+		}
 		
 		// Manda mostrar a tela principal
 		return "sistema?logica=TelaPrincipal";

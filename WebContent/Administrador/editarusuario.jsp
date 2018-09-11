@@ -55,14 +55,13 @@
 				@SuppressWarnings("unchecked")
 				ArrayList<Cargo> cargos = ((ArrayList<Cargo>) request.getSession().getAttribute("todososcargos"));
 
-				for (Cargo cargoDoUsuario : u.getCargo()) {
 			%>
 			<div class="form-group custom-select has-feedback">
-				<select name="cargoNovo<%=u.getCargo().indexOf(cargoDoUsuario)%>">
+				<select name="cargoNovo0">
 					<option style="display: none"
-						value="<%=cargos.indexOf(cargoDoUsuario)%>">
-						<%=cargoDoUsuario.getNome()%> -
-						<%=cargoDoUsuario.getDescricao()%>
+						value="<%=cargos.indexOf(u.getCargo().get(0))%>">
+						<%=u.getCargo().get(0).getNome()%> -
+						<%=u.getCargo().get(0).getDescricao()%>
 					</option>
 
 					<%
@@ -82,9 +81,31 @@
 				</select>
 				<!-- select cargos -->
 			</div>
-			<%
-				}
-			%>
+			<div class="form-group custom-select has-feedback">
+				<select name="cargoNovo1">
+					<option style="display: none"
+						value="<%=cargos.indexOf(u.getCargo().get(1))%>">
+						<%=u.getCargo().get(1).getNome()%> -
+						<%=u.getCargo().get(1).getDescricao()%>
+					</option>
+
+					<%
+						for (Cargo c : cargos) {
+					%>
+					<option value="<%=cargos.indexOf(c)%>">
+						<%=c.getNome()%> -
+						<%=c.getDescricao()%>
+					</option>
+					<%
+						}
+					%>
+
+					<option value="-1">
+						Não tem segundo cargo
+					</option>
+				</select>
+				<!-- select cargos -->
+			</div>
 			<!-- fim div select cargos -->
 
 			<!-- Mostrar as opções de setores -->
