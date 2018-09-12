@@ -434,9 +434,9 @@ public class ContratoDAO extends DAO {
 
 		try {
 			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
-			int posicao = 0;
+			int posicao = 1;
 			
-			getStatement().setBoolean(++posicao, c.isAvisado45());
+			getStatement().setBoolean(posicao, c.isAvisado45());
 			getStatement().setBoolean(++posicao, c.isAvisado60());
 			getStatement().setBoolean(++posicao, c.isAvisado90());
 			getStatement().setInt(++posicao, c.getId());

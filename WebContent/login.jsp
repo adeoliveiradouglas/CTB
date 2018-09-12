@@ -20,8 +20,6 @@
 
 		<div align="center">
 			<img src="/gestaodecontratos/layout/images/logo.png" />
-		
-			<!-- <img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png" /> -->
 		</div>
 
 		<br />
@@ -65,7 +63,7 @@
 	<footer class="footer">
 		<br /><br /><br /><br /><br /><br /><br /><br /><br />
 		<div align="center">
-			SGC - Sistema de Gestão de Contratos - Versão 1.0 BETA	
+			SGC - Sistema de Gestão de Contratos - Versão 1.1.0 BETA	
 		</div>	
 	</footer>
 </body>

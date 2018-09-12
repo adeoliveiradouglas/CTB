@@ -45,14 +45,13 @@
 	<table class="table table-bordered table-striped">
 		<tbody>
 			<tr>
-				<td class="text-center col-md-1">Número: <%=contrato.getNumero() %></td>
+				<td rowspan="2" class="text-center col-md-1">Número: <%=contrato.getNumero() %></td>
 				<td class="text-center col-md-1">Portaria: <%=contrato.getPortaria()%></td>
 				<td class="text-center col-md-1">Gestor: <%=contrato.getGestor().getNome()%></td>
 				<td class="text-center col-md-1">Fiscal: <%=contrato.getFiscal().getNome()%></td>
 				
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Objeto: <%=contrato.getObjeto()%></td>
 				<td class="text-center col-md-1">Recurso: <%=contrato.getRecurso().getNome()%></td>
 				<td class="text-center col-md-1">Uso: <%=contrato.getUso().getNome()%></td>
 				<td class="text-center col-md-1">Fonte pagante: <%=contrato.getFontePagante().getNome()%></td>
@@ -70,6 +69,11 @@
 				<td class="text-center col-md-1">Vencimento da garantia: <%=contrato.getDataVencimentoGarantia().toString(formatoData) %></td>
 			</tr>
 		</tbody>
+	</table>
+	<table class="table table-bordered table-striped">
+		<tr>
+			<td>Objeto: <%=contrato.getObjeto()%></td>
+		</tr>
 	</table>
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Processos</h3>

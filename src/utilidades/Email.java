@@ -49,7 +49,8 @@ public class Email {
 			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
 			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
 			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogação, devendo "
-			+ "assim o processo ser encaminhando a QUAS para conhecimento.";
+			+ "assim o processo ser encaminhando a QUAS para conhecimento.\n\n"
+			+ "Este email foi encaminhado para o gestor do contrato, fiscal do contrato e QUAS";
 		
 		this.emailTo = emailTo;
 		this.enviar();
@@ -66,7 +67,8 @@ public class Email {
 			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
 			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
 			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogação, devendo "
-			+ "assim o processo ser encaminhando a QUAS para conhecimento.";
+			+ "assim o processo ser encaminhando a QUAS para conhecimento.\n\n"
+			+ "Este email foi encaminhado para o gestor do contrato, fiscal do contrato, QUAS e diretor";
 			
 		this.emailTo = emailTo;
 		this.enviar();
@@ -83,7 +85,8 @@ public class Email {
 			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
 			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
 			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogação, devendo "
-			+ "assim o processo ser encaminhando a QUAS para conhecimento.";
+			+ "assim o processo ser encaminhando a QUAS para conhecimento.\n\n"
+			+ "Este email foi encaminhado para o gestor do contrato, fiscal do contrato, QUAS e diretor e presidente";
 			
 		this.emailTo = emailTo;
 		this.enviar();

@@ -11,9 +11,19 @@ public class VerContratoParaPagamento implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String origem = pedido.getParameter("origem");
-		int n = Integer.parseInt(pedido.getParameter("n"));
+		String origem;
+		int n;
 		
+		try{
+			origem = pedido.getParameter("origem");
+			n = Integer.parseInt(pedido.getParameter("n"));
+		} catch (Exception e){
+			origem = "" + pedido.getSession().getAttribute("origem");
+			n = Integer.parseInt("" + pedido.getSession().getAttribute("posicaoNaOrigem"));
+		}
+		
+		pedido.getSession().setAttribute("origem", origem);
+		pedido.getSession().setAttribute("posicaoNaOrigem", n);
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<Contrato> contratosLista = (ArrayList<Contrato>) pedido.getSession().getAttribute(origem);

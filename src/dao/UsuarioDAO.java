@@ -494,7 +494,7 @@ public class UsuarioDAO extends DAO {
 		
 		/*
 		 * Passo a passo desse método:
-		 * 1º: busca na tabela cargo_has_usuario por todos os ids de usuarios que tem o idCargo = 3
+		 * 1º: busca na tabela cargo_has_usuario por todos os ids de usuarios que tem o idCargo = codCargo
 		 * 2º: tranforma todos os ids em um objeto Usuario pelo método UsuarioDAO.getById
 		 */
 		

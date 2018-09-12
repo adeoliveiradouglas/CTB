@@ -42,8 +42,8 @@ public class EditarPrevia implements Logica{
 			
 			try {
 				novaDataVencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
-						pedido.getParameter("novaDataVencimento")
-					);
+					pedido.getParameter("novaDataVencimento")
+				);
 			} catch (Exception e){
 				novaDataVencimento = null;
 			}

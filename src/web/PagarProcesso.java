@@ -10,12 +10,12 @@ public class PagarProcesso implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String idProcesso = pedido.getParameter("n");
+		String idProcesso = pedido.getParameter("i");
 		int idTesoureiro = ((Usuario) pedido.getSession().getAttribute("usuario")).getId();
 		
 		new ProcessoDAO().atualizarPagamento(idProcesso, idTesoureiro);
 		
-		return "/Tesoureiro/verContrato.jsp";
+		return "sistema?logica=VerContratoParaPagamento";
 	}
 
 }

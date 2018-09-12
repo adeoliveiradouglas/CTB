@@ -61,8 +61,10 @@ public class DAO {
 				 * exemplo: UsuarioDAO chama SetorDAO. SetorDAO não fecha a conexao, então essa variável de controle
 				 * fica como falsa pois UsuarioDAO ainda precisa fazer novos acessos ao banco
 				*/
-				this.dbConnection.close();
-				this.dbConnection = null;
+				try {
+					this.dbConnection.close();
+					this.dbConnection = null;
+				} catch (NullPointerException e) {}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

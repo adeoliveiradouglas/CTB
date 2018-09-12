@@ -1,16 +1,15 @@
 package main;
 
-import java.util.ArrayList;
-
-import dao.SetorDAO;
-import dao.UsuarioDAO;
-import entity.Cargo;
-import entity.Usuario;
+import utilidades.AvisoVencimento;
 
 public class Teste {
 
 	public static void main(String[] args) {
-		ArrayList<Cargo> cargos = new ArrayList<>();
+		AvisoVencimento av= new AvisoVencimento();
+		
+		av.run();
+		
+		/*ArrayList<Cargo> cargos = new ArrayList<>();
 		
 		cargos.add(new Cargo(1, "Administrador", ""));
 		cargos.add(new Cargo(1, "Administrador", ""));
@@ -25,6 +24,6 @@ public class Teste {
 				new SetorDAO().getBySigla("CTB/ TECI"),
 				cargos
 			)
-		);
+		);*/
 	}
 }

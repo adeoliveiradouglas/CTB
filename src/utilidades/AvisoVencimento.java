@@ -21,7 +21,8 @@ public class AvisoVencimento implements Runnable {
 		while (true) {
 			DateTime hoje = new DateTime();
 			Days d;
-
+			boolean avisado; 
+			
 			//todos os contratos cadastrados
 			ArrayList<Contrato> todosOsContratos = new ContratoDAO().getAll();
 			
@@ -29,6 +30,8 @@ public class AvisoVencimento implements Runnable {
 			ArrayList<Usuario> destinos;
 			
 			for (Contrato c : todosOsContratos) {
+				avisado = false;
+				
 				//dias que faltam para o vencimento do contrato
 				d = Days.daysBetween(hoje, c.getDataVencimentoContrato());
 				
@@ -60,10 +63,7 @@ public class AvisoVencimento implements Runnable {
 //					marcar as três pois pode ocorrer de um contrato ser inserido e já ter menos de 90 dias para vencer
 					c.setAvisado45(true);
 					c.setAvisado60(true);
-					c.setAvisado90(true);
-					
-//					atualiza o banco de dados
-					new ContratoDAO().atualizarAvisoDeVencimento(c);
+					avisado = true;
 				}
 				else if(d.getDays() <= 60 && !c.avisado60){
 					for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor"))
@@ -73,17 +73,24 @@ public class AvisoVencimento implements Runnable {
 						new Email().aviso60dias(u.getEmail(), c);
 					
 					c.setAvisado60(true);
-					c.setAvisado90(true);
-					new ContratoDAO().atualizarAvisoDeVencimento(c);
+					avisado = true;
 				}
 				else if(d.getDays() <= 90 && !c.avisado90){
 					for (Usuario u: destinos)
 						new Email().aviso90dias(u.getEmail(), c);
 					
+					avisado = true;
+				}
+				
+				if(avisado){
 					c.setAvisado90(true);
+					
+//					atualiza o banco de dados
 					new ContratoDAO().atualizarAvisoDeVencimento(c);
 				}
 			}
+			
+			
 			try {
 //				daqui a tanto tempo, fazer novamente
 				Thread.sleep(10800000);
