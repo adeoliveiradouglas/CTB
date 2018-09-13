@@ -72,7 +72,7 @@ public class Planilha {
 			}
 		}
 		
-//		linhaLeitura = 71;
+//		linhaLeitura = 30;
 		
 		while (linhaLeitura < quantLinhas && mesesConsecutivosSemDados <= 12){			
 //			System.out.println(linhaLeitura);
@@ -149,15 +149,16 @@ public class Planilha {
 				processo, 
 				contrato
 			);
-			
-//			linhas vazias do arquivo não são inseridas
-			if((!p.getNotaFiscal().equals("") || !p.getTipoAditivo().equals("") || !p.getNumeroSei().equals(""))){
+
+			// linhas vazias do arquivo não são inseridas
+			if (!p.getNotaFiscal().equals("") || !p.getTipoAditivo().equals("") || !p.getNumeroSei().equals("")
+					|| !p.getAditivoAsString().equals("0,00")) {
 				lp.add(p);
 				mesesConsecutivosSemDados = 0;
 			} else {
 				++mesesConsecutivosSemDados;
 			}
-			
+
 			++linhaLeitura;
 		}
 		
@@ -285,10 +286,11 @@ public class Planilha {
 				);
 				
 //				linhas vazias do arquivo não são inseridas
-				if((!p.getNotaFiscal().equals("") || !p.getTipoAditivo().equals("") || !p.getNumeroSei().equals(""))){
-					lp.add(p);
-					mesesConsecutivosSemDados = 0;
-				} else {
+			if (!p.getNotaFiscal().equals("") || !p.getTipoAditivo().equals("") || !p.getNumeroSei().equals("")
+					|| !p.getAditivoAsString().equals("0,0")) {
+				lp.add(p);
+				mesesConsecutivosSemDados = 0;
+			} else {
 					++mesesConsecutivosSemDados;
 				}
 				
