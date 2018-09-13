@@ -73,7 +73,7 @@
 				<td class="text-center">
 					<form action="sistema?logica=VerContratoParaPagamento" method="post">
 						<div style="display: none">
-							<input name="origem" value="contratosSemPagamento">
+							<input name="origemContrato" value="contratosSemPagamento">
 						</div>
 						<div style="display: none">
 							<input name="n" value="<%=contratos.indexOf(c)%>">

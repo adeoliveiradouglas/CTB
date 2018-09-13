@@ -161,7 +161,7 @@ public class ProcessoDAO extends DAO{
 		encerraConexaocomBanco();
 	}
 
-	public void atualizarPagamento(String numeroSei, int idTesoureiro) {
+	public void atualizarPagamento(int idProcesso, int idTesoureiro) {
 		iniciaConexaoComBanco();
 		
 		setSqlQuery("update "+getNomeTabela()+" set "+colunaDataPagamento+ " = NOW(), " +colunaUsuario+ " = ? where " +colunaIdProcesso+ " = ?");
@@ -170,7 +170,7 @@ public class ProcessoDAO extends DAO{
 			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
 			
 			getStatement().setInt(1, idTesoureiro);
-			getStatement().setString(2, numeroSei);
+			getStatement().setInt(2, idProcesso);
 			
 			getStatement().executeUpdate();
 		} catch(SQLException e) {
