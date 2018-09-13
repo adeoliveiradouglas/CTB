@@ -27,7 +27,7 @@ public class CadastrarUsuario implements Logica {
 			ArrayList<Setor> setores = ((ArrayList<Setor>) pedido.getSession().getAttribute("setor"));
 			
 			//tenta gerar lista de cargos do usuário
-			ArrayList<Cargo> cargosDoUsuario = new ArrayList<>();
+			ArrayList<Cargo> cargosDoUsuario = new ArrayList<Cargo>();
 			
 			//cargo1 sempre vai funcionar pois a pessoa deve escolher um cargo
 			int cargo1 = Integer.parseInt(pedido.getParameter("cargo1")),

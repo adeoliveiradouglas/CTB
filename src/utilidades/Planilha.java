@@ -55,7 +55,7 @@ public class Planilha {
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		int quantLinhas = sheet.getPhysicalNumberOfRows();
 		
- 		ArrayList<Processo> lp = new ArrayList<>();
+ 		ArrayList<Processo> lp = new ArrayList<Processo>();
 		
 		for (int i = 1; i <= quantLinhas; ++i){
 			//Busca pela primeira linha de processos desse arquivo
@@ -64,7 +64,8 @@ public class Planilha {
 			try {
 				valor = (int) sheet.getRow(i).getCell(posicaoAno).getNumericCellValue();
 //				System.out.println(valor);
-			} catch (NumberFormatException | IllegalStateException e) {}
+			} catch (NumberFormatException e) {}
+			 catch (IllegalStateException e){}
 			
 			if(valor > 2000){
 				linhaLeitura = i;
@@ -190,7 +191,7 @@ public class Planilha {
 			HSSFSheet sheet = workbook.getSheetAt(0);
 			int quantLinhas = sheet.getPhysicalNumberOfRows();
 			
-	 		ArrayList<Processo> lp = new ArrayList<>();
+	 		ArrayList<Processo> lp = new ArrayList<Processo>();
 			
 			for (int i = 1; i <= quantLinhas; ++i){
 				//Busca pela primeira linha de processos desse arquivo
@@ -199,7 +200,8 @@ public class Planilha {
 				try {
 					valor = (int) sheet.getRow(i).getCell(posicaoAno).getNumericCellValue();
 //					System.out.println(valor);
-				} catch (NumberFormatException | IllegalStateException e) {}
+				} catch (NumberFormatException e) {}
+				 catch (IllegalStateException e){}
 				
 				if(valor > 2000){
 					linhaLeitura = i;

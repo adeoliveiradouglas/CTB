@@ -16,7 +16,7 @@ public class TelaPrincipalTesoureiro implements Logica{
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		ProcessoDAO pdao = new ProcessoDAO();
 		ArrayList<Processo> processosSemPagamento = pdao.getAllSemPagamento();
-		ArrayList<Integer> carregados = new ArrayList<>();
+		ArrayList<Integer> carregados = new ArrayList<Integer>();
 
 //		Vai procurar por todos os contratos que tem processos sem pagamento
 		for (Processo p: processosSemPagamento){
@@ -28,7 +28,7 @@ public class TelaPrincipalTesoureiro implements Logica{
 			}
 		}
 		
-		ArrayList<Contrato> contratosSemPagamento = new ArrayList<>();
+		ArrayList<Contrato> contratosSemPagamento = new ArrayList<Contrato>();
 		ContratoDAO cdao = new ContratoDAO();
 		
 		for (int id: carregados){

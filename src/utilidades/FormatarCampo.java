@@ -76,47 +76,46 @@ public class FormatarCampo{
 		return novo;
 	}
 	
-	public String mesToInt(String mes){
-		switch(mes){
-			case "Janeiro":
-				return "01";
-				
-			case "Fevereiro":
-				return "02";
-				
-			case "Março":
-				return "03";
-				
-			case "Abril":
-				return "04";
-				
-			case "Maio":
-				return "05";
-			
-			case "Junho":
-				return "06";
-				
-			case "Julho":
-				return "07";
-				
-			case "Agosto":
-				return "08";
-				
-			case "Setembro":
-				return "09";
-				
-			case "Outubro":
-				return "10";
-				
-			case "Novembro":
-				return "11";
-				
-			case "Dezembro":
-				return "12";
-			
-			default:
-				return mes;
-		}
+	public String mesToInt(String mes) {
+
+		if (mes.equals("Janeiro"))
+			return "01";
+
+		else if (mes.equals("Fevereiro"))
+			return "02";
+
+		else if (mes.equals("Março"))
+			return "03";
+
+		else if (mes.equals("Abril"))
+			return "04";
+
+		else if (mes.equals("Maio"))
+			return "05";
+
+		else if (mes.equals("Junho"))
+			return "06";
+
+		else if (mes.equals("Julho"))
+			return "07";
+
+		else if (mes.equals("Agosto"))
+			return "08";
+
+		else if (mes.equals("Setembro"))
+			return "09";
+
+		else if (mes.equals("Outubro"))
+			return "10";
+
+		else if (mes.equals("Novembro"))
+			return "11";
+
+		else if (mes.equals("Dezembro"))
+			return "12";
+
+		else
+			return mes;
 	}
 	
 	public String intToMonth(int m){

@@ -35,7 +35,7 @@ public class TesteDAO extends DAO{
 			"select * from " + getNomeTabela()
 		);
 
-		ArrayList<BigDecimal> valores = new ArrayList<>();
+		ArrayList<BigDecimal> valores = new ArrayList<BigDecimal>();
 		try{
 			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
 			setResultado(getStatement().executeQuery());
@@ -45,7 +45,7 @@ public class TesteDAO extends DAO{
 			}
 		}catch(SQLException e){
 			System.out.println(e);;
-			valores = new ArrayList<>();
+			valores = new ArrayList<BigDecimal>();
 		} finally {
 			encerraConexaocomBanco();
 		}
