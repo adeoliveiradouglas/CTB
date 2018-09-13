@@ -31,13 +31,13 @@
 
 			<div class="form-group  has-feedback">
 				<input type="text" class="form-control input-lg"
-					placeholder="Número SEI" name="numero" required> <span
+					placeholder="Número SEI" name="numero"> <span
 					class="form-control-feedback" aria-hidden="true"> </span>
 			</div>
 
 			<div class="form-group  has-feedback">
 				<input type="text" class="form-control input-lg"
-					placeholder="Nota fiscal" name="notaFiscal" required> <span
+					placeholder="Nota fiscal" name="notaFiscal"> <span
 					class="form-control-feedback" aria-hidden="true"> </span>
 			</div>
 

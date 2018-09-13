@@ -113,9 +113,10 @@ public class FormatarCampo{
 				
 			case "Dezembro":
 				return "12";
+			
+			default:
+				return mes;
 		}
-		
-		return "";
 	}
 	
 	public String intToMonth(int m){

@@ -1,13 +1,11 @@
 package main;
 
-import utilidades.AvisoVencimento;
+import dao.UsuarioDAO;
 
 public class Teste {
 
 	public static void main(String[] args) {
-		AvisoVencimento av= new AvisoVencimento();
-		
-		av.run();
+		System.out.println(new UsuarioDAO().getAllByCargo("Diretor"));
 		
 		/*ArrayList<Cargo> cargos = new ArrayList<>();
 		
