@@ -25,7 +25,6 @@ public class TelaLogin implements Logica{
 		if(!monitorandoVencimento){
 //			para monitorar os vencimentos de contratos e avisar seus responsáveis
 			AvisoVencimento monitorando = new AvisoVencimento();
-//			monitorando.run();
 			Thread monitorar = new Thread(monitorando);
 			monitorar.start();
 			

@@ -22,12 +22,13 @@ public class CadastrarProcesso implements Logica{
 			novaDataVencimento;
 		
 		String v = new FormatarCampo().stringToDecimal(pedido.getParameter("valor")),
-			   va = new FormatarCampo().stringToDecimal(pedido.getParameter("valorAditivo"));
+			   va = new FormatarCampo().stringToDecimal(pedido.getParameter("valorAditivo")),
+			   notaFiscal = pedido.getParameter("notaFiscal"),
+			   numero = pedido.getParameter("numero");
 		
 		BigDecimal valor = null, aditivo = null;
 		
 		int idContrato = Integer.parseInt(pedido.getParameter("idContrato"));
-		
 
 		try {
 			novaDataVencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
@@ -45,10 +46,12 @@ public class CadastrarProcesso implements Logica{
 			aditivo = new BigDecimal("0.00");
 		}
 		
+//		if(notaFiscal.equals("")){}
+		
 		Processo p = new Processo(
-			pedido.getParameter("notaFiscal"),
+			notaFiscal,
 			pedido.getParameter("tipoAditivo"),
-			pedido.getParameter("numero"),
+			numero,
 			pedido.getParameter("ano"),
 			pedido.getParameter("mes"),
 			aditivo,
