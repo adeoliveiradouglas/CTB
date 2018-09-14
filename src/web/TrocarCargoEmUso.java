@@ -1,7 +1,6 @@
 package web;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import entity.Cargo;
 import entity.Usuario;
@@ -9,7 +8,7 @@ import entity.Usuario;
 public class TrocarCargoEmUso implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		Usuario u = (Usuario) pedido.getSession().getAttribute("usuario");
 		int i = Integer.parseInt((String) pedido.getParameter("i"));
 		

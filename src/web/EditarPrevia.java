@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.DateTime;
 
@@ -19,7 +18,7 @@ public class EditarPrevia implements Logica{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		ArrayList<Processo> previaProcessos = (ArrayList<Processo>) pedido.getSession().getAttribute("previaProcessos");
 		
 //		indice da lista do processo que está sendo manipulado

@@ -3,7 +3,6 @@ package web;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAO;
 import entity.Cargo;
@@ -16,7 +15,7 @@ public class CadastrarUsuario implements Logica {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		String nome = pedido.getParameter("nome");
 		String email = pedido.getParameter("email");
 		UsuarioDAO undao = new UsuarioDAO(true); //DAO para acesso à tabela de novos usuários

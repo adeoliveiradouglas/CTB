@@ -3,7 +3,6 @@ package web;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAO;
 import entity.Cargo;
@@ -14,7 +13,7 @@ public class EditarUsuario implements Logica{
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		ArrayList<Cargo> todosOsCargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("todososcargos")),
 						 cargosDoUsuario = new ArrayList<Cargo>();
 		ArrayList<Setor> todosOsSetores = ((ArrayList<Setor>) pedido.getSession().getAttribute("todosossetores"));

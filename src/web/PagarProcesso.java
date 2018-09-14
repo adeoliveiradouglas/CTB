@@ -3,7 +3,6 @@ package web;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
 import dao.ProcessoDAO;
@@ -13,7 +12,7 @@ import entity.Usuario;
 public class PagarProcesso implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		String origemContrato = "" + pedido.getSession().getAttribute("origemContrato");
 		int posicaoContrato = Integer.parseInt("" + pedido.getSession().getAttribute("posicaoNaOrigem"));
 		

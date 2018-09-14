@@ -3,7 +3,6 @@ package web;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.CargoDAO;
 import dao.SetorDAO;
@@ -12,7 +11,7 @@ import entity.Usuario;
 public class TelaEditarUsuario implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		/*
 		 * Recebe a posição que o usuario está na lista de usuários 
 		 */

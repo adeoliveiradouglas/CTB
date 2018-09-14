@@ -12,7 +12,6 @@ package web;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.OutroDAO;
 import dao.UsuarioDAO;
@@ -21,7 +20,7 @@ import entity.Outro;
 public class TelaNovoContrato implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		final String tabelaRecurso = "recurso",
 					 tabelaUso = "uso",
 					 tabelaFonte = "fontepagante";

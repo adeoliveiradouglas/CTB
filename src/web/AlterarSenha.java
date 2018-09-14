@@ -6,7 +6,6 @@
 package web;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAO;
 import utilidades.Cripto;
@@ -14,7 +13,7 @@ import utilidades.Cripto;
 public class AlterarSenha implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		new UsuarioDAO().atualizarSenha(
 			new Cripto().criptografa(
 				pedido.getParameter("senha")

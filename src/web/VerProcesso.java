@@ -1,7 +1,6 @@
 package web;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import entity.Contrato;
 import entity.Processo;
@@ -9,7 +8,7 @@ import entity.Processo;
 public class VerProcesso implements Logica {
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		String origem = pedido.getParameter("origem");
 		int i = Integer.parseInt(pedido.getParameter("i"));
 				

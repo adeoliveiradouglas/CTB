@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
 import dao.ProcessoDAO;
@@ -15,7 +14,7 @@ import utilidades.FormatarCampo;
 public class CadastrarProcesso implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		Date dataProcesso = new SimpleDateFormat("yyyy-MM-dd").parse(
 				pedido.getParameter("data")
 			),

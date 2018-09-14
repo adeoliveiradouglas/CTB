@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
 import entity.Contrato;
@@ -18,7 +17,7 @@ public class CadastrarContrato implements Logica {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		final String formatoData = "yyyy-MM-dd";
 
 		Date assinatura = new SimpleDateFormat(formatoData).parse(pedido.getParameter("dataAssinatura")),

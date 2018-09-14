@@ -8,7 +8,6 @@ package web;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAO;
 import entity.Usuario;
@@ -17,7 +16,7 @@ import utilidades.Email;
 public class GerarToken implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		String email = pedido.getParameter("email");
 
 		Usuario u = new UsuarioDAO().getByEmail(email);

@@ -8,12 +8,11 @@
 package web;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class ValidarToken implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		int gerado = (Integer) pedido.getSession().getAttribute("token"),
 			inserido = Integer.parseInt(pedido.getParameter("codigo"));
 		

@@ -14,10 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 @ManagedBean
 public class Sistema {
-	private static final long serialVersionUID = -5866444462741496740L;
+//	private static final long serialVersionUID = -5866444462741496740L;
 
 	protected void service(String acao)
 			throws ServletException, IOException {
+		HttpServletRequest pedido;
 		final String pacote = "web.";
 		String pagina;
 				
@@ -29,17 +30,15 @@ public class Sistema {
 			classe = Class.forName(nomeDaClasse);
 
 			logica = (Logica) classe.newInstance();
-			pagina = logica.executa(pedido, resposta);
+			pagina = logica.executa(pedido);
 //			System.out.println(pagina + " solicitada");
-			pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
 
 		} catch (ClassNotFoundException cnfe){
 			nomeDaClasse = pacote + "TelaLogin";
 			try {
 				classe = Class.forName(nomeDaClasse);
 				logica = (Logica) classe.newInstance();
-				pagina = logica.executa(pedido, resposta);
-				pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
+				pagina = logica.executa(pedido);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -48,13 +47,14 @@ public class Sistema {
 			try {
 				classe = Class.forName(nomeDaClasse);
 				logica = (Logica) classe.newInstance();
-				pagina = logica.executa(pedido, resposta);
-				pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
+				pagina = logica.executa(pedido);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
 	}
 }

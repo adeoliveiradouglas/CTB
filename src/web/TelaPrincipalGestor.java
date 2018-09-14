@@ -1,15 +1,16 @@
 package web;
 
+import javax.annotation.ManagedBean;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
 import entity.Usuario;
 
-public class TelaPrincipalGestor implements Logica{
+@ManagedBean
+public class TelaPrincipalGestor{
 
-	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa() throws Exception {
+		HttpServletRequest pedido = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		int idGestor = ((Usuario) pedido.getSession().getAttribute("usuario")).getId();
 		String ordenacao = pedido.getParameter("ordContrato");
 		

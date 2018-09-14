@@ -5,7 +5,7 @@
 	version="3.0">
 	<display-name>Gestão de contratos</display-name>
 	<welcome-file-list>
-		<welcome-file>Sistema</welcome-file>
+		<welcome-file>Sistema.service</welcome-file>
 	</welcome-file-list>
 	
 	<servlet>

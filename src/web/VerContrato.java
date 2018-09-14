@@ -10,14 +10,13 @@ package web;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import entity.Contrato;
 
 public class VerContrato implements Logica {
 
 	@Override
-	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+	public String executa(HttpServletRequest pedido) throws Exception {
 		String adicionaProcesso = "", //quando o usuário tem o poder de adicionar processos no contrato
 			   origem = pedido.getParameter("origem");
 		int n = Integer.parseInt(pedido.getParameter("n"));
