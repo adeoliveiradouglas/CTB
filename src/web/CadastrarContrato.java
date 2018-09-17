@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.annotation.ManagedBean;
 import javax.servlet.http.HttpServletRequest;
 
 import dao.ContratoDAO;
@@ -13,6 +14,7 @@ import entity.Outro;
 import entity.Usuario;
 import utilidades.FormatarCampo;
 
+@ManagedBean
 public class CadastrarContrato implements Logica {
 
 	@Override

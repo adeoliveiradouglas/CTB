@@ -22,7 +22,7 @@
 		</div>
 
 		<br />
-		<form action="sistema?logica=Login" method="POST">
+		<h:form method="POST">
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 
@@ -40,8 +40,7 @@
 							aria-hidden="true"></span>
 					</div>
 					<div class="form-group">
-						<button type="submit"
-							class="btn btn-primary btn-lg aw-btn-full-width">Entrar</button>
+						<h:commandButton action="#{sistema.service}" class="btn btn-primary btn-lg aw-btn-full-width">Entrar</</h:commandButton>
 					</div>
 
 					<div class="form-group clearfix">
@@ -54,7 +53,7 @@
 					</div>
 				</div>
 			</div>
-		</form>
+		</h:form>
 	</div>
 
 	<footer class="footer">

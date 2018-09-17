@@ -8,10 +8,9 @@ package web;
 import javax.servlet.http.HttpServletRequest;
 
 import entity.Usuario;
-import utilidades.AvisoVencimento;
 
 public class TelaLogin implements Logica{
-	private static boolean monitorandoVencimento = false;
+	
 	
 	@Override
 	public String executa(HttpServletRequest pedido) throws Exception {
@@ -21,16 +20,7 @@ public class TelaLogin implements Logica{
 			return "sistema?logica=TelaPrincipal";
 		}
 		
-		if(!monitorandoVencimento){
-//			para monitorar os vencimentos de contratos e avisar seus responsáveis
-			AvisoVencimento monitorando = new AvisoVencimento();
-			Thread monitorar = new Thread(monitorando);
-//			monitorar.start();
-			
-			monitorandoVencimento = true;
-		}
-		
-		return "/login.jsp";
+		return "/login.xhtml";
 	}
 
 }
