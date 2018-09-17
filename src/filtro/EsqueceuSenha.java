@@ -30,7 +30,7 @@ public class EsqueceuSenha implements Filter{
 			throws IOException, ServletException {
 		
 		HttpServletRequest req = (HttpServletRequest) pedido;
-		int token = (int) req.getSession().getAttribute("token");
+		int token = (Integer) req.getSession().getAttribute("token");
 
 		try{
 			if (token >= 1000 && token <= 9999){

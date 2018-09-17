@@ -14,7 +14,7 @@ public class ValidarToken implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		int gerado = (int) pedido.getSession().getAttribute("token"),
+		int gerado = (Integer) pedido.getSession().getAttribute("token"),
 			inserido = Integer.parseInt(pedido.getParameter("codigo"));
 		
 		if (gerado == inserido){

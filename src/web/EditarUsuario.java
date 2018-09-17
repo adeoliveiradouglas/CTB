@@ -16,7 +16,7 @@ public class EditarUsuario implements Logica{
 	@SuppressWarnings("unchecked")
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		ArrayList<Cargo> todosOsCargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("todososcargos")),
-						 cargosDoUsuario = new ArrayList<>();
+						 cargosDoUsuario = new ArrayList<Cargo>();
 		ArrayList<Setor> todosOsSetores = ((ArrayList<Setor>) pedido.getSession().getAttribute("todosossetores"));
 		String nome = pedido.getParameter("nome");
 		int posicaoSetor = Integer.parseInt(pedido.getParameter("setorNovo")),

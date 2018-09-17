@@ -55,7 +55,7 @@ public class Planilha {
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		int quantLinhas = sheet.getPhysicalNumberOfRows();
 		
- 		ArrayList<Processo> lp = new ArrayList<>();
+ 		ArrayList<Processo> lp = new ArrayList<Processo>();
 		
 		for (int i = 1; i <= quantLinhas; ++i){
 			//Busca pela primeira linha de processos desse arquivo
@@ -190,7 +190,7 @@ public class Planilha {
 			HSSFSheet sheet = workbook.getSheetAt(0);
 			int quantLinhas = sheet.getPhysicalNumberOfRows();
 			
-	 		ArrayList<Processo> lp = new ArrayList<>();
+	 		ArrayList<Processo> lp = new ArrayList<Processo>();
 			
 			for (int i = 1; i <= quantLinhas; ++i){
 				//Busca pela primeira linha de processos desse arquivo

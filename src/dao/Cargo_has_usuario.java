@@ -109,7 +109,7 @@ public class Cargo_has_usuario extends DAO{
 		/*
 		 * retorna todos os usuários que tem um determinado cargo 
 		 */
-		ArrayList<Usuario> usuarios = new ArrayList<>();
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		iniciaConexaoComBanco();
 		
 		setSqlQuery("select * from " + getNomeTabela() + " where " + colunaCargo + " = ?");
@@ -142,7 +142,7 @@ public class Cargo_has_usuario extends DAO{
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
-			usuarios = new ArrayList<>();
+			usuarios = new ArrayList<Usuario>();
 		}
 		
 		encerraConexaocomBanco();

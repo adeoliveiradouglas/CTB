@@ -67,7 +67,7 @@ public class CargoDAO extends DAO{
 	}
 	
 	public ArrayList<Cargo> getAll(){
-		ArrayList<Cargo> lc = new ArrayList<>();
+		ArrayList<Cargo> lc = new ArrayList<Cargo>();
 		Cargo c;
 		
 		iniciaConexaoComBanco();

@@ -403,7 +403,7 @@ public class UsuarioDAO extends DAO {
  		
 */
 		
-		ArrayList<Usuario> lu = new ArrayList<>();
+		ArrayList<Usuario> lu = new ArrayList<Usuario>();
 		
 //		monta a query
 		setSqlQuery(
@@ -465,7 +465,7 @@ public class UsuarioDAO extends DAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			lu = new ArrayList<>() ;
+			lu = new ArrayList<Usuario>() ;
 		}
 		
 		encerraConexaocomBanco();
