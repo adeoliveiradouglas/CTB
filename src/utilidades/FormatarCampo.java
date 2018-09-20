@@ -78,40 +78,40 @@ public class FormatarCampo{
 	
 	public String mesToInt(String mes){
 
-		if (mes.equals("Janeiro"))
+		if (mes.equalsIgnoreCase("Janeiro"))
 			return "01";
 
-		else if (mes.equals("Fevereiro"))
+		else if (mes.equalsIgnoreCase("Fevereiro"))
 			return "02";
 
-		else if (mes.equals("Março"))
+		else if (mes.equalsIgnoreCase("Março"))
 			return "03";
 
-		else if (mes.equals("Abril"))
+		else if (mes.equalsIgnoreCase("Abril"))
 			return "04";
 
-		else if (mes.equals("Maio"))
+		else if (mes.equalsIgnoreCase("Maio"))
 			return "05";
 
-		else if (mes.equals("Junho"))
+		else if (mes.equalsIgnoreCase("Junho"))
 			return "06";
 
-		else if (mes.equals("Julho"))
+		else if (mes.equalsIgnoreCase("Julho"))
 			return "07";
 
-		else if (mes.equals("Agosto"))
+		else if (mes.equalsIgnoreCase("Agosto"))
 			return "08";
 
-		else if (mes.equals("Setembro"))
+		else if (mes.equalsIgnoreCase("Setembro"))
 			return "09";
 
-		else if (mes.equals("Outubro"))
+		else if (mes.equalsIgnoreCase("Outubro"))
 			return "10";
 
-		else if (mes.equals("Novembro"))
+		else if (mes.equalsIgnoreCase("Novembro"))
 			return "11";
 
-		else if (mes.equals("Dezembro"))
+		else if (mes.equalsIgnoreCase("Dezembro"))
 			return "12";
 
 		else

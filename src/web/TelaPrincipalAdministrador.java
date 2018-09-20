@@ -9,10 +9,8 @@ public class TelaPrincipalAdministrador implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String ordenacao = pedido.getParameter("ordUser");
-		
-		pedido.getSession().setAttribute("usuariosnovos", new UsuarioDAO(true).getAll(ordenacao));
-		pedido.getSession().setAttribute("usuarios", new UsuarioDAO().getAll(ordenacao));
+		pedido.getSession().setAttribute("usuariosnovos", new UsuarioDAO(true).getAll());
+		pedido.getSession().setAttribute("usuarios", new UsuarioDAO().getAll());
 		
 		return "/Administrador/index.jsp";
 	}

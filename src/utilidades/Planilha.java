@@ -43,10 +43,7 @@ public class Planilha {
 			
 //			cria workbook
 			workbook = new XSSFWorkbook(fisPlanilha);
-		} catch (FileNotFoundException e){
-			e.printStackTrace();
-			return new ArrayList<Processo>();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ArrayList<Processo>();
 		} 

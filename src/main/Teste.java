@@ -1,27 +1,20 @@
 package main;
 
-import dao.UsuarioDAO;
+import java.util.ArrayList;
+
+import dao.ProcessoDAO;
+import entity.Processo;
 
 public class Teste {
 
 	public static void main(String[] args) {
-		System.out.println(new UsuarioDAO().getAllByCargo("Diretor"));
+		ProcessoDAO pdao = new ProcessoDAO();
+		ArrayList<Processo> processos = pdao.getAllSemPagamento();
 		
-		/*ArrayList<Cargo> cargos = new ArrayList<>();
-		
-		cargos.add(new Cargo(1, "Administrador", ""));
-		cargos.add(new Cargo(1, "Administrador", ""));
-		
-		new UsuarioDAO(true).inserir(
-			new Usuario(
-				0,
-				123,
-				"123",
-				"123@123",
-				"teste",
-				new SetorDAO().getBySigla("CTB/ TECI"),
-				cargos
-			)
-		);*/
+		for (Processo p: processos) {
+			if(Integer.parseInt(p.getAno()) < 2017) {
+				pdao.atualizarPagamento(p.getIdContrato(), 15);
+			}
+		}
 	}
 }
