@@ -63,7 +63,7 @@
 	<footer class="footer">
 		<br /><br /><br /><br /><br /><br /><br /><br /><br />
 		<div align="center">
-			SGC - Sistema de Gestão de Contratos - Versão 1.1.1 BETA	
+			SGC - Sistema de Gestão de Contratos - Versão 1.1.2 BETA	
 		</div>	
 	</footer>
 </body>

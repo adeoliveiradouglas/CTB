@@ -5,16 +5,20 @@ import java.util.ArrayList;
 import dao.ProcessoDAO;
 import entity.Processo;
 
-public class Teste {
+public class Main {
 
 	public static void main(String[] args) {
 		ProcessoDAO pdao = new ProcessoDAO();
 		ArrayList<Processo> processos = pdao.getAllSemPagamento();
 		
 		for (Processo p: processos) {
-			if(Integer.parseInt(p.getAno()) < 2017) {
-				pdao.atualizarPagamento(p.getIdContrato(), 15);
+			System.out.print(p.getMesAsInt()+"/"+p.getAno());
+			if((Integer.parseInt(p.getAno()) < 2018) || (Integer.parseInt(p.getMesAsInt()) < 7)) {
+				System.out.print(" OK");
+				pdao.atualizarPagamento(p.getIdProcesso(), 15);
 			}
+			System.out.println("");
 		}
 	}
+
 }
