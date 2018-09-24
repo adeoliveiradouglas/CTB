@@ -28,18 +28,21 @@
 </head>
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	
 	<%@ page import="entity.Usuario,
 					 entity.Cargo,
-					 java.util.ArrayList" %>	
+					 java.util.List" %>	
  
+ 	<c:if test="${param.usuariosnovos.size} < 10">
+		funciona
+	</c:if>
  	<%
  	@SuppressWarnings("unchecked") /*GAMBIARRA PARA TIRAR WARNING DA LINHA ABAIXO*/
- 	ArrayList<Usuario> lun = (ArrayList<Usuario>) request.getSession().getAttribute("usuariosnovos");
+ 	List<Usuario> lun = (List<Usuario>) request.getAttribute("usuariosnovos");
  	
  	if(lun.size() > 0){ //if para mostrar sessão de novos usuários
-	%>
-	
+	%>	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Novos usuários que precisam de autorização</h3>
 	</div>
@@ -65,26 +68,27 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%for (Usuario u: lun){%>
-			<tr>
-				<%-- <td class="text-center"><%=u.getId() %></td> --%>
-				<td class="text-center"><%=u.getNome() %></td>
-				<td class="text-center"><%=u.getMatricula() %></td>
-				<td class="text-center"><%=u.getCargo().get(0).getNome() %></td>
-				<td class="text-center"><%=u.getSetor().getSigla() %></td>
-				<td class="text-center"><%=u.getEmail() %></td>
-				<td class="text-center">
-					<form action="sistema?logica=AutorizarNovoUsuario" method="post">
-						<button class="btn-link" value="<%=lun.indexOf(u)%>" name="id">Autorizar</button>
-					</form>
-				</td>
-				<td class="text-center">
-					<form action="sistema?logica=RemoveUsuario&tabela=usuariosnovos" method="post">
-						<button class="btn-link" value="<%=u.getId()%>" name="id">Recusar</button>
-					</form>
-				</td>
-			</tr>
-			<%} //fim do for%>			
+			<c:forEach var="usuario" items="${param.usuarionovos}">
+				<tr>
+					<%-- <td class="text-center"><%=u.getId() %></td> --%>
+					<td class="text-center">${usuario.nome }</td>
+					<td class="text-center">${usuario.matricula}</td>
+					<td class="text-center">${usuario.cargo.get(0).nome } ${usuario.cargo.get(1).nome}</td>
+					<td class="text-center">${usuario.setor.sigla }</td>
+					<td class="text-center">${usuario.email }</td>
+					<td class="text-center">
+						<form action="sistema?logica=AutorizarNovoUsuario" method="post">
+							<button class="btn-link" value="%>" name="id">Autorizar</button>
+						</form>
+					</td>
+					<td class="text-center">
+						<form action="sistema?logica=RemoveUsuario&tabela=usuariosnovos" method="post">
+							<button class="btn-link" value="${usuario.id}" name="id">Recusar</button>
+						</form>
+					</td>
+				</tr>
+			</c:forEach>
+					
 		</tbody>
 	</table>
 	<%} //fim do if de mostrar novos usuários%> 
@@ -115,32 +119,30 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%
-			@SuppressWarnings("unchecked") 
-			ArrayList<Usuario> lu = (ArrayList<Usuario>) request.getSession().getAttribute("usuarios");
-			for (Usuario u: lu){
-			%>
-			<tr>
-				<td class="text-center"><%=u.getNome() %></td>
-				<td class="text-center"><%=u.getMatricula() %></td>
-				<td class="text-center"><%=u.getCargo().get(0).getNome() %> <%=u.getCargo().get(1).getNome() %></td>
-				<td class="text-center"><%=u.getSetor().getSigla() %></td>
-				<td class="text-center"><%=u.getEmail() %></td>
-				<td class="text-center">
-					<form action="sistema?logica=TelaEditarUsuario" method="post">
-						<button class="btn-link" value="<%=lu.indexOf(u)%>" name="id">Editar</button>
-					</form>
-				</td>
-				<td class="text-center">
-					<form action="sistema?logica=RemoveUsuario&tabela=usuario" method="post">
-						<button class="btn-link" value="<%=u.getId()%>" name="id">Deletar</button>
-					</form>
-				</td>
-			</tr>
-			<%
-				}
-			%>
-			
+
+			<c:forEach var="usuario" items="${param.usuarios}">
+				<tr>
+					<%-- <td class="text-center"><%=u.getId() %></td> --%>
+					<td class="text-center">${usuario.nome }</td>
+					<td class="text-center">${usuario.matricula}</td>
+					<td class="text-center">${usuario.cargo.get(0).nome }
+						${usuario.cargo.get(1).nome}</td>
+					<td class="text-center">${usuario.setor.sigla }</td>
+					<td class="text-center">${usuario.email }</td>
+					<td class="text-center">
+						<form action="sistema?logica=TelaEditarUsuario" method="post">
+							<button class="btn-link" value="" name="id">Editar</button>
+						</form>
+					</td>
+					<td class="text-center">
+						<form action="sistema?logica=RemoveUsuario&tabela=usuario"
+							method="post">
+							<button class="btn-link" value="${usuario.id}" name="id">Deletar</button>
+						</form>
+					</td>
+				</tr>
+			</c:forEach>
+
 		</tbody>
 	</table>
 	

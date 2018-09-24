@@ -10,7 +10,7 @@ public class TrocarCargoEmUso implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		Usuario u = (Usuario) pedido.getSession().getAttribute("usuario");
+		Usuario u = (Usuario) pedido.getSession().getAttribute("usuarioLogado");
 		int i = Integer.parseInt((String) pedido.getParameter("i"));
 		
 		Cargo c = u.getCargo().get(i);

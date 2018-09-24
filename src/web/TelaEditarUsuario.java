@@ -1,16 +1,22 @@
 package web;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CargoDAO;
 import dao.SetorDAO;
+import entity.Cargo;
+import entity.Setor;
 import entity.Usuario;
 
 public class TelaEditarUsuario implements Logica{
 
+	private static List<Cargo> todosOsCargos = null;
+	private static List<Setor> todosOsSetores = null;
+	
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		/*
@@ -18,17 +24,20 @@ public class TelaEditarUsuario implements Logica{
 		 */
 		
 		@SuppressWarnings("unchecked") 
-		ArrayList<Usuario> lu = (ArrayList<Usuario>) pedido.getSession().getAttribute("usuarios");
+		List<Usuario> lu = (ArrayList<Usuario>) pedido.getSession().getAttribute("usuarios");
 				
 		Usuario u = lu.get(Integer.parseInt(pedido.getParameter("id")));
 		
-		pedido.getSession().setAttribute("usuarioeditar", u);
+		pedido.setAttribute("usuarioeditar", u);
 		
-		if(pedido.getSession().getAttribute("todososcargos") == null){
+		if(todosOsCargos == null || todosOsSetores == null){
 //			Para não repetir a operação de buscar no banco toda vez que abrir a página
-			pedido.getSession().setAttribute("todososcargos", new CargoDAO().getAll());
-			pedido.getSession().setAttribute("todosossetores", new SetorDAO().getAll());
+			todosOsCargos = new CargoDAO().getAll();
+			todosOsSetores = new SetorDAO().getAll();
 		}
+		
+		pedido.setAttribute("todosossetores", todosOsSetores);
+		pedido.setAttribute("todososcargos", todosOsCargos);
 		
 		return "/Administrador/editarusuario.jsp";
 	}

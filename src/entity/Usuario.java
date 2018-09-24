@@ -8,7 +8,7 @@
 
 package entity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +28,5 @@ public class Usuario{
 				   email,
 				   senha;
 	private Setor setor;
-	private ArrayList<Cargo> cargo;
+	private List<Cargo> cargo;
 }

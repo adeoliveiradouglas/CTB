@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import entity.Cargo;
 import lombok.Getter;
 public class CargoDAO extends DAO{
@@ -66,8 +68,8 @@ public class CargoDAO extends DAO{
 		return c;
 	}
 	
-	public ArrayList<Cargo> getAll(){
-		ArrayList<Cargo> lc = new ArrayList<Cargo>();
+	public List<Cargo> getAll(){
+		List<Cargo> lc = new ArrayList<Cargo>();
 		Cargo c;
 		
 		iniciaConexaoComBanco();

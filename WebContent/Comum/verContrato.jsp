@@ -19,15 +19,11 @@
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<%@ page import="entity.Contrato,
 					 entity.Processo,
-					 java.util.ArrayList,
-					 utilidades.FormatarCampo" %>
+					 java.util.ArrayList" %>
 		
 	
 	<%		 
-	FormatarCampo format = new FormatarCampo();
-
-	String adicionaProcesso = request.getParameter("adicionaProcesso"),
-		   formatoData = "dd/MM/yyyy";
+	String adicionaProcesso = request.getParameter("adicionaProcesso");
 	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");
 	
 	if("true".equals(adicionaProcesso)){ %>
@@ -118,8 +114,8 @@
 				<td class="text-center"><%=p.getAno() %></td>
 				<td class="text-center"><%=p.getNotaFiscal() %></td>
 				<td class="text-center"><%=p.getDataProcessoAsString()  %></td>
-				<td class="text-center"><%=format.decimalToString(p.getValor()) %></td>
-				<td class="text-center"><%=format.decimalToString(p.getAditivo()) %></td>
+				<td class="text-center"><%=p.getValorAsString() %></td>
+				<td class="text-center"><%=p.getAditivoAsString() %></td>
 				<td class="text-center"><%=p.getTipoAditivo() %></td>
 				<td class="text-center"><%=pagamento  %></td>
 			</tr>

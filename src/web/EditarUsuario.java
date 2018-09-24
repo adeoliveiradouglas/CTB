@@ -1,6 +1,8 @@
 package web;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +17,9 @@ public class EditarUsuario implements Logica{
 	@Override
 	@SuppressWarnings("unchecked")
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		ArrayList<Cargo> todosOsCargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("todososcargos")),
+		List<Cargo> todosOsCargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("todososcargos")),
 						 cargosDoUsuario = new ArrayList<Cargo>();
-		ArrayList<Setor> todosOsSetores = ((ArrayList<Setor>) pedido.getSession().getAttribute("todosossetores"));
+		List<Setor> todosOsSetores = ((ArrayList<Setor>) pedido.getSession().getAttribute("todosossetores"));
 		String nome = pedido.getParameter("nome");
 		int posicaoSetor = Integer.parseInt(pedido.getParameter("setorNovo")),
 			posicaoCargo1 = Integer.parseInt(pedido.getParameter("cargoNovo0")),

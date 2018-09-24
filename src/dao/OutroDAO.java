@@ -7,6 +7,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import entity.Outro;
 
 public class OutroDAO extends DAO{
@@ -21,9 +23,9 @@ public class OutroDAO extends DAO{
 		super(nomeTabela, conexao);
 	}
 
-	public ArrayList<Outro> getAll(){
+	public List<Outro> getAll(){
 		iniciaConexaoComBanco();
-		ArrayList<Outro> lista = new ArrayList<Outro>();
+		List<Outro> lista = new ArrayList<Outro>();
 		
 		/*Exemplo de query
 		  select * from uso/fontepagante/recurso*/

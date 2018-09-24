@@ -16,7 +16,7 @@ public class TelaLogin implements Logica{
 	
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		Usuario logado = (Usuario) pedido.getSession().getAttribute("usuario");
+		Usuario logado = (Usuario) pedido.getSession().getAttribute("usuarioLogado");
 		
 		if(logado != null){
 			return "sistema?logica=TelaPrincipal";
@@ -26,7 +26,7 @@ public class TelaLogin implements Logica{
 //			para monitorar os vencimentos de contratos e avisar seus responsáveis
 			AvisoVencimento monitorando = new AvisoVencimento();
 			Thread monitorar = new Thread(monitorando);
-			monitorar.start();
+			//monitorar.start();
 			
 			monitorandoVencimento = true;
 		}

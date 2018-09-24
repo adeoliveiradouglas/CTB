@@ -2,7 +2,6 @@ package web;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,10 +27,10 @@ public class EnviarPlanilha implements Logica {
 		int n = Integer.parseInt("" + pedido.getSession().getAttribute("n"));
 
 		@SuppressWarnings("unchecked")
-		ArrayList<Contrato> contratos = ((ArrayList<Contrato>) pedido.getSession().getAttribute(origem));
+		List<Contrato> contratos = ((List<Contrato>) pedido.getSession().getAttribute(origem));
 		int idContrato = contratos.get(n).getId();
 
-		ArrayList<Processo> previaProcessos = null;
+		List<Processo> previaProcessos = null;
 		
 		/* Identifica se o formulario é do tipo multipart/form-data */
 		if (ServletFileUpload.isMultipartContent(pedido)) {

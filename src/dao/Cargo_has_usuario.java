@@ -7,6 +7,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import entity.Cargo;
 import entity.Usuario;
@@ -58,12 +59,12 @@ public class Cargo_has_usuario extends DAO{
 		encerraConexaocomBanco();
 	}
 	
-	public ArrayList<Cargo> getByUsuario(int idUsuario){
+	public List<Cargo> getByUsuario(int idUsuario){
 		/*
 		 * retorna os cargos de um usuário 
 		 */
 		
-		ArrayList<Cargo> cargos = new ArrayList<Cargo>();
+		List<Cargo> cargos = new ArrayList<Cargo>();
 		iniciaConexaoComBanco();
 		
 		setSqlQuery("select * from " + getNomeTabela() + " where " + colunaUsuario + " = ?");
@@ -105,11 +106,11 @@ public class Cargo_has_usuario extends DAO{
 		return cargos;
 	}
 	
-	public ArrayList<Usuario> getByCargo(int idCargo){
+	public List<Usuario> getByCargo(int idCargo){
 		/*
 		 * retorna todos os usuários que tem um determinado cargo 
 		 */
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Usuario> usuarios = new ArrayList<Usuario>();
 		iniciaConexaoComBanco();
 		
 		setSqlQuery("select * from " + getNomeTabela() + " where " + colunaCargo + " = ?");

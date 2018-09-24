@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import entity.Processo;
 
@@ -31,14 +32,14 @@ public class ProcessoDAO extends DAO{
 		super("processo", conexao);
 	}
 	
-	public ArrayList<Processo> getByContrato(int id){
+	public List<Processo> getByContrato(int id){
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
 			"select * from " + getNomeTabela() + " where " + colunaContrato + " = ?" + ordernarPorDataReferencia + " desc"
 		);
 		
-		ArrayList<Processo> lista = new ArrayList<Processo>();
+		List<Processo> lista = new ArrayList<Processo>();
 		Processo p;
 				
 		try {
@@ -180,7 +181,7 @@ public class ProcessoDAO extends DAO{
 		encerraConexaocomBanco();
 	}
 
-	public ArrayList<Processo> getByContratoSemPagamento(int idContrato) {
+	public List<Processo> getByContratoSemPagamento(int idContrato) {
 		iniciaConexaoComBanco();
 
 		setSqlQuery(
@@ -233,7 +234,7 @@ public class ProcessoDAO extends DAO{
 		return lista;
 	}
 
-	public ArrayList<Processo> getAllSemPagamento() {
+	public List<Processo> getAllSemPagamento() {
 		iniciaConexaoComBanco();
 		
 		setSqlQuery(
@@ -241,7 +242,7 @@ public class ProcessoDAO extends DAO{
 		);
 		
 
-		ArrayList<Processo> lista = new ArrayList<Processo>();
+		List<Processo> lista = new ArrayList<Processo>();
 		Processo p;
 		
 		try{

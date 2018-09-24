@@ -2,8 +2,8 @@ package web;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ public class EditarPrevia implements Logica{
 	@SuppressWarnings("unchecked")
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		ArrayList<Processo> previaProcessos = (ArrayList<Processo>) pedido.getSession().getAttribute("previaProcessos");
+		List<Processo> previaProcessos = (List<Processo>) pedido.getSession().getAttribute("previaProcessos");
 		
 //		indice da lista do processo que está sendo manipulado
 		int i;
@@ -32,7 +32,7 @@ public class EditarPrevia implements Logica{
 			i = Integer.parseInt(pedido.getParameter("i"));
 			
 //			remove processo da lista previa
-			((ArrayList<Processo>) pedido.getSession().getAttribute("previaProcessos")).remove(i);
+			previaProcessos.remove(i);
 			
 			//pedido.getSession().setAttribute("previaProcessos", previaProcessos);		
 			return "/Gestor/previaContrato.jsp";

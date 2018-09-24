@@ -1,6 +1,8 @@
 package web;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +39,7 @@ public class Login implements Logica {
 			// importando o que há no banco de dados
 
 			// Cria um objeto usuario para Administrador
-			ArrayList<Cargo> c = new ArrayList<Cargo>();
+			List<Cargo> c = new ArrayList<Cargo>();
 			c.add(new Cargo(1, "Administrador", ""));
 			c.add(new Cargo(1, "", ""));
 			

@@ -1,6 +1,8 @@
 package web;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,11 +25,11 @@ public class CadastrarUsuario implements Logica {
 		
 		if (undao.getByEmail(email) == null && new UsuarioDAO().getByEmail(email) == null) {
 			//se usuário com esse email NÃO existe no sistema (usuário autorizado ou usuário a ser autorizado), então pode ser adicionado			
-			ArrayList<Cargo> todosOsCargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("cargo"));
-			ArrayList<Setor> setores = ((ArrayList<Setor>) pedido.getSession().getAttribute("setor"));
+			List<Cargo> todosOsCargos = (List<Cargo>) pedido.getSession().getAttribute("cargo");
+			List<Setor> setores = (List<Setor>) pedido.getSession().getAttribute("setor");
 			
 			//tenta gerar lista de cargos do usuário
-			ArrayList<Cargo> cargosDoUsuario = new ArrayList<Cargo>();
+			List<Cargo> cargosDoUsuario = new ArrayList<Cargo>();
 			
 			//cargo1 sempre vai funcionar pois a pessoa deve escolher um cargo
 			int cargo1 = Integer.parseInt(pedido.getParameter("cargo1")),

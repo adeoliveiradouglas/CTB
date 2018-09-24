@@ -4,6 +4,7 @@
 package utilidades;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -24,10 +25,10 @@ public class AvisoVencimento implements Runnable {
 			boolean avisado; 
 			
 			//todos os contratos cadastrados
-			ArrayList<Contrato> todosOsContratos = new ContratoDAO().getAll();
+			List<Contrato> todosOsContratos = new ContratoDAO().getAll();
 			
 			//lista com os usuários que receberão os emails
-			ArrayList<Usuario> destinos;
+			List<Usuario> destinos;
 			
 			for (Contrato c : todosOsContratos) {
 				avisado = false;

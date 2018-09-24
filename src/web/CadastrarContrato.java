@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +29,7 @@ public class CadastrarContrato implements Logica {
 				vencimentoGarantia = new SimpleDateFormat(formatoData)
 						.parse(pedido.getParameter("dataVencimentoGarantia"));
 
-		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) pedido.getSession().getAttribute("gestores");
+		List<Usuario> usuarios = (ArrayList<Usuario>) pedido.getSession().getAttribute("gestores");
 		Usuario gestor = usuarios.get(Integer.parseInt(pedido.getParameter("gestor"))),
 				fiscal = usuarios.get(Integer.parseInt(pedido.getParameter("fiscal")));
 
@@ -36,9 +37,9 @@ public class CadastrarContrato implements Logica {
 
 		BigDecimal valor = new BigDecimal(format.stringToDecimal(pedido.getParameter("valor")));
 
-		ArrayList<Outro> lRecurso = (ArrayList<Outro>) pedido.getSession().getAttribute("recurso");
-		ArrayList<Outro> lUso = (ArrayList<Outro>) pedido.getSession().getAttribute("uso");
-		ArrayList<Outro> lFonte = (ArrayList<Outro>) pedido.getSession().getAttribute("fontepagante");
+		List<Outro> lRecurso = (ArrayList<Outro>) pedido.getSession().getAttribute("recurso");
+		List<Outro> lUso = (ArrayList<Outro>) pedido.getSession().getAttribute("uso");
+		List<Outro> lFonte = (ArrayList<Outro>) pedido.getSession().getAttribute("fontepagante");
 
 		Outro recurso = lRecurso.get(Integer.parseInt(pedido.getParameter("recurso"))),
 				fontepagante = lFonte.get(Integer.parseInt(pedido.getParameter("fontepagante"))),

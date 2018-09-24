@@ -4,7 +4,7 @@
 </style>
 	<footer class="footer">
 		<div align="center">
-			Sistema de Gestão de Contratos - Versão 1.1.2 BETA	
+			Sistema de Gestão de Contratos - Versão 1.2 BETA	
 		</div>	
 	</footer>
 	<!-- <footer class="aw-layout-footer">

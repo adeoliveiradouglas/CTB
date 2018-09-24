@@ -1,6 +1,7 @@
 package web;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +16,8 @@ public class TelaPrincipalTesoureiro implements Logica{
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		ProcessoDAO pdao = new ProcessoDAO();
-		ArrayList<Processo> processosSemPagamento = pdao.getAllSemPagamento();
-		ArrayList<Integer> carregados = new ArrayList<Integer>();
+		List<Processo> processosSemPagamento = pdao.getAllSemPagamento();
+		List<Integer> carregados = new ArrayList<Integer>();
 
 //		Vai procurar por todos os contratos que tem processos sem pagamento
 		for (Processo p: processosSemPagamento){
@@ -28,7 +29,7 @@ public class TelaPrincipalTesoureiro implements Logica{
 			}
 		}
 		
-		ArrayList<Contrato> contratosSemPagamento = new ArrayList<Contrato>();
+		List<Contrato> contratosSemPagamento = new ArrayList<Contrato>();
 		ContratoDAO cdao = new ContratoDAO();
 		
 		for (int id: carregados){

@@ -1,6 +1,7 @@
 package web;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,7 @@ public class PagarProcesso implements Logica{
 		int posicaoContrato = Integer.parseInt("" + pedido.getSession().getAttribute("posicaoNaOrigem"));
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Contrato> contratosLista = (ArrayList<Contrato>) pedido.getSession().getAttribute(origemContrato);
+		List<Contrato> contratosLista = (List<Contrato>) pedido.getSession().getAttribute(origemContrato);
 
 		//Pega o objeto contrato da lista 
 		Contrato contrato = contratosLista.get(posicaoContrato);

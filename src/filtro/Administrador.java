@@ -3,7 +3,7 @@
 package filtro;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -40,7 +40,7 @@ public class Administrador implements Filter{
 /*		A lógica responsável por autenticar o usuário insere os dados dele na sessão
  * 		Aqui recupera os dados da sessão e verifica se o usuário tem autorização para acessar essa página através do cargo dele
  */
-		ArrayList<Cargo> cargosDoUsuario = ((Usuario) sessao.getAttribute("usuario")).getCargo();
+		List<Cargo> cargosDoUsuario = ((Usuario) sessao.getAttribute("usuario")).getCargo();
 		try {
 			if (cargosDoUsuario.get(0).getId() == 1 || cargosDoUsuario.get(1).getId() == 1)
 				chain.doFilter(pedido, resposta);

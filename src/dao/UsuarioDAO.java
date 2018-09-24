@@ -7,6 +7,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import entity.Cargo;
 import entity.Usuario;
@@ -110,7 +111,7 @@ public class UsuarioDAO extends DAO {
  		
 
 		Usuario u = null;
-		ArrayList<Cargo> cargos = null;
+		List<Cargo> cargos = null;
 		
 //		monta a query
 		setSqlQuery(
@@ -214,7 +215,7 @@ public class UsuarioDAO extends DAO {
 			);
 			
 			if(getResultado().next()){
-				ArrayList<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+				List<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
 					getResultado().getInt(colunaId)
 				);
 				
@@ -388,11 +389,11 @@ public class UsuarioDAO extends DAO {
 		encerraConexaocomBanco();
 	}
 
-	public ArrayList<Usuario> getAll() {
+	public List<Usuario> getAll() {
 		return getAll(colunaNome);
 	}
 	
-	public ArrayList<Usuario> getAll(String ordenacao) {
+	public List<Usuario> getAll(String ordenacao) {
 		iniciaConexaoComBanco();
 		
 /*		
@@ -403,7 +404,7 @@ public class UsuarioDAO extends DAO {
  		
 */
 		
-		ArrayList<Usuario> lu = new ArrayList<Usuario>();
+		List<Usuario> lu = new ArrayList<Usuario>();
 		
 //		monta a query
 		setSqlQuery(
@@ -426,7 +427,7 @@ public class UsuarioDAO extends DAO {
 			Usuario u = null;
 			
 			while(getResultado().next()){
-				ArrayList<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
+				List<Cargo> cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByUsuario(
 					getResultado().getInt(colunaId)
 				);
 				
@@ -472,7 +473,7 @@ public class UsuarioDAO extends DAO {
 		return lu;
 	}
 
-	public ArrayList<Usuario> getAllGestor() {
+	public List<Usuario> getAllGestor() {
 		iniciaConexaoComBanco();
 		
 		/*
@@ -481,13 +482,13 @@ public class UsuarioDAO extends DAO {
 		 * 2º: tranforma todos os ids em um objeto Usuario pelo método UsuarioDAO.getById
 		 */
 		
-		ArrayList<Usuario> lu = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByCargo(3);
+		List<Usuario> lu = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByCargo(3);
 				
 		encerraConexaocomBanco();
 		return lu;
 	}
 	
-	public ArrayList<Usuario> getAllByCargo(String cargo) {
+	public List<Usuario> getAllByCargo(String cargo) {
 		int codCargo = new CargoDAO().getByNome(cargo).getId();
 		
 		iniciaConexaoComBanco();
@@ -498,7 +499,7 @@ public class UsuarioDAO extends DAO {
 		 * 2º: tranforma todos os ids em um objeto Usuario pelo método UsuarioDAO.getById
 		 */
 		
-		ArrayList<Usuario> lu = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByCargo(codCargo);
+		List<Usuario> lu = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByCargo(codCargo);
 				
 		encerraConexaocomBanco();
 		return lu;

@@ -11,8 +11,8 @@
 package entity;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
@@ -56,7 +56,7 @@ public class Contrato {
 				  	   valorTotal = new BigDecimal(0); //vide cabecalho obs5
 	
 	@Getter @Setter
-	private ArrayList<Processo> processos;
+	private List<Processo> processos;
 
 	@Getter @Setter
 	//para ajudar no controle de aviso quando email for enviado avisando sobre vencimento de contrato 
@@ -214,7 +214,7 @@ public class Contrato {
 			Date dataVencimentoContrato,
 			Date dataVencimentoGarantia, 
 			BigDecimal valorInicial,
-			ArrayList<Processo> processos, 
+			List<Processo> processos, 
 			boolean avisado90, 
 			boolean avisado60, 
 			boolean avisado45) {

@@ -3,6 +3,7 @@ package dao;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import entity.Contrato;
 
@@ -32,12 +33,12 @@ public class ContratoDAO extends DAO {
 		super("contrato");
 	}
 
-	public ArrayList<Contrato> getByGestor(int id) {
+	public List<Contrato> getByGestor(int id) {
 		return getByGestor(id, colunaId);
 	}
 
-	public ArrayList<Contrato> getByGestor(int id, String ordenacao) {
-		ArrayList<Contrato> lista = new ArrayList<Contrato>();
+	public List<Contrato> getByGestor(int id, String ordenacao) {
+		List<Contrato> lista = new ArrayList<Contrato>();
 		
 		iniciaConexaoComBanco();
 
@@ -89,7 +90,7 @@ public class ContratoDAO extends DAO {
 		return lista;
 	}
 
-	public ArrayList<Contrato> getAllRecente(int quantidade) {
+	public List<Contrato> getAllRecente(int quantidade) {
 		/*
 		 * Retorna uma lista com a quantidade dos contratos mais recentes
 		 * Exemplo: parâmetro quantidade = 5, retorna os 5 mais recentes.
@@ -101,7 +102,7 @@ public class ContratoDAO extends DAO {
 
 		setSqlQuery("select * from " + getNomeTabela() + " order by " + colunaId + " desc");
 
-		ArrayList<Contrato> recentes = new ArrayList<Contrato>();
+		List<Contrato> recentes = new ArrayList<Contrato>();
 
 		try {
 			// monta o statement
@@ -159,8 +160,8 @@ public class ContratoDAO extends DAO {
 		return recentes;
 	}
 
-	public ArrayList<Contrato> getVencimento90() {
-		ArrayList<Contrato> recentes = new ArrayList<Contrato>();
+	public List<Contrato> getVencimento90() {
+		List<Contrato> recentes = new ArrayList<Contrato>();
 
 		return recentes;
 	}
@@ -220,15 +221,15 @@ public class ContratoDAO extends DAO {
 		encerraConexaocomBanco();
 	}
 
-	public ArrayList<Contrato> getAll() {
+	public List<Contrato> getAll() {
 		/*
 		 * Usado quando não necessita de resultado ordenado
 		 */
 		return getAll(colunaId);
 	}
 
-	public ArrayList<Contrato> getAll(String ordenacao) {
-		ArrayList<Contrato> contratos = new ArrayList<Contrato>();
+	public List<Contrato> getAll(String ordenacao) {
+		List<Contrato> contratos = new ArrayList<Contrato>();
 
 		iniciaConexaoComBanco();
 
@@ -286,18 +287,18 @@ public class ContratoDAO extends DAO {
 		return contratos;
 	}
 
-	public ArrayList<Contrato> getByFiscal(int id) {
+	public List<Contrato> getByFiscal(int id) {
 		/*
 		 * Usado quando não necessita de resultado ordenado
 		 */
 		return getByFiscal(id, "");
 	}
 
-	public ArrayList<Contrato> getByFiscal(int id, String ordenacao) {
+	public List<Contrato> getByFiscal(int id, String ordenacao) {
 		/*
 		 * Retorna a lista com a ordenacao desejada
 		 */
-		ArrayList<Contrato> lista = new ArrayList<Contrato>();
+		List<Contrato> lista = new ArrayList<Contrato>();
 		Contrato c = null;
 
 		iniciaConexaoComBanco();
@@ -342,7 +343,6 @@ public class ContratoDAO extends DAO {
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
-			;
 			encerraConexaocomBanco();
 			return null;
 		}

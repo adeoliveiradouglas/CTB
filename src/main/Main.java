@@ -1,6 +1,6 @@
 package main;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import dao.ProcessoDAO;
 import entity.Processo;
@@ -9,7 +9,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		ProcessoDAO pdao = new ProcessoDAO();
-		ArrayList<Processo> processos = pdao.getAllSemPagamento();
+		List<Processo> processos = pdao.getAllSemPagamento();
 		
 		for (Processo p: processos) {
 			System.out.print(p.getMesAsInt()+"/"+p.getAno());

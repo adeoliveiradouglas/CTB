@@ -8,6 +8,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import entity.Setor;
 
@@ -120,13 +121,13 @@ public class SetorDAO extends DAO{
 		return s;
 	}
 	
-	public ArrayList<Setor> getAll(){
+	public List<Setor> getAll(){
 		iniciaConexaoComBanco();
 		setSqlQuery(
 			"select * from " + getNomeTabela() + " order by sigla"
 		);
 		
-		ArrayList<Setor> setores = new ArrayList<Setor>();
+		List<Setor> setores = new ArrayList<Setor>();
 		Setor s;
 		
 		try {
