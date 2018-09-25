@@ -24,9 +24,9 @@ public class TelaEditarUsuario implements Logica{
 		 */
 		
 		@SuppressWarnings("unchecked") 
-		List<Usuario> lu = (ArrayList<Usuario>) pedido.getSession().getAttribute("usuarios");
+		List<Usuario> lu = (ArrayList<Usuario>) pedido.getAttribute("usuarios");
 				
-		Usuario u = lu.get(Integer.parseInt(pedido.getParameter("id")));
+		Usuario u = lu.get(Integer.parseInt(pedido.getParameter("posicao")));
 		
 		pedido.setAttribute("usuarioeditar", u);
 		

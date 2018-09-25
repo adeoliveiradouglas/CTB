@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -21,11 +22,6 @@ select {
 </head>
 
 <body class="aw-layout-simple-page">
-	<%@ page
-		import="entity.Cargo,
-  					 entity.Setor,
-  					 java.util.ArrayList"%>
-
 	<div class="aw-layout-simple-page__container">
 		<div align="center">
 			<a href="sistema?logica=TelaLogin"> <img
@@ -78,18 +74,11 @@ select {
 					<div class="form-group custom-select has-feedback">
 						<select name="cargo1">
 							<option style="display: none">Selecione seu cargo:</option>
-							<%
-								@SuppressWarnings("unchecked")
-								ArrayList<Cargo> cargos = ((ArrayList<Cargo>) request.getSession().getAttribute("cargo"));
-								for (Cargo c : cargos) {
-							%>
-							<option value="<%=cargos.indexOf(c)%>">
-								<%=c.getNome()%> -
-								<%=c.getDescricao()%>
-							</option>
-							<%
-								}
-							%>
+							<c:forEach var="c" items="${cargos}" varStatus="posicao">
+								<option value="${posicao.index}">
+									${c.nome} - ${c.descricao}
+								</option>
+							</c:forEach>							
 						</select>
 						<!-- select do primeiro cargo -->
 						
@@ -101,17 +90,11 @@ select {
 						id="cargoselectopcional" style="display: none">
 						<select name="cargo2">
 							<option style="display: none">Selecione seu segundo cargo:</option>
-							<%
-								for (Cargo c : cargos) {
-							%>
-							<option value="<%=cargos.indexOf(c)%>">
-								<%=c.getNome()%> -
-								<%=c.getDescricao()%>
-							</option>
-							<%
-								}
-							%>
-
+							<c:forEach var="c" items="${cargos}" varStatus="posicao">
+								<option value="${posicao.index}">
+									${c.nome} - ${c.descricao}
+								</option>
+							</c:forEach>
 						</select>
 						<!-- select do segundo cargo (opcional) -->
 					</div>
@@ -122,18 +105,12 @@ select {
 						<select name="setor">
 							<option style="display: none">Selecione seu setor:</option>
 
-							<%
-								@SuppressWarnings("unchecked")
-								ArrayList<Setor> setores = ((ArrayList<Setor>) request.getSession().getAttribute("setor"));
-								for (Setor s : setores) {
-							%>
-							<option value="<%=setores.indexOf(s)%>">
-								<%=s.getSigla()%> -
-								<%=s.getNome()%>
-							</option>
-							<%
-								}
-							%>
+							<c:forEach var="s" items="${setores}" varStatus="posicao">
+								<option value="${posicao.index}">
+									${s.sigla} -
+									${s.nome}
+								</option>
+							</c:forEach>
 						</select>
 						<!-- select setores -->
 					</div>
@@ -155,7 +132,7 @@ select {
 		<script type="text/javascript" src="js/validarsenha.js"></script>
 		<script type="text/javascript" src="js/mostraropcaodecargo.js"></script>
 	</div>
-
+	<p>${param.setores.get(0) }</p>
 	<jsp:include page="adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

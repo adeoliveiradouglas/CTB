@@ -25,7 +25,7 @@
 			</a>			
 		</div>
 		<br />
-		<form action="sistema?logica=GerarToken" th:object="${userdetails}" method="POST"> 
+		<form action="sistema?logica=GerarToken" method="POST"> 
 			<div class="aw-simple-panel">
 				<div class="aw-simple-panel__box">
 					Por favor, informe seu email de acesso:

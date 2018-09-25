@@ -30,20 +30,8 @@
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	
-	<%@ page import="entity.Usuario,
-					 entity.Cargo,
-					 java.util.List" %>	
- 
- 	<c:if test="${param.usuariosnovos.size} < 10">
-		funciona
-	</c:if>
- 	<%
- 	@SuppressWarnings("unchecked") /*GAMBIARRA PARA TIRAR WARNING DA LINHA ABAIXO*/
- 	List<Usuario> lun = (List<Usuario>) request.getAttribute("usuariosnovos");
- 	
- 	if(lun.size() > 0){ //if para mostrar sessão de novos usuários
-	%>	
-	<div style="background-color: #1e94d2; color: white" align="center">
+	
+ 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Novos usuários que precisam de autorização</h3>
 	</div>
 	<table class="table table-bordered table-striped">
@@ -68,7 +56,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="usuario" items="${param.usuarionovos}">
+			<c:forEach var="usuario" items="${usuariosnovos}">
 				<tr>
 					<%-- <td class="text-center"><%=u.getId() %></td> --%>
 					<td class="text-center">${usuario.nome }</td>
@@ -91,7 +79,6 @@
 					
 		</tbody>
 	</table>
-	<%} //fim do if de mostrar novos usuários%> 
 	
 	<!-- Mostra opções de todos os usuários do sistema -->
 	<div style="background-color: #1e94d2; color: white" align="center">
@@ -120,7 +107,7 @@
 		</thead>
 		<tbody>
 
-			<c:forEach var="usuario" items="${param.usuarios}">
+			<c:forEach var="usuario" items="${usuarios}" varStatus="posicao">
 				<tr>
 					<%-- <td class="text-center"><%=u.getId() %></td> --%>
 					<td class="text-center">${usuario.nome }</td>
@@ -131,7 +118,7 @@
 					<td class="text-center">${usuario.email }</td>
 					<td class="text-center">
 						<form action="sistema?logica=TelaEditarUsuario" method="post">
-							<button class="btn-link" value="" name="id">Editar</button>
+							<button class="btn-link" value="${posicao.index}" name="posicao">Editar</button>
 						</form>
 					</td>
 					<td class="text-center">
