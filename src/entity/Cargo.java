@@ -6,11 +6,13 @@
 package entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data 
-@AllArgsConstructor 
+@Getter
+@AllArgsConstructor
+@EqualsAndHashCode
 @NoArgsConstructor
 public class Cargo {
 	int id;

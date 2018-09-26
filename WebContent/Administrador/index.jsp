@@ -37,26 +37,17 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-2">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=nome">Nome</a>
-				</th>
-				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=matricula">Matrícula</a>
-				</th>
-				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=cargo_id">Cargo</a>
-				</th>
-				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=setor_codigo">Setor</a>
-				</th>
-				<th class="text-center col-md-2">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=login">Login</a>
-				</th>
-				<th class="col-md-1"></th><th class="col-md-1"></th>
+				<th class="text-center col-md-2">Nome</th>
+				<th class="text-center col-md-1">Matrícula</th>
+				<th class="text-center col-md-1">Cargo</th>
+				<th class="text-center col-md-1">Setor</th>
+				<th class="text-center col-md-2">Login</th>
+				<th class="col-md-1"></th>
+				<th class="col-md-1"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="usuario" items="${usuariosnovos}">
+			<c:forEach var="usuario" items="${sessionScope.usuariosnovos}" varStatus="posicao">
 				<tr>
 					<%-- <td class="text-center"><%=u.getId() %></td> --%>
 					<td class="text-center">${usuario.nome }</td>
@@ -66,7 +57,7 @@
 					<td class="text-center">${usuario.email }</td>
 					<td class="text-center">
 						<form action="sistema?logica=AutorizarNovoUsuario" method="post">
-							<button class="btn-link" value="%>" name="id">Autorizar</button>
+							<button class="btn-link" value="${posicao.index}" name="id">Autorizar</button>
 						</form>
 					</td>
 					<td class="text-center">
@@ -107,13 +98,11 @@
 		</thead>
 		<tbody>
 
-			<c:forEach var="usuario" items="${usuarios}" varStatus="posicao">
+			<c:forEach var="usuario" items="${sessionScope.usuarios}" varStatus="posicao">
 				<tr>
-					<%-- <td class="text-center"><%=u.getId() %></td> --%>
 					<td class="text-center">${usuario.nome }</td>
 					<td class="text-center">${usuario.matricula}</td>
-					<td class="text-center">${usuario.cargo.get(0).nome }
-						${usuario.cargo.get(1).nome}</td>
+					<td class="text-center">${usuario.cargo.get(0).nome} ${usuario.cargo.get(1).nome}</td>
 					<td class="text-center">${usuario.setor.sigla }</td>
 					<td class="text-center">${usuario.email }</td>
 					<td class="text-center">

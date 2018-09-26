@@ -4,7 +4,7 @@
  */
 package web;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ public class AutorizarNovoUsuario implements Logica{
 		 */
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Usuario> us = (ArrayList<Usuario>) pedido.getSession().getAttribute("usuariosnovos");
+		List<Usuario> us = (List<Usuario>) pedido.getSession().getAttribute("usuariosnovos");
 		
 		Usuario u = us.get(Integer.parseInt(pedido.getParameter("id")));
 		

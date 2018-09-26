@@ -6,12 +6,12 @@
 package entity;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 
-@ToString
 @Getter
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Setor {
 	private String codigo, nome, sigla;
 }

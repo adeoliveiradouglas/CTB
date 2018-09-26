@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -18,87 +19,65 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 
-	<%@ page import="entity.Usuario,
-					 entity.Cargo,
-			  		 entity.Setor,
-  					 java.util.ArrayList"%>
-	<%Usuario u = (Usuario) request.getSession().getAttribute("usuarioeditar");
-	String nome = u.getNome();
-	%>
-
 	<form action="sistema?logica=EditarUsuario" method="POST">
 		<div class="aw-simple-panel__box">
+			<div style="display: none">
+				<input type="number" name="id" value="${usuarioeditar.id}" required>
+				<input name="senha" value="${usuarioeditar.senha}" required> 
+			</div>
+			
 			<div class="form-group  has-feedback">
 				<input type="number" class="form-control input-lg"
 					placeholder="Sua matrícula" name="matricula"
-					value=<%=u.getMatricula() %> required> <span
+					value="${usuarioeditar.matricula}" required> <span
 					class="form-control-feedback" aria-hidden="true"> </span>
 			</div>
 
 			<div class="form-group  has-feedback">
 				<input type="text" class="form-control input-lg"
-					placeholder="<%=nome %>" name="nome"> <span class="form-control-feedback"
+					value="${usuarioeditar.nome}" name="nome"> <span class="form-control-feedback"
 					aria-hidden="true"> </span>
 			</div>
 
 			<div class="form-group  has-feedback">
 				<input type="email" class="form-control input-lg"
 					placeholder="Seu e-mail corporativo" name="email"
-					value=<%=u.getEmail() %> required> <span
+					value="${usuarioeditar.email}" required> <span
 					class="form-control-feedback" aria-hidden="true"></span>
 			</div>
 
 			<br />
 			
 			<!-- Mostrar as opções de cargos -->
-			<%
-				@SuppressWarnings("unchecked")
-				ArrayList<Cargo> cargos = ((ArrayList<Cargo>) request.getSession().getAttribute("todososcargos"));
-
-			%>
 			<div class="form-group custom-select has-feedback">
 				<select name="cargoNovo0">
 					<option style="display: none"
-						value="<%=cargos.indexOf(u.getCargo().get(0))%>">
-						<%=u.getCargo().get(0).getNome()%> -
-						<%=u.getCargo().get(0).getDescricao()%>
+						value="${posicaoCargo0}">
+						${usuarioeditar.cargo.get(0).nome} - ${usuarioeditar.cargo.get(0).descricao}
 					</option>
 
-					<%
-						for (Cargo c : cargos) {
-					%>
-					<option value="<%=cargos.indexOf(c)%>">
-						<%=c.getNome()%> -
-						<%=c.getDescricao()%>
-					</option>
-					<%
-						}
-					%>
-
-					<option value="-1">
-						Não tem segundo cargo
-					</option>
+					<c:forEach var="c" items="${sessionScope.todososcargos}" varStatus="posicao">
+						<option value="${posicao.index}">
+							${c.nome} -
+							${c.descricao}
+						</option>
+					</c:forEach>
 				</select>
 				<!-- select cargos -->
 			</div>
 			<div class="form-group custom-select has-feedback">
 				<select name="cargoNovo1">
 					<option style="display: none"
-						value="<%=cargos.indexOf(u.getCargo().get(1))%>">
-						<%=u.getCargo().get(1).getNome()%> -
-						<%=u.getCargo().get(1).getDescricao()%>
+						value="${posicaoCargo1}">
+						${usuarioeditar.cargo.get(1).nome} - ${usuarioeditar.cargo.get(1).descricao}
 					</option>
-
-					<%
-						for (Cargo c : cargos) {
-					%>
-					<option value="<%=cargos.indexOf(c)%>">
-						<%=c.getNome()%> -
-						<%=c.getDescricao()%>
-					</option>
-					<%
-						}
-					%>
+					
+					<c:forEach var="c" items="${sessionScope.todososcargos}" varStatus="posicao">
+						<option value="${posicao.index}">
+							${c.nome} -
+							${c.descricao}
+						</option>
+					</c:forEach>
 
 					<option value="-1">
 						Não tem segundo cargo
@@ -111,26 +90,17 @@
 			<!-- Mostrar as opções de setores -->
 			<div class="form-group custom-select has-feedback">
 				<select name="setorNovo">
-					<%
-						@SuppressWarnings("unchecked")
-						ArrayList<Setor> setores = ((ArrayList<Setor>) request.getSession().getAttribute("todosossetores"));
-					%>
-					<option style="display: none"
-						value="<%=setores.indexOf(u.getSetor())%>">
-						<%=u.getSetor().getSigla()%> -
-						<%=u.getSetor().getNome()%>
+					<option style="display: none" value="${posicaoSetor}">
+						${usuarioeditar.setor.sigla} - 
+						${usuarioeditar.setor.nome}
 					</option>
-
-					<%
-						for (Setor s : setores) {
-					%>
-					<option value="<%=setores.indexOf(s)%>">
-						<%=s.getSigla()%> -
-						<%=s.getNome()%>
-					</option>
-					<%
-						}
-					%>
+	
+					<c:forEach var="s" items="${sessionScope.todosossetores}" varStatus="posicao">
+						<option value="${posicao.index}">
+							${s.sigla} -
+							${s.nome}
+						</option>
+					</c:forEach>
 				</select>
 				<!-- select setores -->
 			</div>

@@ -17,44 +17,35 @@ public class EditarUsuario implements Logica{
 	@Override
 	@SuppressWarnings("unchecked")
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		List<Cargo> todosOsCargos = ((ArrayList<Cargo>) pedido.getSession().getAttribute("todososcargos")),
-						 cargosDoUsuario = new ArrayList<Cargo>();
-		List<Setor> todosOsSetores = ((ArrayList<Setor>) pedido.getSession().getAttribute("todosossetores"));
-		String nome = pedido.getParameter("nome");
+		List<Setor> todosOsSetores = ((List<Setor>) pedido.getSession().getAttribute("todosossetores"));
+		List<Cargo> todosOsCargos = ((List<Cargo>) pedido.getSession().getAttribute("todososcargos")),
+					cargosDoUsuario = new ArrayList<Cargo>();
 		int posicaoSetor = Integer.parseInt(pedido.getParameter("setorNovo")),
 			posicaoCargo1 = Integer.parseInt(pedido.getParameter("cargoNovo0")),
 			posicaoCargo2 = Integer.parseInt(pedido.getParameter("cargoNovo1"));
-		
-		Usuario usuarioEditar = (Usuario) pedido.getSession().getAttribute("usuarioeditar");
 		Setor setor = null;
+		
 //		Quando o usuário não tem segundo cargo e não foi alterado, essa variável vem como -1
 		if(posicaoCargo2 == -1)
 			posicaoCargo2 = posicaoCargo1;
 			
-		if(posicaoSetor == -1)
-			setor = usuarioEditar.getSetor();
-		else
-			setor = todosOsSetores.get(posicaoSetor);
+		setor = todosOsSetores.get(posicaoSetor);
 		
-//		Consertado bug que só aparecia o primeiro nome do usuário
-		if(nome.equals(""))
-			nome = usuarioEditar.getNome();
-	
 		cargosDoUsuario.add(todosOsCargos.get(posicaoCargo1));
 		cargosDoUsuario.add(todosOsCargos.get(posicaoCargo2));
 		
 		Usuario u = new Usuario(
-			((Usuario) pedido.getSession().getAttribute("usuarioeditar")).getId(),
+			Integer.parseInt(pedido.getParameter("id")),
 			Integer.parseInt(pedido.getParameter("matricula")), 
-			nome,
+			pedido.getParameter("nome"),
 			pedido.getParameter("email"), 
-			((Usuario) pedido.getSession().getAttribute("usuarioeditar")).getSenha(), 
+			pedido.getParameter("senha"), 
 			setor, 
 			cargosDoUsuario
 		);
 		
 		new UsuarioDAO().atualizar(u);
-		return "sistema?logica=TelaPrincipal";
+		return "sistema?logica=TelaPrincipalAdministrador";
 	}
 
 }
