@@ -7,7 +7,7 @@
 
 package web;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +24,7 @@ public class VerContrato implements Logica {
 		
 		//carrega a lista para essa página
 		@SuppressWarnings("unchecked")
-		ArrayList<Contrato> contratosLista = (ArrayList<Contrato>) pedido.getSession().getAttribute(origem);
+		List<Contrato> contratosLista = (List<Contrato>) pedido.getSession().getAttribute(origem);
 		
 		//Pega o objeto contrato da lista 
 		Contrato contrato = contratosLista.get(n);

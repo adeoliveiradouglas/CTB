@@ -103,7 +103,10 @@ public class Processo {
 	}
 	
 	public String getDataPagamentoAsString(){
-		return this.dataPagamento.toString(formatoData);
+		if(dataPagamento != null)
+			return this.dataPagamento.toString(formatoData);
+		else
+			return "";			
 	}
 	
 	public String getDataProcessoAsString(){

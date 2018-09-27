@@ -1,4 +1,5 @@
 <!-- Página principal do Gestor Geral -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org"
@@ -18,15 +19,12 @@
 </head>
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
-	<%@page import="entity.Contrato"%>
-	<%
-	String id = (String) request.getParameter("id");
-	%>
+	
 	<form action="sistema?logica=CadastrarProcesso" method="post">
 		<div class="aw-simple-panel__box">
 			<div class="form-group  has-feedback" style="display: none">
 				<input type="text" class="form-control input-lg" name="idContrato"
-					value="<%=id%>" required>
+					value="${param.id}" required>
 			</div>
 
 			<div class="form-group  has-feedback">

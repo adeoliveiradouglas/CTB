@@ -33,19 +33,71 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.mail.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.servlet-3.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/joda-time-2.9.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/jxl.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/lombok.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/mysql-connector-java-5.1.46.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-3.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-ooxml-3.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-ooxml-schemas-3.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/stax-api-1.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.mail.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.servlet-3.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/joda-time-2.9.9.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/jxl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/lombok.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/mysql-connector-java-5.1.46.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-3.9.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-ooxml-3.9.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/poi-ooxml-schemas-3.9.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/stax-api-1.0.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/xmlbeans-2.6.0.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>

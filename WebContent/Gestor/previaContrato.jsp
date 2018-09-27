@@ -1,4 +1,5 @@
 <!-- Ver previa de contrato do gestor -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -20,50 +21,37 @@
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h1>Prévia do contrato</h1>
 	</div>
-	<%@ page import="entity.Contrato,
-					 entity.Processo,
-					 java.util.ArrayList,
-					 utilidades.FormatarCampo" %>
-		
-	
-	<%		 
-	String adicionaProcesso = request.getParameter("adicionaProcesso");
-	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");	
-	
-	@SuppressWarnings("unchecked")
-	ArrayList<Processo> previaProcessos = (ArrayList<Processo>) request.getSession().getAttribute("previaProcessos");
-	%>
 	
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3><%=contrato.getNomeEmpresaContratada()%> - CNPJ: <%=contrato.getCnpjEmpresaContratada()%></h3>
+		<h3>${sessionScope.contrato.NomeEmpresaContratada} - CNPJ: ${sessionScope.contrato.CnpjEmpresaContratada}</h3>
 	</div>
 	
 	<table class="table table-bordered table-striped">
 		<tbody>
 			<tr>
-				<td class="text-center col-md-1">Número: <%=contrato.getNumero() %></td>
-				<td class="text-center col-md-1">Portaria: <%=contrato.getPortaria()%></td>
-				<td class="text-center col-md-1">Gestor: <%=contrato.getGestor().getNome()%></td>
-				<td class="text-center col-md-1">Fiscal: <%=contrato.getFiscal().getNome()%></td>
+				<td class="text-center col-md-1">Número: ${sessionScope.contrato.Numero}</td>
+				<td class="text-center col-md-1">Portaria: ${sessionScope.contrato.Portaria}</td>
+				<td class="text-center col-md-1">Gestor: ${sessionScope.contrato.Gestor().getNome}</td>
+				<td class="text-center col-md-1">Fiscal: ${sessionScope.contrato.Fiscal().getNome}</td>
 				
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Objeto: <%=contrato.getObjeto()%></td>
-				<td class="text-center col-md-1">Recurso: <%=contrato.getRecurso().getNome()%></td>
-				<td class="text-center col-md-1">Uso: <%=contrato.getUso().getNome()%></td>
-				<td class="text-center col-md-1">Fonte pagante: <%=contrato.getFontePagante().getNome()%></td>
+				<td class="text-center col-md-1">Objeto: ${sessionScope.contrato.Objeto}</td>
+				<td class="text-center col-md-1">Recurso: ${sessionScope.contrato.Recurso().getNome}</td>
+				<td class="text-center col-md-1">Uso: ${sessionScope.contrato.Uso().getNome}</td>
+				<td class="text-center col-md-1">Fonte pagante: ${sessionScope.contrato.FontePagante().getNome}</td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Data de assinatura: <%=contrato.getDataAssinaturaAsString() %></td>
-				<td class="text-center col-md-1">Valor inicial: R$ <%=contrato.getValorInicialAsString() %></td>
-				<td class="text-center col-md-1">Valor dos aditivos: R$ <%=contrato.getValorAditivoAsString() %></td>
-				<td class="text-center col-md-1">Valor total: R$ <%=contrato.getValorTotalAsString()%></td>
+				<td class="text-center col-md-1">Data de assinatura: ${sessionScope.contrato.DataAssinaturaAsString}</td>
+				<td class="text-center col-md-1">Valor inicial: R$ ${sessionScope.contrato.ValorInicialAsString}</td>
+				<td class="text-center col-md-1">Valor dos aditivos: R$ ${sessionScope.contrato.ValorAditivoAsString}</td>
+				<td class="text-center col-md-1">Valor total: R$ ${sessionScope.contrato.ValorTotalAsString}</td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Ass. ordem de serviço: <%=contrato.getDataOrdemServicoAsString() %></td>
-				<td class="text-center col-md-1">Ass. garantia: <%=contrato.getDataGarantiaAsString() %></td>
-				<td class="text-center col-md-1">Vencimento do contrato: <%=contrato.getDataVencimentoContratoAsString() %></td>
-				<td class="text-center col-md-1">Vencimento da garantia: <%=contrato.getDataVencimentoGarantiaAsString() %></td>
+				<td class="text-center col-md-1">Ass. ordem de serviço: ${sessionScope.contrato.DataOrdemServicoAsString}</td>
+				<td class="text-center col-md-1">Ass. garantia: ${sessionScope.contrato.DataGarantiaAsString}</td>
+				<td class="text-center col-md-1">Vencimento do contrato: ${sessionScope.contrato.DataVencimentoContratoAsString}</td>
+				<td class="text-center col-md-1">Vencimento da garantia: ${sessionScope.contrato.DataVencimentoGarantiaAsString}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -86,12 +74,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<%for(Processo p: previaProcessos){
-			String pagamento = "";
-			
-			if(p.getDataPagamento() != null){
-				pagamento = p.getDataPagamentoAsString();
-			}%>
+		<c:forEach var="processo" items="${sessionScope.previaProcessos}" varStatus="posicao">
 			<tr>
 				<td class="text-center">
 					<form action="sistema?logica=VerProcesso" method="post">
@@ -99,23 +82,23 @@
 							<input name="origem" value="contratoVisualizar">
 						</div>
 						<div style="display: none">
-							<input name="i" value="<%=previaProcessos.indexOf(p)%>">
+							<input name="i" value="${posicao.index}">
 						</div>
-						<button type="submit" class="btn-link"><%=p.getNumeroSei()%></button>
+						<button type="submit" class="btn-link">${processo.numeroSei}</button>
 					</form>
 				</td>
-				<td class="text-center"><%=previaProcessos.indexOf(p)+1 %></td>
-				<td class="text-center"><%=p.getMes()%></td>
-				<td class="text-center"><%=p.getAno() %></td>
-				<td class="text-center"><%=p.getNotaFiscal() %></td>
-				<td class="text-center"><%=p.getDataProcessoAsString()  %></td>
-				<td class="text-center"><%=p.getValorAsString() %></td>
-				<td class="text-center"><%=p.getAditivoAsString() %></td>
-				<td class="text-center"><%=p.getTipoAditivo() %></td>
+				<td class="text-center">${posicao.index + 1}</td>
+				<td class="text-center">${processo.mes}</td>
+				<td class="text-center">${processo.ano}</td>
+				<td class="text-center">${processo.notaFiscal}</td>
+				<td class="text-center">${processo.dataProcessoAsString}</td>
+				<td class="text-center">${processo.valorAsString}</td>
+				<td class="text-center">${processo.aditivoAsString}</td>
+				<td class="text-center">${processo.tipoAditivo}</td>
 				<td class="text-center">
 					<form action="sistema?logica=EditarPrevia" method="post">
 						<div style="display: none">
-							<input name="i" value="<%=previaProcessos.indexOf(p)%>">
+							<input name="i" value="${posicao.index}">
 						</div>
 						<div style="display: none">
 							<input name="acao" value="telaEditar">
@@ -126,7 +109,7 @@
 				<td class="text-center">
 					<form action="sistema?logica=EditarPrevia" method="post">
 						<div style="display: none">
-							<input name="i" value="<%=previaProcessos.indexOf(p)%>">
+							<input name="i" value="${posicao.index}">
 						</div>
 						<div style="display: none">
 							<input name="acao" value="remover">
@@ -135,7 +118,7 @@
 					</form>
 				</td>
 			</tr>
-		<%}%> <!-- fim do if do for que mostra os contratos recentes -->
+		</c:forEach>
 		</tbody>
 	</table>
 	<form action="sistema?logica=EditarPrevia" method="post">

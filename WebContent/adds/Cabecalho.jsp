@@ -35,9 +35,9 @@
 			<table>
 				<tr>
 					<th class="col-md-1" style="color: blue"><h3><i>Matrícula: ${sessionScope.usuario.matricula} </i></h3></th>
-					<th class="text-center col-md-1" style="color: blue"><h3><i>Nome: ${sessionScope.usuario.nome} </i></h3></th>
+					<th class="text-center col-md-1" style="color: blue"><h3><i>${sessionScope.usuario.nome} </i></h3></th>
 					<th class="text-center col-md-1" style="color: blue"><h3><i>${sessionScope.cargoParaLogin.nome}</i></h3></th>
-					<th class="text-right col-md-1" style="color: blue"><h3><i>Setor: ${sessionScope.usuario.setor.sigla } </i></h3></th>
+					<th class="text-right col-md-1" style="color: blue"><h3><i>${sessionScope.usuario.setor.sigla } </i></h3></th>
 				</tr>
 			</table>
 		</div>

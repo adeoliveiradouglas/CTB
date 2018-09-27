@@ -33,12 +33,12 @@
 		<div class="aw-simple-panel__box">
 			<div style="display: none">
 				<input type="text" class="form-control input-lg" name="idContrato"
-					value="<%=id%>" >
+					value="${param.id}" >
 			</div>
 
 			<div style="display: none">
 				<input name="i"
-					value="<%=i%>" >
+					value="${param.i}" >
 			</div>
 			<div style="display: none">
 				<input name="acao"

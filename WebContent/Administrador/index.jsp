@@ -1,4 +1,5 @@
 <!-- Página principal do Administrador -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -28,49 +29,49 @@
 </head>
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	
-	
- 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Novos usuários que precisam de autorização</h3>
-	</div>
-	<table class="table table-bordered table-striped">
-		<thead>
-			<tr>
-				<th class="text-center col-md-2">Nome</th>
-				<th class="text-center col-md-1">Matrícula</th>
-				<th class="text-center col-md-1">Cargo</th>
-				<th class="text-center col-md-1">Setor</th>
-				<th class="text-center col-md-2">Login</th>
-				<th class="col-md-1"></th>
-				<th class="col-md-1"></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="usuario" items="${sessionScope.usuariosnovos}" varStatus="posicao">
+
+	<c:if test="${sessionScope.usuariosnovos.size() > 0}">
+		<div style="background-color: #1e94d2; color: white" align="center">
+			<h3>Novos usuários que precisam de autorização</h3>
+		</div>
+		<table class="table table-bordered table-striped">
+			<thead>
 				<tr>
-					<%-- <td class="text-center"><%=u.getId() %></td> --%>
-					<td class="text-center">${usuario.nome }</td>
-					<td class="text-center">${usuario.matricula}</td>
-					<td class="text-center">${usuario.cargo.get(0).nome } ${usuario.cargo.get(1).nome}</td>
-					<td class="text-center">${usuario.setor.sigla }</td>
-					<td class="text-center">${usuario.email }</td>
-					<td class="text-center">
-						<form action="sistema?logica=AutorizarNovoUsuario" method="post">
-							<button class="btn-link" value="${posicao.index}" name="id">Autorizar</button>
-						</form>
-					</td>
-					<td class="text-center">
-						<form action="sistema?logica=RemoveUsuario&tabela=usuariosnovos" method="post">
-							<button class="btn-link" value="${usuario.id}" name="id">Recusar</button>
-						</form>
-					</td>
+					<th class="text-center col-md-2">Nome</th>
+					<th class="text-center col-md-1">Matrícula</th>
+					<th class="text-center col-md-1">Cargo</th>
+					<th class="text-center col-md-1">Setor</th>
+					<th class="text-center col-md-2">Login</th>
+					<th class="col-md-1"></th>
+					<th class="col-md-1"></th>
 				</tr>
-			</c:forEach>
-					
-		</tbody>
-	</table>
-	
+			</thead>
+			<tbody>
+				<c:forEach var="usuario" items="${sessionScope.usuariosnovos}" varStatus="posicao">
+					<tr>
+						<%-- <td class="text-center"><%=u.getId() %></td> --%>
+						<td class="text-center">${usuario.nome }</td>
+						<td class="text-center">${usuario.matricula}</td>
+						<td class="text-center">${usuario.cargo.get(0).nome } ${usuario.cargo.get(1).nome}</td>
+						<td class="text-center">${usuario.setor.sigla }</td>
+						<td class="text-center">${usuario.email }</td>
+						<td class="text-center">
+							<form action="sistema?logica=AutorizarNovoUsuario" method="post">
+								<button class="btn-link" value="${posicao.index}" name="id">Autorizar</button>
+							</form>
+						</td>
+						<td class="text-center">
+							<form action="sistema?logica=RemoveUsuario&tabela=usuariosnovos"
+								method="post">
+								<button class="btn-link" value="${usuario.id}" name="id">Recusar</button>
+							</form>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</c:if>
+
 	<!-- Mostra opções de todos os usuários do sistema -->
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Todos os usuários</h3>
