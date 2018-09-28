@@ -19,6 +19,12 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
+	<div align="center">
+		<a href="sistema?logica=TelaNovoProcesso&id=${sessionScope.contratoVisualizar.id}">
+			<font size="5">Novo processo</font>
+		</a>
+	</div>
+
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - CNPJ: ${sessionScope.contratoVisualizar.cnpjEmpresaContratada}</h3>
 	</div>
@@ -102,6 +108,13 @@
 		</tbody>
 	</table>
 
+	<div align="center">
+		<font size="3">Importar planilha para esse contrato</font>
+		<form action="sistema?logica=EnviarPlanilha" method="post" enctype="multipart/form-data">
+			<input type="file" name="file" id="file" /> <input type="submit" value="Enviar" />
+		</form>
+	</div>
+	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

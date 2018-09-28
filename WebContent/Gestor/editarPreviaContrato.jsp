@@ -1,4 +1,4 @@
-<!-- Página principal do Gestor Geral -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -18,58 +18,43 @@
 </head>
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
-	<%@page import=" entity.Processo,
-					 entity.Contrato,
-					 utilidades.FormatarCampo,
-					 java.util.ArrayList"%>
-	<%
-		String id = (String) request.getParameter("id");
-		@SuppressWarnings("unchecked")
-		ArrayList<Processo> previaProcessos = (ArrayList<Processo>) request.getSession().getAttribute("previaProcessos");
-		int i = Integer.parseInt(request.getParameter("i"));
-	
-	%>
 	<form action="sistema?logica=EditarPrevia" method="post">
 		<div class="aw-simple-panel__box">
 			<div style="display: none">
 				<input type="text" class="form-control input-lg" name="idContrato"
-					value="${param.id}" >
+					value="${p.id}" >
 			</div>
 
 			<div style="display: none">
 				<input name="i"
-					value="${param.i}" >
+					value="${i}" >
 			</div>
 			<div style="display: none">
 				<input name="acao"
 					value="editar" >
 			</div>
-			<div style="display: none">
-				<input type="text" class="form-control input-lg" name="idContrato"
-					value="editar" >
-			</div>
 			<div class="form-group  has-feedback">
 				<input type="text" class="form-control input-lg"
-					value="<%=previaProcessos.get(i).getNumeroSei() %>" placeholder="Número SEI" name="numero" > <span
+					value="${processoEditar.numeroSei}" placeholder="Número SEI" name="numero" > <span
 					class="form-control-feedback" aria-hidden="true"> </span>
 			</div>
 
 			<div class="form-group  has-feedback">
 				<input type="text" class="form-control input-lg"
-					value="<%=previaProcessos.get(i).getNotaFiscal() %>"placeholder="Nota fiscal" name="notaFiscal" > <span
+					value="${processoEditar.notaFiscal}"placeholder="Nota fiscal" name="notaFiscal" > <span
 					class="form-control-feedback" aria-hidden="true"> </span>
 			</div>
 
 			<div class="form-group  has-feedback">
 				<input type="text" class="form-control input-lg" placeholder="Valor"
-					value="<%=previaProcessos.get(i).getValorAsString() %>"id="valor" name="valor" maxlength="14" onkeyup="MascaraMoeda(this)"
+					value="${processoEditar.valorAsString}"id="valor" name="valor" maxlength="14" onkeyup="MascaraMoeda(this)"
 					 /> <span class="form-control-feedback" aria-hidden="true">
 				</span>
 			</div>
 
 			<div class="form-group custom-select has-feedback">
 				<select name="mes" id="mes">
-					<option value="<%=previaProcessos.get(i).getMes() %>"style="display: none"><%=previaProcessos.get(i).getMes() %></option>
+					<option value="${processoEditar.mes}"style="display: none">${processoEditar.mes}</option>
 					<option value="Janeiro">Janeiro</option>
 					<option value="Fevereiro">Fevereiro</option>
 					<option value="Março">Março</option>
@@ -89,13 +74,13 @@
 
 			<div class="form-group  has-feedback">
 				<input type="number" class="form-control input-lg" placeholder="Ano"
-					value="<%=previaProcessos.get(i).getAno() %>"name="ano" maxlength="4"  /> <span
+					value="${processoEditar.ano}"name="ano" maxlength="4"  /> <span
 					class="form-control-feedback" aria-hidden="true"> </span>
 			</div>
 
 			<div class="form-group  has-feedback">
 				Data do processo: <input type="date" class="form-control input-lg"
-					value="<%=previaProcessos.get(i).getDataProcesso() %>"name="data" > <span class="form-control-feedback"
+					value="${processoEditar.dataProcesso}"name="data" > <span class="form-control-feedback"
 					aria-hidden="true"> </span>
 			</div>
 			<div class="form-group  has-feedback" align="center">
@@ -105,13 +90,13 @@
 			<div id="infoAditivo" style="display: none">
 				<div class="form-group  has-feedback">
 					<input type="text" class="form-control input-lg"
-						value="<%=previaProcessos.get(i).getAditivoAsString() %>" placeholder="Valor do aditivo" name="valorAditivo" maxlength="14"
+						value="${processoEditar.aditivoAsString}" placeholder="Valor do aditivo" name="valorAditivo" maxlength="14"
 						onkeyup="MascaraMoeda(this)" /> <span
 						class="form-control-feedback" aria-hidden="true"> </span>
 				</div>
 				<div class="form-group  has-feedback">
 					<input type="text" class="form-control input-lg"
-						value="<%=previaProcessos.get(i).getTipoAditivo() %>"placeholder="Tipo de aditivo" name="tipoAditivo"> <span
+						value="${processoEditar.tipoAditivo}"placeholder="Tipo de aditivo" name="tipoAditivo"> <span
 						class="form-control-feedback" aria-hidden="true"> </span>
 				</div>
 				<div class="form-group  has-feedback">

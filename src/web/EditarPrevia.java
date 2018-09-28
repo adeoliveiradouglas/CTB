@@ -23,14 +23,12 @@ public class EditarPrevia implements Logica{
 		List<Processo> previaProcessos = (List<Processo>) pedido.getSession().getAttribute("previaProcessos");
 		
 //		indice da lista do processo que está sendo manipulado
-		int i;
+		int i = Integer.parseInt(pedido.getParameter("i"));
 		
 //		recebe o que deve ser feito
 		String acao = pedido.getParameter("acao");
 		
 		if(acao.equals("remover")){
-			i = Integer.parseInt(pedido.getParameter("i"));
-			
 //			remove processo da lista previa
 			previaProcessos.remove(i);
 			
@@ -64,8 +62,6 @@ public class EditarPrevia implements Logica{
 //			altera um processo da lista previa
 			
 			Date dataProcesso;
-			
-			i = Integer.parseInt(pedido.getParameter("i"));
 			
 			String v = new FormatarCampo().stringToDecimal(pedido.getParameter("valor")),
 				   va = new FormatarCampo().stringToDecimal(pedido.getParameter("valorAditivo"));
@@ -109,6 +105,9 @@ public class EditarPrevia implements Logica{
 			
 		} else {		
 //			envia para a página de editar dados de um processo
+			Processo p = previaProcessos.get(i);
+			pedido.setAttribute("processoEditar", p);
+			pedido.setAttribute("i", i);
 			return "/Gestor/editarPreviaContrato.jsp";
 		}  
 	}

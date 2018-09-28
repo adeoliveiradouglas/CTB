@@ -19,41 +19,41 @@
 <body class="aw-layout-page">
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h1>Prévia do contrato</h1>
-	</div>
-	
-	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>${sessionScope.contrato.NomeEmpresaContratada} - CNPJ: ${sessionScope.contrato.CnpjEmpresaContratada}</h3>
+		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - CNPJ: ${sessionScope.contratoVisualizar.cnpjEmpresaContratada}</h3>
 	</div>
 	
 	<table class="table table-bordered table-striped">
 		<tbody>
 			<tr>
-				<td class="text-center col-md-1">Número: ${sessionScope.contrato.Numero}</td>
-				<td class="text-center col-md-1">Portaria: ${sessionScope.contrato.Portaria}</td>
-				<td class="text-center col-md-1">Gestor: ${sessionScope.contrato.Gestor().getNome}</td>
-				<td class="text-center col-md-1">Fiscal: ${sessionScope.contrato.Fiscal().getNome}</td>
+				<td rowspan="2" class="text-center col-md-1">Número: ${sessionScope.contratoVisualizar.numero}</td>
+				<td class="text-center col-md-1">Portaria: ${sessionScope.contratoVisualizar.portaria}</td>
+				<td class="text-center col-md-1">Gestor: ${sessionScope.contratoVisualizar.gestor.nome}</td>
+				<td class="text-center col-md-1">Fiscal: ${sessionScope.contratoVisualizar.fiscal.nome}</td>
 				
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Objeto: ${sessionScope.contrato.Objeto}</td>
-				<td class="text-center col-md-1">Recurso: ${sessionScope.contrato.Recurso().getNome}</td>
-				<td class="text-center col-md-1">Uso: ${sessionScope.contrato.Uso().getNome}</td>
-				<td class="text-center col-md-1">Fonte pagante: ${sessionScope.contrato.FontePagante().getNome}</td>
+				<td class="text-center col-md-1">Recurso: ${sessionScope.contratoVisualizar.recurso.nome}</td>
+				<td class="text-center col-md-1">Uso: ${sessionScope.contratoVisualizar.uso.nome}</td>
+				<td class="text-center col-md-1">Fonte pagante: ${sessionScope.contratoVisualizar.fontePagante.nome}</td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Data de assinatura: ${sessionScope.contrato.DataAssinaturaAsString}</td>
-				<td class="text-center col-md-1">Valor inicial: R$ ${sessionScope.contrato.ValorInicialAsString}</td>
-				<td class="text-center col-md-1">Valor dos aditivos: R$ ${sessionScope.contrato.ValorAditivoAsString}</td>
-				<td class="text-center col-md-1">Valor total: R$ ${sessionScope.contrato.ValorTotalAsString}</td>
+				<td class="text-center col-md-1">Data de assinatura: ${sessionScope.contratoVisualizar.dataAssinaturaAsString}</td>
+				<td class="text-center col-md-1">Valor inicial: R$ ${sessionScope.contratoVisualizar.valorInicialAsString}</td>
+				<td class="text-center col-md-1">Valor dos aditivos: R$ ${sessionScope.contratoVisualizar.valorAditivoAsString}</td>
+				<td class="text-center col-md-1">Valor total: R$ ${sessionScope.contratoVisualizar.valorTotalAsString}</td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Ass. ordem de serviço: ${sessionScope.contrato.DataOrdemServicoAsString}</td>
-				<td class="text-center col-md-1">Ass. garantia: ${sessionScope.contrato.DataGarantiaAsString}</td>
-				<td class="text-center col-md-1">Vencimento do contrato: ${sessionScope.contrato.DataVencimentoContratoAsString}</td>
-				<td class="text-center col-md-1">Vencimento da garantia: ${sessionScope.contrato.DataVencimentoGarantiaAsString}</td>
+				<td class="text-center col-md-1">Ass. ordem de serviço: ${sessionScope.contratoVisualizar.dataOrdemServicoAsString}</td>
+				<td class="text-center col-md-1">Ass. garantia: ${sessionScope.contratoVisualizar.dataGarantiaAsString}</td>
+				<td class="text-center col-md-1">Vencimento do contrato: ${sessionScope.contratoVisualizar.dataVencimentoContratoAsString}</td>
+				<td class="text-center col-md-1">Vencimento da garantia: ${sessionScope.contratoVisualizar.dataVencimentoGarantiaAsString}</td>
 			</tr>
 		</tbody>
+	</table>
+	<table class="table table-bordered table-striped">
+		<tr>
+			<td>Objeto: ${sessionScope.contratoVisualizar.objeto}</td>
+		</tr>
 	</table>
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Processos</h3>

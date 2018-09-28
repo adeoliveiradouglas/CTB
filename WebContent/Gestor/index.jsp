@@ -111,10 +111,7 @@
 						<td class="text-center">
 							<form action="sistema?logica=VerContrato" method="post">
 								<div style="display: none">
-									<input name="adicionaProcesso" value="true">
-								</div>
-								<div style="display: none">
-									<input name="origem" value="contratos">
+									<input name="origem" value="contratosFiscal">
 								</div>
 								<div style="display: none">
 									<input name="n" value="${posicao.index}">
