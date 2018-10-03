@@ -9,7 +9,7 @@
 
 package web;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,19 +17,19 @@ import javax.servlet.http.HttpServletResponse;
 import dao.OutroDAO;
 import dao.UsuarioDAO;
 import entity.Outro;
+import entity.Usuario;
 
 public class TelaNovoContrato implements Logica{
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		final String tabelaRecurso = "recurso",
 					 tabelaUso = "uso",
 					 tabelaFonte = "fontepagante";
 		
-//		Tenta recuperar uma lista da sessão
-		@SuppressWarnings("unchecked")
-		ArrayList<Outro> teste = (ArrayList<Outro>) pedido.getSession().getAttribute(tabelaFonte),
-						 gestores = (ArrayList<Outro>) pedido.getSession().getAttribute("gestores");
+//		Tenta recuperar uma lista da sessão		
+		List<Outro> teste = (List<Outro>) pedido.getSession().getAttribute(tabelaFonte);
+		List<Usuario> gestores = (List<Usuario>) pedido.getSession().getAttribute("gestores");
 		
 		if(teste == null || gestores == null){
 //			Para evitar acessos desnecessários ao banco de dados toda vez que chamar a página

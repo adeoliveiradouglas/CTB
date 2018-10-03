@@ -1,0 +1,69 @@
+<div class="form-group custom-select has-feedback">
+				<select name="gestor" id="gestor">
+					<option style="display: none">Selecione o gestor:</option>
+
+					<c:forEach var="gestor" items="${sessionScope.gestores}" varStatus="posicao">
+							<option value="${posicao.index}">
+								${gestor.nome} - ${gestor.setor.sigla}
+							</option>
+					</c:forEach>
+
+				</select>
+				<!-- select gestor -->
+			</div>
+			<!-- fim div select gestor -->
+
+			<div class="form-group custom-select has-feedback">
+				<select name="fiscal" id="fiscal">
+					<option style="display: none">Selecione o fiscal:</option>
+
+					<c:forEach var="fiscal" items="${sessionScope.gestores}"varStatus="posicao">
+						<option value="${posicao.index}">
+							${fiscal.nome} - ${fiscal.setor.sigla}
+						</option>
+					</c:forEach>
+
+				</select>
+				<!-- select fiscal -->
+			</div>
+			<!-- fim div select fiscal -->
+
+			<div class="form-group custom-select has-feedback">
+				<select name="recurso" id="recurso">
+					<option style="display: none">Recurso:</option>
+					
+					<c:forEach var="recurso" items="${sessionScope.recurso}" varStatus="posicao">
+						<option value="${posicao.index}">
+							${recurso.nome}
+						</option>
+					</c:forEach>
+
+				</select> <!-- select recurso -->
+			</div>
+			
+			<div  class="form-group custom-select has-feedback">
+			  <select name="uso" id="uso">
+			  	<option style="display: none">Uso:</option>	
+			  	
+			  		<c:forEach var="uso" items="${sessionScope.uso}" varStatus="posicao">
+						<option value="${posicao.index}">
+							${uso.nome}
+						</option>
+					</c:forEach>
+					
+			  </select> <!-- select uso -->
+			</div> <!-- fim div select uso -->
+			
+			<div  class="form-group custom-select has-feedback">
+			  <select name="fontepagante" id="fontepagante">
+			  	<option style="display: none">Fonte pagante:</option>	
+			  		
+			  		<c:forEach var="fp" items="${sessionScope.fontepagante}" varStatus="posicao">
+						<option value="${posicao.index}">
+							${fp.nome}
+						</option>
+					</c:forEach>
+					
+			  </select> <!-- select fonte pagante -->
+			</div> <!-- fim div select fonte pagante  -->
+			

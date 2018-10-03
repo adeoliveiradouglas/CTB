@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -16,16 +17,6 @@
 </head>
 <body class="aw-layout-page">
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
-<%@ page import="entity.Contrato,
-				 java.util.ArrayList,
-				 utilidades.FormatarCampo" %>
-							 
-	<%
-	String formatoData = "dd/MM/yyyy";
-	@SuppressWarnings("unchecked")
-	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession().getAttribute("contratos");
-	FormatarCampo format = new FormatarCampo();
-	%>
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Todos os contratos</h3>
 	</div>
@@ -42,22 +33,20 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%
-			for (Contrato c: contratos){
-			%>
-			<tr>
-				<td class="text-center">
-					<a href="sistema?logica=VerContrato&n=<%=contratos.indexOf(c)%>&origem=contratos">
-						<%=c.getNumero() %>
-					</a>
-				</td>
-				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
-				<td class="text-center"><%=c.getGestor().getNome() %></td>
-				<td class="text-center"><%=format.decimalToString(c.getValorTotal()) %></td>
-				<td class="text-center"><%=c.getDataVencimentoContrato().toString(formatoData) %></td>
-				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
-			</tr>
-			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
+			<c:forEach var="c" items="${sessionScope.contratos}" varStatus="posicao">
+				<tr>
+					<td class="text-center">
+						<a href="sistema?logica=VerContrato&n=${posicao.index}&origem=contratos">
+							${c.numero}
+						</a>
+					</td>
+					<td class="text-center">${c.nomeEmpresaContratada}</td>
+					<td class="text-center">${c.gestor.nome}</td>
+					<td class="text-center">${c.valorTotalAsString}</td>
+					<td class="text-center">${c.dataVencimentoContratoAsString}</td>
+				</tr> <!-- fim do if do for que mostra os contratos recentes -->
+			</c:forEach>
+			
 		</tbody>
 	</table>
 	

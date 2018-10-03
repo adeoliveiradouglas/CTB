@@ -7,10 +7,12 @@ package dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import entity.Cargo;
 import entity.Usuario;
+import utilidades.ComparadorUsuario;
 
 public class Cargo_has_usuario extends DAO{
 	private final String colunaUsuario = getNomeTabela() + ".idUsuario",
@@ -146,6 +148,7 @@ public class Cargo_has_usuario extends DAO{
 			usuarios = new ArrayList<Usuario>();
 		}
 		
+		Collections.sort(usuarios, new ComparadorUsuario());
 		encerraConexaocomBanco();
 		return usuarios;
 	}
