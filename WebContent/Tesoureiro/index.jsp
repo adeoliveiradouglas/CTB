@@ -1,4 +1,5 @@
 <!-- Página principal do Tesoureiro -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -30,71 +31,55 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<%@ page import="entity.Contrato,
-					 java.util.ArrayList,
-					 utilidades.FormatarCampo" %>
-							 
-	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Contratos com pagamentos em aberto</h3>
 	</div>
+	<c:if test="${sessionScope.contratosSemPagamento.size() > 0}">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th class="text-center col-md-1">
+						<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=numero">Número</a>
+					</th>
+					<th class="text-center col-md-2">
+						<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=nomeEmpresaContratada">Empresa</a>
+					</th>
+					<th class="text-center col-md-2">
+						<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Fiscal</a>
+					</th>
+					<th class="text-center col-md-1">
+						<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Valor</a>
+					</th>
+					<th class="text-center col-md-1">Vencimento</th>
+					<!-- <th class="text-center col-md-1">%</th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="contrato" items="${sessionScope.contratosSemPagamento}" varStatus="posicao">
+					<tr>
+						<td class="text-center">
+							<form action="sistema?logica=VerContratoParaPagamento" method="post">
+								<div style="display: none">
+									<input name="origemContrato" value="contratosSemPagamento">
+								</div>
+								<div style="display: none">
+									<input name="n" value="${posicao.index}">
+								</div>
+								<button type="submit" class="btn-link">${contrato.numero}</button>
+							</form>
+						</td>
+						<td class="text-center">${contrato.nomeEmpresaContratada}</td>
+						<td class="text-center">${contrato.fiscal.nome}</td>
+						<td class="text-center">${contrato.valorTotalAsString}</td>
+						<td class="text-center">${contrato.dataVencimentoContratoAsString}</td>
+						<%-- <th class="text-center" >${c.DataVencimentoContrato}</th> --%>
+					</tr>
+				</c:forEach> <!-- fim do if do for que mostra os contratos recentes -->
+			</tbody>
+		</table>
+	</c:if> <!-- fim do if da tabela -->
 	
-	<%
-	FormatarCampo format = new FormatarCampo();
 	
-	@SuppressWarnings("unchecked")
-	ArrayList<Contrato> contratos = (ArrayList<Contrato>) request.getSession().getAttribute("contratosSemPagamento");
-	if(contratos.size() > 0){
-	%>
-	<table class="table table-bordered table-striped">
-		<thead>
-			<tr>
-				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=numero">Número</a>
-				</th>
-				<th class="text-center col-md-2">
-					<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=nomeEmpresaContratada">Empresa</a>
-				</th>
-				<th class="text-center col-md-2">
-					<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Fiscal</a>
-				</th>
-				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Valor</a>
-				</th>
-				<th class="text-center col-md-1">Vencimento</th>
-				<!-- <th class="text-center col-md-1">%</th> -->
-			</tr>
-		</thead>
-		<tbody>
-			<%
-			for (Contrato c: contratos){
-			%>
-			<tr>
-				<td class="text-center">
-					<form action="sistema?logica=VerContratoParaPagamento" method="post">
-						<div style="display: none">
-							<input name="origemContrato" value="contratosSemPagamento">
-						</div>
-						<div style="display: none">
-							<input name="n" value="<%=contratos.indexOf(c)%>">
-						</div>
-						<button type="submit" class="btn-link"><%=c.getNumero()%></button>
-					</form>
-				</td>
-				<td class="text-center"><%=c.getNomeEmpresaContratada() %></td>
-				<td class="text-center"><%=c.getFiscal().getNome() %></td>
-				<td class="text-center"><%=c.getValorTotalAsString() %></td>
-				<td class="text-center"><%=c.getDataVencimentoContratoAsString() %></td>
-				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
-			</tr>
-			<%}%> <!-- fim do if do for que mostra os contratos recentes -->
-		</tbody>
-	</table>
-	
-	<br />
-	<%}else{%> <!-- fim do if da tabela -->
-	<p>Não há contratos.</p>
-	<%} %>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>

@@ -12,7 +12,7 @@ import java.util.List;
 
 import entity.Cargo;
 import entity.Usuario;
-import utilidades.ComparadorUsuario;
+import utilidades.ComparadorNome;
 
 public class Cargo_has_usuario extends DAO{
 	private final String colunaUsuario = getNomeTabela() + ".idUsuario",
@@ -148,7 +148,7 @@ public class Cargo_has_usuario extends DAO{
 			usuarios = new ArrayList<Usuario>();
 		}
 		
-		Collections.sort(usuarios, new ComparadorUsuario());
+		Collections.sort(usuarios, new ComparadorNome());
 		encerraConexaocomBanco();
 		return usuarios;
 	}

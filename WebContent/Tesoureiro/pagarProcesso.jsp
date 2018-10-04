@@ -18,34 +18,20 @@
 <body class="aw-layout-page">
 
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
-	<%@ page import="entity.Processo,
-					 entity.Contrato,
-					 utilidades.FormatarCampo,
-					 java.util.ArrayList" %>
-	<%
-	Contrato contrato = (Contrato) request.getSession().getAttribute("contratoVisualizar");
-	Processo processo = (Processo) request.getSession().getAttribute("processoVisualizar");
-	
-	String pagamento = "";
-	
-	if(processo.getDataPagamento() != null){
-		pagamento = processo.getDataPagamentoAsString();
-	}
-	%>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3><%=contrato.getNomeEmpresaContratada()%> - Processo n°: <%=processo.getNumeroSei() %></h3>
+		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - Processo n°: ${sessionScope.processoVisualizar.numeroSei}</h3>
 	</div>
 	
 <div class="aw-layout-content">
 	
-	<p>Nota fiscal = <%=processo.getNotaFiscal() %></p>
-	<p>Mês de referência = <%=processo.getMes() %>/<%=processo.getAno() %></p>
-	<p>Data do processo = <%=processo.getDataProcessoAsString() %></p>
-	<p>Valor = <%=processo.getValorAsString() %></p>
-	<p>Aditivo = <%=processo.getAditivoAsString() %></p>
-	<p>Objeto = <%=processo.getTipoAditivo() %></p>
-	<p>Data de pagamento = <%=pagamento %></p>
-	<p>Responsável pelo pagamento = <%=processo.getTesoureiro().getNome() %>
+	<p>Nota fiscal = ${sessionScope.processoVisualizar.notaFiscal}</p>
+	<p>Mês de referência = ${sessionScope.processoVisualizar.mes}/${sessionScope.processoVisualizar.ano}</p>
+	<p>Data do processo = ${sessionScope.processoVisualizar.dataProcessoAsString}</p>
+	<p>Valor = ${sessionScope.processoVisualizar.valorAsString}</p>
+	<p>Aditivo = ${sessionScope.processoVisualizar.aditivoAsString}</p>
+	<p>Objeto = ${sessionScope.processoVisualizar.tipoAditivo}</p>
+	<p>Data de pagamento = ${sessionScope.processoVisualizar.dataPagamentoAsString }</p>
+	<p>Responsável pelo pagamento = ${sessionScope.processoVisualizar.tesoureiro.nome}
 </div>
 
 <form action="sistema?logica=EditarPrevia" method="post">

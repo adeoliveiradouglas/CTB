@@ -17,8 +17,8 @@
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 
 	<div align="center">
-		<a href="sistema?logica=TelaNovoContrato"> <font size="5">Novo
-				contrato</font>
+		<a href="sistema?logica=TelaNovoContrato"> 
+			<font size="5">Novo contrato</font>
 		</a>
 	</div>
 	<div style="background-color: #1e94d2; color: white" align="center">
@@ -37,14 +37,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="c" items="${sessionScope.contratosRecentes}"
-				varStatus="posicao">
+			<c:forEach var="c" items="${sessionScope.contratosRecentes}" varStatus="posicao">
 				<tr>
-					<td class="text-center"><a
-						href="sistema?logica=VerContrato&n=${posicao.index}&origem=contratosRecentes">
+					<td class="text-center">
+						<a href="sistema?logica=VerContrato&n=${posicao.index}&origem=contratosRecentes">
 							<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
 							${c.numero}
-					</a></td>
+						</a>
+					</td>
 					<td class="text-center">${c.nomeEmpresaContratada}</td>
 					<td class="text-center">${c.gestor.nome}</td>
 					<td class="text-center">${c.valorTotalAsString}</td>
@@ -81,10 +81,11 @@
 				<c:forEach var="c" items="${sessionScope.contratos90}" varStatus="posicao">
 					<tr>
 						<td class="text-center">
-							<form action="sistema?logica=VerContrato" method="post">
-								<button value="${c.numero}" name="numeroContrato">${c.numero}</button>
-							</form>
-						</td>
+						<a href="sistema?logica=VerContrato&n=${posicao.index}&origem=contratos90">
+							<!-- Envia o id da lista onde o contrato está (n) e diz que a origem da chamada é da página principal (origem)-->
+							${c.numero}
+						</a>
+					</td>
 						<td class="text-center">${c.nomeEmpresaContratada}</td>
 						<td class="text-center">${c.gestor.nome}</td>
 						<td class="text-center">${c.valorTotal}</td>
