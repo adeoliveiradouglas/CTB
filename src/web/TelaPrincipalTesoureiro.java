@@ -1,6 +1,7 @@
 package web;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import dao.ContratoDAO;
 import dao.ProcessoDAO;
 import entity.Contrato;
 import entity.Processo;
+import utilidades.ComparadorNome;
 
 public class TelaPrincipalTesoureiro implements Logica{
 
@@ -36,6 +38,8 @@ public class TelaPrincipalTesoureiro implements Logica{
 			contratosSemPagamento.add(cdao.getByIdSemPagamento(id));
 		}
 		
+		//organiza a lista pelo nome dos contratos
+		Collections.sort(contratosSemPagamento, new ComparadorNome());
 		pedido.getSession().setAttribute("contratosSemPagamento", contratosSemPagamento);
 		
 		return "/Tesoureiro/index.jsp";

@@ -9,11 +9,13 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode
 @NoArgsConstructor
+@ToString
 public class Cargo {
 	int id;
 	String nome,

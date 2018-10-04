@@ -54,7 +54,7 @@
 			</div>
 		</form>
 		
-		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="js/validarsenha.js"></script>
 	</div>
 </body>
 </html>

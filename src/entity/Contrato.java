@@ -97,6 +97,11 @@ public class Contrato {
 		return this.dataVencimentoGarantia.toString(formatoData);
 	}
 	
+	public String getNome() {
+		//parametro para comparação entre objetos
+		return this.nomeEmpresaContratada;
+	}
+	
 	public Contrato(int id, boolean avisado90, boolean avisado60, boolean avisado45) {
 		super();
 		this.id = id;
