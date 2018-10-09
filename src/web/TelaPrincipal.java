@@ -9,14 +9,23 @@ public class TelaPrincipal implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String cargo = ((Cargo) pedido.getSession().getAttribute("cargoParaLogin")).getNome();
+		int cargo = ((Cargo) pedido.getSession().getAttribute("cargoParaLogin")).getId();
 		
-//		Por causa do nome da servlet de tela principal do gestor geral
-		if (!cargo.equals("Gestor geral")) {
-			return "sistema?logica=TelaPrincipal" + cargo +"&ordUser=nome&ordContrato=numero";
-		} else {
-			return "sistema?logica=TelaPrincipalGestorGeral";
+		switch(cargo) {
+			case 1:
+				return "sistema?logica=TelaPrincipalAdministrador";
+			
+			case 2:
+				return "sistema?logica=TelaPrincipalGestorGeral";
+		
+			case 3:
+				return "sistema?logica=TelaPrincipalGestor";
+		
+			case 4:
+				return "sistema?logica=TelaPrincipalTesoureiro";
+				
+			default: //caso seja diretor ou presidente
+				return "sistema?logica=TelaPrincipalOnlyView";
 		}
 	}
-
 }

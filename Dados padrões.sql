@@ -22,12 +22,12 @@ USE gestaodecontratos;
 
 LOCK TABLES `cargo` WRITE;
 /*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
-INSERT INTO `cargo` VALUES (1,'Administrador','Tem total domínio sobre todo o sistema'),
-						   (2,'Gestor geral','Enxerga todos os processos da empresa e inicia novos contratos'),
-						   (3,'Gestor','Adiciona processos aos contratos já existentes ou é um fiscal de processo'),
-						   (4,'Tesoureiro','Libera o pagamento de processos'),
-						   (5,'Diretor','Visualiza processos'),
-						   (6,'Presidente','Visualiza processos');
+INSERT INTO `cargo` VALUES (1,'Administrador do Sistema','Tem total domínio sobre todo o sistema'),
+						   (2,'Gestor Geral de Contrato','Enxerga todos os processos da empresa e inicia novos contratos'),
+						   (3,'Gestor','Adiciona processos aos contratos já existentes'),
+						   (4,'COFIN','Libera o pagamento de processos'),
+						   (5,'Diretor Administrativo e Financeiro','Visualiza processos'),
+						   (6,'DIPRE','Visualiza processos');
 /*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
 UNLOCK TABLES;
 
