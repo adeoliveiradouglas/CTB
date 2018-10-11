@@ -74,7 +74,7 @@ select {
 					<div class="form-group custom-select has-feedback">
 						<select name="cargo1">
 							<option style="display: none">Selecione seu cargo:</option>
-							<c:forEach var="c" items="${cargos}" varStatus="posicao">
+							<c:forEach var="c" items="${sessionScope.cargos}" varStatus="posicao">
 								<option value="${posicao.index}">
 									${c.nome} - ${c.descricao}
 								</option>
@@ -90,7 +90,7 @@ select {
 						id="cargoselectopcional" style="display: none">
 						<select name="cargo2">
 							<option style="display: none">Selecione seu segundo cargo:</option>
-							<c:forEach var="c" items="${cargos}" varStatus="posicao">
+							<c:forEach var="c" items="${sessionScope.cargos}" varStatus="posicao">
 								<option value="${posicao.index}">
 									${c.nome} - ${c.descricao}
 								</option>
@@ -105,7 +105,7 @@ select {
 						<select name="setor">
 							<option style="display: none">Selecione seu setor:</option>
 
-							<c:forEach var="s" items="${setores}" varStatus="posicao">
+							<c:forEach var="s" items="${sessionScope.setores}" varStatus="posicao">
 								<option value="${posicao.index}">
 									${s.sigla} -
 									${s.nome}

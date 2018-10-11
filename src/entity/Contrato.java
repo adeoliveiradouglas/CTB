@@ -147,60 +147,6 @@ public class Contrato {
 		this.avisado45 = this.avisado60 = this.avisado90 == false;
 	}
 	
-/*	public Contrato(
-			int id,
-			String numero, 
-			int portaria, 
-			Usuario gestor, 
-			Usuario fiscal,
-			String cnpjEmpresaContratada, 
-			String nomeEmpresaContratada, 
-			String objeto, 
-			Outro recurso,
-			Outro fontePagante, 
-			Outro uso, 
-			Date dataAssinatura, 
-			Date dataOrdemServico,
-			Date dataGarantia,
-			Date dataVencimentoContrato, 
-			Date dataVencimentoGarantia, 
-			BigDecimal valorInicial,
-			ArrayList<Processo> processos
-			) {
-//		Construtor com cálculos de aditivos
-		this.id = id;
-		this.numero = numero;
-		this.portaria = portaria;
-		this.gestor = gestor;
-		this.fiscal = fiscal;
-		this.cnpjEmpresaContratada = cnpjEmpresaContratada;
-		this.nomeEmpresaContratada = nomeEmpresaContratada;
-		this.objeto = objeto;
-		this.recurso = recurso;
-		this.fontePagante = fontePagante;
-		this.uso = uso;
-		this.dataAssinatura = new DateTime(dataAssinatura);
-		this.dataOrdemServico = new DateTime(dataOrdemServico);
-		this.dataGarantia = new DateTime(dataGarantia);
-		this.dataVencimentoContrato = new DateTime(dataVencimentoContrato);
-		this.dataVencimentoGarantia = new DateTime(dataVencimentoGarantia);
-		this.valorInicial = valorInicial;
-		this.processos = processos;
-		
-//		Calcula valores aditivos e total
-		BigDecimal aditivo = new BigDecimal("0");
-		for (Processo p: processos){
-//			Soma todos os aditivos de todos os processos dos contratos
-			aditivo = aditivo.add(
-				p.getAditivo()
-			);
-		}
-		
-		this.valorAditivos = aditivo;
-//		Soma o resultado do valor inicial com o valor dos aditivos e põe em valorTotal
-		this.valorTotal = valorInicial.add(aditivo);
-	}*/
-	
 	public Contrato(
 			int id, 
 			int portaria, 
@@ -258,4 +204,16 @@ public class Contrato {
 		this.valorTotal = valorInicial.add(aditivo);
 	}
 	
+	public BigDecimal getSaldo() {
+		int ultimo = 1 - this.processos.size();
+		
+		switch(ultimo) {
+			case -1:
+//				caso o contrato não tenha processos atrelados a ele, o saldo é o valor inicial
+				return this.valorTotal;
+				
+			default:
+				return this.processos.get(ultimo).getSaldo();
+		}
+	}
 }

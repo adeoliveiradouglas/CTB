@@ -70,4 +70,18 @@ public class DAO {
 			e.printStackTrace();
 		}
 	}
+	
+	protected int getResultSize() {
+		int item = 0;
+		
+		try {
+			this.resultado.last();
+			item = this.resultado.getRow();
+			this.resultado.beforeFirst();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		
+		return item;
+	}
 }

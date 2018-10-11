@@ -5,6 +5,7 @@
  * obs1: numeroSei é o número do processo.
  * obs2: se valor do aditivo for nulo ou zero, então não houve aditivo.
  * obs3: se não houver data de pagamento, é porque ele ainda não foi feito.
+ * obs4: posição de contagem do processo no contrato
  */
 
 
@@ -32,28 +33,31 @@ public class Processo {
 	
 	@Getter @Setter
 	private BigDecimal aditivo = null,  // vide cabecalho obs2
-					   valor;
+					   valor,
+					   saldo;
 	
 	@Getter @Setter
 	private DateTime dataPagamento = null, // vide cabecalho obs3
 				     dataProcesso;
 	
 	@Getter @Setter
-	private int idContrato, idProcesso;
+	private int idContrato, idProcesso, 
+		item; //vide obs4
 	
 	@Getter @Setter
 	private Usuario tesoureiro;
 	
-	public Processo(){}
-	
+	public Processo(){}	
 
 	public Processo(
 			int idProcesso,
+			int item,
 			String notaFiscal, 
 			String tipoAditivo, 
 			String numeroSei, 
 			BigDecimal aditivo,
 			BigDecimal valor, 
+			BigDecimal saldo,
 			Date dataPagamento, 
 			Date dataProcesso, 
 			Date referencia,
@@ -62,6 +66,7 @@ public class Processo {
 		DateTime r = new DateTime(referencia);	
 		
 		this.idProcesso = idProcesso;
+		this.item = item;
 		this.notaFiscal = notaFiscal;
 		this.tipoAditivo = tipoAditivo;
 		this.numeroSei = numeroSei;
@@ -69,6 +74,7 @@ public class Processo {
 		this.mes = new FormatarCampo().intToMonth(r.getMonthOfYear());
 		this.aditivo = aditivo;
 		this.valor = valor;
+		this.saldo = saldo;
 		this.dataProcesso = new DateTime(dataProcesso);
 		this.idContrato = idContrato;
 		this.tesoureiro = tesoureiro;
@@ -80,7 +86,7 @@ public class Processo {
 
 
 	public Processo(String notaFiscal, String tipoAditivo, String numeroSei, String ano, String mes, BigDecimal aditivo,
-			BigDecimal valor, Date dataProcesso, int idContrato) {
+			BigDecimal valor, BigDecimal saldo, Date dataProcesso, int idContrato) {
 //		construtor usado para novos processos pois não tem data de pagamento
 		this.notaFiscal = notaFiscal;
 		this.tipoAditivo = tipoAditivo;
@@ -89,17 +95,21 @@ public class Processo {
 		this.mes = mes;
 		this.aditivo = aditivo;
 		this.valor = valor;
+		this.saldo = saldo;
 		this.dataProcesso = new DateTime(dataProcesso);
 		this.idContrato = idContrato;
 	}
 	
-
 	public String getAditivoAsString(){
 		return new FormatarCampo().decimalToString(this.aditivo);
 	}
 	
 	public String getValorAsString(){
 		return new FormatarCampo().decimalToString(this.valor);
+	}
+	
+	public String getSaldoAsString() {
+		return new FormatarCampo().decimalToString(this.saldo);
 	}
 	
 	public String getDataPagamentoAsString(){

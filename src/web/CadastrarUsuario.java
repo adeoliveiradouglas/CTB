@@ -25,8 +25,8 @@ public class CadastrarUsuario implements Logica {
 		
 		if (undao.getByEmail(email) == null && new UsuarioDAO().getByEmail(email) == null) {
 			//se usuário com esse email NÃO existe no sistema (usuário autorizado ou usuário a ser autorizado), então pode ser adicionado			
-			List<Cargo> todosOsCargos = (List<Cargo>) pedido.getSession().getAttribute("cargo");
-			List<Setor> setores = (List<Setor>) pedido.getSession().getAttribute("setor");
+			List<Cargo> todosOsCargos = (List<Cargo>) pedido.getSession().getAttribute("cargos");
+			List<Setor> setores = (List<Setor>) pedido.getSession().getAttribute("setores");
 			
 			//tenta gerar lista de cargos do usuário
 			List<Cargo> cargosDoUsuario = new ArrayList<Cargo>();

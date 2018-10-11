@@ -90,8 +90,6 @@ public class UsuarioDAO extends DAO {
 						
 			getStatement().executeUpdate();
 			
-			usuario.setId(getByEmail(usuario.getEmail()).getId());
-			
 			//inserir a referência dos cargos na tabela de cargo_has_usuariosnovos
 			new Cargo_has_usuario(getNomeTabela(), getDbConnection()).inserir(usuario);
 		} catch (SQLException e) {

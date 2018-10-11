@@ -10,7 +10,7 @@
 <title>Sistema de Gestão de Contratos</title>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.standalone.min.css" />
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstradados.min.css" />
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
 <link rel="stylesheet" type="text/css" href="css/application.css" />
@@ -74,34 +74,34 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="p" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
+			<c:forEach var="dados" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
 			<tr>
 				<td class="text-center">
-					<form action="sistema?logica=VerProcesso" method="post">
+					<form action="sistema?logica=VerDados" method="post">
 						<div style="display: none">
 							<input name="origem" value="contratoVisualizar">
 						</div>
 						<div style="display: none">
 							<input name="i" value="${posicao.index}">
 						</div>
-						<button type="submit" name="your_name" class="btn-link">${posicao.index + 1}</button>
+						<button type="submit" name="your_name" class="btn-link">${dados.item}</button>
 					</form>
 				</td>
-				<td class="text-center">${p.numeroSei}</td>
-				<td class="text-center">${p.mes}</td>
-				<td class="text-center">${p.ano}</td>
-				<td class="text-center">${p.notaFiscal}</td>
-				<td class="text-center">${p.dataProcessoAsString}</td>
-				<td class="text-center">${p.valorAsString}</td>
-				<td class="text-center">${p.aditivoAsString}</td>
-				<td class="text-center">${p.tipoAditivo}</td>
+				<td class="text-center">${dados.numeroSei}</td>
+				<td class="text-center">${dados.mes}</td>
+				<td class="text-center">${dados.ano}</td>
+				<td class="text-center">${dados.notaFiscal}</td>
+				<td class="text-center">${dados.dataProcessoAsString}</td>
+				<td class="text-center">${dados.valorAsString}</td>
+				<td class="text-center">${dados.aditivoAsString}</td>
+				<td class="text-center">${dados.tipoAditivo}</td>
 				<td class="text-center">
 					<form action="sistema?logica=PagarProcesso" method="post">
 						<div style="display: none">
 							<input name="origem" value="contratoVisualizar">
 						</div>
 						<div style="display: none">
-							<input name="idProcesso" value="${p.idProcesso}">
+							<input name="idProcesso" value="${dados.idProcesso}">
 						</div>
 						<button type="submit" name="your_name" class="btn-link">Pagar</button>
 					</form>				

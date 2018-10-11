@@ -26,7 +26,7 @@
 	</div>
 
 	<div class="aw-layout-content">
-
+		<p>Item = ${sessionScope.processoVisualizar.item}</p>
 		<p>Nota fiscal = ${sessionScope.processoVisualizar.notaFiscal}</p>
 		<p>Mês de referência =
 			${sessionScope.processoVisualizar.mes}/${sessionScope.processoVisualizar.ano}</p>
@@ -34,6 +34,7 @@
 			${sessionScope.processoVisualizar.dataProcessoAsString}</p>
 		<p>Valor = ${sessionScope.processoVisualizar.valorAsString}</p>
 		<p>Aditivo = ${sessionScope.processoVisualizar.aditivoAsString}</p>
+		<p>Saldo = ${sessionScope.processoVisualizar.saldoAsString}</p>
 		<p>Objeto = ${sessionScope.processoVisualizar.tipoAditivo}</p>
 		<p>Data de pagamento =
 			${sessionScope.processoVisualizar.dataPagamentoAsString}</p>

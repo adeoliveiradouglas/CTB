@@ -77,7 +77,7 @@
 		<c:forEach var="processo" items="${sessionScope.previaProcessos}" varStatus="posicao">
 			<tr>
 				<td class="text-center">
-					<form action="sistema?logica=VerProcesso" method="post">
+					<form action="sistema?logica=VerDados" method="post">
 						<div style="display: none">
 							<input name="origem" value="contratoVisualizar">
 						</div>

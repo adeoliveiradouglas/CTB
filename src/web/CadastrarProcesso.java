@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
 import dao.ProcessoDAO;
+import entity.Contrato;
 import entity.Processo;
 import utilidades.FormatarCampo;
 
@@ -16,6 +17,7 @@ public class CadastrarProcesso implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
+		Contrato c = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
 		Date dataProcesso = new SimpleDateFormat("yyyy-MM-dd").parse(
 				pedido.getParameter("data")
 			),
@@ -26,14 +28,14 @@ public class CadastrarProcesso implements Logica{
 			   notaFiscal = pedido.getParameter("notaFiscal"),
 			   numero = pedido.getParameter("numero");
 		
-		BigDecimal valor = null, aditivo = null;
+		BigDecimal valor = null, aditivo = null, saldo;
 		
 		int idContrato = Integer.parseInt(pedido.getParameter("idContrato"));
 
 		try {
 			novaDataVencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
-					pedido.getParameter("novaDataVencimento")
-				);
+				pedido.getParameter("novaDataVencimento")
+			);
 		} catch (Exception e){
 			novaDataVencimento = null;
 		}
@@ -45,8 +47,10 @@ public class CadastrarProcesso implements Logica{
 			//catch para não dar erro no processo quando não houver aditivo
 			aditivo = new BigDecimal("0.00");
 		}
+
+		saldo = c.getSaldo().add(aditivo);
+		saldo = saldo.subtract(saldo);
 		
-//		if(notaFiscal.equals("")){}
 		
 		Processo p = new Processo(
 			notaFiscal,
@@ -56,6 +60,7 @@ public class CadastrarProcesso implements Logica{
 			pedido.getParameter("mes"),
 			aditivo,
 			valor,
+			saldo,
 			dataProcesso,
 			idContrato
 		);

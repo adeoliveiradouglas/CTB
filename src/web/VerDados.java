@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import entity.Contrato;
 import entity.Processo;
 
-public class VerProcesso implements Logica {
+public class VerDados implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
@@ -18,6 +18,6 @@ public class VerProcesso implements Logica {
 		Processo p = c.getProcessos().get(i);
 		
 		pedido.getSession().setAttribute("processoVisualizar", p);
-		return "/Comum/verProcesso.jsp";
+		return "/Comum/verDados.jsp";
 	}
 }

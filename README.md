@@ -12,5 +12,7 @@ Sistema para gerir os contratos de pagamentos de uma empresa
 	* 1.1.2
 		* Mês na planilha estava case-sensitivo (Resolvido)
 		* Aviso de vencimento não chega ao gestor geral (Resolvido)
-		 
+	* 1.2
+		* Corrigido bug no cadastro de usuário
+		* Corrigido bug na tela de Administrador do sistema 
 		

@@ -21,7 +21,7 @@
 	
 	<div align="center">
 		<a href="sistema?logica=TelaNovoProcesso&id=${sessionScope.contratoVisualizar.id}">
-			<font size="5">Novo processo</font>
+			<font size="5">Novos dados</font>
 		</a>
 	</div>
 
@@ -68,7 +68,7 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">Med</th>
+				<th class="text-center col-md-1">Item</th>
 				<th class="text-center col-md-1">N° processo</th>
 				<th class="text-center col-md-1">Mês refer.</th>
 				<th class="text-center col-md-1">Ano refer.</th>
@@ -84,14 +84,14 @@
 			<c:forEach var="produto" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
 			<tr>
 				<td class="text-center">
-					<form action="sistema?logica=VerProcesso" method="post">
+					<form action="sistema?logica=VerDados" method="post">
 						<div style="display: none">
 							<input name="origem" value="contratoVisualizar">
 						</div>
 						<div style="display: none">
 							<input name="i" value="${posicao.index}">
 						</div>
-						<button type="submit" name="your_name" class="btn-link">${posicao.index + 1}</button>
+						<button type="submit" name="your_name" class="btn-link">${produto.item}</button>
 					</form>
 				</td>
 				<td class="text-center">${produto.numeroSei}</td>

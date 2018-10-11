@@ -12,15 +12,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entity.Cargo;
 import entity.Contrato;
 
 public class VerContrato implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String adicionaProcesso = "", //quando o usuário tem o poder de adicionar processos no contrato
-			   origem = pedido.getParameter("origem"),
+		String origem = pedido.getParameter("origem"),
 			   pagina = "/Comum/verContrato.jsp";
+		
+		Cargo logado = (Cargo) pedido.getSession().getAttribute("cargoParaLogin");
+		
 		int n = Integer.parseInt(pedido.getParameter("n"));
 		
 		//carrega a lista para essa página
@@ -30,8 +33,8 @@ public class VerContrato implements Logica {
 		//Pega o objeto contrato da lista 
 		Contrato contrato = contratosLista.get(n);
 		
-		//para saber qual tela de contrato deve mostrar: a comum (somente visualiza) ou a do gestor (insere novos processos)
-		if ((String) pedido.getParameter("adicionaProcesso") != null){
+		//para saber qual tela de contrato deve mostrar: a comum (somente visualiza) ou a do gestor (insere novos dados)
+		if (logado.getId() == 3){
 			pagina = "/Gestor/verContrato.jsp"; 
 		}
 
@@ -39,7 +42,6 @@ public class VerContrato implements Logica {
 		pedido.getSession().setAttribute("contratoVisualizar", contrato);
 		pedido.getSession().setAttribute("origem", origem);
 		pedido.getSession().setAttribute("n", n);
-		pedido.getSession().setAttribute("adicionaProcesso", adicionaProcesso);
 		
 		return pagina;
 	}

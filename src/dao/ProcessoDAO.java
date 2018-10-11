@@ -20,8 +20,9 @@ public class ProcessoDAO extends DAO{
 						 colunaContrato = getNomeTabela() + ".contrato_id",
 						 colunaSei = getNomeTabela() + ".numeroSei",
 						 colunaReferencia = getNomeTabela() + ".referencia",
-						 colunaUsuario = getNomeTabela() + ".usuario_id",
+						 colunaUsuario = getNomeTabela() + ".tesoureiro_id",
 						 colunaIdProcesso = getNomeTabela() + ".idProcesso",
+						 colunaSaldo = getNomeTabela() + ".saldo",
 						 ordernarPorDataReferencia = " order by " + colunaReferencia;
 	
 	public ProcessoDAO() {
@@ -58,15 +59,20 @@ public class ProcessoDAO extends DAO{
 				getStatement().executeQuery()
 			);
 			
+//			quantidade de itens no resultSet
+			int item = getResultSize();			
+			
 			while(getResultado().next()){
 				
 				p = new Processo(
 					getResultado().getInt(colunaIdProcesso),
+					item--,
 					getResultado().getString(colunaNotaFiscal),
 					getResultado().getString(colunaTipoAditivo),
 					getResultado().getString(colunaSei),
 					getResultado().getBigDecimal(colunaAditivo),
 					getResultado().getBigDecimal(colunaValor),
+					getResultado().getBigDecimal(colunaSaldo),
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaDataProcesso),
 					getResultado().getDate(colunaReferencia),
@@ -189,7 +195,7 @@ public class ProcessoDAO extends DAO{
 			colunaContrato + " = ?" + ordernarPorDataReferencia + " desc"
 		);
 
-		ArrayList<Processo> lista = new ArrayList<Processo>();
+		List<Processo> lista = new ArrayList<Processo>();
 		Processo p;
 		
 		try{
@@ -208,14 +214,18 @@ public class ProcessoDAO extends DAO{
 				getStatement().executeQuery()
 			);
 			
+			int item = getResultSize();
+			
 			while(getResultado().next()){
 				p = new Processo(
 					getResultado().getInt(colunaIdProcesso),
+					item--,
 					getResultado().getString(colunaNotaFiscal),
 					getResultado().getString(colunaTipoAditivo),
 					getResultado().getString(colunaSei),
 					getResultado().getBigDecimal(colunaAditivo),
 					getResultado().getBigDecimal(colunaValor),
+					getResultado().getBigDecimal(colunaSaldo),
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaDataProcesso),
 					getResultado().getDate(colunaReferencia),
@@ -256,14 +266,18 @@ public class ProcessoDAO extends DAO{
 				getStatement().executeQuery()
 			);
 			
+			int item = getResultSize();
+			
 			while(getResultado().next()){
 				p = new Processo(
 					getResultado().getInt(colunaIdProcesso),
+					item--,
 					getResultado().getString(colunaNotaFiscal),
 					getResultado().getString(colunaTipoAditivo),
 					getResultado().getString(colunaSei),
 					getResultado().getBigDecimal(colunaAditivo),
 					getResultado().getBigDecimal(colunaValor),
+					getResultado().getBigDecimal(colunaSaldo),
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaDataProcesso),
 					getResultado().getDate(colunaReferencia),

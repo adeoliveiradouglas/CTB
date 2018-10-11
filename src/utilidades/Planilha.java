@@ -25,7 +25,8 @@ public class Planilha {
 			  posicaoDataProcesso = 5,
 			  posicaoValor = 6,
 			  posicaoValorAditivo = 9,
-			  posicaoObjeto = 10;
+			  posicaoObjeto = 10,
+			  posicaoSaldo = 7;
 	
 	public Planilha(){}
 	
@@ -73,7 +74,7 @@ public class Planilha {
 		
 		while (linhaLeitura < quantLinhas && mesesConsecutivosSemDados <= 12){			
 //			System.out.println(linhaLeitura);
-			BigDecimal aditivo = null, valor = null;
+			BigDecimal aditivo = null, valor = null, saldo = null;
 			
 			try {
 //				System.out.println(sheet.getRow(linhaLeitura).getCell(posicaoValorAditivo).getNumericCellValue());
@@ -93,6 +94,16 @@ public class Planilha {
 			} catch (Exception e) {
 //				Se o campo estiver vazio põe zero no lugar
 				valor = new BigDecimal("0");
+			}
+			
+			try {
+//				System.out.println(sheet.getRow(linhaLeitura).getCell(posicaoValor).getNumericCellValue());
+				saldo = new BigDecimal(
+					"" + sheet.getRow(linhaLeitura).getCell(posicaoSaldo).getNumericCellValue()
+				);
+			} catch (Exception e) {
+//				Se o campo estiver vazio põe zero no lugar
+				saldo = new BigDecimal("0");
 			}
 			
 			Date processo;
@@ -143,6 +154,7 @@ public class Planilha {
 				mes,
 				aditivo, 
 				valor, 
+				saldo,
 				processo, 
 				contrato
 			);
@@ -208,7 +220,7 @@ public class Planilha {
 			
 			while (linhaLeitura < quantLinhas && mesesConsecutivosSemDados <= 12){			
 //				System.out.println(linhaLeitura);
-				BigDecimal aditivo = null, valor = null;
+				BigDecimal aditivo = null, valor = null, saldo = null;
 				
 				try {
 //					System.out.println(sheet.getRow(linhaLeitura).getCell(posicaoValorAditivo).getNumericCellValue());
@@ -228,6 +240,16 @@ public class Planilha {
 				} catch (Exception e) {
 //					Se o campo estiver vazio põe zero no lugar
 					valor = new BigDecimal("0");
+				}
+				
+				try {
+//					System.out.println(sheet.getRow(linhaLeitura).getCell(posicaoValor).getNumericCellValue());
+					saldo = new BigDecimal(
+						"" + sheet.getRow(linhaLeitura).getCell(posicaoValor).getNumericCellValue()
+					);
+				} catch (Exception e) {
+//					Se o campo estiver vazio põe zero no lugar
+					saldo = new BigDecimal("0");
 				}
 				
 				Date processo;
@@ -278,6 +300,7 @@ public class Planilha {
 					mes,
 					aditivo, 
 					valor, 
+					saldo,
 					processo, 
 					idContrato
 				);

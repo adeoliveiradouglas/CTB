@@ -10,8 +10,8 @@ public class TelaCadastroUsuario implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		pedido.setAttribute("setores", new SetorDAO().getAll());
-		pedido.setAttribute("cargos", new CargoDAO().getAll());
+		pedido.getSession().setAttribute("setores", new SetorDAO().getAll());
+		pedido.getSession().setAttribute("cargos", new CargoDAO().getAll());
 		
 		
 		return "/cadastrousuario.jsp";

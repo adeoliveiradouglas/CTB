@@ -33,59 +33,58 @@
 		<h3>Contratos sob minha gestão</h3>
 	</div>
 
-	<c:if test="${sessionScope.contratos.size() > 0}">
-		<table class="table table-bordered table-striped">
-			<thead>
-				<tr>
-					<th class="text-center col-md-1"><a
-						href="sistema?logica=TelaPrincipalGestor&ordContrato=numero">Número</a>
-					</th>
-					<th class="text-center col-md-2"><a
-						href="sistema?logica=TelaPrincipalGestor&ordContrato=nomeEmpresaContratada">Empresa</a>
-					</th>
-					<th class="text-center col-md-2"><a
-						href="sistema?logica=TelaPrincipalGestor&ordContrato=fiscal_id">Fiscal</a>
-					</th>
-					<th class="text-center col-md-1"><a
-						href="sistema?logica=TelaPrincipalGestor&ordContrato=valor">Valor</a>
-					</th>
-					<th class="text-center col-md-1">Vencimento</th>
-					<!-- <th class="text-center col-md-1">%</th> -->
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="c" items="${sessionScope.contratos}"
-					varStatus="posicao">
+	<c:choose>
+		<c:when test="${sessionScope.contratos.size() > 0}">
+			<table class="table table-bordered table-striped">
+				<thead>
 					<tr>
-						<td class="text-center">
-							<form action="sistema?logica=VerContrato" method="post">
-								<div style="display: none">
-									<input name="adicionaProcesso" value="true">
-								</div>
-								<div style="display: none">
-									<input name="origem" value="contratos">
-								</div>
-								<div style="display: none">
-									<input name="n" value="${posicao.index}">
-								</div>
-								<button type="submit" name="your_name" class="btn-link">${c.numero}</button>
-							</form>
-						</td>
-						<td class="text-center">${c.nomeEmpresaContratada}</td>
-						<td class="text-center">${c.fiscal.nome}</td>
-						<td class="text-center">${c.valorTotalAsString}</td>
-						<td class="text-center">${c.dataVencimentoContratoAsString}</td>
+						<th class="text-center col-md-1"><a
+							href="sistema?logica=TelaPrincipalGestor&ordContrato=numero">Número</a>
+						</th>
+						<th class="text-center col-md-2"><a
+							href="sistema?logica=TelaPrincipalGestor&ordContrato=nomeEmpresaContratada">Empresa</a>
+						</th>
+						<th class="text-center col-md-2"><a
+							href="sistema?logica=TelaPrincipalGestor&ordContrato=fiscal_id">Fiscal</a>
+						</th>
+						<th class="text-center col-md-1"><a
+							href="sistema?logica=TelaPrincipalGestor&ordContrato=valor">Valor</a>
+						</th>
+						<th class="text-center col-md-1">Vencimento</th>
+						<!-- <th class="text-center col-md-1">%</th> -->
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</c:if>
-
-	<br />
-	
-	<c:if test="${sessionScope.contratosFiscal.size() == 0}">
-		<p>Você não é gestor de nenhum contrato.</p>
-	</c:if>
+				</thead>
+				<tbody>
+					<c:forEach var="c" items="${sessionScope.contratos}"
+						varStatus="posicao">
+						<tr>
+							<td class="text-center">
+								<form action="sistema?logica=VerContrato" method="post">
+									<div style="display: none">
+										<input name="adicionaProcesso" value="true">
+									</div>
+									<div style="display: none">
+										<input name="origem" value="contratos">
+									</div>
+									<div style="display: none">
+										<input name="n" value="${posicao.index}">
+									</div>
+									<button type="submit" name="your_name" class="btn-link">${c.numero}</button>
+								</form>
+							</td>
+							<td class="text-center">${c.nomeEmpresaContratada}</td>
+							<td class="text-center">${c.fiscal.nome}</td>
+							<td class="text-center">${c.valorTotalAsString}</td>
+							<td class="text-center">${c.dataVencimentoContratoAsString}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:when>
+		<c:otherwise>
+			<p>Você não é gestor de nenhum contrato.</p>
+		</c:otherwise>
+	</c:choose>
 	
 	<c:if test="${sessionScope.contratosFiscal.size() > 0}">
 		<div style="background-color: #1e94d2; color: white" align="center">

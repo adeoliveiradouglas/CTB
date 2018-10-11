@@ -75,28 +75,28 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="produto" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
+			<c:forEach var="dados" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
 			<tr>
 				<td class="text-center">
-					<form action="sistema?logica=VerProcesso" method="post">
+					<form action="sistema?logica=VerDados" method="post">
 						<div style="display: none">
 							<input name="origem" value="contratoVisualizar">
 						</div>
 						<div style="display: none">
 							<input name="i" value="${posicao.index}">
 						</div>
-						<button type="submit" name="your_name" class="btn-link">${posicao.index + 1}</button>
+						<button type="submit" name="your_name" class="btn-link">${dados.item}</button>
 					</form>
 				</td>
-				<td class="text-center">${produto.numeroSei}</td>
-				<td class="text-center">${produto.mes}</td>
-				<td class="text-center">${produto.ano}</td>
-				<td class="text-center">${produto.notaFiscal}</td>
-				<td class="text-center">${produto.dataProcessoAsString}</td>
-				<td class="text-center">${produto.valorAsString}</td>
-				<td class="text-center">${produto.aditivoAsString}</td>
-				<td class="text-center">${produto.tipoAditivo}</td>
-				<td class="text-center">${produto.dataPagamentoAsString}</td>
+				<td class="text-center">${dados.numeroSei}</td>
+				<td class="text-center">${dados.mes}</td>
+				<td class="text-center">${dados.ano}</td>
+				<td class="text-center">${dados.notaFiscal}</td>
+				<td class="text-center">${dados.dataProcessoAsString}</td>
+				<td class="text-center">${dados.valorAsString}</td>
+				<td class="text-center">${dados.aditivoAsString}</td>
+				<td class="text-center">${dados.tipoAditivo}</td>
+				<td class="text-center">${dados.dataPagamentoAsString}</td>
 			</tr>
 			</c:forEach>
 		</tbody>

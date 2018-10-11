@@ -107,7 +107,7 @@ public class Email {
 		    email.addTo(emailTo);
 		    email.send();
 		} catch (EmailException e) {
-		    e.printStackTrace();
-		}
+			e.printStackTrace();
+		} 
 	}
 }
