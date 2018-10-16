@@ -3,7 +3,6 @@
 package filtro;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entity.Cargo;
-import entity.Usuario;
 
 @WebFilter(
 	urlPatterns = {"/Diretor/*"}, 
@@ -40,9 +38,9 @@ public class Diretor implements Filter{
 /*		A lógica responsável por autenticar o usuário insere os dados dele na sessão
  * 		Aqui recupera os dados da sessão e verifica se o usuário tem autorização para acessar essa página através do cargo dele
  */
-		List<Cargo> cargosDoUsuario = ((Usuario) sessao.getAttribute("usuario")).getCargo();
+		Cargo cargo = (Cargo) sessao.getAttribute("cargoParaLogin");
 		try {
-			if (cargosDoUsuario.get(0).getId() == 5 || cargosDoUsuario.get(1).getId() == 5)
+			if (cargo.getId() == 5)
 				chain.doFilter(pedido, resposta);
 			else
 				res.sendRedirect("/gestaodecontratos/sistema?logica=Erro403");

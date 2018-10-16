@@ -1,4 +1,4 @@
-/*package filtro;
+package filtro;
 
 import java.io.IOException;
 
@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entity.Usuario;
+import entity.Cargo;
 
-	
+	/*
 	 * Responsável por bloquear acesso às páginas da pasta Comum
 	 * Comum é uma pasta onde ficam as páginas que são vistas por mais de um tipo de usuário
-	 
+	 */
 
 	@WebFilter(
 		urlPatterns = {"/Comum/*"},
@@ -36,10 +36,9 @@ import entity.Usuario;
 			HttpServletRequest req = (HttpServletRequest) pedido;
 			HttpServletResponse res = (HttpServletResponse) resposta;
 			HttpSession sessao = req.getSession(false);
-			Usuario u = (Usuario) sessao.getAttribute("usuario");
-			
+			Cargo cargo = (Cargo) sessao.getAttribute("cargoParaLogin");
 			try {
-				if (u.getCargo().getId() != 4)
+				if (cargo != null)
 					//Com exceção do tesoureiro, todos os outros cargos podem ver as páginas dessa pasta
 					chain.doFilter(pedido, resposta);
 				else
@@ -56,4 +55,3 @@ import entity.Usuario;
 		public void init(FilterConfig arg0) throws ServletException {}
 
 	}
-*/
