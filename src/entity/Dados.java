@@ -22,7 +22,7 @@ import lombok.ToString;
 import utilidades.FormatarCampo;
 
 @ToString
-public class Processo {
+public class Dados {
 	private static final String formatoData = "dd/MM/yyyy";
 
 	@Getter @Setter
@@ -38,18 +38,18 @@ public class Processo {
 	
 	@Getter @Setter
 	private DateTime dataPagamento = null, // vide cabecalho obs3
-				     dataProcesso;
+				     data;
 	
 	@Getter @Setter
-	private int idContrato, idProcesso, 
+	private int idContrato, id, 
 		item; //vide obs4
 	
 	@Getter @Setter
 	private Usuario tesoureiro;
 	
-	public Processo(){}	
+	public Dados(){}	
 
-	public Processo(
+	public Dados(
 			int idProcesso,
 			int item,
 			String notaFiscal, 
@@ -65,7 +65,7 @@ public class Processo {
 			Usuario tesoureiro) {
 		DateTime r = new DateTime(referencia);	
 		
-		this.idProcesso = idProcesso;
+		this.id = idProcesso;
 		this.item = item;
 		this.notaFiscal = notaFiscal;
 		this.tipoAditivo = tipoAditivo;
@@ -75,7 +75,7 @@ public class Processo {
 		this.aditivo = aditivo;
 		this.valor = valor;
 		this.saldo = saldo;
-		this.dataProcesso = new DateTime(dataProcesso);
+		this.data = new DateTime(dataProcesso);
 		this.idContrato = idContrato;
 		this.tesoureiro = tesoureiro;
 					
@@ -85,7 +85,7 @@ public class Processo {
 	}
 
 
-	public Processo(String notaFiscal, String tipoAditivo, String numeroSei, String ano, String mes, BigDecimal aditivo,
+	public Dados(String notaFiscal, String tipoAditivo, String numeroSei, String ano, String mes, BigDecimal aditivo,
 			BigDecimal valor, BigDecimal saldo, Date dataProcesso, int idContrato) {
 //		construtor usado para novos processos pois não tem data de pagamento
 		this.notaFiscal = notaFiscal;
@@ -96,7 +96,7 @@ public class Processo {
 		this.aditivo = aditivo;
 		this.valor = valor;
 		this.saldo = saldo;
-		this.dataProcesso = new DateTime(dataProcesso);
+		this.data = new DateTime(dataProcesso);
 		this.idContrato = idContrato;
 	}
 	
@@ -119,8 +119,8 @@ public class Processo {
 			return "";			
 	}
 	
-	public String getDataProcessoAsString(){
-		return this.dataProcesso.toString(formatoData);
+	public String getDataAsString(){
+		return this.data.toString(formatoData);
 	}
 
 	public String getMesAsInt() {

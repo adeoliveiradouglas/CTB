@@ -9,7 +9,12 @@ public class TelaPrincipal implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		int cargo = ((Cargo) pedido.getSession().getAttribute("cargoParaLogin")).getId();
+		int cargo;
+		try {
+			cargo = ((Cargo) pedido.getSession().getAttribute("cargoParaLogin")).getId();
+		} catch (NullPointerException e) {
+			return "sistema?logica=ErroDeslogado";
+		}
 		
 		switch(cargo) {
 			case 1:

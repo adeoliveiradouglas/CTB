@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
-import dao.ProcessoDAO;
+import dao.DadosDAO;
 import entity.Contrato;
 import entity.Usuario;
 
@@ -24,11 +24,11 @@ public class PagarProcesso implements Logica{
 		//Pega o objeto contrato da lista 
 		Contrato contrato = contratosLista.get(posicaoContrato);
 				
-		int idProcesso = Integer.parseInt(pedido.getParameter("idProcesso"));
+		int idDados = Integer.parseInt(pedido.getParameter("idDados"));
 		int idTesoureiro = ((Usuario) pedido.getSession().getAttribute("usuario")).getId();
 				
 		//atualiza pagamento
-		new ProcessoDAO().atualizarPagamento(idProcesso, idTesoureiro);
+		new DadosDAO().atualizarPagamento(idDados, idTesoureiro);
 		
 		//atualiza o contrato na lista de contratos
 		contratosLista.remove(posicaoContrato);

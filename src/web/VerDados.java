@@ -4,20 +4,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entity.Contrato;
-import entity.Processo;
+import entity.Dados;
 
 public class VerDados implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String origem = pedido.getParameter("origem");
 		int i = Integer.parseInt(pedido.getParameter("i"));
 				
-		Contrato c = (Contrato) pedido.getSession().getAttribute(origem);
+		Contrato c = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
 				
-		Processo p = c.getProcessos().get(i);
+		Dados p = c.getProcessos().get(i);
 		
-		pedido.getSession().setAttribute("processoVisualizar", p);
+		pedido.getSession().setAttribute("dadosVisualizar", p);
 		return "/Comum/verDados.jsp";
 	}
 }

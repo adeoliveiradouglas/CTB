@@ -20,7 +20,7 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<form action="sistema?logica=CadastrarProcesso" method="post">
+	<form action="sistema?logica=CadastrarDados" method="post">
 		<div class="aw-simple-panel__box">
 			<div class="form-group  has-feedback" style="display: none">
 				<input type="text" class="form-control input-lg" name="idContrato"

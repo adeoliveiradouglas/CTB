@@ -57,18 +57,17 @@
 		</tr>
 	</table>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Processos</h3>
+		<h3>Planilha</h3>
 	</div>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">Med</th>
+				<th class="text-center col-md-1">Item</th>
 				<th class="text-center col-md-1">N° processo</th>
-				<th class="text-center col-md-1">Mês refer.</th>
-				<th class="text-center col-md-1">Ano refer.</th>
+				<th class="text-center col-md-1">Referência</th>
 				<th class="text-center col-md-1">Nota fiscal</th>
-				<th class="text-center col-md-1">Data</th>
 				<th class="text-center col-md-1">Valor</th>
+				<th class="text-center col-md-1">Saldo</th>
 				<th class="text-center col-md-1">Aditivo</th>
 				<th class="text-center col-md-2">Objeto</th>
 				<th class="text-center col-md-1">Pagamento</th>
@@ -89,11 +88,10 @@
 					</form>
 				</td>
 				<td class="text-center">${dados.numeroSei}</td>
-				<td class="text-center">${dados.mes}</td>
-				<td class="text-center">${dados.ano}</td>
+				<td class="text-center">${dados.mes}/${dados.ano}</td>
 				<td class="text-center">${dados.notaFiscal}</td>
-				<td class="text-center">${dados.dataProcessoAsString}</td>
 				<td class="text-center">${dados.valorAsString}</td>
+				<td class="text-center">${dados.saldoAsString}</td>
 				<td class="text-center">${dados.aditivoAsString}</td>
 				<td class="text-center">${dados.tipoAditivo}</td>
 				<td class="text-center">${dados.dataPagamentoAsString}</td>

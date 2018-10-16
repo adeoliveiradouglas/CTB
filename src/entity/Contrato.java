@@ -50,13 +50,13 @@ public class Contrato {
 				 dataVencimentoContrato,
 				 dataVencimentoGarantia;
 	
-	@Getter @Setter
+	@Getter
 	private BigDecimal valorInicial,
 				  	   valorAditivos = new BigDecimal(0),
 				  	   valorTotal = new BigDecimal(0); //vide cabecalho obs5
 	
 	@Getter @Setter
-	private List<Processo> processos;
+	private List<Dados> processos;
 
 	@Getter @Setter
 	//para ajudar no controle de aviso quando email for enviado avisando sobre vencimento de contrato 
@@ -64,6 +64,10 @@ public class Contrato {
 				   avisado60, 
 				   avisado45;
 	/*MÉTODOS*/
+	public void setValorAditivos(BigDecimal valorAditivos) {
+		this.valorAditivos = valorAditivos;
+		this.valorTotal = valorAditivos.add(this.valorInicial);
+	}
 	
 	public String getValorInicialAsString(){
 		return new FormatarCampo().decimalToString(this.valorInicial);
@@ -102,8 +106,24 @@ public class Contrato {
 		return this.nomeEmpresaContratada;
 	}
 	
+	public BigDecimal getSaldo() {
+		int ultimo = this.processos.size() - 1;
+		
+		switch(ultimo) {
+			case -1:
+//				caso o contrato não tenha processos atrelados a ele, o saldo é o valor inicial
+				return this.valorTotal;
+				
+			default:
+				return this.processos.get(ultimo).getSaldo();
+		}
+	}
+	
+	public BigDecimal getSaldo(int i) {
+		return this.processos.get(i).getSaldo();
+	}
+	
 	public Contrato(int id, boolean avisado90, boolean avisado60, boolean avisado45) {
-		super();
 		this.id = id;
 		this.avisado90 = avisado90;
 		this.avisado60 = avisado60;
@@ -144,7 +164,7 @@ public class Contrato {
 		this.dataVencimentoContrato = new DateTime(dataVencimentoContrato);
 		this.dataVencimentoGarantia = new DateTime(dataVencimentoGarantia);
 		this.valorInicial = valorInicial;
-		this.avisado45 = this.avisado60 = this.avisado90 == false;
+		this.avisado45 = this.avisado60 = this.avisado90 = false;
 	}
 	
 	public Contrato(
@@ -165,7 +185,7 @@ public class Contrato {
 			Date dataVencimentoContrato,
 			Date dataVencimentoGarantia, 
 			BigDecimal valorInicial,
-			List<Processo> processos, 
+			List<Dados> processos, 
 			boolean avisado90, 
 			boolean avisado60, 
 			boolean avisado45) {
@@ -194,7 +214,7 @@ public class Contrato {
 		
 //		Calcula valores aditivos e total
 		BigDecimal aditivo = new BigDecimal("0");
-		for (Processo p: processos){
+		for (Dados p: processos){
 //			Soma todos os aditivos de todos os processos dos contratos
 			aditivo = aditivo.add(p.getAditivo());
 		}
@@ -202,18 +222,5 @@ public class Contrato {
 		this.valorAditivos = aditivo;
 //		Soma o resultado do valor inicial com o valor dos aditivos e põe em valorTotal
 		this.valorTotal = valorInicial.add(aditivo);
-	}
-	
-	public BigDecimal getSaldo() {
-		int ultimo = 1 - this.processos.size();
-		
-		switch(ultimo) {
-			case -1:
-//				caso o contrato não tenha processos atrelados a ele, o saldo é o valor inicial
-				return this.valorTotal;
-				
-			default:
-				return this.processos.get(ultimo).getSaldo();
-		}
 	}
 }

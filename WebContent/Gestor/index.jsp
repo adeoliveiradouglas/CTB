@@ -51,7 +51,6 @@
 							href="sistema?logica=TelaPrincipalGestor&ordContrato=valor">Valor</a>
 						</th>
 						<th class="text-center col-md-1">Vencimento</th>
-						<!-- <th class="text-center col-md-1">%</th> -->
 					</tr>
 				</thead>
 				<tbody>

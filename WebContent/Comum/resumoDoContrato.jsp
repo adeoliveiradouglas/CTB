@@ -4,8 +4,7 @@
 <body>
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<%@ page
-		import="entity.Contrato,
-					 entity.Processo,
+		import="entity.Contrato,entity.Dados,
 					 java.util.ArrayList"%>
 	
 	

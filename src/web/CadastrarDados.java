@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
-import dao.ProcessoDAO;
+import dao.DadosDAO;
 import entity.Contrato;
-import entity.Processo;
+import entity.Dados;
 import utilidades.FormatarCampo;
 
-public class CadastrarProcesso implements Logica{
+public class CadastrarDados implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		Contrato c = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
-		Date dataProcesso = new SimpleDateFormat("yyyy-MM-dd").parse(
+		Date dataDados = new SimpleDateFormat("yyyy-MM-dd").parse(
 				pedido.getParameter("data")
 			),
 			novaDataVencimento;
@@ -28,7 +28,7 @@ public class CadastrarProcesso implements Logica{
 			   notaFiscal = pedido.getParameter("notaFiscal"),
 			   numero = pedido.getParameter("numero");
 		
-		BigDecimal valor = null, aditivo = null, saldo;
+		BigDecimal valor = null, aditivo = null, saldo = null;
 		
 		int idContrato = Integer.parseInt(pedido.getParameter("idContrato"));
 
@@ -49,10 +49,9 @@ public class CadastrarProcesso implements Logica{
 		}
 
 		saldo = c.getSaldo().add(aditivo);
-		saldo = saldo.subtract(saldo);
+		saldo = saldo.subtract(valor);		
 		
-		
-		Processo p = new Processo(
+		Dados p = new Dados(
 			notaFiscal,
 			pedido.getParameter("tipoAditivo"),
 			numero,
@@ -61,11 +60,11 @@ public class CadastrarProcesso implements Logica{
 			aditivo,
 			valor,
 			saldo,
-			dataProcesso,
+			dataDados,
 			idContrato
 		);
 		
-		new ProcessoDAO().inserir(p);
+		new DadosDAO().inserir(p);
 		
 		//se houve atualização na data de vencimento
 		if (novaDataVencimento != null)

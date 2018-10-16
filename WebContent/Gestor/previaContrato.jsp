@@ -19,6 +19,11 @@
 <body class="aw-layout-page">
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<div style="background-color: #1e94d2; color: white" align="center">
+		<h3>Prévia da importação</h3>
+		<h5>Verifique todos os dados e informações pois você não poderá alterá-los depois. Quando estiver pronto, vá até o final da página e clique em "Aprovar".</h5>
+	</div>
+	
+	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - CNPJ: ${sessionScope.contratoVisualizar.cnpjEmpresaContratada}</h3>
 	</div>
 	
@@ -56,83 +61,62 @@
 		</tr>
 	</table>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Processos</h3>
+		<h3>Planilha</h3>
 	</div>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
+				<th class="text-center col-md-1">Item</th>
 				<th class="text-center col-md-1">N° processo</th>
-				<th class="text-center col-md-1">Med</th>
-				<th class="text-center col-md-1">Mês refer.</th>
-				<th class="text-center col-md-1">Ano refer.</th>
+				<th class="text-center col-md-1">Referência</th>
 				<th class="text-center col-md-1">Nota fiscal</th>
-				<th class="text-center col-md-1">Data</th>
 				<th class="text-center col-md-1">Valor</th>
+				<th class="text-center col-md-1">Saldo</th>
 				<th class="text-center col-md-1">Aditivo</th>
 				<th class="text-center col-md-2">Objeto</th>
 				<th class="text-center col-md-1"></th><th class="text-center col-md-1"></th>
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach var="processo" items="${sessionScope.previaProcessos}" varStatus="posicao">
+			<c:forEach var="dados" items="${sessionScope.previaDados}" varStatus="posicao">
 			<tr>
 				<td class="text-center">
 					<form action="sistema?logica=VerDados" method="post">
 						<div style="display: none">
-							<input name="origem" value="contratoVisualizar">
-						</div>
-						<div style="display: none">
 							<input name="i" value="${posicao.index}">
 						</div>
-						<button type="submit" class="btn-link">${processo.numeroSei}</button>
+						<button type="submit" name="your_name" class="btn-link">${posicao.index + 1}</button>
 					</form>
 				</td>
-				<td class="text-center">${posicao.index + 1}</td>
-				<td class="text-center">${processo.mes}</td>
-				<td class="text-center">${processo.ano}</td>
-				<td class="text-center">${processo.notaFiscal}</td>
-				<td class="text-center">${processo.dataProcessoAsString}</td>
-				<td class="text-center">${processo.valorAsString}</td>
-				<td class="text-center">${processo.aditivoAsString}</td>
-				<td class="text-center">${processo.tipoAditivo}</td>
+				<td class="text-center">${dados.numeroSei}</td>
+				<td class="text-center">${dados.mes}/${dados.ano}</td>
+				<td class="text-center">${dados.notaFiscal}</td>
+				<td class="text-center">${dados.valorAsString}</td>
+				<td class="text-center">${dados.saldoAsString}</td>
+				<td class="text-center">${dados.aditivoAsString}</td>
+				<td class="text-center">${dados.tipoAditivo}</td>
 				<td class="text-center">
-					<form action="sistema?logica=EditarPrevia" method="post">
+					<form action="sistema?logica=EditarPrevia">
 						<div style="display: none">
+							<input name="acao" value="editar">
 							<input name="i" value="${posicao.index}">
 						</div>
-						<div style="display: none">
-							<input name="acao" value="telaEditar">
-						</div>
-						<button type="submit" class="btn-link">Editar</button>
+						<button>Editar</button>
 					</form>
 				</td>
 				<td class="text-center">
-					<form action="sistema?logica=EditarPrevia" method="post">
-						<div style="display: none">
-							<input name="i" value="${posicao.index}">
-						</div>
+					<form action="sistema?logica=EditarPrevia">
 						<div style="display: none">
 							<input name="acao" value="remover">
+							<input name="i" value="${posicao.index}">
 						</div>
-						<button type="submit" class="btn-link">Remover</button>
+						<button>Remover</button>
 					</form>
 				</td>
 			</tr>
-		</c:forEach>
+			</c:forEach>
 		</tbody>
 	</table>
-	<form action="sistema?logica=EditarPrevia" method="post">
-		<div style="display: none">
-			<input name="acao" value="aprovar">
-		</div>
-		<div class="form-group  has-feedback">
-			Nova data de vencimento (deixe vazia se não for necessário alterar): 
-			<input type="date"
-				class="form-control input-lg" name="novaDataVencimento"> <span
-				class="form-control-feedback" aria-hidden="true"> </span>
-		</div>
-		<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Aprovar</button>
-	</form>
-	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
+	
 </body>
 </html>

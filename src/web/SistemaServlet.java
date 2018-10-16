@@ -35,7 +35,7 @@ public class SistemaServlet extends HttpServlet {
 //			System.out.println(pagina + " solicitada");
 			pedido.getRequestDispatcher(pagina).forward(pedido, resposta);
 
-		} catch (ClassNotFoundException | NullPointerException cnfe){
+		} catch (ClassNotFoundException cnfe){
 			nomeDaClasse = pacote + "TelaLogin";
 			try {
 				classe = Class.forName(nomeDaClasse);

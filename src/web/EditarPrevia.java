@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.joda.time.DateTime;
 
 import dao.ContratoDAO;
-import dao.ProcessoDAO;
-import entity.Processo;
+import dao.DadosDAO;
+import entity.Dados;
 import utilidades.FormatarCampo;
 
 public class EditarPrevia implements Logica{
@@ -20,19 +20,24 @@ public class EditarPrevia implements Logica{
 	@SuppressWarnings("unchecked")
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		List<Processo> previaProcessos = (List<Processo>) pedido.getSession().getAttribute("previaProcessos");
+		List<Dados> previaDados = (List<Dados>) pedido.getSession().getAttribute("previaDados");
 		
 //		indice da lista do processo que está sendo manipulado
-		int i = Integer.parseInt(pedido.getParameter("i"));
+		int i; 
 		
 //		recebe o que deve ser feito
 		String acao = pedido.getParameter("acao");
 		
 		if(acao.equals("remover")){
-//			remove processo da lista previa
-			previaProcessos.remove(i);
+			i = Integer.parseInt(pedido.getParameter("i"));
 			
-			//pedido.getSession().setAttribute("previaProcessos", previaProcessos);		
+//			remove processo da lista previa
+			previaDados.remove(i);
+			
+			for(int aux = i; aux < previaDados.size(); ++aux) {
+				
+			}
+			//pedido.getSession().setAttribute("previaDados", previaDados);		
 			return "/Gestor/previaContrato.jsp";
 			
 		} else if (acao.equals("aprovar")){
@@ -48,12 +53,12 @@ public class EditarPrevia implements Logica{
 			
 			//se houve atualização na data de vencimento
 			if (novaDataVencimento != null)
-				new ContratoDAO().atualizarDataVencimento(previaProcessos.get(0).getIdContrato(), novaDataVencimento);
+				new ContratoDAO().atualizarDataVencimento(previaDados.get(0).getIdContrato(), novaDataVencimento);
 			
 			
 //			grava todos os dados no banco
-			for (Processo p : previaProcessos){
-				new ProcessoDAO().inserir(p);
+			for (Dados p : previaDados){
+				new DadosDAO().inserir(p);
 			}
 			
 			return "sistema?logica=TelaPrincipalGestor";
@@ -61,7 +66,9 @@ public class EditarPrevia implements Logica{
 		}else if (acao.equals("editar")){
 //			altera um processo da lista previa
 			
-			Date dataProcesso;
+			i = Integer.parseInt(pedido.getParameter("i"));
+			
+			Date dataDados;
 			
 			String v = new FormatarCampo().stringToDecimal(pedido.getParameter("valor")),
 				   va = new FormatarCampo().stringToDecimal(pedido.getParameter("valorAditivo"));
@@ -69,11 +76,11 @@ public class EditarPrevia implements Logica{
 			BigDecimal valor = null, aditivo = null;
 						
 			try {
-				dataProcesso = new SimpleDateFormat("yyyy-MM-dd").parse(
+				dataDados = new SimpleDateFormat("yyyy-MM-dd").parse(
 					pedido.getParameter("data")
 				);
 			} catch (Exception e){
-				dataProcesso = null;
+				dataDados = null;
 			}
 			
 			try{
@@ -91,21 +98,23 @@ public class EditarPrevia implements Logica{
 				aditivo = new BigDecimal("0.00");
 			}
 			
-			previaProcessos.get(i).setNotaFiscal(pedido.getParameter("notaFiscal"));
-			previaProcessos.get(i).setTipoAditivo(pedido.getParameter("tipoAditivo"));
-			previaProcessos.get(i).setNumeroSei(pedido.getParameter("numero"));
-			previaProcessos.get(i).setAno(pedido.getParameter("ano"));
-			previaProcessos.get(i).setMes(pedido.getParameter("mes"));
-			previaProcessos.get(i).setAditivo(aditivo);
-			previaProcessos.get(i).setValor(valor);
-			previaProcessos.get(i).setDataProcesso(new DateTime(dataProcesso));
+			previaDados.get(i).setNotaFiscal(pedido.getParameter("notaFiscal"));
+			previaDados.get(i).setTipoAditivo(pedido.getParameter("tipoAditivo"));
+			previaDados.get(i).setNumeroSei(pedido.getParameter("numero"));
+			previaDados.get(i).setAno(pedido.getParameter("ano"));
+			previaDados.get(i).setMes(pedido.getParameter("mes"));
+			previaDados.get(i).setAditivo(aditivo);
+			previaDados.get(i).setValor(valor);
+			previaDados.get(i).setData(new DateTime(dataDados));
 			
-			pedido.getSession().setAttribute("previaProcessos", previaProcessos);
+			pedido.getSession().setAttribute("previaDados", previaDados);
 			return "/Gestor/previaContrato.jsp";
 			
 		} else {		
 //			envia para a página de editar dados de um processo
-			Processo p = previaProcessos.get(i);
+			i = Integer.parseInt(pedido.getParameter("i"));
+			
+			Dados p = previaDados.get(i);
 			pedido.setAttribute("processoEditar", p);
 			pedido.setAttribute("i", i);
 			return "/Gestor/editarPreviaContrato.jsp";

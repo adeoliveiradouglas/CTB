@@ -8,21 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ContratoDAO;
-import dao.ProcessoDAO;
+import dao.DadosDAO;
 import entity.Contrato;
-import entity.Processo;
+import entity.Dados;
 import utilidades.ComparadorNome;
 
 public class TelaPrincipalTesoureiro implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		ProcessoDAO pdao = new ProcessoDAO();
-		List<Processo> processosSemPagamento = pdao.getAllSemPagamento();
+		DadosDAO pdao = new DadosDAO();
+		List<Dados> processosSemPagamento = pdao.getAllSemPagamento();
 		List<Integer> carregados = new ArrayList<Integer>();
 
 //		Vai procurar por todos os contratos que tem processos sem pagamento
-		for (Processo p: processosSemPagamento){
+		for (Dados p: processosSemPagamento){
 			int idContrato = p.getIdContrato();
 			
 //			se o contrato ainda não está na lista, será adicionado

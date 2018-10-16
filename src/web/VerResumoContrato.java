@@ -6,14 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entity.Contrato;
-import entity.Processo;
+import entity.Dados;
 
 public class VerResumoContrato implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		Contrato contrato = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
-		List<Processo> processos = contrato.getProcessos();
+		List<Dados> processos = contrato.getProcessos();
 		
 		
 		

@@ -20,7 +20,7 @@
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
 	<div align="center">
-		<a href="sistema?logica=TelaNovoProcesso&id=${sessionScope.contratoVisualizar.id}">
+		<a href="sistema?logica=TelaNovosDados&id=${sessionScope.contratoVisualizar.id}">
 			<font size="5">Novos dados</font>
 		</a>
 	</div>
@@ -63,25 +63,24 @@
 		</tr>
 	</table>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>Processos</h3>
+		<h3>Planilha</h3>
 	</div>
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
 				<th class="text-center col-md-1">Item</th>
 				<th class="text-center col-md-1">N° processo</th>
-				<th class="text-center col-md-1">Mês refer.</th>
-				<th class="text-center col-md-1">Ano refer.</th>
+				<th class="text-center col-md-1">Referência</th>
 				<th class="text-center col-md-1">Nota fiscal</th>
-				<th class="text-center col-md-1">Data</th>
 				<th class="text-center col-md-1">Valor</th>
+				<th class="text-center col-md-1">Saldo</th>
 				<th class="text-center col-md-1">Aditivo</th>
 				<th class="text-center col-md-2">Objeto</th>
 				<th class="text-center col-md-1">Pagamento</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="produto" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
+			<c:forEach var="dados" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
 			<tr>
 				<td class="text-center">
 					<form action="sistema?logica=VerDados" method="post">
@@ -91,18 +90,17 @@
 						<div style="display: none">
 							<input name="i" value="${posicao.index}">
 						</div>
-						<button type="submit" name="your_name" class="btn-link">${produto.item}</button>
+						<button type="submit" name="your_name" class="btn-link">${dados.item}</button>
 					</form>
 				</td>
-				<td class="text-center">${produto.numeroSei}</td>
-				<td class="text-center">${produto.mes}</td>
-				<td class="text-center">${produto.ano}</td>
-				<td class="text-center">${produto.notaFiscal}</td>
-				<td class="text-center">${produto.dataProcessoAsString}</td>
-				<td class="text-center">${produto.valorAsString}</td>
-				<td class="text-center">${produto.aditivoAsString}</td>
-				<td class="text-center">${produto.tipoAditivo}</td>
-				<td class="text-center">${produto.dataPagamentoAsString}</td>
+				<td class="text-center">${dados.numeroSei}</td>
+				<td class="text-center">${dados.mes}/${dados.ano}</td>
+				<td class="text-center">${dados.notaFiscal}</td>
+				<td class="text-center">${dados.valorAsString}</td>
+				<td class="text-center">${dados.saldoAsString}</td>
+				<td class="text-center">${dados.aditivoAsString}</td>
+				<td class="text-center">${dados.tipoAditivo}</td>
+				<td class="text-center">${dados.dataPagamentoAsString}</td>
 			</tr>
 			</c:forEach>
 		</tbody>

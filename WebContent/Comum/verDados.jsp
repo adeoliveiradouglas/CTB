@@ -22,24 +22,24 @@
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada}-
-			Processo n°: ${sessionScope.processoVisualizar.numeroSei}</h3>
+			Processo n°: ${sessionScope.dadosVisualizar.numeroSei}</h3>
 	</div>
 
 	<div class="aw-layout-content">
-		<p>Item = ${sessionScope.processoVisualizar.item}</p>
-		<p>Nota fiscal = ${sessionScope.processoVisualizar.notaFiscal}</p>
+		<p>Item = ${sessionScope.dadosVisualizar.item}</p>
+		<p>Nota fiscal = ${sessionScope.dadosVisualizar.notaFiscal}</p>
 		<p>Mês de referência =
-			${sessionScope.processoVisualizar.mes}/${sessionScope.processoVisualizar.ano}</p>
-		<p>Data do processo =
-			${sessionScope.processoVisualizar.dataProcessoAsString}</p>
-		<p>Valor = ${sessionScope.processoVisualizar.valorAsString}</p>
-		<p>Aditivo = ${sessionScope.processoVisualizar.aditivoAsString}</p>
-		<p>Saldo = ${sessionScope.processoVisualizar.saldoAsString}</p>
-		<p>Objeto = ${sessionScope.processoVisualizar.tipoAditivo}</p>
+			${sessionScope.dadosVisualizar.mes}/${sessionScope.dadosVisualizar.ano}</p>
+		<p>Data do registro =
+			${sessionScope.dadosVisualizar.dataProcessoAsString}</p>
+		<p>Valor = ${sessionScope.dadosVisualizar.valorAsString}</p>
+		<p>Aditivo = ${sessionScope.dadosVisualizar.aditivoAsString}</p>
+		<p>Saldo = ${sessionScope.dadosVisualizar.saldoAsString}</p>
+		<p>Objeto = ${sessionScope.dadosVisualizar.tipoAditivo}</p>
 		<p>Data de pagamento =
-			${sessionScope.processoVisualizar.dataPagamentoAsString}</p>
+			${sessionScope.dadosVisualizar.dataPagamentoAsString}</p>
 		<p>Responsável pelo pagamento =
-			${sessionScope.processoVisualizar.tesoureiro.nome}
+			${sessionScope.dadosVisualizar.tesoureiro.nome}
 	</div>
 
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>

@@ -73,7 +73,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
+					new DadosDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
@@ -139,7 +139,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
+					new DadosDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
@@ -268,7 +268,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
+					new DadosDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
@@ -333,7 +333,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
+					new DadosDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
@@ -391,7 +391,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getDate(colunaDataVencimentoContrato),
 					getResultado().getDate(colunaDataVencimentoGarantia),
 					getResultado().getBigDecimal(colunaValorInicial),
-					new ProcessoDAO(getDbConnection()).getByContratoSemPagamento(id),
+					new DadosDAO(getDbConnection()).getByContratoSemPagamento(id),
 					getResultado().getBoolean(coluna90),
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)

@@ -2,6 +2,7 @@ package web;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,25 +13,22 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import entity.Contrato;
-import entity.Processo;
+import entity.Dados;
 import utilidades.Planilha;
 
 public class EnviarPlanilha implements Logica {
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		final String formatoArquivoXLSX = ".xlsx",
-					 formatoArquivoXLS = ".xls";
+		final String formatoArquivoXLSX = "xlsx",
+					 formatoArquivoXLS = "xls";
 		File planilha = null;
 
-		String origem = "" + pedido.getSession().getAttribute("origem"), nomeDoArquivo = null;
-		int n = Integer.parseInt("" + pedido.getSession().getAttribute("n"));
+		String nomeDoArquivo = null;
+		
+		Contrato contrato = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
 
-		@SuppressWarnings("unchecked")
-		List<Contrato> contratos = ((List<Contrato>) pedido.getSession().getAttribute(origem));
-		int idContrato = contratos.get(n).getId();
-
-		List<Processo> previaProcessos = null;
+		List<Dados> previaProcessos = null;
 		
 		/* Identifica se o formulario é do tipo multipart/form-data */
 		if (ServletFileUpload.isMultipartContent(pedido)) {
@@ -41,7 +39,7 @@ public class EnviarPlanilha implements Logica {
 				/* Escreve a o arquivo na pasta img */
 				for (FileItem item : multiparts) {
 					if (!item.isFormField()) {
-						String formatoArquivoRecebido = item.getName().substring(item.getName().length() - 5,
+						String formatoArquivoRecebido = item.getName().substring(item.getName().lastIndexOf(".") + 1,
 								item.getName().length());
 
 						// para processar somente arquivos excel
@@ -49,17 +47,17 @@ public class EnviarPlanilha implements Logica {
 						planilha = new File(new File(System.getProperty("user.home")), nomeDoArquivo);
 						item.write(planilha);
 						
-						if (formatoArquivoRecebido.contains(formatoArquivoXLSX)) {
+						if (formatoArquivoRecebido.equals(formatoArquivoXLSX)) {
 							previaProcessos = new Planilha().
 								carregarXLSX( 
 									planilha,
-									idContrato
+									contrato
 								);
-						} else if (formatoArquivoRecebido.contains(formatoArquivoXLS)) {
+						} else if (formatoArquivoRecebido.equals(formatoArquivoXLS)) {
 							previaProcessos = new Planilha().
 								carregarXLS( 
 									planilha,
-									idContrato
+									contrato
 								);
 						} else {
 							return "sistema?logica=ErroFormato";
@@ -70,9 +68,14 @@ public class EnviarPlanilha implements Logica {
 				return "sistema?logica=ErroArquivoInexistente";
 			} catch (Exception ex) {
 				ex.printStackTrace();
-			} 
+			}
 			
-			pedido.getSession().setAttribute("previaProcessos", previaProcessos);
+			BigDecimal totalAditivos = new BigDecimal("0");
+			for (Dados d: previaProcessos)
+				totalAditivos = totalAditivos.add(d.getAditivo());
+				
+			contrato.setValorAditivos(totalAditivos);
+			pedido.getSession().setAttribute("previaDados", previaProcessos);
 			
 			planilha.delete();
 		}
