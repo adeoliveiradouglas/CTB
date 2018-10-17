@@ -22,7 +22,7 @@
 		<div class="aw-simple-panel__box">
 			<div style="display: none">
 				<input type="text" class="form-control input-lg" name="idContrato"
-					value="${p.id}" >
+					value="${processoEditar.idContrato}" >
 			</div>
 
 			<div style="display: none">

@@ -12,15 +12,15 @@ import org.joda.time.DateTime;
 
 import dao.ContratoDAO;
 import dao.DadosDAO;
+import entity.Contrato;
 import entity.Dados;
 import utilidades.FormatarCampo;
 
 public class EditarPrevia implements Logica{
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		List<Dados> previaDados = (List<Dados>) pedido.getSession().getAttribute("previaDados");
+		List<Dados> previaDados = ((Contrato) pedido.getSession().getAttribute("contratoVisualizar")).getProcessos();
 		
 //		indice da lista do processo que está sendo manipulado
 		int i; 
@@ -37,8 +37,6 @@ public class EditarPrevia implements Logica{
 			for(int aux = i; aux < previaDados.size(); ++aux) {
 				
 			}
-			//pedido.getSession().setAttribute("previaDados", previaDados);		
-			return "/Gestor/previaContrato.jsp";
 			
 		} else if (acao.equals("aprovar")){
 			Date novaDataVencimento;
@@ -105,11 +103,7 @@ public class EditarPrevia implements Logica{
 			previaDados.get(i).setMes(pedido.getParameter("mes"));
 			previaDados.get(i).setAditivo(aditivo);
 			previaDados.get(i).setValor(valor);
-			previaDados.get(i).setData(new DateTime(dataDados));
-			
-			pedido.getSession().setAttribute("previaDados", previaDados);
-			return "/Gestor/previaContrato.jsp";
-			
+			previaDados.get(i).setData(new DateTime(dataDados));			
 		} else {		
 //			envia para a página de editar dados de um processo
 			i = Integer.parseInt(pedido.getParameter("i"));
@@ -117,8 +111,11 @@ public class EditarPrevia implements Logica{
 			Dados p = previaDados.get(i);
 			pedido.setAttribute("processoEditar", p);
 			pedido.setAttribute("i", i);
-			return "/Gestor/editarPreviaContrato.jsp";
+			return "/gestaodecontratos/Gestor/editarPreviaContrato.jsp";
 		}  
+		
+		((Contrato) pedido.getSession().getAttribute("contratoVisualizar")).setProcessos(previaDados);
+		return "/Gestor/previaContrato.jsp";
 	}
 
 }

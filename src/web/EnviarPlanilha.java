@@ -75,7 +75,7 @@ public class EnviarPlanilha implements Logica {
 				totalAditivos = totalAditivos.add(d.getAditivo());
 				
 			contrato.setValorAditivos(totalAditivos);
-			pedido.getSession().setAttribute("previaDados", previaProcessos);
+			contrato.setProcessos(previaProcessos);
 			
 			planilha.delete();
 		}

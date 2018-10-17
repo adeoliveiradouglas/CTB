@@ -34,7 +34,7 @@ public class VerContrato implements Logica {
 		Contrato contrato = contratosLista.get(n);
 		
 		//para saber qual tela de contrato deve mostrar: a comum (somente visualiza) ou a do gestor (insere novos dados)
-		if (logado.getId() == 3 && pedido.getParameter("adicionaProcesso").equals("true")){
+		if (logado.getId() == 3 && "true".equals(pedido.getParameter("adicionaProcesso"))){
 			pagina = "/Gestor/verContrato.jsp"; 
 		}
 

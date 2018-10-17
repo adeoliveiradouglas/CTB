@@ -66,6 +66,7 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
+				<th class="text-center col-md-1"></th>
 				<th class="text-center col-md-1">Item</th>
 				<th class="text-center col-md-1">N° processo</th>
 				<th class="text-center col-md-1">Referência</th>
@@ -74,18 +75,27 @@
 				<th class="text-center col-md-1">Saldo</th>
 				<th class="text-center col-md-1">Aditivo</th>
 				<th class="text-center col-md-2">Objeto</th>
-				<th class="text-center col-md-1"></th><th class="text-center col-md-1"></th>
+				<th class="text-center col-md-1"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="dados" items="${sessionScope.previaDados}" varStatus="posicao">
+			<c:forEach var="dados" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
 			<tr>
+				<td class="text-center">
+					<form action="sistema?logica=EditarPrevia" >
+						<div style="display: none">
+							<input name="acao" value="abrirTelaEditar">
+							<input name="i" value="${posicao.index}">
+						</div>
+						<button>Editar</button>
+					</form>
+				</td>
 				<td class="text-center">
 					<form action="sistema?logica=VerDados" method="post">
 						<div style="display: none">
 							<input name="i" value="${posicao.index}">
 						</div>
-						<button type="submit" name="your_name" class="btn-link">${posicao.index + 1}</button>
+						<button type="submit" class="btn-link">${posicao.index + 1}</button>
 					</form>
 				</td>
 				<td class="text-center">${dados.numeroSei}</td>
@@ -95,15 +105,6 @@
 				<td class="text-center">${dados.saldoAsString}</td>
 				<td class="text-center">${dados.aditivoAsString}</td>
 				<td class="text-center">${dados.tipoAditivo}</td>
-				<td class="text-center">
-					<form action="sistema?logica=EditarPrevia">
-						<div style="display: none">
-							<input name="acao" value="editar">
-							<input name="i" value="${posicao.index}">
-						</div>
-						<button>Editar</button>
-					</form>
-				</td>
 				<td class="text-center">
 					<form action="sistema?logica=EditarPrevia">
 						<div style="display: none">

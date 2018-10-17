@@ -11,7 +11,7 @@ public class VerDados implements Logica {
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		int i = Integer.parseInt(pedido.getParameter("i"));
-				
+		
 		Contrato c = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
 				
 		Dados p = c.getProcessos().get(i);
