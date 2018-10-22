@@ -20,7 +20,7 @@ public class EditarPrevia implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		List<Dados> previaDados = ((Contrato) pedido.getSession().getAttribute("contratoVisualizar")).getProcessos();
+		List<Dados> previaDados = ((Contrato) pedido.getSession().getAttribute("contratoVisualizar")).getDados();
 		
 //		indice da lista do processo que está sendo manipulado
 		int i; 
@@ -114,7 +114,7 @@ public class EditarPrevia implements Logica{
 			return "/gestaodecontratos/Gestor/editarPreviaContrato.jsp";
 		}  
 		
-		((Contrato) pedido.getSession().getAttribute("contratoVisualizar")).setProcessos(previaDados);
+		((Contrato) pedido.getSession().getAttribute("contratoVisualizar")).setDados(previaDados);
 		return "/Gestor/previaContrato.jsp";
 	}
 

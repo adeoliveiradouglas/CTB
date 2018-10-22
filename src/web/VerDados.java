@@ -14,7 +14,7 @@ public class VerDados implements Logica {
 		
 		Contrato c = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
 				
-		Dados p = c.getProcessos().get(i);
+		Dados p = c.getDados().get(i);
 		
 		pedido.getSession().setAttribute("dadosVisualizar", p);
 		return "/Comum/verDados.jsp";

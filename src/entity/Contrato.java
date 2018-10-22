@@ -4,7 +4,7 @@
  *  Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Getter" e "@Setter"  
  *  obs2 - objeto: descricao do contrato
  *  obs3 - recurso, fontePagante e uso: há padrões para os três campos no bd, aqui só será armazenado o campo String/Varchar dos mesmos
- *  obs5 - valor total é o valor de todos os aditivos de todos os processos mais o valor inicial do contrato
+ *  obs5 - valor total é o valor de todos os aditivos de todos os dados mais o valor inicial do contrato
  *  	   Calcula somente quando é retorno de resultado do banco 	
  */
 
@@ -56,7 +56,7 @@ public class Contrato {
 				  	   valorTotal = new BigDecimal(0); //vide cabecalho obs5
 	
 	@Getter @Setter
-	private List<Dados> processos;
+	private List<Dados> dados;
 
 	@Getter @Setter
 	//para ajudar no controle de aviso quando email for enviado avisando sobre vencimento de contrato 
@@ -107,20 +107,20 @@ public class Contrato {
 	}
 	
 	public BigDecimal getSaldo() {
-		int ultimo = this.processos.size() - 1;
+		int ultimo = this.dados.size() - 1;
 		
 		switch(ultimo) {
 			case -1:
-//				caso o contrato não tenha processos atrelados a ele, o saldo é o valor inicial
-				return this.valorTotal;
+//				caso o contrato não tenha dados atrelados a ele, o saldo é o valor inicial
+				return this.valorInicial;
 				
 			default:
-				return this.processos.get(ultimo).getSaldo();
+				return this.dados.get(ultimo).getSaldo();
 		}
 	}
 	
 	public BigDecimal getSaldo(int i) {
-		return this.processos.get(i).getSaldo();
+		return this.dados.get(i).getSaldo();
 	}
 	
 	public Contrato(int id, boolean avisado90, boolean avisado60, boolean avisado45) {
@@ -147,7 +147,7 @@ public class Contrato {
 			Date dataVencimentoContrato, 
 			Date dataVencimentoGarantia, 
 			BigDecimal valorInicial) {
-//		Construtor usado para novos contratos pois não tem id do banco e nem entrada de processos
+//		Construtor usado para novos contratos pois não tem id do banco e nem entrada de dados
 		this.numero = numero;
 		this.portaria = portaria;
 		this.gestor = gestor;
@@ -185,7 +185,7 @@ public class Contrato {
 			Date dataVencimentoContrato,
 			Date dataVencimentoGarantia, 
 			BigDecimal valorInicial,
-			List<Dados> processos, 
+			List<Dados> dados, 
 			boolean avisado90, 
 			boolean avisado60, 
 			boolean avisado45) {
@@ -207,15 +207,15 @@ public class Contrato {
 		this.dataVencimentoContrato = new DateTime(dataVencimentoContrato);
 		this.dataVencimentoGarantia = new DateTime(dataVencimentoGarantia);
 		this.valorInicial = valorInicial;
-		this.processos = processos;
+		this.dados = dados;
 		this.avisado90 = avisado90;
 		this.avisado60 = avisado60;
 		this.avisado45 = avisado45;
 		
 //		Calcula valores aditivos e total
 		BigDecimal aditivo = new BigDecimal("0");
-		for (Dados p: processos){
-//			Soma todos os aditivos de todos os processos dos contratos
+		for (Dados p: dados){
+//			Soma todos os aditivos de todos os dados dos contratos
 			aditivo = aditivo.add(p.getAditivo());
 		}
 		

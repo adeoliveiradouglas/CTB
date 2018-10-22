@@ -1,11 +1,11 @@
 /*
- * Classe responsável por armazenar dados de um processo
- * Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Data"
- * Cada processo está dentro de um contrato.
- * obs1: numeroSei é o número do processo.
- * obs2: se valor do aditivo for nulo ou zero, então não houve aditivo.
- * obs3: se não houver data de pagamento, é porque ele ainda não foi feito.
- * obs4: posição de contagem do processo no contrato
+ * Classe responsï¿½vel por armazenar dados de um processo
+ * Usando framework Lombok para gerar os getters e setters da classe atravï¿½s da anotaï¿½ï¿½o "@Data"
+ * Cada processo estï¿½ dentro de um contrato.
+ * obs1: numeroSei ï¿½ o nï¿½mero do processo.
+ * obs2: se valor do aditivo for nulo ou zero, entï¿½o nï¿½o houve aditivo.
+ * obs3: se nï¿½o houver data de pagamento, ï¿½ porque ele ainda nï¿½o foi feito.
+ * obs4: posiï¿½ï¿½o de contagem do processo no contrato
  */
 
 
@@ -59,7 +59,7 @@ public class Dados {
 			BigDecimal valor, 
 			BigDecimal saldo,
 			Date dataPagamento, 
-			Date dataProcesso, 
+			Date dataRegistro, 
 			Date referencia,
 			int idContrato, 
 			Usuario tesoureiro) {
@@ -75,7 +75,7 @@ public class Dados {
 		this.aditivo = aditivo;
 		this.valor = valor;
 		this.saldo = saldo;
-		this.data = new DateTime(dataProcesso);
+		this.data = new DateTime(dataRegistro);
 		this.idContrato = idContrato;
 		this.tesoureiro = tesoureiro;
 					
@@ -86,8 +86,8 @@ public class Dados {
 
 
 	public Dados(String notaFiscal, String tipoAditivo, String numeroSei, String ano, String mes, BigDecimal aditivo,
-			BigDecimal valor, BigDecimal saldo, Date dataProcesso, int idContrato) {
-//		construtor usado para novos processos pois não tem data de pagamento
+			BigDecimal valor, BigDecimal saldo, Date dataRegistro, int idContrato) {
+//		construtor usado para novos processos pois nï¿½o tem data de pagamento
 		this.notaFiscal = notaFiscal;
 		this.tipoAditivo = tipoAditivo;
 		this.numeroSei = numeroSei;
@@ -96,7 +96,7 @@ public class Dados {
 		this.aditivo = aditivo;
 		this.valor = valor;
 		this.saldo = saldo;
-		this.data = new DateTime(dataProcesso);
+		this.data = new DateTime(dataRegistro);
 		this.idContrato = idContrato;
 	}
 	
