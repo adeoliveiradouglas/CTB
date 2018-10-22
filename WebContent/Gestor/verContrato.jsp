@@ -80,38 +80,38 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="dados" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
-			<tr>
-				<td class="text-center">
-					<form action="sistema?logica=VerDados" method="post">
-						<div style="display: none">
-							<input name="origem" value="contratoVisualizar">
-						</div>
-						<div style="display: none">
-							<input name="i" value="${posicao.index}">
-						</div>
-						<button type="submit" name="your_name" class="btn-link">${dados.item}</button>
-					</form>
-				</td>
-				<td class="text-center">${dados.numeroSei}</td>
-				<td class="text-center">${dados.mes}/${dados.ano}</td>
-				<td class="text-center">${dados.notaFiscal}</td>
-				<td class="text-center">${dados.valorAsString}</td>
-				<td class="text-center">${dados.saldoAsString}</td>
-				<td class="text-center">${dados.aditivoAsString}</td>
-				<td class="text-center">${dados.tipoAditivo}</td>
-				<td class="text-center">${dados.dataPagamentoAsString}</td>
-			</tr>
+			<c:forEach var="dados" items="${sessionScope.contratoVisualizar.dados}" varStatus="posicao">
+				<tr>
+					<td class="text-center">
+						<form action="sistema?logica=VerDados" method="post">
+							<div style="display: none">
+								<input name="origem" value="contratoVisualizar">
+							</div>
+							<div style="display: none">
+								<input name="i" value="${posicao.index}">
+							</div>
+							<button type="submit" name="your_name" class="btn-link">${dados.item}</button>
+						</form>
+					</td>
+					<td class="text-center">${dados.numeroSei}</td>
+					<td class="text-center">${dados.mes}/${dados.ano}</td>
+					<td class="text-center">${dados.notaFiscal}</td>
+					<td class="text-center">${dados.valorAsString}</td>
+					<td class="text-center">${dados.saldoAsString}</td>
+					<td class="text-center">${dados.aditivoAsString}</td>
+					<td class="text-center">${dados.tipoAditivo}</td>
+					<td class="text-center">${dados.dataPagamentoAsString}</td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
-	<div align="center">
+	
+	<!-- <div align="center">
 		<font size="3">Importar planilha para esse contrato</font>
 		<form action="sistema?logica=EnviarPlanilha" method="post" enctype="multipart/form-data">
 			<input type="file" name="file" id="file" /> <input type="submit" value="Enviar" />
 		</form>
-	</div>
+	</div> -->
 	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
