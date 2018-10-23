@@ -103,8 +103,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="c" items="${sessionScope.contratosFiscal}"
-					varStatus="posicao">
+				<c:forEach var="c" items="${sessionScope.contratosFiscal}" varStatus="posicao">
 					<tr>
 						<td class="text-center">
 							<form action="sistema?logica=VerContrato" method="post">
