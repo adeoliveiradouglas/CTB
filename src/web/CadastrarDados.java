@@ -55,7 +55,7 @@ public class CadastrarDados implements Logica{
 			notaFiscal,
 			pedido.getParameter("tipoAditivo"),
 			numero,
-			pedido.getParameter("ano"),
+			Integer.parseInt(pedido.getParameter("ano")),
 			pedido.getParameter("mes"),
 			aditivo,
 			valor,

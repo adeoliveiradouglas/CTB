@@ -99,7 +99,7 @@ public class EditarPrevia implements Logica{
 			previaDados.get(i).setNotaFiscal(pedido.getParameter("notaFiscal"));
 			previaDados.get(i).setTipoAditivo(pedido.getParameter("tipoAditivo"));
 			previaDados.get(i).setNumeroSei(pedido.getParameter("numero"));
-			previaDados.get(i).setAno(pedido.getParameter("ano"));
+			previaDados.get(i).setAno(Integer.parseInt(pedido.getParameter("ano")));
 			previaDados.get(i).setMes(pedido.getParameter("mes"));
 			previaDados.get(i).setAditivo(aditivo);
 			previaDados.get(i).setValor(valor);

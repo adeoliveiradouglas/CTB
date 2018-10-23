@@ -29,7 +29,7 @@ public class Dados {
 	private String notaFiscal,
 			tipoAditivo = null, // vide cabecalho obs2
 			numeroSei, // vide cabecalho obs1
-			ano, mes;
+			mes;
 	
 	@Getter @Setter
 	private BigDecimal aditivo = null,  // vide cabecalho obs2
@@ -42,6 +42,7 @@ public class Dados {
 	
 	@Getter @Setter
 	private int idContrato, id, 
+		ano, 
 		item; //vide obs4
 	
 	@Getter @Setter
@@ -70,7 +71,7 @@ public class Dados {
 		this.notaFiscal = notaFiscal;
 		this.tipoAditivo = tipoAditivo;
 		this.numeroSei = numeroSei;
-		this.ano = "" + r.getYear();
+		this.ano = r.getYear();
 		this.mes = new FormatarCampo().intToMonth(r.getMonthOfYear());
 		this.aditivo = aditivo;
 		this.valor = valor;
@@ -85,7 +86,7 @@ public class Dados {
 	}
 
 
-	public Dados(String notaFiscal, String tipoAditivo, String numeroSei, String ano, String mes, BigDecimal aditivo,
+	public Dados(String notaFiscal, String tipoAditivo, String numeroSei, int ano, String mes, BigDecimal aditivo,
 			BigDecimal valor, BigDecimal saldo, Date dataRegistro, int idContrato) {
 //		construtor usado para novos processos pois n�o tem data de pagamento
 		this.notaFiscal = notaFiscal;

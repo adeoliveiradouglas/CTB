@@ -78,8 +78,8 @@ public class Planilha {
 			String notaFiscal = "",
 					   objeto = sheet.getRow(linhaLeitura).getCell(posicaoObjeto).getStringCellValue(),
 					   numeroSei = "",
-					   ano = "" + (int) sheet.getRow(linhaLeitura).getCell(posicaoAno).getNumericCellValue(),
 					   mes = sheet.getRow(linhaLeitura).getCell(posicaoMes).getStringCellValue();
+			int ano = (int) sheet.getRow(linhaLeitura).getCell(posicaoAno).getNumericCellValue();
 				
 				
 			try {
@@ -221,8 +221,8 @@ public class Planilha {
 			String notaFiscal = "",
 					   objeto = sheet.getRow(linhaLeitura).getCell(posicaoObjeto).getStringCellValue(),
 					   numeroSei = "",
-					   ano = "" + (int) sheet.getRow(linhaLeitura).getCell(posicaoAno).getNumericCellValue(),
 					   mes = sheet.getRow(linhaLeitura).getCell(posicaoMes).getStringCellValue();
+			int ano = (int) sheet.getRow(linhaLeitura).getCell(posicaoAno).getNumericCellValue();
 				
 			try {
 				aditivo = new BigDecimal(
