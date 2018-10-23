@@ -19,6 +19,7 @@ import org.joda.time.DateTime;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import utilidades.CalcularData;
 import utilidades.FormatarCampo;
 @ToString
 public class Contrato {
@@ -121,6 +122,10 @@ public class Contrato {
 	
 	public BigDecimal getSaldo(int i) {
 		return this.dados.get(i).getSaldo();
+	}
+	
+	public int getDiasParaVencimento() {
+		return new CalcularData(dataVencimentoContrato).diasEntre();		
 	}
 	
 	public Contrato(int id, boolean avisado90, boolean avisado60, boolean avisado45) {

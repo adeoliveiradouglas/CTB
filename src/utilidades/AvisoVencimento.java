@@ -6,9 +6,6 @@ package utilidades;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-
 import dao.ContratoDAO;
 import dao.UsuarioDAO;
 import entity.Contrato;
@@ -20,8 +17,7 @@ public class AvisoVencimento implements Runnable {
 	@Override
 	public void run(){
 		while (true) {
-			DateTime hoje = new DateTime();
-			Days d;
+			CalcularData calculadoraData;
 			boolean avisado; 
 			
 			//todos os contratos cadastrados
@@ -31,13 +27,12 @@ public class AvisoVencimento implements Runnable {
 			List<Usuario> destinos;
 			
 			for (Contrato c : todosOsContratos) {
+				//calculadora de datas com base no vencimento do contrato
+				calculadoraData =  new CalcularData(c.getDataVencimentoContrato());
 				avisado = false;
 				
-				//dias que faltam para o vencimento do contrato
-				d = Days.daysBetween(hoje, c.getDataVencimentoContrato());
-				
 				destinos = new ArrayList<Usuario>();
-				System.out.println("Analisando contrato " + c.getNumero() + " faltam " + d.getDays() + " dias para vencer");
+				System.out.println("Analisando contrato " + c.getNumero() + " faltam " + calculadoraData.diasEntre() + " dias para vencer");
 				
 //				adiciona gestor e fiscal na lista de destinos pois eles sempre são avisados
 				destinos.add(c.getFiscal());
@@ -48,7 +43,7 @@ public class AvisoVencimento implements Runnable {
 					destinos.add(u);
 
 				
-				if(d.getDays() > 0 && d.getDays() <= 45 && !c.avisado45){
+				if(calculadoraData.faltam45dias() && !c.avisado45){
 //					se estiver faltando menos de 45 dias, avisar para diretor e presidente	
 					for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor"))
 						destinos.add(u);
@@ -66,7 +61,7 @@ public class AvisoVencimento implements Runnable {
 					c.setAvisado60(true);
 					avisado = true;
 				}
-				else if(d.getDays() <= 60 && !c.avisado60){
+				else if(calculadoraData.faltam60dias() && !c.avisado60){
 					for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor"))
 						destinos.add(u);
 
@@ -76,7 +71,7 @@ public class AvisoVencimento implements Runnable {
 					c.setAvisado60(true);
 					avisado = true;
 				}
-				else if(d.getDays() <= 90 && !c.avisado90){
+				else if(calculadoraData.faltam90dias() && !c.avisado90){
 					for (Usuario u: destinos)
 						new Email().aviso90dias(u.getEmail(), c);
 					
