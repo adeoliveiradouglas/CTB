@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="ISO-8859-1" />
-<title>Sistema de Gestï¿½o de Contratos</title>
+<title>Sistema de Gestão de Contratos</title>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.standalone.min.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
@@ -18,7 +18,8 @@
 </head>
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
-	
+	<jsp:include page="../Comum/avisoDeVencimento.jsp"></jsp:include>
+		
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - CNPJ: ${sessionScope.contratoVisualizar.cnpjEmpresaContratada}</h3>
 	</div>
@@ -26,7 +27,7 @@
 	<table class="table table-bordered table-striped">
 		<tbody>
 			<tr>
-				<td rowspan="2" class="text-center col-md-1">Nï¿½mero: ${sessionScope.contratoVisualizar.numero}</td>
+				<td rowspan="2" class="text-center col-md-1">Número: ${sessionScope.contratoVisualizar.numero}</td>
 				<td class="text-center col-md-1">Portaria: ${sessionScope.contratoVisualizar.portaria}</td>
 				<td class="text-center col-md-1">Gestor: ${sessionScope.contratoVisualizar.gestor.nome}</td>
 				<td class="text-center col-md-1">Fiscal: ${sessionScope.contratoVisualizar.fiscal.nome}</td>
@@ -44,7 +45,7 @@
 				<td class="text-center col-md-1">Valor total: R$ ${sessionScope.contratoVisualizar.valorTotalAsString}</td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Ass. ordem de serviï¿½o: ${sessionScope.contratoVisualizar.dataOrdemServicoAsString}</td>
+				<td class="text-center col-md-1">Ass. ordem de serviço: ${sessionScope.contratoVisualizar.dataOrdemServicoAsString}</td>
 				<td class="text-center col-md-1">Ass. garantia: ${sessionScope.contratoVisualizar.dataGarantiaAsString}</td>
 				<td class="text-center col-md-1">Vencimento do contrato: ${sessionScope.contratoVisualizar.dataVencimentoContratoAsString}</td>
 				<td class="text-center col-md-1">Vencimento da garantia: ${sessionScope.contratoVisualizar.dataVencimentoGarantiaAsString}</td>
@@ -63,8 +64,8 @@
 		<thead>
 			<tr>
 				<th class="text-center col-md-1">Item</th>
-				<th class="text-center col-md-1">Nï¿½ processo</th>
-				<th class="text-center col-md-1">Referï¿½ncia</th>
+				<th class="text-center col-md-1">N° processo</th>
+				<th class="text-center col-md-1">Referência</th>
 				<th class="text-center col-md-1">Nota fiscal</th>
 				<th class="text-center col-md-1">Valor</th>
 				<th class="text-center col-md-1">Saldo</th>

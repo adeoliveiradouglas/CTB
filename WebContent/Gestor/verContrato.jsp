@@ -24,7 +24,8 @@
 			<font size="5">Novos dados</font>
 		</a>
 	</div>
-
+	
+	<jsp:include page="../Comum/avisoDeVencimento.jsp"></jsp:include>
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - CNPJ: ${sessionScope.contratoVisualizar.cnpjEmpresaContratada}</h3>
 	</div>
