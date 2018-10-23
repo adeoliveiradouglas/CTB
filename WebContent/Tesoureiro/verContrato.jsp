@@ -69,11 +69,10 @@
 				<th class="text-center col-md-1">Saldo</th>
 				<th class="text-center col-md-1">Aditivo</th>
 				<th class="text-center col-md-2">Objeto</th>
-				<th class="text-center col-md-1">Pagamento</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="dados" items="${sessionScope.contratoVisualizar.processos}" varStatus="posicao">
+			<c:forEach var="dados" items="${sessionScope.contratoVisualizar.dados}" varStatus="posicao">
 			<tr>
 				<td class="text-center">
 					<form action="sistema?logica=VerDados" method="post">
@@ -93,7 +92,6 @@
 				<td class="text-center">${dados.saldoAsString}</td>
 				<td class="text-center">${dados.aditivoAsString}</td>
 				<td class="text-center">${dados.tipoAditivo}</td>
-				<td class="text-center">${dados.dataPagamentoAsString}</td>
 				<td class="text-center">
 					<form action="sistema?logica=PagarProcesso" method="post">
 						<div style="display: none">

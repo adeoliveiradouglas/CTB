@@ -21,27 +21,22 @@
 
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada}-
-			Processo n°: ${sessionScope.dadosVisualizar.numeroSei}</h3>
+		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - Processo n°: ${dadosVisualizar.numeroSei}</h3>
 	</div>
 
 	<div class="aw-layout-content">
-		<p>Item = ${sessionScope.dadosVisualizar.item}</p>
-		<p>Nota fiscal = ${sessionScope.dadosVisualizar.notaFiscal}</p>
-		<p>Mês de referência =
-			${sessionScope.dadosVisualizar.mes}/${sessionScope.dadosVisualizar.ano}</p>
-		<p>Data do registro =
-			${sessionScope.dadosVisualizar.dataProcessoAsString}</p>
-		<p>Valor = ${sessionScope.dadosVisualizar.valorAsString}</p>
-		<p>Aditivo = ${sessionScope.dadosVisualizar.aditivoAsString}</p>
-		<p>Saldo = ${sessionScope.dadosVisualizar.saldoAsString}</p>
-		<p>Objeto = ${sessionScope.dadosVisualizar.tipoAditivo}</p>
-		<p>Data de pagamento =
-			${sessionScope.dadosVisualizar.dataPagamentoAsString}</p>
-		<p>Responsável pelo pagamento =
-			${sessionScope.dadosVisualizar.tesoureiro.nome}
+		<p>Item = ${dadosVisualizar.item}</p>
+		<p>Nota fiscal = ${dadosVisualizar.notaFiscal}</p>
+		<p>Mês de referência = ${dadosVisualizar.mes}/${dadosVisualizar.ano}</p>
+		<p>Data do registro = ${dadosVisualizar.dataAsString}</p>
+		<p>Valor = ${dadosVisualizar.valorAsString}</p>
+		<p>Aditivo = ${dadosVisualizar.aditivoAsString}</p>
+		<p>Saldo = ${dadosVisualizar.saldoAsString}</p>
+		<p>Objeto = ${dadosVisualizar.tipoAditivo}</p>
+		<p>Data de pagamento = ${dadosVisualizar.dataPagamentoAsString}</p>
+		<p>Responsável pelo pagamento = ${dadosVisualizar.tesoureiro.nome}</p>
 	</div>
-
+	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>
 </html>
