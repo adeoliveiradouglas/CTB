@@ -11,12 +11,12 @@ public class VerDados implements Logica {
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		int i = Integer.parseInt(pedido.getParameter("i"));
-		
-		Contrato c = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
+		String origem = pedido.getParameter("origem"); 
+		Contrato c = (Contrato) pedido.getSession().getAttribute(origem);
 				
 		Dados p = c.getDados().get(i);
 		
-		pedido.getSession().setAttribute("dadosVisualizar", p);
+		pedido.setAttribute("dadosVisualizar", p);
 		return "/Comum/verDados.jsp";
 	}
 }

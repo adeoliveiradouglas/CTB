@@ -40,7 +40,6 @@ public class VerContrato implements Logica {
 
 		/*Coloca esses dados na sessão*/
 		pedido.getSession().setAttribute("contratoVisualizar", contrato);
-		pedido.getSession().setAttribute("origem", origem);
 		pedido.getSession().setAttribute("n", n);
 		
 		return pagina;

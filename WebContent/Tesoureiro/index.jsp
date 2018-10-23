@@ -34,50 +34,53 @@
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Contratos com pagamentos em aberto</h3>
 	</div>
-	<c:if test="${sessionScope.contratosSemPagamento.size() > 0}">
-		<table class="table table-bordered table-striped">
-			<thead>
-				<tr>
-					<th class="text-center col-md-1">
-						<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=numero">Número</a>
-					</th>
-					<th class="text-center col-md-2">
-						<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=nomeEmpresaContratada">Empresa</a>
-					</th>
-					<th class="text-center col-md-2">
-						<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Fiscal</a>
-					</th>
-					<th class="text-center col-md-1">
-						<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Valor</a>
-					</th>
-					<th class="text-center col-md-1">Vencimento</th>
-					<!-- <th class="text-center col-md-1">%</th> -->
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="contrato" items="${sessionScope.contratosSemPagamento}" varStatus="posicao">
+	<c:choose>
+		<c:when test="${sessionScope.contratosSemPagamento.size() > 0}">
+			<table class="table table-bordered table-striped">
+				<thead>
 					<tr>
-						<td class="text-center">
-							<form action="sistema?logica=VerContratoParaPagamento" method="post">
-								<div style="display: none">
-									<input name="origemContrato" value="contratosSemPagamento">
-								</div>
-								<div style="display: none">
-									<input name="n" value="${posicao.index}">
-								</div>
-								<button type="submit" class="btn-link">${contrato.numero}</button>
-							</form>
-						</td>
-						<td class="text-center">${contrato.nomeEmpresaContratada}</td>
-						<td class="text-center">${contrato.fiscal.nome}</td>
-						<td class="text-center">${contrato.valorTotalAsString}</td>
-						<td class="text-center">${contrato.dataVencimentoContratoAsString}</td>
-						<%-- <th class="text-center" >${c.DataVencimentoContrato}</th> --%>
+						<th class="text-center col-md-1">
+							<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=numero">Número</a>
+						</th>
+						<th class="text-center col-md-2">
+							<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=nomeEmpresaContratada">Empresa</a>
+						</th>
+						<th class="text-center col-md-2">
+							<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Fiscal</a>
+						</th>
+						<th class="text-center col-md-1">
+							<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Valor</a>
+						</th>
+						<th class="text-center col-md-1">Vencimento</th>
+						<!-- <th class="text-center col-md-1">%</th> -->
 					</tr>
-				</c:forEach> <!-- fim do if do for que mostra os contratos recentes -->
-			</tbody>
-		</table>
-	</c:if> <!-- fim do if da tabela -->
+				</thead>
+				<tbody>
+					<c:forEach var="contrato" items="${sessionScope.contratosSemPagamento}" varStatus="posicao">
+						<tr>
+							<td class="text-center">
+								<form action="sistema?logica=VerContratoParaPagamento" method="post">
+									<div style="display: none">
+										<input name="n" value="${posicao.index}">
+									</div>
+									<button type="submit" class="btn-link">${contrato.numero}</button>
+								</form>
+							</td>
+							<td class="text-center">${contrato.nomeEmpresaContratada}</td>
+							<td class="text-center">${contrato.fiscal.nome}</td>
+							<td class="text-center">${contrato.valorTotalAsString}</td>
+							<td class="text-center">${contrato.dataVencimentoContratoAsString}</td>
+							<%-- <th class="text-center" >${c.DataVencimentoContrato}</th> --%>
+						</tr>
+					</c:forEach> <!-- fim do if do for que mostra os contratos recentes -->
+				</tbody>
+			</table>
+		</c:when>
+		
+		<c:otherwise>
+			<p>Não há contratos</p>
+		</c:otherwise>
+	</c:choose>
 	
 	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>

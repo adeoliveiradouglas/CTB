@@ -8,17 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import entity.Contrato;
 
 public class VerContratoParaPagamento implements Logica {
-
+	String origemContrato = "contratosSemPagamento";
+	
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		String origemContrato;
 		int posicaoContrato;
 		
 		try{
-			origemContrato = pedido.getParameter("origemContrato");
 			posicaoContrato = Integer.parseInt(pedido.getParameter("n"));
 		} catch (Exception e){
-			origemContrato = "" + pedido.getSession().getAttribute("origemContrato");
 			posicaoContrato = Integer.parseInt("" + pedido.getSession().getAttribute("posicaoNaOrigem"));
 		}
 		
