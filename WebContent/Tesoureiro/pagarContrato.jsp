@@ -41,6 +41,15 @@
 			class="form-control input-lg" name="dataPagamento"> <span
 			class="form-control-feedback" aria-hidden="true"> </span>
 		</div>
+		<div style="display: none">
+			<input name="i" value="${i}">
+		</div>
+		<div style="display: none">
+			<input name="origem" value="contratoVisualizar">
+		</div>
+		<div style="display: none">
+			<input name="acao" value="pagar">
+		</div>
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary btn-lg aw-btn-full-width">Pagar</button>
 		</div>

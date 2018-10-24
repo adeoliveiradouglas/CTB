@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import entity.Dados;
 
 public class DadosDAO extends DAO{
@@ -174,16 +176,29 @@ public class DadosDAO extends DAO{
 		encerraConexaocomBanco();
 	}
 
-	public void atualizarPagamento(int idDados, int idTesoureiro) {
+	public void atualizarPagamento(int idDados, int idTesoureiro, DateTime dataPagamento) {
 		iniciaConexaoComBanco();
 		
-		setSqlQuery("update "+getNomeTabela()+" set "+colunaDataPagamento+ " = NOW(), " +colunaTesoureiro+ " = ? where " +colunaId+ " = ?");
+		setSqlQuery("update "+getNomeTabela()+" set "+colunaDataPagamento+ " = ?, " +colunaTesoureiro+ " = ? where " +colunaId+ " = ?");
 		
 		try{
 			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
 			
-			getStatement().setInt(1, idTesoureiro);
-			getStatement().setInt(2, idDados);
+			int i = 1;
+			
+			getStatement().setDate(
+				i++, 
+				new Date(dataPagamento.toDate().getTime())
+			);
+			
+			getStatement().setInt(
+				i++, 
+				idTesoureiro
+			);
+			getStatement().setInt(
+				i++, 
+				idDados
+			);
 			
 			getStatement().executeUpdate();
 		} catch(SQLException e) {
@@ -191,6 +206,10 @@ public class DadosDAO extends DAO{
 		}
 		
 		encerraConexaocomBanco();
+	}
+	
+	public void atualizarPagamento(int idDados, int idTesoureiro) {	
+		atualizarPagamento(idDados, idTesoureiro, new DateTime());
 	}
 
 	public List<Dados> getByContratoSemPagamento(int idContrato) {

@@ -95,10 +95,10 @@
 				<td class="text-center">
 					<form action="sistema?logica=PagarProcesso" method="post">
 						<div style="display: none">
-							<input name="origem" value="contratoVisualizar">
+							<input name="i" value="${posicao.index}">
 						</div>
 						<div style="display: none">
-							<input name="idProcesso" value="${dados.id}">
+							<input name="acao" value="tela">
 						</div>
 						<button type="submit" name="your_name" class="btn-link">Pagar</button>
 					</form>				
