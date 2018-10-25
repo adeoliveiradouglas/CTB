@@ -209,7 +209,9 @@ public class DadosDAO extends DAO{
 	}
 	
 	public void atualizarPagamento(int idDados, int idTesoureiro) {	
-		atualizarPagamento(idDados, idTesoureiro, new DateTime());
+		DateTime hoje = new DateTime();
+		
+		atualizarPagamento(idDados, idTesoureiro, hoje);
 	}
 
 	public List<Dados> getByContratoSemPagamento(int idContrato) {

@@ -19,22 +19,22 @@
 
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	<div style="background-color: #1e94d2; color: white" align="center">
-		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - Processo n°: ${sessionScope.processoVisualizar.numeroSei}</h3>
+		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - Processo n°: ${sessionScope.contratoVisualizar.dados.get(i).numeroSei}</h3>
 	</div>
 	
 <div class="aw-layout-content">
+	<p>Nota fiscal = ${sessionScope.contratoVisualizar.dados.get(i).notaFiscal}</p>
+	<p>Mês de referência = ${sessionScope.contratoVisualizar.dados.get(i).mes}/${sessionScope.contratoVisualizar.dados.get(i).ano}</p>
+	<p>Data do processo = ${sessionScope.contratoVisualizar.dados.get(i).dataAsString}</p>
+	<p>Valor = ${sessionScope.contratoVisualizar.dados.get(i).valorAsString}</p>
+	<p>Aditivo = ${sessionScope.contratoVisualizar.dados.get(i).aditivoAsString}</p>
+	<p>Objeto = ${sessionScope.contratoVisualizar.dados.get(i).tipoAditivo}</p>
+	<p>Data de pagamento = ${sessionScope.contratoVisualizar.dados.get(i).dataPagamentoAsString }</p>
+	<p>Responsável pelo pagamento = ${sessionScope.contratoVisualizar.dados.get(i).tesoureiro.nome}</p>
 	
-	<p>Nota fiscal = ${sessionScope.processoVisualizar.notaFiscal}</p>
-	<p>Mês de referência = ${sessionScope.processoVisualizar.mes}/${sessionScope.processoVisualizar.ano}</p>
-	<p>Data do processo = ${sessionScope.processoVisualizar.dataProcessoAsString}</p>
-	<p>Valor = ${sessionScope.processoVisualizar.valorAsString}</p>
-	<p>Aditivo = ${sessionScope.processoVisualizar.aditivoAsString}</p>
-	<p>Objeto = ${sessionScope.processoVisualizar.tipoAditivo}</p>
-	<p>Data de pagamento = ${sessionScope.processoVisualizar.dataPagamentoAsString }</p>
-	<p>Responsável pelo pagamento = ${sessionScope.processoVisualizar.tesoureiro.nome}
 </div>
 
-<form action="sistema?logica=EditarPrevia" method="post">
+<form action="sistema?logica=PagarProcesso" method="post">
 	<div class="aw-simple-panel__box">
 		<div class="form-group  has-feedback">
 			Insira data de pagamento: <input type="date"
@@ -42,10 +42,7 @@
 			class="form-control-feedback" aria-hidden="true"> </span>
 		</div>
 		<div style="display: none">
-			<input name="i" value="${i}">
-		</div>
-		<div style="display: none">
-			<input name="origem" value="contratoVisualizar">
+			<input name="id" value="${sessionScope.contratoVisualizar.dados.get(i).id}">
 		</div>
 		<div style="display: none">
 			<input name="acao" value="pagar">
