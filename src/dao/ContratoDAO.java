@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import entity.Contrato;
+import utilidades.CalcularData;
 
 public class ContratoDAO extends DAO {
 	private final String colunaNumero = getNomeTabela() + ".numero", 
@@ -161,9 +164,72 @@ public class ContratoDAO extends DAO {
 	}
 
 	public List<Contrato> getVencimento90() {
-		List<Contrato> recentes = new ArrayList<Contrato>();
-
-		return recentes;
+		DateTime hoje = new DateTime(), 
+				 dias90 = new CalcularData().daquiA90dias();
+		
+		List<Contrato> vencimento90 = new ArrayList<Contrato>();
+		
+		setSqlQuery(
+			"SELECT * FROM " + getNomeTabela() + " where " + 
+			colunaDataVencimentoContrato + " > ? and " + //? é a data de hoje 
+			colunaDataVencimentoContrato + " < ? " +  //? é a data daqui a 90 dias
+			" order by " + colunaDataVencimentoContrato + " desc"
+		);
+		
+		iniciaConexaoComBanco();
+		
+		try {
+			// monta o statement
+			setStatement(
+				// pega prepareStatement da conexao
+				getDbConnection().prepareStatement(getSqlQuery())
+			);
+			
+			getStatement().setDate(1, new Date(hoje.toDate().getTime()));
+			getStatement().setDate(2, new Date(dias90.toDate().getTime()));
+	
+			setResultado(getStatement().executeQuery());
+			
+			Contrato c;
+			while (getResultado().next()) {
+				/*
+				 * Enquanto houverem elementos do resulta de quary e estiver
+				 * dentro no parâmetro, continua processando
+				 */
+				c = new Contrato(
+					getResultado().getInt(colunaId), 
+					getResultado().getInt(colunaPortaria),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaGestor)),
+					new UsuarioDAO(getDbConnection()).getById(getResultado().getInt(colunaFiscal)),
+					new OutroDAO("recurso", getDbConnection()).getById(getResultado().getInt(colunaRecurso)),
+					new OutroDAO("fontepagante", getDbConnection()).getById(getResultado().getInt(colunaFontePagante)),
+					new OutroDAO("uso", getDbConnection()).getById(getResultado().getInt(colunaUso)),
+					getResultado().getString(colunaNumero),
+					getResultado().getString(colunaEmpresaCnpj), 
+					getResultado().getString(colunaEmpresaNome),
+					getResultado().getString(colunaObjeto),
+					getResultado().getDate(colunaDataAssinatura), 
+					getResultado().getDate(colunaDataOrdemServico),
+					getResultado().getDate(colunaDataGarantia),
+					getResultado().getDate(colunaDataVencimentoContrato),
+					getResultado().getDate(colunaDataVencimentoGarantia),
+					getResultado().getBigDecimal(colunaValorInicial),
+					new DadosDAO(getDbConnection()).getByContrato(getResultado().getInt(colunaId)),
+					getResultado().getBoolean(coluna90),
+					getResultado().getBoolean(coluna60),
+					getResultado().getBoolean(coluna45)
+				);
+	
+				// Adiciona na lista
+				vencimento90.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ArrayList<Contrato>();
+		}
+		
+		encerraConexaocomBanco();
+		return vencimento90;
 	}
 
 	public void inserir(Contrato c) {
@@ -181,37 +247,37 @@ public class ContratoDAO extends DAO {
 
 			int posicao = 1;
 
-			getStatement().setString(posicao, c.getNumero());
+			getStatement().setString(posicao++, c.getNumero());
 
-			getStatement().setString(++posicao, c.getCnpjEmpresaContratada());
+			getStatement().setString(posicao++, c.getCnpjEmpresaContratada());
 
-			getStatement().setString(++posicao, c.getNomeEmpresaContratada());
+			getStatement().setString(posicao++, c.getNomeEmpresaContratada());
 
-			getStatement().setString(++posicao, c.getObjeto());
+			getStatement().setString(posicao++, c.getObjeto());
 
-			getStatement().setInt(++posicao, c.getPortaria());
+			getStatement().setInt(posicao++, c.getPortaria());
 
-			getStatement().setDate(++posicao, new Date(c.getDataAssinatura().toDate().getTime()));
+			getStatement().setDate(posicao++, new Date(c.getDataAssinatura().toDate().getTime()));
 
-			getStatement().setDate(++posicao, new Date(c.getDataOrdemServico().toDate().getTime()));
+			getStatement().setDate(posicao++, new Date(c.getDataOrdemServico().toDate().getTime()));
 
-			getStatement().setDate(++posicao, new Date(c.getDataGarantia().toDate().getTime()));
+			getStatement().setDate(posicao++, new Date(c.getDataGarantia().toDate().getTime()));
 
-			getStatement().setDate(++posicao, new Date(c.getDataVencimentoContrato().toDate().getTime()));
+			getStatement().setDate(posicao++, new Date(c.getDataVencimentoContrato().toDate().getTime()));
 
-			getStatement().setDate(++posicao, new Date(c.getDataVencimentoGarantia().toDate().getTime()));
+			getStatement().setDate(posicao++, new Date(c.getDataVencimentoGarantia().toDate().getTime()));
 
-			getStatement().setBigDecimal(++posicao, c.getValorInicial());
+			getStatement().setBigDecimal(posicao++, c.getValorInicial());
 
-			getStatement().setInt(++posicao, c.getGestor().getId());
+			getStatement().setInt(posicao++, c.getGestor().getId());
 
-			getStatement().setInt(++posicao, c.getFiscal().getId());
+			getStatement().setInt(posicao++, c.getFiscal().getId());
 
-			getStatement().setInt(++posicao, c.getRecurso().getId());
+			getStatement().setInt(posicao++, c.getRecurso().getId());
 
-			getStatement().setInt(++posicao, c.getFontePagante().getId());
+			getStatement().setInt(posicao++, c.getFontePagante().getId());
 
-			getStatement().setInt(++posicao, c.getUso().getId());
+			getStatement().setInt(posicao++, c.getUso().getId());
 
 			getStatement().executeUpdate();
 		} catch (SQLException e) {
@@ -436,10 +502,10 @@ public class ContratoDAO extends DAO {
 			setStatement(getDbConnection().prepareStatement(getSqlQuery()));
 			int posicao = 1;
 			
-			getStatement().setBoolean(posicao, c.isAvisado45());
-			getStatement().setBoolean(++posicao, c.isAvisado60());
-			getStatement().setBoolean(++posicao, c.isAvisado90());
-			getStatement().setInt(++posicao, c.getId());
+			getStatement().setBoolean(posicao++, c.isAvisado45());
+			getStatement().setBoolean(posicao++, c.isAvisado60());
+			getStatement().setBoolean(posicao++, c.isAvisado90());
+			getStatement().setInt(posicao++, c.getId());
 			
 			getStatement().executeUpdate();
 		} catch (SQLException e) {

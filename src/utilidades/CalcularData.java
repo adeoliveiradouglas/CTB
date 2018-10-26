@@ -34,6 +34,18 @@ public class CalcularData {
 		return d.getDays() + 1;
 	}
 	
+
+	//retorna a data 90 dias a frente da data do parâmetro
+	public DateTime daquiA90dias() {
+		return daquiA90dias(new DateTime());
+	}
+
+	//retorna a data 90 dias a frente da data do parâmetro
+	public DateTime daquiA90dias(DateTime data) {
+		DateTime dias90 = data.plusDays(91);
+		return dias90;
+	}
+	
 	//retorna true se a distância entre hoje e a data inserida for menor que 90 dias
 	public boolean faltam90dias(DateTime data) {
 		if (diasEntre(data) <= 90)
