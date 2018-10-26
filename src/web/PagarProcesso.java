@@ -35,26 +35,30 @@ public class PagarProcesso implements Logica{
 		
 		if(acao.equals("pagar")) {
 			
-			//Pega o objeto contrato da lista 
+//			Pega o objeto contrato da lista 
 			Contrato contrato = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
-					
+			Date pagamento;
+			
 			int idDados = Integer.parseInt(pedido.getParameter("id"));
 			int idTesoureiro = ((Usuario) pedido.getSession().getAttribute("usuario")).getId();
 			
-			final String formatoData = "yyyy-MM-dd";
-			Date pagamento = new SimpleDateFormat(formatoData).parse(pedido.getParameter("dataPagamento"));
+			try {
+				final String formatoData = "yyyy-MM-dd";
+				pagamento = new SimpleDateFormat(formatoData).parse(pedido.getParameter("dataPagamento"));
+			} catch(Exception e) {
+//				caso o tesoureiro não informe data, significa que a data de pagamento deve ser hoje
+				pagamento = new DateTime().toDate();
+			}
 					
-			//atualiza pagamento
+//			atualiza pagamento
 			new DadosDAO().atualizarPagamento(idDados, idTesoureiro, new DateTime(pagamento));
 			
-			//atualiza o contrato na lista de contratos
+//			atualiza o contrato na lista de contratos
 			contrato.getDados().remove(posicaoDados);
 		
 			pedido.getSession().getAttribute("contratoVisualizar");
 			return "sistema?logica=VerContratoParaPagamento";
-		}
-		
-		
+		}		
 		
 		return "/Tesoureiro/pagarProcesso.jsp";
 	}

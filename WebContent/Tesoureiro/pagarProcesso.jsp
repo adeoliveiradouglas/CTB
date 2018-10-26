@@ -37,7 +37,7 @@
 <form action="sistema?logica=PagarProcesso" method="post">
 	<div class="aw-simple-panel__box">
 		<div class="form-group  has-feedback">
-			Insira data de pagamento: <input type="date"
+			Se o pagamento não ocorreu hoje, insira a data correta: <input type="date"
 			class="form-control input-lg" name="dataPagamento"> <span
 			class="form-control-feedback" aria-hidden="true"> </span>
 		</div>
