@@ -1,18 +1,29 @@
 # SGC - Sistema de Gestao de Contratos
 Sistema para gerir os contratos de pagamentos de uma empresa
 	
-* Log versões
+* Log versï¿½es
 	* 1.1
 		* Suporte para planilhas .xlsx
 		* Identifica quem pagou o processo
-		* Usuários podem ter 2 cargos. Exemplo: um gestor pode ser tesoureiro ao mesmo tempo
-		* Novos cargos para visualização de dados: presidente e diretor
-		* Avisa aos responsáveis sobre vencimento dos contratos por email
-		* Tesoureiro agora também vê os dados dos processos em aberto 
+		* Usuï¿½rios podem ter 2 cargos. Exemplo: um gestor pode ser tesoureiro ao mesmo tempo
+		* Novos cargos para visualizaï¿½ï¿½o de dados: presidente e diretor
+		* Avisa aos responsï¿½veis sobre vencimento dos contratos por email
+		* Tesoureiro agora tambï¿½m vï¿½ os dados dos processos em aberto 
 	* 1.1.2
-		* Mês na planilha estava case-sensitivo (Resolvido)
-		* Aviso de vencimento não chega ao gestor geral (Resolvido)
+		* Mï¿½s na planilha estava case-sensitivo (Resolvido)
+		* Aviso de vencimento nï¿½o chega ao gestor geral (Resolvido)
 	* 1.2
-		* Corrigido bug no cadastro de usuário
+		* Corrigido bug no cadastro de usuï¿½rio
 		* Corrigido bug na tela de Administrador do sistema 
+		* Corrigido bug no pagamento de processos
+		* Calcula saldo do contrato
+		* Avisa sobre vencimento de contrato na tela de visualizaï¿½ï¿½o		
+		* Tesoureiro pode colocar manualmente data de pagamento
+		* Gestor geral de contratos vï¿½ os contratos com vencimento em 90 dias logo apï¿½s o login
+		* Novo rodapï¿½
+		* Se um usuï¿½rio nï¿½o tem dois cargos, nï¿½o aparece a opï¿½ï¿½o de troca no cabeï¿½alho
+		
+		*bugs:
+			* importaï¿½ï¿½o de planilhas parou de funcionar por causa do cï¿½lculo de saldo
+			* depois que Administrador edita um usuÃ¡rio, ao tentar novamente o sistema diz que foi deslogado, porÃ©m ao ir para tela inicial, o erro some.
 		
