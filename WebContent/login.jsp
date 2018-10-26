@@ -60,11 +60,6 @@
 		</form>
 	</div>
 
-	<footer class="footer">
-		<br /><br /><br /><br /><br /><br /><br /><br /><br />
-		<div align="center">
-			SGC - Sistema de Gestão de Contratos - Versão 1.2 BETA	
-		</div>	
-	</footer>
+	<jsp:include page="adds/Rodape.jsp"></jsp:include>
 </body>
 </html>
