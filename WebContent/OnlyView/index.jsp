@@ -46,7 +46,6 @@
 				<td class="text-center">${c.gestor.nome}</td>
 				<td class="text-center">${c.valorTotalAsString}</td>
 				<td class="text-center">${c.dataVencimentoContratoAsString}</td>
-				<%-- <th class="text-center" ><%=c.getDataVencimentoContrato() %></th> --%>
 			</tr>
 			</c:forEach>
 		</tbody>

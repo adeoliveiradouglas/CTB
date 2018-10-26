@@ -12,7 +12,6 @@ import entity.Cargo;
 import entity.Setor;
 import entity.Usuario;
 import utilidades.Cripto;
-import utilidades.Email;
 
 public class CadastrarUsuario implements Logica {
 
@@ -63,7 +62,7 @@ public class CadastrarUsuario implements Logica {
 				);
 				
 				// envia email informando cadastro
-				new Email().enviarConfirmacaoCadastro(email, nome);
+//				new Email().enviarConfirmacaoCadastro(email, nome);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
