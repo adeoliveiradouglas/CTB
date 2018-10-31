@@ -154,11 +154,11 @@ public class Cargo_has_usuario extends DAO{
 	}
 
 	public void atualizar(Usuario usuario) {
-		deletar(usuario);
+		deletar(usuario.getId());
 		inserir(usuario);		
 	}
 	
-	public void deletar(Usuario usuario){
+	public void deletar(int id){
 		iniciaConexaoComBanco();
 		
 		/*Exemplo
@@ -177,7 +177,7 @@ public class Cargo_has_usuario extends DAO{
 			
 			getStatement().setInt(
 				1,
-				usuario.getId()
+				id
 			);
 			
 			getStatement().executeUpdate();

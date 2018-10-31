@@ -28,8 +28,11 @@ public class AutorizarNovoUsuario implements Logica{
 //		Insere na tabela de usuários autorizados
 		new UsuarioDAO().inserir(u);
 		
+		UsuarioDAO novos = new UsuarioDAO(true); 
 //		remove da tabela de novos usuários
-		new UsuarioDAO(true).deleteById(u.getId());
+		novos.deleteById(u.getId());
+		
+		pedido.getSession().setAttribute("usuariosnovos", novos.getAll());
 		
 		return "sistema?logica=TelaPrincipal";
 	}

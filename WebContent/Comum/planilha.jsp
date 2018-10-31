@@ -6,19 +6,7 @@
 	  z-index: 10;
 	  background-color: white;
 	}
-</style>
-<script>
-	window.addEventListener('scroll', function(event){ 
-	  if (window.scrollY < 350) {
-	     document.getElementById("menu").style.display = "none";
-	  } else {
-	     document.getElementById("menu").style.display = "block";
-	  }
-	});
-</script>
-
-
-	
+</style>	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - CNPJ: ${sessionScope.contratoVisualizar.cnpjEmpresaContratada}</h3>
 	</div>

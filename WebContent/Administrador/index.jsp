@@ -14,6 +14,12 @@
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
 <link rel="stylesheet" type="text/css" href="css/application.css" />
 <style>
+	th.sticky-header {
+	  position: sticky;
+	  top: 5rem;
+	  z-index: 10;
+	  background-color: white;
+	}
 	btn-link {
 		border: none;
 		outline: none;
@@ -79,21 +85,11 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-2">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=nome">Nome</a>
-				</th>
-				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=matricula">Matrícula</a>
-				</th>
-				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=cargo_id">Cargo</a>
-				</th>
-				<th class="text-center col-md-1">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=setor_codigo">Setor</a>
-				</th>
-				<th class="text-center col-md-2">
-					<a href="sistema?logica=TelaPrincipalAdministrador&ordUser=login">Login</a>
-				</th>
+				<th class="text-center col-md-2">Nome</th>
+				<th class="text-center col-md-1">Matrícula</th>
+				<th class="text-center col-md-1">Cargo</th>
+				<th class="text-center col-md-1">Setor</th>
+				<th class="text-center col-md-2">Login</th>
 				<th class="col-md-1"></th><th class="col-md-1"></th>
 			</tr>
 		</thead>
