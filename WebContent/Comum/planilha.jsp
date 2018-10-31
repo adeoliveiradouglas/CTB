@@ -49,13 +49,13 @@
 			<thead>
 				<tr>
 					<th class="text-center">Item</th>
-					<th class="text-center">N° processo</th>
+					<th class="text-center">Nº processo</th>
 					<th class="text-center">Referência</th>
 					<th class="text-center">Nota fiscal</th>
 					<th class="text-center">Valor</th>
 					<th class="text-center">Saldo</th>
 					<th class="text-center">Aditivo</th>
-					<th class="text-center">Observação</th>
+					<th class="text-center">Observaêêo</th>
 					<th class="text-center">Pagamento</th>
 				</tr>
 			</thead>
@@ -93,7 +93,7 @@
 		<thead>
 			<tr>
 				<th class="text-center sticky-header">Item</th>
-				<th class="text-center sticky-header">N° processo</th>
+				<th class="text-center sticky-header">Nº processo</th>
 				<th class="text-center sticky-header">Referência</th>
 				<th class="text-center sticky-header">Nota fiscal</th>
 				<th class="text-center sticky-header">Valor</th>
