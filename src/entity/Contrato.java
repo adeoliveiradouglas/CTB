@@ -1,11 +1,11 @@
 /*
- * Classe responsável por armazenar um contrato
+ * Classe responsï¿½vel por armazenar um contrato
  *
- *  Usando framework Lombok para gerar os getters e setters da classe através da anotação "@Getter" e "@Setter"  
+ *  Usando framework Lombok para gerar os getters e setters da classe atravï¿½s da anotaï¿½ï¿½o "@Getter" e "@Setter"  
  *  obs2 - objeto: descricao do contrato
- *  obs3 - recurso, fontePagante e uso: há padrões para os três campos no bd, aqui só será armazenado o campo String/Varchar dos mesmos
- *  obs5 - valor total é o valor de todos os aditivos de todos os dados mais o valor inicial do contrato
- *  	   Calcula somente quando é retorno de resultado do banco 	
+ *  obs3 - recurso, fontePagante e uso: hï¿½ padrï¿½es para os trï¿½s campos no bd, aqui sï¿½ serï¿½ armazenado o campo String/Varchar dos mesmos
+ *  obs5 - valor total ï¿½ o valor de todos os aditivos de todos os dados mais o valor inicial do contrato
+ *  	   Calcula somente quando ï¿½ retorno de resultado do banco 	
  */
 
 package entity;
@@ -64,7 +64,7 @@ public class Contrato {
 	public boolean avisado90, 
 				   avisado60, 
 				   avisado45;
-	/*MÉTODOS*/
+	/*Mï¿½TODOS*/
 	public void setValorAditivos(BigDecimal valorAditivos) {
 		this.valorAditivos = valorAditivos;
 		this.valorTotal = valorAditivos.add(this.valorInicial);
@@ -103,7 +103,7 @@ public class Contrato {
 	}
 	
 	public String getNome() {
-		//parametro para comparação entre objetos
+		//parametro para comparaï¿½ï¿½o entre objetos
 		return this.nomeEmpresaContratada;
 	}
 	
@@ -112,7 +112,7 @@ public class Contrato {
 		
 		switch(ultimo) {
 			case -1:
-//				caso o contrato não tenha dados atrelados a ele, o saldo é o valor inicial
+//				caso o contrato nï¿½o tenha dados atrelados a ele, o saldo ï¿½ o valor inicial
 				return this.valorInicial;
 				
 			default:
@@ -152,7 +152,7 @@ public class Contrato {
 			Date dataVencimentoContrato, 
 			Date dataVencimentoGarantia, 
 			BigDecimal valorInicial) {
-//		Construtor usado para novos contratos pois não tem id do banco e nem entrada de dados
+//		Construtor usado para novos contratos pois nï¿½o tem id do banco e nem entrada de dados
 		this.numero = numero;
 		this.portaria = portaria;
 		this.gestor = gestor;
@@ -225,7 +225,11 @@ public class Contrato {
 		}
 		
 		this.valorAditivos = aditivo;
-//		Soma o resultado do valor inicial com o valor dos aditivos e põe em valorTotal
+//		Soma o resultado do valor inicial com o valor dos aditivos e pï¿½e em valorTotal
 		this.valorTotal = valorInicial.add(aditivo);
+	}
+
+	public void addDados(Dados p) {
+		this.dados.add(0, p);		
 	}
 }
