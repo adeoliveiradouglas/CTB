@@ -17,13 +17,16 @@ import java.util.Date;
 import org.joda.time.DateTime;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import utilidades.FormatarCampo;
 
 @ToString
+@NoArgsConstructor
 public class Dados {
 	private static final String formatoData = "dd/MM/yyyy";
+	FormatarCampo formatarCampo = new FormatarCampo();
 
 	@Getter @Setter
 	private String notaFiscal,
@@ -46,9 +49,7 @@ public class Dados {
 		item; //vide obs4
 	
 	@Getter @Setter
-	private Usuario tesoureiro;
-	
-	public Dados(){}	
+	private Usuario tesoureiro;	
 
 	public Dados(
 			int idProcesso,
@@ -88,7 +89,7 @@ public class Dados {
 
 	public Dados(String notaFiscal, String tipoAditivo, String numeroSei, int ano, String mes, BigDecimal aditivo,
 			BigDecimal valor, BigDecimal saldo, Date dataRegistro, int idContrato) {
-//		construtor usado para novos processos pois nï¿½o tem data de pagamento
+//		construtor usado para novos processos pois não tem data de pagamento
 		this.notaFiscal = notaFiscal;
 		this.tipoAditivo = tipoAditivo;
 		this.numeroSei = numeroSei;
@@ -102,15 +103,15 @@ public class Dados {
 	}
 	
 	public String getAditivoAsString(){
-		return new FormatarCampo().decimalToString(this.aditivo);
+		return formatarCampo.decimalToString(this.aditivo);
 	}
 	
 	public String getValorAsString(){
-		return new FormatarCampo().decimalToString(this.valor);
+		return formatarCampo.decimalToString(this.valor);
 	}
 	
 	public String getSaldoAsString() {
-		return new FormatarCampo().decimalToString(this.saldo);
+		return formatarCampo.decimalToString(this.saldo);
 	}
 	
 	public String getDataPagamentoAsString(){
@@ -125,6 +126,6 @@ public class Dados {
 	}
 
 	public String getMesAsInt() {
-		return new FormatarCampo().mesToInt(mes);
+		return formatarCampo.mesToInt(mes);
 	}	
 }

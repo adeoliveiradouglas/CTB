@@ -63,12 +63,12 @@ public class CadastrarDados implements Logica{
 		);
 		
 //		Adiciona o dado na lista do contrato e recalcula os saldos
-		c.addDados(p);
+		int posicao = c.addDados(p);
 		
 //		Busca o saldo calculado, atualiza o objeto para mandar inserir no banco
 		p.setSaldo(
 			c.getDados().get(
-				c.getDados().indexOf(p)
+				posicao
 			).getSaldo()
 		);
 		

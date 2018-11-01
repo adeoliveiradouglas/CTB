@@ -115,7 +115,10 @@ public class Contrato {
 		return new CalcularData(dataVencimentoContrato).diasEntre();		
 	}
 	
-	public void addDados(Dados p) {
+	public int addDados(Dados p) {
+//		Adiciona o objeto p na posicao correta com base na data de referencia e retorna a posicao em 
+//		que foi inserido
+		
 		int posicao = 0;
 		
 		for (int i = this.dados.size() - 1; i >= 0; i--) {
@@ -137,6 +140,8 @@ public class Contrato {
 		
 		this.dados.add(posicao, p);
 		recalcularSaldo(posicao);
+		
+		return posicao;
 	}
 	
 	public void setValorAditivos(BigDecimal valorAditivos) {
