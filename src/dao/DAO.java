@@ -72,6 +72,7 @@ public class DAO {
 	}
 	
 	protected int getResultSize() {
+//		retorna a quantidade de itens no resultSet após uma consulta ao banco
 		int item = 0;
 		
 		try {

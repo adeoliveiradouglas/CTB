@@ -29,9 +29,7 @@ public class CadastrarDados implements Logica{
 			   numero = pedido.getParameter("numero");
 		
 		BigDecimal valor = null, 
-				   aditivo = null, 
-				   saldo = null, 
-				   ultimoSaldo = c.getSaldo();
+				   aditivo = null;
 		
 		int idContrato = Integer.parseInt(pedido.getParameter("idContrato"));
 
@@ -50,9 +48,6 @@ public class CadastrarDados implements Logica{
 			//catch para não dar erro no processo quando não houver aditivo
 			aditivo = new BigDecimal("0.00");
 		}
-
-		saldo = ultimoSaldo.add(aditivo);
-		saldo = saldo.subtract(valor);		
 		
 		Dados p = new Dados(
 			notaFiscal,
@@ -62,14 +57,23 @@ public class CadastrarDados implements Logica{
 			pedido.getParameter("mes"),
 			aditivo,
 			valor,
-			saldo,
+			null, //saldo é calculado mais abaixo
 			dataDados,
 			idContrato
 		);
 		
-		new DadosDAO().inserir(p);
-
+//		Adiciona o dado na lista do contrato e recalcula os saldos
 		c.addDados(p);
+		
+//		Busca o saldo calculado, atualiza o objeto para mandar inserir no banco
+		p.setSaldo(
+			c.getDados().get(
+				c.getDados().indexOf(p)
+			).getSaldo()
+		);
+		
+		new DadosDAO().inserir(p);
+		
 		pedido.getSession().setAttribute("contratoVisualizar", c);
 		
 		//se houve atualização na data de vencimento
