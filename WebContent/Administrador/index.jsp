@@ -43,11 +43,11 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th class="text-center col-md-2">Nome</th>
-					<th class="text-center col-md-1">Matrícula</th>
-					<th class="text-center col-md-1">Cargo</th>
-					<th class="text-center col-md-1">Setor</th>
-					<th class="text-center col-md-2">Login</th>
+					<th class="text-center">Nome</th>
+					<th class="text-center">Matrícula</th>
+					<th class="text-center">Cargo</th>
+					<th class="text-center">Setor</th>
+					<th class="text-center">Login</th>
 					<th class="col-md-1"></th>
 					<th class="col-md-1"></th>
 				</tr>
@@ -85,11 +85,11 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-2">Nome</th>
-				<th class="text-center col-md-1">Matrícula</th>
-				<th class="text-center col-md-1">Cargo</th>
-				<th class="text-center col-md-1">Setor</th>
-				<th class="text-center col-md-2">Login</th>
+				<th class="text-center">Nome</th>
+				<th class="text-center">Matrícula</th>
+				<th class="text-center">Cargo</th>
+				<th class="text-center">Setor</th>
+				<th class="text-center">Login</th>
 				<th class="col-md-1"></th><th class="col-md-1"></th>
 			</tr>
 		</thead>

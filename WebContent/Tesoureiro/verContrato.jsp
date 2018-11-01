@@ -25,28 +25,28 @@
 	<table class="table table-bordered table-striped">
 		<tbody>
 			<tr>
-				<td rowspan="2" class="text-center col-md-1">Número: ${sessionScope.contratoVisualizar.numero}</td>
-				<td class="text-center col-md-1">Portaria: ${sessionScope.contratoVisualizar.portaria}</td>
-				<td class="text-center col-md-1">Gestor: ${sessionScope.contratoVisualizar.gestor.nome}</td>
-				<td class="text-center col-md-1">Fiscal: ${sessionScope.contratoVisualizar.fiscal.nome}</td>
+				<td rowspan="2" class="text-center">Número: ${sessionScope.contratoVisualizar.numero}</td>
+				<td class="text-center">Portaria: ${sessionScope.contratoVisualizar.portaria}</td>
+				<td class="text-center">Gestor: ${sessionScope.contratoVisualizar.gestor.nome}</td>
+				<td class="text-center">Fiscal: ${sessionScope.contratoVisualizar.fiscal.nome}</td>
 				
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Recurso: ${sessionScope.contratoVisualizar.recurso.nome}</td>
-				<td class="text-center col-md-1">Uso: ${sessionScope.contratoVisualizar.uso.nome}</td>
-				<td class="text-center col-md-1">Fonte pagante: ${sessionScope.contratoVisualizar.fontePagante.nome}</td>
+				<td class="text-center">Recurso: ${sessionScope.contratoVisualizar.recurso.nome}</td>
+				<td class="text-center">Uso: ${sessionScope.contratoVisualizar.uso.nome}</td>
+				<td class="text-center">Fonte pagante: ${sessionScope.contratoVisualizar.fontePagante.nome}</td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Data de assinatura: ${sessionScope.contratoVisualizar.dataAssinaturaAsString}</td>
-				<td class="text-center col-md-1">Valor inicial: R$ ${sessionScope.contratoVisualizar.valorInicialAsString}</td>
-				<td class="text-center col-md-1">Valor dos aditivos: R$ ${sessionScope.contratoVisualizar.valorAditivoAsString}</td>
-				<td class="text-center col-md-1">Valor total: R$ ${sessionScope.contratoVisualizar.valorTotalAsString}</td>
+				<td class="text-center">Data de assinatura: ${sessionScope.contratoVisualizar.dataAssinaturaAsString}</td>
+				<td class="text-center">Valor inicial: R$ ${sessionScope.contratoVisualizar.valorInicialAsString}</td>
+				<td class="text-center">Valor dos aditivos: R$ ${sessionScope.contratoVisualizar.valorAditivoAsString}</td>
+				<td class="text-center">Valor total: R$ ${sessionScope.contratoVisualizar.valorTotalAsString}</td>
 			</tr>
 			<tr>
-				<td class="text-center col-md-1">Ass. ordem de serviço: ${sessionScope.contratoVisualizar.dataOrdemServicoAsString}</td>
-				<td class="text-center col-md-1">Ass. garantia: ${sessionScope.contratoVisualizar.dataGarantiaAsString}</td>
-				<td class="text-center col-md-1">Vencimento do contrato: ${sessionScope.contratoVisualizar.dataVencimentoContratoAsString}</td>
-				<td class="text-center col-md-1">Vencimento da garantia: ${sessionScope.contratoVisualizar.dataVencimentoGarantiaAsString}</td>
+				<td class="text-center">Ass. ordem de serviço: ${sessionScope.contratoVisualizar.dataOrdemServicoAsString}</td>
+				<td class="text-center">Ass. garantia: ${sessionScope.contratoVisualizar.dataGarantiaAsString}</td>
+				<td class="text-center">Vencimento do contrato: ${sessionScope.contratoVisualizar.dataVencimentoContratoAsString}</td>
+				<td class="text-center">Vencimento da garantia: ${sessionScope.contratoVisualizar.dataVencimentoGarantiaAsString}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -61,14 +61,14 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">Item</th>
-				<th class="text-center col-md-1">N° processo</th>
-				<th class="text-center col-md-1">Referência</th>
-				<th class="text-center col-md-1">Nota fiscal</th>
-				<th class="text-center col-md-1">Valor</th>
-				<th class="text-center col-md-1">Saldo</th>
-				<th class="text-center col-md-1">Aditivo</th>
-				<th class="text-center col-md-2">Objeto</th>
+				<th class="text-center">Item</th>
+				<th class="text-center">N° processo</th>
+				<th class="text-center">Referência</th>
+				<th class="text-center">Nota fiscal</th>
+				<th class="text-center">Valor</th>
+				<th class="text-center">Saldo</th>
+				<th class="text-center">Aditivo</th>
+				<th class="text-center">Objeto</th>
 			</tr>
 		</thead>
 		<tbody>

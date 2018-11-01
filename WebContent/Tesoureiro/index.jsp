@@ -39,20 +39,20 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="text-center col-md-1">
+						<th class="text-center">
 							<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=numero">Número</a>
 						</th>
-						<th class="text-center col-md-2">
+						<th class="text-center">
 							<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=nomeEmpresaContratada">Empresa</a>
 						</th>
-						<th class="text-center col-md-2">
+						<th class="text-center">
 							<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Fiscal</a>
 						</th>
-						<th class="text-center col-md-1">
+						<th class="text-center">
 							<a href="sistema?logica=TelaPrincipalTesoureiro&ordContrato=fiscal_id">Valor</a>
 						</th>
-						<th class="text-center col-md-1">Vencimento</th>
-						<!-- <th class="text-center col-md-1">%</th> -->
+						<th class="text-center">Vencimento</th>
+						<!-- <th class="text-center">%</th> -->
 					</tr>
 				</thead>
 				<tbody>

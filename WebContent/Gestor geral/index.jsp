@@ -29,12 +29,12 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th class="text-center col-md-1">Número</th>
-					<th class="text-center col-md-2">Empresa</th>
-					<th class="text-center col-md-2">Gestor</th>
-					<th class="text-center col-md-1">Valor</th>
-					<th class="text-center col-md-1">Vencimento</th>
-					<!-- <th class="text-center col-md-1">%</th> -->
+					<th class="text-center">Número</th>
+					<th class="text-center">Empresa</th>
+					<th class="text-center">Gestor</th>
+					<th class="text-center">Valor</th>
+					<th class="text-center">Vencimento</th>
+					<!-- <th class="text-center">%</th> -->
 				</tr>
 			</thead>
 			<tbody>
@@ -67,12 +67,12 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">Número</th>
-				<th class="text-center col-md-2">Empresa</th>
-				<th class="text-center col-md-2">Gestor</th>
-				<th class="text-center col-md-1">Valor</th>
-				<th class="text-center col-md-1">Vencimento</th>
-				<!-- <th class="text-center col-md-1">%</th> -->
+				<th class="text-center">Número</th>
+				<th class="text-center">Empresa</th>
+				<th class="text-center">Gestor</th>
+				<th class="text-center">Valor</th>
+				<th class="text-center">Vencimento</th>
+				<!-- <th class="text-center">%</th> -->
 			</tr>
 		</thead>
 		<tbody>

@@ -38,19 +38,19 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="text-center col-md-1"><a
+						<th class="text-center"><a
 							href="sistema?logica=TelaPrincipalGestor&ordContrato=numero">Número</a>
 						</th>
-						<th class="text-center col-md-2"><a
+						<th class="text-center"><a
 							href="sistema?logica=TelaPrincipalGestor&ordContrato=nomeEmpresaContratada">Empresa</a>
 						</th>
-						<th class="text-center col-md-2"><a
+						<th class="text-center"><a
 							href="sistema?logica=TelaPrincipalGestor&ordContrato=fiscal_id">Fiscal</a>
 						</th>
-						<th class="text-center col-md-1"><a
+						<th class="text-center"><a
 							href="sistema?logica=TelaPrincipalGestor&ordContrato=valor">Valor</a>
 						</th>
-						<th class="text-center col-md-1">Vencimento</th>
+						<th class="text-center">Vencimento</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -94,12 +94,12 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th class="text-center col-md-1">Número</th>
-					<th class="text-center col-md-2">Empresa</th>
-					<th class="text-center col-md-2">Gestor</th>
-					<th class="text-center col-md-1">Valor</th>
-					<th class="text-center col-md-1">Vencimento</th>
-					<!-- <th class="text-center col-md-1">%</th> -->
+					<th class="text-center">Número</th>
+					<th class="text-center">Empresa</th>
+					<th class="text-center">Gestor</th>
+					<th class="text-center">Valor</th>
+					<th class="text-center">Vencimento</th>
+					<!-- <th class="text-center">%</th> -->
 				</tr>
 			</thead>
 			<tbody>

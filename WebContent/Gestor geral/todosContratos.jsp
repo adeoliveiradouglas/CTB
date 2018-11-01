@@ -13,7 +13,14 @@
 <link rel="stylesheet" type="text/css" href="css/vendors.min.css" />
 <link rel="stylesheet" type="text/css" href="css/algaworks.min.css" />
 <link rel="stylesheet" type="text/css" href="css/application.css" />
-
+<style>
+	th.sticky-header {
+	  position: sticky;
+	  top: 5rem;
+	  z-index: 10;
+	  background-color: white;
+	}
+</style>
 </head>
 <body class="aw-layout-page">
 <jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
@@ -24,12 +31,12 @@
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
-				<th class="text-center col-md-1">Número</th>
-				<th class="text-center col-md-2">Empresa</th>
-				<th class="text-center col-md-2">Gestor</th>
-				<th class="text-center col-md-1">Valor</th>
-				<th class="text-center col-md-1">Vencimento</th>
-				<!-- <th class="text-center col-md-1">%</th> -->
+				<th class="text-center">Número</th>
+				<th class="text-center">Empresa</th>
+				<th class="text-center">Gestor</th>
+				<th class="text-center">Valor</th>
+				<th class="text-center">Vencimento</th>
+				<!-- <th class="text-center">%</th> -->
 			</tr>
 		</thead>
 		<tbody>
