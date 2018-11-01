@@ -28,7 +28,10 @@ public class CadastrarDados implements Logica{
 			   notaFiscal = pedido.getParameter("notaFiscal"),
 			   numero = pedido.getParameter("numero");
 		
-		BigDecimal valor = null, aditivo = null, saldo = null;
+		BigDecimal valor = null, 
+				   aditivo = null, 
+				   saldo = null, 
+				   ultimoSaldo = c.getSaldo();
 		
 		int idContrato = Integer.parseInt(pedido.getParameter("idContrato"));
 
@@ -48,7 +51,7 @@ public class CadastrarDados implements Logica{
 			aditivo = new BigDecimal("0.00");
 		}
 
-		saldo = c.getSaldo().add(aditivo);
+		saldo = ultimoSaldo.add(aditivo);
 		saldo = saldo.subtract(valor);		
 		
 		Dados p = new Dados(
@@ -65,12 +68,15 @@ public class CadastrarDados implements Logica{
 		);
 		
 		new DadosDAO().inserir(p);
+
+		c.addDados(p);
+		pedido.getSession().setAttribute("contratoVisualizar", c);
 		
 		//se houve atualização na data de vencimento
 		if (novaDataVencimento != null)
 			new ContratoDAO().atualizarDataVencimento(idContrato, novaDataVencimento);
 		
-		return "sistema?logica=TelaPrincipalGestor";
+		return "sistema?logica=VerContrato";
 	}
 	
 	
