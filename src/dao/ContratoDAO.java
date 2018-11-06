@@ -82,6 +82,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getBoolean(coluna45)
 				);
 
+				c.recalcularSaldo();
 				lista.add(c);
 			}
 		} catch (SQLException e) {
@@ -148,6 +149,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getBoolean(coluna45)
 				);
 
+				c.recalcularSaldo();
 				// Adiciona na lista
 				recentes.add(c);
 
@@ -219,7 +221,9 @@ public class ContratoDAO extends DAO {
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
 				);
-	
+				
+				c.recalcularSaldo();
+				
 				// Adiciona na lista
 				vencimento90.add(c);
 			}
@@ -340,6 +344,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getBoolean(coluna45)
 				);
 
+				c.recalcularSaldo();
 				// Adiciona na lista
 				contratos.add(c);
 			}
@@ -405,6 +410,7 @@ public class ContratoDAO extends DAO {
 					getResultado().getBoolean(coluna45)
 				);
 
+				c.recalcularSaldo();
 				lista.add(c);
 			}
 		} catch (SQLException e) {
@@ -462,6 +468,8 @@ public class ContratoDAO extends DAO {
 					getResultado().getBoolean(coluna60),
 					getResultado().getBoolean(coluna45)
 				);
+				
+				c.recalcularSaldo();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

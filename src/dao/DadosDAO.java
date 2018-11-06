@@ -24,7 +24,6 @@ public class DadosDAO extends DAO{
 						 colunaReferencia = getNomeTabela() + ".referencia",
 						 colunaTesoureiro = getNomeTabela() + ".tesoureiro_id",
 						 colunaId = getNomeTabela() + ".id",
-						 colunaSaldo = getNomeTabela() + ".saldo",
 						 ordernarPorDataReferencia = " order by " + colunaReferencia;
 	
 	public DadosDAO() {
@@ -74,7 +73,7 @@ public class DadosDAO extends DAO{
 					getResultado().getString(colunaSei),
 					getResultado().getBigDecimal(colunaAditivo),
 					getResultado().getBigDecimal(colunaValor),
-					getResultado().getBigDecimal(colunaSaldo),
+					null,
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaData),
 					getResultado().getDate(colunaReferencia),
@@ -101,13 +100,12 @@ public class DadosDAO extends DAO{
 				colunaNotaFiscal + ", " +
 				colunaAditivo + ", " +
 				colunaValor + ", " +
-				colunaSaldo + ", " +
 				colunaTipoAditivo + ", " +
 				colunaData + ", " +
 				colunaSei + ", " +
 				colunaContrato + ", " +
 				colunaReferencia +
-				") values (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+				") values (?, ?, ?, ?, ?, ?, ?, ?)"
 		);
 		
 		try{
@@ -135,11 +133,6 @@ public class DadosDAO extends DAO{
 			getStatement().setBigDecimal(
 				++posicao, 
 				dado.getValor()
-			);
-			
-			getStatement().setBigDecimal(
-				++posicao, 
-				dado.getSaldo()
 			);
 			
 			getStatement().setString(
@@ -252,7 +245,7 @@ public class DadosDAO extends DAO{
 					getResultado().getString(colunaSei),
 					getResultado().getBigDecimal(colunaAditivo),
 					getResultado().getBigDecimal(colunaValor),
-					getResultado().getBigDecimal(colunaSaldo),
+					null,
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaData),
 					getResultado().getDate(colunaReferencia),
@@ -304,7 +297,7 @@ public class DadosDAO extends DAO{
 					getResultado().getString(colunaSei),
 					getResultado().getBigDecimal(colunaAditivo),
 					getResultado().getBigDecimal(colunaValor),
-					getResultado().getBigDecimal(colunaSaldo),
+					null,
 					getResultado().getDate(colunaDataPagamento),
 					getResultado().getDate(colunaData),
 					getResultado().getDate(colunaReferencia),

@@ -7,6 +7,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
+
 import dao.ContratoDAO;
 import dao.DadosDAO;
 import entity.Contrato;
@@ -37,6 +39,8 @@ public class CadastrarDados implements Logica{
 			novaDataVencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
 				pedido.getParameter("novaDataVencimento")
 			);
+			
+			c.setDataVencimentoContrato(new DateTime(novaDataVencimento));
 		} catch (Exception e){
 			novaDataVencimento = null;
 		}
@@ -44,6 +48,10 @@ public class CadastrarDados implements Logica{
 		try{
 			valor = new BigDecimal(v); 
 			aditivo = new BigDecimal(va);
+			
+			c.setValorAditivos(
+				c.getValorAditivos().add(aditivo)
+			);
 		} catch (NumberFormatException e){
 			//catch para não dar erro no processo quando não houver aditivo
 			aditivo = new BigDecimal("0.00");

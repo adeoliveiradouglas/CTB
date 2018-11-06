@@ -117,7 +117,7 @@
 							</form>
 						</td>
 						<td class="text-center">${c.nomeEmpresaContratada}</td>
-						<td class="text-center">${c.fiscal.nome}</td>
+						<td class="text-center">${c.gestor.nome}</td>
 						<td class="text-center">${c.valorTotalAsString}</td>
 						<td class="text-center">${c.dataVencimentoContratoAsString}</td>
 					</tr>
