@@ -88,7 +88,8 @@ public class CadastrarDados implements Logica{
 		if (novaDataVencimento != null)
 			new ContratoDAO().atualizarDataVencimento(idContrato, novaDataVencimento);
 		
-		return "sistema?logica=VerContrato";
+		pedido.setAttribute("adicionaProcesso", "true");
+		return "sistema?logica=VerContrato&adicionaProcesso=true";
 	}
 	
 	
