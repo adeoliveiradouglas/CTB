@@ -43,7 +43,13 @@ public class FormatarCampo{
 						break;
 						
 					case 6:
-						aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
+						if(b.compareTo(new BigDecimal(0)) >= 0) //se o número for maior que zero
+							aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
+						else { //se menor que zero
+							if(aux.length() != 8) 
+//								se o número for -xxxxxx.xx não deve considerar o sinal negativo
+								aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
+						}
 						break;
 				}
 				
