@@ -148,7 +148,9 @@ public class Cargo_has_usuario extends DAO{
 			usuarios = new ArrayList<Usuario>();
 		}
 		
-		Collections.sort(usuarios, new ComparadorNome());
+		if(usuarios.size() > 1)
+			Collections.sort(usuarios, new ComparadorNome());
+		
 		encerraConexaocomBanco();
 		return usuarios;
 	}

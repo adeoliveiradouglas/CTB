@@ -39,16 +39,16 @@ public class AvisoVencimento implements Runnable {
 				destinos.add(c.getGestor());
 
 //				procura todos os gestores gerais e coloca na lista de destino também
-				for (Usuario u : new UsuarioDAO().getAllByCargo("Gestor geral"))
+				for (Usuario u : new UsuarioDAO().getAllByCargo("Gestor geral de Contrato"))
 					destinos.add(u);
 
 				
 				if(calculadoraData.faltam45dias() && !c.avisado45){
 //					se estiver faltando menos de 45 dias, avisar para diretor e presidente	
-					for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor"))
+					for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor Administrativo e Financeiro"))
 						destinos.add(u);
 
-					for (Usuario u : new UsuarioDAO().getAllByCargo("Presidente"))
+					for (Usuario u : new UsuarioDAO().getAllByCargo("DIPRE"))
 						destinos.add(u);
 
 //					avisa todos os usuários da lista de destino
@@ -62,7 +62,7 @@ public class AvisoVencimento implements Runnable {
 					avisado = true;
 				}
 				else if(calculadoraData.faltam60dias() && !c.avisado60){
-					for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor"))
+					for (Usuario u : new UsuarioDAO().getAllByCargo("Diretor Administrativo e Financeiro"))
 						destinos.add(u);
 
 					for (Usuario u: destinos)

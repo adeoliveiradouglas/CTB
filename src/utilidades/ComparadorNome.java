@@ -27,6 +27,8 @@ public class ComparadorNome implements Comparator<Object> {
 			s2 = (String) getNome.invoke(arg1);
 		} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			return -1;
 		}
 		
 		//compara as strings e retorna o resultado
