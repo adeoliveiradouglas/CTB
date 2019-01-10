@@ -6,6 +6,9 @@
 	  z-index: 10;
 	  background-color: white;
 	}
+	td{
+		text-align: center;
+	}
 </style>	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - CNPJ: ${sessionScope.contratoVisualizar.cnpjEmpresaContratada}</h3>
@@ -14,28 +17,28 @@
 	<table class="table table-bordered table-striped">
 		<tbody>
 			<tr>
-				<td rowspan="2" class="text-center">Número: ${sessionScope.contratoVisualizar.numero}</td>
-				<td class="text-center">Portaria: ${sessionScope.contratoVisualizar.portaria}</td>
-				<td class="text-center">Gestor: ${sessionScope.contratoVisualizar.gestor.nome}</td>
-				<td class="text-center">Fiscal: ${sessionScope.contratoVisualizar.fiscal.nome}</td>
+				<td rowspan="2">Número: ${sessionScope.contratoVisualizar.numero}</td>
+				<td>Portaria: ${sessionScope.contratoVisualizar.portaria}</td>
+				<td>Gestor: ${sessionScope.contratoVisualizar.gestor.nome}</td>
+				<td>Fiscal: ${sessionScope.contratoVisualizar.fiscal.nome}</td>
 				
 			</tr>
 			<tr>
-				<td class="text-center">Recurso: ${sessionScope.contratoVisualizar.recurso.nome}</td>
-				<td class="text-center">Uso: ${sessionScope.contratoVisualizar.uso.nome}</td>
-				<td class="text-center">Fonte pagante: ${sessionScope.contratoVisualizar.fontePagante.nome}</td>
+				<td>Recurso: ${sessionScope.contratoVisualizar.recurso.nome}</td>
+				<td>Uso: ${sessionScope.contratoVisualizar.uso.nome}</td>
+				<td>Fonte pagante: ${sessionScope.contratoVisualizar.fontePagante.nome}</td>
 			</tr>
 			<tr>
-				<td class="text-center">Data de assinatura: ${sessionScope.contratoVisualizar.dataAssinaturaAsString}</td>
-				<td class="text-center">Valor inicial: R$ ${sessionScope.contratoVisualizar.valorInicialAsString}</td>
-				<td class="text-center">Valor dos aditivos: R$ ${sessionScope.contratoVisualizar.valorAditivoAsString}</td>
-				<td class="text-center">Valor total: R$ ${sessionScope.contratoVisualizar.valorTotalAsString}</td>
+				<td>Data de assinatura: ${sessionScope.contratoVisualizar.dataAssinaturaAsString}</td>
+				<td>Valor inicial: R$ ${sessionScope.contratoVisualizar.valorInicialAsString}</td>
+				<td>Valor dos aditivos: R$ ${sessionScope.contratoVisualizar.valorAditivoAsString}</td>
+				<td>Valor total: R$ ${sessionScope.contratoVisualizar.valorTotalAsString}</td>
 			</tr>
 			<tr>
-				<td class="text-center">Ass. ordem de serviço: ${sessionScope.contratoVisualizar.dataOrdemServicoAsString}</td>
-				<td class="text-center">Ass. garantia: ${sessionScope.contratoVisualizar.dataGarantiaAsString}</td>
-				<td class="text-center">Vencimento do contrato: ${sessionScope.contratoVisualizar.dataVencimentoContratoAsString}</td>
-				<td class="text-center">Vencimento da garantia: ${sessionScope.contratoVisualizar.dataVencimentoGarantiaAsString}</td>
+				<td>Ass. ordem de serviço: ${sessionScope.contratoVisualizar.dataOrdemServicoAsString}</td>
+				<td>Ass. garantia: ${sessionScope.contratoVisualizar.dataGarantiaAsString}</td>
+				<td>Vencimento do contrato: ${sessionScope.contratoVisualizar.dataVencimentoContratoAsString}</td>
+				<td>Vencimento da garantia: ${sessionScope.contratoVisualizar.dataVencimentoGarantiaAsString}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -44,47 +47,6 @@
 			<td>Objeto: ${sessionScope.contratoVisualizar.objeto}</td>
 		</tr>
 	</table>
-	<%-- <div class="teste">
-		<table class="table table-bordered table-striped">
-			<thead>
-				<tr>
-					<th class="text-center">Item</th>
-					<th class="text-center">Nº processo</th>
-					<th class="text-center">Referência</th>
-					<th class="text-center">Nota fiscal</th>
-					<th class="text-center">Valor</th>
-					<th class="text-center">Saldo</th>
-					<th class="text-center">Aditivo</th>
-					<th class="text-center">Observaêêo</th>
-					<th class="text-center">Pagamento</th>
-				</tr>
-			</thead>
-		
-			<tbody>
-				<tr>
-					<td class="text-center">
-						<form action="sistema?logica=VerDados" method="post">
-							<div style="display: none">
-								<input name="origem" value="contratoVisualizar">
-							</div>
-							<div style="display: none">
-								<input name="i" value="0">
-							</div>
-							<button type="submit" name="your_name" class="btn-link">${sessionScope.contratoVisualizar.dados.get(0).item}</button>
-						</form>
-					</td>
-					<td class="text-center">${sessionScope.contratoVisualizar.dados.get(0).numeroSei}</td>
-					<td class="text-center">${sessionScope.contratoVisualizar.dados.get(0).mes}/${sessionScope.contratoVisualizar.dados.get(0).ano}</td>
-					<td class="text-center">${sessionScope.contratoVisualizar.dados.get(0).notaFiscal}</td>
-					<td class="text-center">${sessionScope.contratoVisualizar.dados.get(0).valorAsString}</td>
-					<td class="text-center">${sessionScope.contratoVisualizar.dados.get(0).saldoAsString}</td>
-					<td class="text-center">${sessionScope.contratoVisualizar.dados.get(0).aditivoAsString}</td>
-					<td class="text-center">${sessionScope.contratoVisualizar.dados.get(0).tipoAditivo}</td>
-					<td class="text-center">${sessionScope.contratoVisualizar.dados.get(0).dataPagamentoAsString}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div> --%>
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Planilha</h3>
 	</div>
@@ -106,7 +68,7 @@
 		<tbody>
 			<c:forEach var="dados" items="${sessionScope.contratoVisualizar.dados}" varStatus="posicao">
 				<tr>
-					<td class="text-center">
+					<td>
 						<form action="sistema?logica=VerDados" method="post">
 							<div style="display: none">
 								<input name="origem" value="contratoVisualizar">
@@ -117,15 +79,22 @@
 							<button type="submit" name="your_name" class="btn-link">${dados.item}</button>
 						</form>
 					</td>
-					<td class="text-center">${dados.numeroSei}</td>
-					<td class="text-center">${dados.mes}/${dados.ano}</td>
-					<td class="text-center">${dados.notaFiscal}</td>
-					<td class="text-center">${dados.valorAsString}</td>
-					<td class="text-center">${dados.saldoAsString}</td>
-					<td class="text-center">${dados.aditivoAsString}</td>
-					<td class="text-center">${dados.tipoAditivo}</td>
-					<td class="text-center">${dados.dataPagamentoAsString}</td>
+					<td>${dados.numeroSei}</td>
+					<td>${dados.mes}/${dados.ano}</td>
+					<td>${dados.notaFiscal}</td>
+					<td>${dados.valorAsString}</td>
+					<td>${dados.saldoAsString}</td>
+					<td>${dados.aditivoAsString}</td>
+					<td>${dados.tipoAditivo}</td>
+					<td>${dados.dataPagamentoAsString}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<div align="center">
+		<a href="sistema?logica=VerResumoContrato">
+			<font size="5">Ver resumo do contrato</font>
+		</a>
+	</div>
+	<br /><br />

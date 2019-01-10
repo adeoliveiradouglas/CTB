@@ -28,12 +28,6 @@
 	<jsp:include page="../Comum/avisoDeVencimento.jsp"></jsp:include>
 	<jsp:include page="../Comum/planilha.jsp"></jsp:include>
 	
-	<!-- <div align="center">
-		<font size="3">Importar planilha para esse contrato</font>
-		<form action="sistema?logica=EnviarPlanilha" method="post" enctype="multipart/form-data">
-			<input type="file" name="file" id="file" /> <input type="submit" value="Enviar" />
-		</form>
-	</div> -->
 	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>

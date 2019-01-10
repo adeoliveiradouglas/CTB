@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import utilidades.FormatarCampo;
 
 @ToString
 @Getter
@@ -29,5 +30,17 @@ public class ResumoAno {
 	
 	public void somaAditivo(BigDecimal valor) {
 		aditivo = aditivo.add(valor); 
+	}
+	
+	public String getTotalAsString() {
+		return new FormatarCampo().decimalToString(total);
+	}
+	
+	public String getAditivoAsString() {
+		return new FormatarCampo().decimalToString(aditivo);
+	}
+	
+	public String getSaldoAsString() {
+		return new FormatarCampo().decimalToString(saldo);
 	}
 }

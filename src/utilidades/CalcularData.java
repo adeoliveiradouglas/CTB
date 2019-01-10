@@ -18,6 +18,7 @@ public class CalcularData {
 	private Days d;
 	
 	public CalcularData(DateTime proxima) {
+		//usada para setar a próxima data para referência 
 		this.outra = proxima;
 	}
 	
@@ -33,7 +34,6 @@ public class CalcularData {
 		d = Days.daysBetween(hoje, outra);
 		return d.getDays() + 1;
 	}
-	
 
 	//retorna a data 90 dias a frente da data do parâmetro
 	public DateTime daquiA90dias() {

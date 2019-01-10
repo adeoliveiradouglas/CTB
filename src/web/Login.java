@@ -31,6 +31,7 @@ public class Login implements Logica {
 		// criptografadas
 		String senha = new Cripto().criptografa(pedido.getParameter("senha"));
 
+		System.out.println(senha + " " + u.getNome());
 		if (u != null && senha.equals(u.getSenha())) {
 			// Caso o login seja válido
 		} else if (email.equals("contratos.ctb@ctb.ba.gov.br")

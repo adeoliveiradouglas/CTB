@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import entity.Contrato;
 import entity.Dados;
 import entity.ResumoAno;
+import utilidades.FormatarCampo;
 
 public class VerResumoContrato implements Logica{
 
@@ -18,7 +19,10 @@ public class VerResumoContrato implements Logica{
 		Contrato contrato = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
 		List<Dados> processos = contrato.getDados();
 		List<ResumoAno> anos = new ArrayList<ResumoAno>(); //anos que o resumo deve abranger
+		BigDecimal totalPago = new BigDecimal(0);
+		
 		anos.add(new ResumoAno(processos.get(0).getAno())); //cria registro do primeiro ano 
+		anos.get(anos.size() - 1).setSaldo(processos.get(0).getSaldo());
 		
 		//calcula o resumo ano a ano
 		for (Dados d: processos) {
@@ -29,30 +33,39 @@ public class VerResumoContrato implements Logica{
 			 * todo novo ano é inserido no final da lista 
 			 */
 			if (d.getAno() != anos.get(anos.size() - 1).getAno()) {
+				anos.get(anos.size() - 1).setSaldo(d.getSaldo());
 				anos.add(new ResumoAno(d.getAno()));
 			}
 						
 			//sempre acessa o ano mais recente que está na última posição da lista para atualizar os registros
-			anos.get(anos.size() - 1).setSaldo(d.getSaldo());
 			anos.get(anos.size() - 1).somaTotal(d.getValor());
 			anos.get(anos.size() - 1).somaAditivo(d.getAditivo());
+			
+			totalPago = totalPago.add(d.getValor());
 		}				
 
 		//calcular porcentagem concluída e a concluir
-		BigDecimal totalPago = new BigDecimal(0);
-		
-		for (ResumoAno r: anos) { //calcula o total já pago
-			totalPago = totalPago.add(r.getTotal());
+		float porcentagemConcluida = 0, aConcluir;
+		try {
+//			porcentagem = totalPago / valorDoContrato * 100
+			porcentagemConcluida = totalPago.floatValue() / contrato.getValorTotal().floatValue() * 100;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
-		BigDecimal cem = new BigDecimal(100);
-		BigDecimal porcentagemConcluida = totalPago.divide(contrato.getValorTotal());
-		porcentagemConcluida.multiply(cem);
-		BigDecimal aConcluir = porcentagemConcluida.subtract(cem);
+		
+		aConcluir = 100 - porcentagemConcluida;
+		FormatarCampo fc = new FormatarCampo();
 		
 		pedido.setAttribute("anos", anos);
-		pedido.setAttribute("concluida", porcentagemConcluida);
-		pedido.setAttribute("aConcluir", aConcluir);
+		pedido.setAttribute("porcentagemConcluida", porcentagemConcluida);
+		pedido.setAttribute("porcentagemAConcluir", aConcluir);
+		pedido.setAttribute("valorTotalPago", fc.decimalToString(totalPago));
+		pedido.setAttribute(
+			"valorAPagar", 
+			fc.decimalToString( //converte para string o resultado de valorDoContrato MENOS (-) valorJáPago
+				contrato.getValorTotal().subtract(totalPago)
+			)
+		);
 		
 		return "/Comum/resumoDoContrato.jsp";
 	}
