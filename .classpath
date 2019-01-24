@@ -103,5 +103,31 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/barcodes-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/barcodes-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/barcodes-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/font-asian-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/forms-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/forms-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/forms-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/hyph-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/io-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/io-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/io-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/kernel-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/kernel-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/kernel-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/layout-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/layout-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/layout-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/pdfa-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/pdfa-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/pdfa-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/pdftest-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/pdftest-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/pdftest-7.1.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/sign-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/sign-7.1.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/sign-7.1.3-sources.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
