@@ -26,6 +26,8 @@ Sistema para gerir os contratos de pagamentos de uma empresa
 		* Mudanças visuais
 	* 1.3.2
 		* Corrigido bug de saldo ao inserir dados fora de ordem
+	* 1.4
+		* Calcula resumo do contrato
 		
 	* bugs:
 			* importação de planilhas parou de funcionar por causa do cálculo de saldo

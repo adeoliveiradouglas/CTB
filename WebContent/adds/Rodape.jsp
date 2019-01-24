@@ -14,8 +14,7 @@
 
 <body>
 	<footer class="footer">
-		Sistema de Gestão de Contratos - Versão 1.4
-			BETA
+		Sistema de Gestão de Contratos - Versão 1.4	BETA
 	</footer>
 </body>
 </html>

@@ -9,6 +9,17 @@
 	td{
 		text-align: center;
 	}
+	btn-link {
+		border: none;
+		outline: none;
+		background: none;
+		cursor: pointer;
+		color: #0000EE;
+		padding: 0;
+		text-decoration: underline;
+		font-family: inherit;
+		font-size: inherit;
+	}
 </style>	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>${sessionScope.contratoVisualizar.nomeEmpresaContratada} - CNPJ: ${sessionScope.contratoVisualizar.cnpjEmpresaContratada}</h3>
@@ -92,9 +103,10 @@
 		</tbody>
 	</table>
 	
-	<div align="center">
+	<!-- <div align="center">
 		<a href="sistema?logica=VerResumoContrato">
 			<font size="5">Ver resumo do contrato</font>
 		</a>
-	</div>
+	</div> -->
+	
 	<br /><br />

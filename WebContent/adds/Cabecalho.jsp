@@ -28,7 +28,7 @@
 				<li><a href="/gestaodecontratos/sistema?logica=TrocarCargoEmUso&i=0">${sessionScope.usuario.cargo.get(0).nome}</a></li>
 				<li><a href="/gestaodecontratos/sistema?logica=TrocarCargoEmUso&i=1">${sessionScope.usuario.cargo.get(1).nome}</a></li>
 			</c:if>
-			<li><a href="adds/ajuda.jsp">Ajuda</a></li>
+			<!-- <li><a href="adds/ajuda.jsp">Ajuda</a></li> -->
 			<li><a href="/gestaodecontratos/sistema?logica=Logout">Sair</a></li>
 		</ul>
 	</div>
