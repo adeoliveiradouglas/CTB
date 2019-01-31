@@ -12,11 +12,15 @@
 </head>
 <body>
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
-	<form action="sistema?logica=VerResumoContrato" method="post">
-		<button class="btn btn-primary btn-lg aw-btn-full-width" type="submit">
-			Ver resumo do contrato
-		</button>
-	</form>
+	<table class="table table-striped">
+	<tbody>	
+		<tr>
+			<td>				
+				<form action="sistema?logica=VerResumoContrato" method="post">
+					<button class="btn btn-primary btn-lg aw-btn-full-width" type="submit">
+						Ver resumo do contrato
+					</button>
+				</form></td></tr></tbody></table>
 	<jsp:include page="../Comum/avisoDeVencimento.jsp"></jsp:include>
 	<jsp:include page="../Comum/planilha.jsp"></jsp:include>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>

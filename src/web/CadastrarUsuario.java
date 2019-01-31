@@ -64,6 +64,7 @@ public class CadastrarUsuario implements Logica {
 				// envia email informando cadastro
 //				new Email().enviarConfirmacaoCadastro(email, nome);
 			} catch (NumberFormatException e) {
+				System.out.println("Erro ao inserir " + nome);
 				e.printStackTrace();
 			}
 

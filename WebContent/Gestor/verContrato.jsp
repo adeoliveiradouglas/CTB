@@ -19,7 +19,7 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<table class="table table-bordered table-striped">
+	<table class="table table-striped">
 	<tbody>	
 		<tr>
 			<td>				
@@ -50,12 +50,12 @@
 	<jsp:include page="../Comum/avisoDeVencimento.jsp"></jsp:include>
 	<jsp:include page="../Comum/planilha.jsp"></jsp:include>
 	
-	<!-- <div align="center">
+	<div align="center">
 		<font size="3">Importar planilha para esse contrato</font>
 		<form action="sistema?logica=EnviarPlanilha" method="post" enctype="multipart/form-data">
 			<input type="file" name="file" id="file" /> <input type="submit" value="Enviar" />
 		</form>
-	</div> -->
+	</div>
 	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>

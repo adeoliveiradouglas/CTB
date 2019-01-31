@@ -108,5 +108,3 @@
 			<font size="5">Ver resumo do contrato</font>
 		</a>
 	</div> -->
-	
-	<br /><br />
