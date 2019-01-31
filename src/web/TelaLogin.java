@@ -5,6 +5,8 @@
 
 package web;
 
+import java.util.Stack;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +19,7 @@ public class TelaLogin implements Logica{
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
 		Usuario logado = (Usuario) pedido.getSession().getAttribute("usuario");
-		
+		pedido.getSession().setAttribute("pilhaPaginas", new Stack<String>());
 		if(logado != null){
 			return "sistema?logica=TelaPrincipal";
 		}

@@ -16,10 +16,21 @@
 
 <nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipala">
-			<img align="left" height="20" src="/gestaodecontratos/layout/images/logo pequeno.png" />
-			Sistema de Gestão de Contratos
-		</a>
+		<table>
+			<tr>
+				<td>
+					<form action="sistema?logica=VoltarPagina" method="post">
+						<button class="btn btn-danger btn-lg" type="submit">Voltar</button>
+					</form>
+				</td>
+				<td>
+					<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipal">
+						<img align="left" height="20" src="/gestaodecontratos/layout/images/logo pequeno.png" />
+						Sistema de Gestão de Contratos
+					</a>
+				</td>
+			</tr>
+		</table>		
 	</div>
 
 	<div class="container-fluid">
