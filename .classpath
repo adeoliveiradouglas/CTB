@@ -31,5 +31,7 @@
 	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/jxl.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/itextpdf-5.4.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/TECI/workspace/gestaodecontratos/WebContent/WEB-INF/lib/itextpdf-5.4.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -1,5 +1,5 @@
 /*
- * Servlet padrão para redirecionamento de páginas
+ * Servlet padrï¿½o para redirecionamento de pÃ¡ginas
  * uso = sistema?logica=oquefazer
  */
 
