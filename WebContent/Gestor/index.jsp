@@ -29,6 +29,7 @@
 </head>
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
+	
 	<div style="background-color: #1e94d2; color: white" align="center">
 		<h3>Contratos sob minha gestão</h3>
 	</div>

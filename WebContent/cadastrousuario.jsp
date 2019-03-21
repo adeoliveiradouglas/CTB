@@ -62,8 +62,7 @@ select {
 					<div class="form-group has-feedback" id="confirmacaosenhadiv">
 						<input type="password" class="form-control input-lg"
 							placeholder="Confirme sua senha" name="confirmacaosenha"
-							id="confirmacaosenha"> <span
-							class="form-control-feedback" aria-hidden="true"></span>
+							id="confirmacaosenha">
 						<div id="mensagemconfirmacaosenha">
 							<label>Senhas não conferem</label>
 						</div>

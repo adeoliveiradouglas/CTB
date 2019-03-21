@@ -44,7 +44,7 @@ public class Email {
 		this.mensagem = 
 			"Prezado(a) Gestor(a),\n" +
 			"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
-			+ "Estado da Bahia faltam 90 (sessenta) dias para o fim de vigência do contrato.\n"+
+			+ "Estado da Bahia faltam menos de 90 (noventa) dias para o fim de vigência do contrato.\n"+
 			"Conforme o art. 142 e o parágrafo único da Lei 9.433/2005 qualquer prorrogação dos contratos de prestação a "
 			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
 			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
@@ -62,7 +62,7 @@ public class Email {
 		this.mensagem = 
 			"Prezado(a) Gestor(a),\n" +
 			"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
-			+ "Estado da Bahia faltam 60 (sessenta) dias para o fim de vigência do contrato.\n"+
+			+ "Estado da Bahia faltam menos de 60 (sessenta) dias para o fim de vigência do contrato.\n"+
 			"Conforme o art. 142 e o parágrafo único da Lei 9.433/2005 qualquer prorrogação dos contratos de prestação a "
 			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
 			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
@@ -80,7 +80,7 @@ public class Email {
 		this.mensagem = 
 			"Prezado(a) Gestor(a),\n" +
 			"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
-			+ "Estado da Bahia faltam 45 (sessenta) dias para o fim de vigência do contrato.\n"+
+			+ "Estado da Bahia faltam menos de 45 (quarenta e cinco) dias para o fim de vigência do contrato.\n"+
 			"Conforme o art. 142 e o parágrafo único da Lei 9.433/2005 qualquer prorrogação dos contratos de prestação a "
 			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
 			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "

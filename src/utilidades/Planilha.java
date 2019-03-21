@@ -75,6 +75,7 @@ public class Planilha {
 		while (linhaLeitura < quantLinhas && mesesConsecutivosSemDados <= 12){			
 			BigDecimal aditivo = null, valor = null, saldo = null;
 			Date processo;
+			sheet.getRow(linhaLeitura).getCell(posicaoObjeto).setCellType(1);
 			String notaFiscal = "",
 					   objeto = sheet.getRow(linhaLeitura).getCell(posicaoObjeto).getStringCellValue(),
 					   numeroSei = "",

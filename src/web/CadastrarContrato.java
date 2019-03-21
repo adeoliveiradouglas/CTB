@@ -26,8 +26,7 @@ public class CadastrarContrato implements Logica {
 				ordemDeServico = new SimpleDateFormat(formatoData).parse(pedido.getParameter("dataOs")),
 				garantia = new SimpleDateFormat(formatoData).parse(pedido.getParameter("dataGarantia")),
 				vencimento = new SimpleDateFormat(formatoData).parse(pedido.getParameter("dataVencimento")),
-				vencimentoGarantia = new SimpleDateFormat(formatoData)
-						.parse(pedido.getParameter("dataVencimentoGarantia"));
+				vencimentoGarantia = new SimpleDateFormat(formatoData).parse(pedido.getParameter("dataVencimentoGarantia"));
 
 		List<Usuario> usuarios = (ArrayList<Usuario>) pedido.getSession().getAttribute("gestores");
 		Usuario gestor = usuarios.get(Integer.parseInt(pedido.getParameter("gestor"))),

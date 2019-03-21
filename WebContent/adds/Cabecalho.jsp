@@ -19,9 +19,7 @@
 		<table>
 			<tr>
 				<td>
-					<form action="sistema?logica=VoltarPagina" method="post">
-						<button class="btn btn-danger btn-lg" type="submit">Voltar</button>
-					</form>
+					<a href="sistema?logica=VoltarPagina"><img src="/gestaodecontratos/layout/images/voltar.png"></a>
 				</td>
 				<td>
 					<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipal">
@@ -40,7 +38,7 @@
 				<li><a href="/gestaodecontratos/sistema?logica=TrocarCargoEmUso&i=1">${sessionScope.usuario.cargo.get(1).nome}</a></li>
 			</c:if>
 			<!-- <li><a href="adds/ajuda.jsp">Ajuda</a></li> -->
-			<li><a href="/gestaodecontratos/sistema?logica=Logout">Sair</a></li>
+			<li><a href="/gestaodecontratos/sistema?logica=Logout"><img height="20" src="/gestaodecontratos/layout/images/logout.png"></a></li>
 		</ul>
 	</div>
 </nav>

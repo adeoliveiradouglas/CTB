@@ -1,5 +1,5 @@
 /*
- * Classe responsável por gerenciar a pilha de páginas acessadas 
+ * Classe responsï¿½vel por gerenciar a pilha de pï¿½ginas acessadas 
  */
 
 package filtro;
@@ -50,7 +50,7 @@ public class PilhaPagina implements Filter{
 		
 		paginas.push(paginaAcessada);
 		sessao.setAttribute("pilhaPaginas", paginas);
-		System.out.println("Filtro: " + paginaAcessada);
+//		System.out.println("Filtro: " + paginaAcessada);
 		chain.doFilter(pedido, resposta);
 	}
 

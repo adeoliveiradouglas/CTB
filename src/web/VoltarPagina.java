@@ -26,7 +26,7 @@ public class VoltarPagina implements Logica{
 					p + 1, 
 					pagina.length()
 				);
-		System.out.println("função: " + pag2);
+		System.out.println("funÃ§Ã£o: " + pag2);
 		return pag2;
 	}
 

@@ -115,7 +115,7 @@ public class Cargo_has_usuario extends DAO{
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		iniciaConexaoComBanco();
 		
-		setSqlQuery("select * from " + getNomeTabela() + " where " + colunaCargo + " = ?");
+		setSqlQuery("select * from " + getNomeTabela() + " where " + colunaCargo + " = ? and "+colunaUsuario+" > -1");
 		
 		try{
 //			monta o statement

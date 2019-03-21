@@ -1,5 +1,5 @@
 /*
- * Classe responsável por acessar os dados de usuario no banco de dados
+ * Classe responsï¿½vel por acessar os dados de usuario no banco de dados
  */
 
 package dao;
@@ -36,7 +36,7 @@ public class UsuarioDAO extends DAO {
 	
 	public UsuarioDAO(boolean novosUsuarios){
 /*		para uso da tabela usuariosnovos
- *		acessa tabela de novos usuários não importando qual o valor do parâmetro 
+ *		acessa tabela de novos usuÃ¡rios  importando qual o valor do parÃ¢metro 
  */		
 		super("usuariosnovos");
 	}
@@ -92,7 +92,7 @@ public class UsuarioDAO extends DAO {
 			
 			usuario.setId(getByEmail(usuario.getEmail()).getId());
 			
-			//inserir a referência dos cargos na tabela de cargo_has_usuariosnovos
+			//inserir a referÃªncia dos cargos na tabela de cargo_has_usuariosnovos
 			new Cargo_has_usuario(getNomeTabela(), getDbConnection()).inserir(usuario);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,10 +104,10 @@ public class UsuarioDAO extends DAO {
 	public Usuario getById(int id) {
 		iniciaConexaoComBanco();
 				
- 	/*	Exemplo de query para esse método
+ 	/*	Exemplo de query para esse mÃ©todo
  		
  		select * from usuario where usuario.id = ?";
- 		depois busca setor e cargo através do resultado do usuario*/
+ 		depois busca setor e cargo atravÃ©s do resultado do usuario*/
  		
 
 		Usuario u = null;
@@ -141,7 +141,7 @@ public class UsuarioDAO extends DAO {
 				cargos = new Cargo_has_usuario(getNomeTabela(), getDbConnection())
 						.getByUsuario(getResultado().getInt(colunaId));
 				
-//				Se o usuário só tiver 1 cargo, a posição do segundo fica somente com o id para não gerar erros mais tarde
+//				Se o usuÃ¡rio sÃ³ tiver 1 cargo, a posiÃ§Ã£o do segundo fica somente com o id para nÃ£p gerar erros mais tarde
 				if(cargos.size() == 1){
 					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
 				}
@@ -182,10 +182,10 @@ public class UsuarioDAO extends DAO {
 		iniciaConexaoComBanco();
 		
 /*		
- 		Exemplo de query para esse método
+ 		Exemplo de query para esse mÃ©todo
  		
  		select * from usuario where usuario.login = ?";
- 		depois busca setor e cargo através do resultado do usuario
+ 		depois busca setor e cargo atravÃ©s do resultado do usuario
  		
 */
 		Usuario u = null;
@@ -219,7 +219,7 @@ public class UsuarioDAO extends DAO {
 					getResultado().getInt(colunaId)
 				);
 				
-//				Se o usuário só tiver 1 cargo, a posição do segundo fica somente com o id para não gerar erros mais tarde 
+//				Se o usuÃ¡rio sÃ³ tiver 1 cargo, a posiÃ§Ã£o do segundo fica somente com o id para nÃ£o gerar erros mais tarde 
 				if(cargos.size() == 1){
 					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
 				}
@@ -398,10 +398,10 @@ public class UsuarioDAO extends DAO {
 		iniciaConexaoComBanco();
 		
 /*		
- 		Exemplo de query para esse método
+ 		Exemplo de query para esse mÃ©todo
  		
  		select * from usuario";
- 		depois busca setor e cargo através do resultado do usuario
+ 		depois busca setor e cargo atravÃ©s do resultado do usuario
  		
 */
 		
@@ -409,7 +409,7 @@ public class UsuarioDAO extends DAO {
 		
 //		monta a query
 		setSqlQuery(
-			"select * from " + getNomeTabela() + " order by " + ordenacao
+			"select * from " + getNomeTabela() + " order by " + ordenacao + " where " + colunaId + " > -1"
 		);
 		
 		try {
@@ -432,10 +432,10 @@ public class UsuarioDAO extends DAO {
 					getResultado().getInt(colunaId)
 				);
 				
-//				Se o usuário só tiver 1 cargo, a posição do segundo fica somente com o id para não gerar erros mais tarde
+//				Se o usuÃ¡rio sÃ³ tiver 1 cargo, a posiÃ§Ã£o do segundo fica somente com o id para nÃ£o gerar erros mais tarde
 				if(cargos.size() == 1){
 					cargos.add(new Cargo(cargos.get(0).getId() ,"",""));
-//				Se, por algum erro do banco, o usuário não possuir cargos, é setado a ele dois cargos vazios seguindo a mesma ideia acima
+//				Se, por algum erro do banco, o usuÃ¡rio nÃ£o possuir cargos, Ã© setado a ele dois cargos vazios seguindo a mesma ideia acima
 				} else if (cargos.size() == 0){
 					cargos.add(new Cargo());
 					cargos.add(new Cargo());
@@ -457,7 +457,7 @@ public class UsuarioDAO extends DAO {
 					getResultado().getString(
 						colunaSenha
 					),				
-//						busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
+//					busca setor de acordo com o resultado do usuario e salva somente sigla como na obs1 da classe Usuario
 					new SetorDAO(getDbConnection()).getByCodigo(
 						getResultado().getString(colunaSetor)
 					),
@@ -478,9 +478,9 @@ public class UsuarioDAO extends DAO {
 		iniciaConexaoComBanco();
 		
 		/*
-		 * Passo a passo desse método:
-		 * 1º: busca na tabela cargo_has_usuario por todos os ids de usuarios que tem o idCargo = 3
-		 * 2º: tranforma todos os ids em um objeto Usuario pelo método UsuarioDAO.getById
+		 * Passo a passo desse mÃ©todo:
+		 * 1ï¿½: busca na tabela cargo_has_usuario por todos os ids de usuarios que tem o idCargo = 3
+		 * 2ï¿½: tranforma todos os ids em um objeto Usuario pelo mÃ©todo UsuarioDAO.getById
 		 */
 		
 		List<Usuario> lu = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByCargo(3);
@@ -495,9 +495,9 @@ public class UsuarioDAO extends DAO {
 		iniciaConexaoComBanco();
 		
 		/*
-		 * Passo a passo desse método:
-		 * 1º: busca na tabela cargo_has_usuario por todos os ids de usuarios que tem o idCargo = codCargo
-		 * 2º: tranforma todos os ids em um objeto Usuario pelo método UsuarioDAO.getById
+		 * Passo a passo desse mÃ©todo:
+		 * 1ï¿½: busca na tabela cargo_has_usuario por todos os ids de usuarios que tem o idCargo = codCargo
+		 * 2ï¿½: tranforma todos os ids em um objeto Usuario pelo mÃ©todo UsuarioDAO.getById
 		 */
 		
 		List<Usuario> lu = new Cargo_has_usuario(getNomeTabela(), getDbConnection()).getByCargo(codCargo);
