@@ -13,5 +13,4 @@ public class ExportarPDF implements Logica{
 		new PDF(pedido.getContextPath()).relatorioContrato(new ContratoDAO().getAll().get(0));
 		return "";
 	}
-
 }
