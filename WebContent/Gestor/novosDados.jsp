@@ -65,13 +65,16 @@
 				<!-- select mês de referência -->
 			</div>
 			<!-- fim div select cargos -->
-
-			<div class="form-group  has-feedback">
-				<input type="number" class="form-control input-lg" placeholder="Ano"
-					name="ano" maxlength="4" required /> <span
-					class="form-control-feedback" aria-hidden="true"> </span>
+			
+			<div id="avisoano" style="display:none"> 
+				<label>Por favor, use o formato de 4 dígitos</label>
 			</div>
-
+			<div class="form-group  has-feedback">
+				<input type="number" class="form-control input-lg" placeholder="Ano (no formato de 4 dígitos)"
+					name="ano" maxlength="4" required />
+					
+			</div>
+						
 			<div class="form-group  has-feedback">
 				Data do processo: <input type="date" class="form-control input-lg"
 					name="data" required> <span class="form-control-feedback"

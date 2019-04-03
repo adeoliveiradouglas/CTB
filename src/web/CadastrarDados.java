@@ -28,13 +28,14 @@ public class CadastrarDados implements Logica{
 		String v = new FormatarCampo().stringToDecimal(pedido.getParameter("valor")),
 			   va = new FormatarCampo().stringToDecimal(pedido.getParameter("valorAditivo")),
 			   notaFiscal = pedido.getParameter("notaFiscal"),
-			   numero = pedido.getParameter("numero");
+			   numero = pedido.getParameter("numero"),
+			   ano = pedido.getParameter("ano");
 		
 		BigDecimal valor = null, 
 				   aditivo = null;
 		
 		int idContrato = Integer.parseInt(pedido.getParameter("idContrato"));
-
+		
 		try {
 			novaDataVencimento = new SimpleDateFormat("yyyy-MM-dd").parse(
 				pedido.getParameter("novaDataVencimento")
@@ -53,19 +54,28 @@ public class CadastrarDados implements Logica{
 				c.getValorAditivos().add(aditivo)
 			);
 		} catch (NumberFormatException e){
-			//catch para n�o dar erro no processo quando n�o houver aditivo
+			//catch para não dar erro no processo quando não houver aditivo
 			aditivo = new BigDecimal("0.00");
 		}
+		
+//		GAMBIARRA PQ TO COM PREGUIÇA DE PROGRAMAR 
+		if(ano.length() == 2) 
+//			caso o usuário seja jumento o suficiente pra escrever 19 ao invés de 2019 (baseado em fatos reais)
+			ano = "20"+ano;
+		 else if (ano.length() == 3) 
+//			caso o usuário seja alignigena o suficiente pra escrever 019 ao invés de 2019 (aqui já to sendo escroto 
+//			mesmo). O se por um milagre esse sistema fique ativo até 2999. Pelo menos tá garantido.
+			ano = "2"+ano;
 		
 		Dados p = new Dados(
 			notaFiscal,
 			pedido.getParameter("tipoAditivo"),
 			numero,
-			Integer.parseInt(pedido.getParameter("ano")),
+			Integer.parseInt(ano) ,
 			pedido.getParameter("mes"),
 			aditivo,
 			valor,
-			null, //saldo � calculado mais abaixo
+			null, //saldo é calculado mais abaixo
 			dataDados,
 			idContrato
 		);
@@ -84,13 +94,11 @@ public class CadastrarDados implements Logica{
 		
 		pedido.getSession().setAttribute("contratoVisualizar", c);
 		
-		//se houve atualiza��o na data de vencimento
+		//se houve atualização na data de vencimento
 		if (novaDataVencimento != null)
 			new ContratoDAO().atualizarDataVencimento(idContrato, novaDataVencimento);
 		
 		pedido.setAttribute("adicionaProcesso", "true");
 		return "sistema?logica=VerContrato&adicionaProcesso=true";
 	}
-	
-	
 }
