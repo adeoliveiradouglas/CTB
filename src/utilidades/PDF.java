@@ -14,8 +14,10 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -31,11 +33,11 @@ public class PDF {
 	 */
 	private final String subPasta = "Comum\\comprovantes\\";
 	private String pastaRaiz, nomeArquivo;
-	private Document d = new Document();
+	private Document d = new Document(PageSize.A4.rotate());
 	private Font f = new Font();
 	private Paragraph paragrafo;
 	private DateTime hoje = new DateTime();
-	private Image logoPequeno;
+	private Image logoCtbPequeno, logoPequeno;
 
 	public PDF(String pastaRaiz) {
 		this.pastaRaiz = pastaRaiz;
@@ -46,194 +48,150 @@ public class PDF {
 		try {
 			iniciarArquivo("relatorioContrato" + contrato.getId() + ".pdf");
 
+			PdfPTable tabela = new PdfPTable(2);
+			tabela.setWidthPercentage(100.0f);
+			PdfPCell celula;
+			
+			d.add(logoCtbPequeno);
 			d.add(logoPequeno);
 			
-			paragrafo = new Paragraph("RELATÓRIO DO CONTRATO\n"+contrato.getNome()+"\n\n");
+			paragrafo = new Paragraph("SGC - RELATÓRIO DE CONTRATO\n"+contrato.getNome()+"\n\n\n");
 			paragrafo.setAlignment(Element.ALIGN_CENTER);
 			d.add(paragrafo);
 			
-//			PdfPTable tabela = new PdfPTable(4);
-//			
-//			PdfPCell celula = new PdfPCell(new Phrase(contrato.getNumero()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getPortaria()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getGestor().getNome()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getFiscal().getNome()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(""));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getRecurso().getNome()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getUso().getNome()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getFontePagante().getNome()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getDataAssinaturaAsString()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getValorInicialAsString()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getValorAditivoAsString()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getValorTotalAsString()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getDataAssinaturaAsString()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
-//			celula = new PdfPCell(new Phrase(contrato.getDataGarantiaAsString()));
-//			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);
-//			
+			tabela.addCell(celulaSemBorda("Número do contrato:"+contrato.getNumero()+"\n"));
+			tabela.addCell(celulaSemBorda("Número da portaria:"+contrato.getPortaria()+"\n"));
+				
+			tabela.addCell(celulaSemBorda("Gestor:"+contrato.getGestor().getNome()+"\n"));
+			tabela.addCell(celulaSemBorda("Fiscal: "+contrato.getFiscal().getNome()+"\n"));
+			
+			d.add(tabela);
+			
+			tabela = new PdfPTable(3);
+			tabela.setWidthPercentage(100.0f);
+			
+			tabela.addCell(celulaSemBorda("Recurso: "+contrato.getRecurso().getNome()+"\n"));
+			tabela.addCell(celulaSemBorda("Uso: "+contrato.getUso().getNome()+"\n"));
+			tabela.addCell(celulaSemBorda("Fonte pagante: "+contrato.getFontePagante().getNome()+"\n"));
+			
+			d.add(tabela);
+			
+			tabela = new PdfPTable(4);
+			tabela.setWidthPercentage(100.0f);
+			
+			tabela.addCell(celulaSemBorda("Valor inicial: R$"+contrato.getValorInicialAsString()+"\n"));
+			tabela.addCell(celulaSemBorda("Total dos aditivos: R$"+contrato.getValorAditivoAsString()+"\n"));
+			tabela.addCell(celulaSemBorda("Valor total: R$"+contrato.getValorTotalAsString()+"\n"));
+			tabela.addCell(celulaSemBorda("Valor total: R$"+contrato.getSaldoAsString()+"\n"));
+			
+			tabela = new PdfPTable(4);
+			t
+			tabela.addCell(celulaSemBorda("Ass.: "+contrato.getDataAssinaturaAsString()+"\n"));
+			tabela.addCell(celulaSemBorda("Vencimento: "+contrato.getDataVencimentoContratoAsString()+"\n"));
+			tabela.addCell(celulaSemBorda("Ass. da garantia: "+contrato.getDataGarantiaAsString()+"\n"));
 //			celula = new PdfPCell(new Phrase(contrato.getDataVencimentoContratoAsString()));
 //			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
 //			tabela.addCell(celula);
-//			
+
+			tabela.addCell(celulaSemBorda("Vencimento da garantia: "+contrato.getDataVencimentoGarantiaAsString()+"\n"));
 //			celula = new PdfPCell(new Phrase(contrato.getDataVencimentoGarantiaAsString()));
 //			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-//			tabela.addCell(celula);			
+//			tabela.addCell(celula);	
 			
-			PdfPTable tabela = new PdfPTable(9);
+			tabela.addCell(celulaSemBorda("Objeto: "+contrato.getObjeto()));
+			d.add(tabela);
+			d.add(new Paragraph("\n\n"));
+			
+			//cada um desses valores corresponde a largura de cada célula
+			tabela = new PdfPTable(new float[] {0.035f, 0.065f, 0.1f,0.1f,0.065f,0.1f,0.1f,0.1f,0.1f,0.065f });
 			tabela.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tabela.setTotalWidth(/* d.getPageSize().getWidth() */800);
-			System.out.print(tabela.getTotalWidth());
-			
-			Phrase frase = new Phrase("#");
-			frase.setFont(f);		
-			PdfPCell celula = new PdfPCell(frase);
-			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-			celula.setBorderWidth(800);
-			tabela.addCell(celula);
-			
-			frase = new Phrase("Referência");
-			frase.setFont(f);
-			celula = new PdfPCell(frase);
-			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tabela.addCell(celula);
-			
-			frase = new Phrase("Nº");
-			frase.setFont(f);
-			celula = new PdfPCell(frase);
-			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tabela.addCell(celula);
-			
-			frase = new Phrase("Nota fiscal");
-			frase.setFont(f);
-			celula = new PdfPCell(frase);
-			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tabela.addCell(celula);
-			
-			frase = new Phrase("Valor");
-			frase.setFont(f);
-			celula = new PdfPCell(frase);
-			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tabela.addCell(celula);
-			
-			frase = new Phrase("Saldo");
-			frase.setFont(f);
-			celula = new PdfPCell(frase);
-			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tabela.addCell(celula);
-			
-			frase = new Phrase("Aditivo");
-			frase.setFont(f);
-			celula = new PdfPCell(frase);
-			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tabela.addCell(celula);
-			
-			frase = new Phrase("Observação");
-			frase.setFont(f);
-			celula = new PdfPCell(frase);
-			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tabela.addCell(celula);
-			
-			frase = new Phrase("Pagamento");
-			frase.setFont(f);
-			celula = new PdfPCell(frase);
-			celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-			tabela.addCell(celula);
+			tabela.setWidthPercentage(100.0f);
+			tabela.addCell(celula(frase("Med.")));
+			tabela.addCell(celula(frase("Referência")));
+			tabela.addCell(celula(frase("Nº")));
+			tabela.addCell(celula(frase("Nota Fiscal")));
+			tabela.addCell(celula(frase("Data")));
+			tabela.addCell(celula(frase("Valor")));
+			tabela.addCell(celula(frase("Saldo")));
+			tabela.addCell(celula(frase("Aditivo")));
+			tabela.addCell(celula(frase("Observação")));
+			tabela.addCell(celula(frase("Pagamento")));
 			
 			int i = contrato.getDados().size();
 			for (Dados data: contrato.getDados()) {
-				frase = new Phrase(Integer.toString(i));
-				frase.setFont(f);
-				celula = new PdfPCell(frase);
-				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-				tabela.addCell(celula);
+				tabela.addCell(celula(frase(""+i)));
+				tabela.addCell(celula(frase(data.getMesAsInt()+"/"+data.getAno())));
+				tabela.addCell(celula(frase(data.getNumeroSei())));
+				tabela.addCell(celula(frase(data.getNotaFiscal())));
+				tabela.addCell(celula(frase(data.getDataAsString())));
+				tabela.addCell(celula(frase("R$"+data.getValorAsString())));
+				tabela.addCell(celula(frase("R$"+data.getSaldoAsString())));
+				tabela.addCell(celula(frase("R$"+data.getAditivoAsString())));
+				tabela.addCell(celula(frase(data.getTipoAditivo())));
+				tabela.addCell(celula(frase(data.getDataPagamentoAsString())));
+				
 				--i;
-				
-				frase = new Phrase(data.getMes()+"/"+data.getAno());
-				frase.setFont(f);
-				celula = new PdfPCell(frase);
-				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-				tabela.addCell(celula);
-				
-				frase = new Phrase(data.getNumeroSei());
-				frase.setFont(f);
-				celula = new PdfPCell(frase);
-				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-				tabela.addCell(celula);
-				
-				frase = new Phrase(data.getNotaFiscal());
-				frase.setFont(f);
-				celula = new PdfPCell(frase);
-				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-				tabela.addCell(celula);
-				
-				frase = new Phrase("R$"+data.getValorAsString());
-				frase.setFont(f);
-				celula = new PdfPCell(frase);
-				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-				tabela.addCell(celula);
-				
-				frase = new Phrase("R$"+data.getSaldoAsString());
-				frase.setFont(f);
-				celula = new PdfPCell(frase);
-				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-				tabela.addCell(celula);
-				
-				frase = new Phrase("R$"+data.getAditivoAsString());
-				frase.setFont(f);
-				celula = new PdfPCell(frase);
-				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-				tabela.addCell(celula);
-				
-				frase = new Phrase(data.getTipoAditivo());
-				frase.setFont(f);
-				celula = new PdfPCell(frase);
-				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-				tabela.addCell(celula);
-				
-				frase = new Phrase(data.getDataPagamentoAsString());
-				frase.setFont(f);
-				celula = new PdfPCell(frase);
-				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
-				tabela.addCell(celula);
+//				frase = new Phrase();
+//				frase.setFont(f);
+//				frase.add(Integer.toString(i));
+//				celula = new PdfPCell(frase);
+//				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				tabela.addCell(celula);
+//				--i;
+//				
+//				frase = new Phrase();
+//				frase.setFont(f);
+//				frase.add(data.getMes()+"/"+data.getAno());
+//				celula = new PdfPCell(frase);
+//				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				tabela.addCell(celula);
+//				
+//				frase = new Phrase();
+//				frase.setFont(f);
+//				frase.add(data.getNumeroSei());
+//				celula = new PdfPCell(frase);
+//				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				tabela.addCell(celula);
+//				
+//				frase = new Phrase();
+//				frase.setFont(f);
+//				frase.add(data.getNotaFiscal());
+//				tabela.addCell(novaCelula(frase));
+//				
+//				frase = new Phrase();
+//				frase.setFont(f);
+//				frase.add("R$"+data.getValorAsString());
+//				celula = new PdfPCell(frase);
+//				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				tabela.addCell(celula);
+//				
+//				frase = new Phrase();
+//				frase.setFont(f);
+//				frase.add("R$"+data.getSaldoAsString());
+//				celula = new PdfPCell(frase);
+//				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				tabela.addCell(celula);
+//				
+//				frase = new Phrase();
+//				frase.setFont(f);
+//				frase.add("R$"+data.getAditivoAsString());
+//				celula = new PdfPCell(frase);
+//				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				tabela.addCell(celula);
+//				
+//				frase = new Phrase();
+//				frase.setFont(f);
+//				frase.add(data.getTipoAditivo());
+//				celula = new PdfPCell(frase);
+//				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				tabela.addCell(celula);
+//				
+//				frase = new Phrase();
+//				frase.setFont(f);
+//				frase.add(data.getDataPagamentoAsString());
+//				celula = new PdfPCell(frase);
+//				celula.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				tabela.addCell(celula);
 			}
 
 			d.add(tabela);
@@ -511,14 +469,40 @@ public class PDF {
 		PdfWriter.getInstance(d, fos);
 		d.open();
 
-		logoPequeno = Image.getInstance(pastaRaiz + "layout\\images\\logo-ctb pequeno.png");
-
-		float teste = 470;
-		float documentWidth = d.getPageSize().getWidth() - d.leftMargin() - d.rightMargin() - teste;
-		float documentHeight = d.getPageSize().getHeight() - d.topMargin() - d.bottomMargin() - teste;
-		logoPequeno.scaleToFit(documentWidth, documentHeight);
-		logoPequeno.setAlignment(Element.PARAGRAPH);
+		logoCtbPequeno = Image.getInstance(pastaRaiz + "layout\\images\\logo-ctb pequeno.png");
+		logoPequeno = Image.getInstance(pastaRaiz + "layout\\images\\logo pequeno.png");
+//		float teste = 300;
+//		float documentWidth = d.getPageSize().getWidth() - d.leftMargin() - d.rightMargin() - teste;
+//		float documentHeight = d.getPageSize().getHeight() - d.topMargin() - d.bottomMargin() - teste;
+//		logoPequeno.scaleToFit(documentWidth, documentHeight);
+//		logoCtbPequeno.setAlignment(Element.PARAGRAPH);
 //		logoPequeno.scaleToFit(logoPequeno.getAbsoluteX(),logoPequeno.getAbsoluteY());
+//		logoPequeno.setAlignment(Element.ALIGN_RIGHT);
+		int yImagePosition = 525;
+		logoCtbPequeno.setAbsolutePosition(35, yImagePosition);
+		logoPequeno.setAbsolutePosition(750, yImagePosition);
 
+	}
+	
+	private Phrase frase(String texto) {
+		Phrase frase = new Phrase();
+		frase.setFont(f);
+		frase.add(texto);
+		
+		return frase;
+	}
+	
+	private PdfPCell celula(Phrase texto) {
+		PdfPCell celula = new PdfPCell(texto);
+		celula.setHorizontalAlignment(Element.ALIGN_CENTER);
+		
+		return celula;
+	}
+	private PdfPCell celulaSemBorda(String texto) {
+		
+		PdfPCell celula = new PdfPCell(new Phrase(texto));
+		celula.setBorder(Rectangle.NO_BORDER);
+		
+		return celula;
 	}
 }
