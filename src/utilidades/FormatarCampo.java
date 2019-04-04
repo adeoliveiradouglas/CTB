@@ -16,7 +16,7 @@ public class FormatarCampo{
 	public FormatarCampo(){}
 	
 	public String stringToDecimal(String parameter) {
-//		Tirar pontos do valor e mudar vírgula para ponto
+//		Tirar pontos do valor e mudar vï¿½rgula para ponto
 		parameter = parameter.replace(".", "");
 		parameter = parameter.replace(",", ".");
 		
@@ -24,7 +24,7 @@ public class FormatarCampo{
 	}
 	
 	public String decimalToString(BigDecimal b) {
-//		pontos do valor e mudar vírgula para ponto
+//		pontos do valor e mudar vÃ­rgula para ponto
 		String parameter = "" + b,
 				aux = "0,00";
 		
@@ -43,11 +43,11 @@ public class FormatarCampo{
 						break;
 						
 					case 6:
-						if(b.compareTo(new BigDecimal(0)) >= 0) //se o número for maior que zero
+						if(b.compareTo(new BigDecimal(0)) >= 0) //se o nÃºmero for maior que zero
 							aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
 						else { //se menor que zero
 							if(aux.length() != 8) 
-//								se o número for -xxxxxx.xx não deve considerar o sinal negativo
+//								se o nï¿½mero for -xxxxxx.xx nï¿½o deve considerar o sinal negativo
 								aux = aux.substring(0, i) + "." + aux.substring(i, aux.length());
 						}
 						break;
@@ -90,7 +90,7 @@ public class FormatarCampo{
 		else if (mes.equalsIgnoreCase("Fevereiro"))
 			return "02";
 
-		else if (mes.equalsIgnoreCase("Março"))
+		else if (mes.equalsIgnoreCase("MarÃ§o"))
 			return "03";
 
 		else if (mes.equalsIgnoreCase("Abril"))
@@ -133,7 +133,7 @@ public class FormatarCampo{
 				return "Fevereiro";
 				
 			case 3:
-				return "Março";
+				return "Marï¿½o";
 				
 			case 4:
 				return "Abril";
