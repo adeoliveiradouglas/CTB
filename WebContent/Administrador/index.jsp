@@ -58,7 +58,10 @@
 						<%-- <td class="text-center"><%=u.getId() %></td> --%>
 						<td class="text-center">${usuario.nome }</td>
 						<td class="text-center">${usuario.matricula}</td>
-						<td class="text-center">${usuario.cargo.get(0).nome } ${usuario.cargo.get(1).nome}</td>
+						<td class="text-center">
+							${usuario.cargo.get(0).nome } 
+							${usuario.cargo.get(1).nome}
+						</td>
 						<td class="text-center">${usuario.setor.sigla }</td>
 						<td class="text-center">${usuario.email }</td>
 						<td class="text-center">

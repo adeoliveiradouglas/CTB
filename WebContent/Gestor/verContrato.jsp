@@ -19,33 +19,42 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
-	<table class="table table-striped">
+	<table class="table" style="border: none">
 	<tbody>	
 		<tr>
-			<td>				
+			<td colspan="2">				
 				<form action="sistema?logica=TelaNovosDados" method="post">
-					<button class="btn btn-primary btn-lg aw-btn-full-width" type="submit" value="${sessionScope.contratoVisualizar.id}" name="id">
+					<button class="btn btn-success btn-lg aw-btn-full-width" type="submit" value="${sessionScope.contratoVisualizar.id}" name="id">
 						+ Inserir novos dados
 					</button>
 				</form>
-				
-				<%-- <a href="sistema?logica=TelaNovosDados&id=${sessionScope.contratoVisualizar.id}">
-					<font size="5">Inserir novos dados</font>
-				</a> --%>
 			</td>
+		</tr>
+		
+		<tr>
 			<td>
 				<form action="sistema?logica=VerResumoContrato" method="post">
 					<button class="btn btn-primary btn-lg aw-btn-full-width" type="submit">
 						Ver resumo do contrato
 					</button>
 				</form>
-				<!-- <a href="sistema?logica=VerResumoContrato">
-					<font size="5">Ver resumo do contrato</font>
-				</a> -->
-			</td>			
+			</td>	
+			<td>
+				<form action="sistema?logica=ExportarPDF" method="post">
+					<button class="btn btn-primary btn-lg aw-btn-full-width" type="submit">
+						Exportar para PDF
+					</button>
+				</form>
+			</td>
+					
 		</tr>
 	</tbody>
 	</table>
+	
+	<c:if test="${relatorioGerado == true}">
+		Veja o relatório do contrato <a href="/gestaodecontratos/Comum/relatorios/relatorioContrato${sessionScope.contratoVisualizar.id}.pdf" target="_blank">aqui</a>.
+	</c:if>
+	
 	
 	<jsp:include page="../Comum/avisoDeVencimento.jsp"></jsp:include>
 	<jsp:include page="../Comum/planilha.jsp"></jsp:include>

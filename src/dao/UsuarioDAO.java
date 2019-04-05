@@ -409,7 +409,7 @@ public class UsuarioDAO extends DAO {
 		
 //		monta a query
 		setSqlQuery(
-			"select * from " + getNomeTabela() + " order by " + ordenacao + " where " + colunaId + " > -1"
+			"select * from " + getNomeTabela() + " where " + colunaId + " > -1" + " order by " + ordenacao
 		);
 		
 		try {
