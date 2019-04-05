@@ -11,7 +11,7 @@ public class Email {
 	private String  assunto = null,
 			mensagem = null,
 			emailTo = null,
-			nome = "Gestão de Contratos",
+			nome = "GestÃ£o de Contratos",
 			smtp = "smtp.office365.com",
 			senha = "$TEci.2018$",
 			emailFrom = "contratos.ctb@ctb.ba.gov.br";
@@ -22,18 +22,18 @@ public class Email {
 	
 	public void enviarCodigo(String emailTo, int codigo){
 		//envia a mensagem com o codigo para o email recebido no parametro
-		this.assunto = "Recuperação de senha Gestão de Contratos - CTB";
+		this.assunto = "Recuperaï¿½ï¿½o de senha Gestï¿½o de Contratos - CTB";
 		this.emailTo = emailTo;
-		this.mensagem = "O token de recuperação é: " + codigo + ".\nSe não solicitou, desconsidere essa mensagem.";
+		this.mensagem = "O token de recuperaï¿½ï¿½o ï¿½: " + codigo + ".\nSe nÃ£o solicitou, desconsidere essa mensagem.";
 		this.enviar();
 	}
 	
 	public void enviarConfirmacaoCadastro(String emailTo, String nome){
-		this.assunto = "Confirmação de cadastro";
+		this.assunto = "ConfirmaÃ§Ã£o de cadastro";
 		this.emailTo = emailTo;
-		this.mensagem = nome + ", obrigado por se cadastrar no Sistema de Gestão de Contratos " +
+		this.mensagem = nome + ", obrigado por se cadastrar no Sistema de Gestï¿½o de Contratos " +
 			"da CTB. Agora basta aguardar o administrador liberar o seu acesso " +
-			"para começar a usar. Te enviaremos outro email quando seu acesso for aprovado.";
+			"para comeï¿½ar a usar. Te enviaremos outro email quando seu acesso for aprovado.";
 		this.enviar();
 	}
 	
@@ -43,12 +43,12 @@ public class Email {
 		this.assunto = "Faltam 90 dias para vencimento do contrato";
 		this.mensagem = 
 			"Prezado(a) Gestor(a),\n" +
-			"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
-			+ "Estado da Bahia faltam menos de 90 (noventa) dias para o fim de vigência do contrato.\n"+
-			"Conforme o art. 142 e o parágrafo único da Lei 9.433/2005 qualquer prorrogação dos contratos de prestação a "
-			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
-			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
-			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogação, devendo "
+			"Considerando que o contrato nï¿½: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
+			+ "Estado da Bahia faltam menos de 90 (noventa) dias para o fim de vigï¿½ncia do contrato.\n"+
+			"Conforme o art. 142 e o parï¿½grafo ï¿½nico da Lei 9.433/2005 qualquer prorrogaï¿½ï¿½o dos contratos de prestaï¿½ï¿½o a "
+			+ "serem executado de forma contï¿½nua deverï¿½ ser solicitada ainda no prazo de vigï¿½ncia do contrato, a prorrogaï¿½ï¿½o "
+			+ "dos contratos deverï¿½ ser realizada pelo servidor responsï¿½vel pelo seu acompanhamento no prazo mï¿½ximo de atï¿½ 60 "
+			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogaï¿½ï¿½o, devendo "
 			+ "assim o processo ser encaminhando a QUAS para conhecimento.\n\n"
 			+ "Este email foi encaminhado para o gestor do contrato, fiscal do contrato e QUAS";
 		
@@ -61,12 +61,12 @@ public class Email {
 		this.assunto = "Faltam 60 dias para vencimento do contrato";
 		this.mensagem = 
 			"Prezado(a) Gestor(a),\n" +
-			"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
-			+ "Estado da Bahia faltam menos de 60 (sessenta) dias para o fim de vigência do contrato.\n"+
-			"Conforme o art. 142 e o parágrafo único da Lei 9.433/2005 qualquer prorrogação dos contratos de prestação a "
-			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
-			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
-			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogação, devendo "
+			"Considerando que o contrato nï¿½: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
+			+ "Estado da Bahia faltam menos de 60 (sessenta) dias para o fim de vigï¿½ncia do contrato.\n"+
+			"Conforme o art. 142 e o parï¿½grafo ï¿½nico da Lei 9.433/2005 qualquer prorrogaï¿½ï¿½o dos contratos de prestaï¿½ï¿½o a "
+			+ "serem executado de forma contï¿½nua deverï¿½ ser solicitada ainda no prazo de vigï¿½ncia do contrato, a prorrogaï¿½ï¿½o "
+			+ "dos contratos deverï¿½ ser realizada pelo servidor responsï¿½vel pelo seu acompanhamento no prazo mï¿½ximo de atï¿½ 60 "
+			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogaï¿½ï¿½o, devendo "
 			+ "assim o processo ser encaminhando a QUAS para conhecimento.\n\n"
 			+ "Este email foi encaminhado para o gestor do contrato, fiscal do contrato, QUAS e diretor";
 			
@@ -79,12 +79,12 @@ public class Email {
 		this.assunto = "Faltam 45 dias para vencimento do contrato";
 		this.mensagem = 
 			"Prezado(a) Gestor(a),\n" +
-			"Considerando que o contrato n°: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
-			+ "Estado da Bahia faltam menos de 45 (quarenta e cinco) dias para o fim de vigência do contrato.\n"+
-			"Conforme o art. 142 e o parágrafo único da Lei 9.433/2005 qualquer prorrogação dos contratos de prestação a "
-			+ "serem executado de forma contínua deverá ser solicitada ainda no prazo de vigência do contrato, a prorrogação "
-			+ "dos contratos deverá ser realizada pelo servidor responsável pelo seu acompanhamento no prazo máximo de até 60 "
-			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogação, devendo "
+			"Considerando que o contrato nï¿½: " + c.getNumero() + " firmado entre a Contratada e a Companhia de Transportes do "
+			+ "Estado da Bahia faltam menos de 45 (quarenta e cinco) dias para o fim de vigï¿½ncia do contrato.\n"+
+			"Conforme o art. 142 e o parï¿½grafo ï¿½nico da Lei 9.433/2005 qualquer prorrogaï¿½ï¿½o dos contratos de prestaï¿½ï¿½o a "
+			+ "serem executado de forma contï¿½nua deverï¿½ ser solicitada ainda no prazo de vigï¿½ncia do contrato, a prorrogaï¿½ï¿½o "
+			+ "dos contratos deverï¿½ ser realizada pelo servidor responsï¿½vel pelo seu acompanhamento no prazo mï¿½ximo de atï¿½ 60 "
+			+ "(sessenta) dias antes do termo final. diante disso solicitamos abertura do processo de prorrogaï¿½ï¿½o, devendo "
 			+ "assim o processo ser encaminhando a QUAS para conhecimento.\n\n"
 			+ "Este email foi encaminhado para o gestor do contrato, fiscal do contrato, QUAS e diretor e presidente";
 			
@@ -108,6 +108,6 @@ public class Email {
 		    email.send();
 		} catch (EmailException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 }
