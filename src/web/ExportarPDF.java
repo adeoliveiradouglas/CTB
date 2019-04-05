@@ -3,14 +3,19 @@ package web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ContratoDAO;
+import entity.Contrato;
 import utilidades.PDF;
 
 public class ExportarPDF implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest pedido, HttpServletResponse resposta) throws Exception {
-		new PDF(pedido.getContextPath()).relatorioContrato(new ContratoDAO().getAll().get(0));
-		return "";
+		Contrato contrato = (Contrato) pedido.getSession().getAttribute("contratoVisualizar");
+		String caminho = pedido.getServletContext().getRealPath("");
+		
+		new PDF(caminho).relatorioContrato(contrato);
+		
+		pedido.setAttribute("relatorioGerado", true);
+		return "sistema?logica=VerContrato";
 	}
 }

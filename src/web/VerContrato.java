@@ -1,7 +1,7 @@
 /*
- * Redireciona para página de ver determinado contrato
+ * Redireciona para pï¿½gina de ver determinado contrato
  * recebe dois parametros por GET
- * origem = lista carregada na sessão em que o contrato está
+ * origem = lista carregada na sessï¿½o em que o contrato estï¿½
  * n = posicao do contrato na lista "origem"
  * */
 
@@ -24,10 +24,10 @@ public class VerContrato implements Logica {
 		int n;
 		
 		if (origem == null)
-//			tenta saber qual lista de contrato deve acessar através do POST e guarda na sessão
+//			tenta saber qual lista de contrato deve acessar atravï¿½s do POST e guarda na sessï¿½o
 			origem = (String) pedido.getSession().getAttribute("origem");
 		else		
-//			se o POST falhar, é porque a informação está na sessão
+//			se o POST falhar, ï¿½ porque a informaï¿½ï¿½o estï¿½ na sessï¿½o
 			pedido.getSession().setAttribute("origem", origem);
 		
 		try {
@@ -40,7 +40,7 @@ public class VerContrato implements Logica {
 		
 		Cargo logado = (Cargo) pedido.getSession().getAttribute("cargoParaLogin");
 				
-//		carrega a lista para essa página
+//		carrega a lista para essa pï¿½gina
 		@SuppressWarnings("unchecked")
 		List<Contrato> contratosLista = (List<Contrato>) pedido.getSession().getAttribute(origem);
 		
@@ -48,11 +48,11 @@ public class VerContrato implements Logica {
 		Contrato contrato = contratosLista.get(n);
 		
 //		para saber qual tela de contrato deve mostrar: a comum (somente visualiza) ou a do gestor (insere novos dados)
-		if (logado.getId() == 3 && "true".equals(pedido.getParameter("adicionaProcesso"))){
+		if (logado.getId() == 3 || "true".equals(pedido.getParameter("adicionaProcesso"))){
 			pagina = "/Gestor/verContrato.jsp"; 
 		}
 
-//		Coloca esses dados na sessão
+//		Coloca esses dados na sessï¿½o
 		pedido.getSession().setAttribute("contratoVisualizar", contrato);
 		pedido.getSession().setAttribute("n", n);
 		
