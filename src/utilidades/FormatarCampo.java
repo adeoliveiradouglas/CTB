@@ -16,7 +16,7 @@ public class FormatarCampo{
 	public FormatarCampo(){}
 	
 	public String stringToDecimal(String parameter) {
-//		Tirar pontos do valor e mudar v�rgula para ponto
+//		Tirar pontos do valor e mudar vírgula para ponto
 		parameter = parameter.replace(".", "");
 		parameter = parameter.replace(",", ".");
 		
@@ -133,7 +133,7 @@ public class FormatarCampo{
 				return "Fevereiro";
 				
 			case 3:
-				return "Mar�o";
+				return "Março";
 				
 			case 4:
 				return "Abril";

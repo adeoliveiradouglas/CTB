@@ -19,6 +19,12 @@
 <body class="aw-layout-page">
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
 	
+	<c:if test="${relatorioGerado == true}">
+		<div style="background-color: #5cb85c; color: white" align="center">
+		Veja o relatório do contrato <a href="/gestaodecontratos/Comum/relatorios/relatorioContrato${sessionScope.contratoVisualizar.id}.pdf" target="_blank">aqui</a>.
+		</div>
+	</c:if>
+	
 	<table class="table" style="border: none">
 	<tbody>	
 		<tr>
@@ -49,22 +55,17 @@
 					
 		</tr>
 	</tbody>
-	</table>
-	
-	<c:if test="${relatorioGerado == true}">
-		Veja o relatório do contrato <a href="/gestaodecontratos/Comum/relatorios/relatorioContrato${sessionScope.contratoVisualizar.id}.pdf" target="_blank">aqui</a>.
-	</c:if>
-	
+	</table>	
 	
 	<jsp:include page="../Comum/avisoDeVencimento.jsp"></jsp:include>
 	<jsp:include page="../Comum/planilha.jsp"></jsp:include>
 	
-	<div align="center">
+	<!-- <div align="center">
 		<font size="3">Importar planilha para esse contrato</font>
 		<form action="sistema?logica=EnviarPlanilha" method="post" enctype="multipart/form-data">
 			<input type="file" name="file" id="file" /> <input type="submit" value="Enviar" />
 		</form>
-	</div>
+	</div> -->
 	
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
 </body>

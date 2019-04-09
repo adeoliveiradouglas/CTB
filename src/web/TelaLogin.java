@@ -24,11 +24,11 @@ public class TelaLogin implements Logica{
 			return "sistema?logica=TelaPrincipal";
 		}
 		
-		if(!monitorandoVencimento){//se n„o estiver monitorando os contratos
-//			Inicia monitoramento dos vencimentos de contratos e avisar seus respons·veis
+		if(!monitorandoVencimento){//se n√£o estiver monitorando os contratos
+//			Inicia monitoramento dos vencimentos de contratos e avisar seus respons√°veis
 			AvisoVencimento monitorando = new AvisoVencimento();
 			Thread monitorar = new Thread(monitorando);
-//			monitorar.start();
+			monitorar.start();
 			
 			monitorandoVencimento = true;
 		}
