@@ -60,24 +60,26 @@ public class PDF {
 			paragrafo.setAlignment(Element.ALIGN_CENTER);
 			d.add(paragrafo);
 			
-			tabela.addCell(celulaSemBorda("Número do contrato:"+contrato.getNumero()+"\n"));
-			tabela.addCell(celulaSemBorda("Número da portaria:"+contrato.getPortaria()+"\n"));
-			tabela.addCell(celulaSemBorda("Gestor:"+contrato.getGestor().getNome()+"\n"));
-			tabela.addCell(celulaSemBorda("Fiscal: "+contrato.getFiscal().getNome()+"\n"));
-			tabela.addCell(celulaSemBorda("Recurso: "+contrato.getRecurso().getNome()+"\n"));
-			tabela.addCell(celulaSemBorda("Uso: "+contrato.getUso().getNome()+"\n"));
-			tabela.addCell(celulaSemBorda("Fonte pagante: "+contrato.getFontePagante().getNome()+"\n"));
-			tabela.addCell(celulaSemBorda("Valor inicial: R$"+contrato.getValorInicialAsString()+"\n"));
-			tabela.addCell(celulaSemBorda("Total dos aditivos: R$"+contrato.getValorAditivoAsString()+"\n"));
-			tabela.addCell(celulaSemBorda("Valor total: R$"+contrato.getValorTotalAsString()+"\n"));
-			tabela.addCell(celulaSemBorda("Ass.: "+contrato.getDataAssinaturaAsString()+"\n"));
-			tabela.addCell(celulaSemBorda("Vencimento: "+contrato.getDataVencimentoContratoAsString()+"\n"));
-			tabela.addCell(celulaSemBorda("Ass. da garantia: "+contrato.getDataGarantiaAsString()+"\n"));
-			tabela.addCell(celulaSemBorda("Vencimento da garantia: "+contrato.getDataVencimentoGarantiaAsString()+"\n"));
+			tabela.addCell(celulaSemBorda("Número do contrato:"+contrato.getNumero()));
+			tabela.addCell(celulaSemBorda("Número da portaria:"+contrato.getPortaria()));
+			tabela.addCell(celulaSemBorda("Gestor:"+contrato.getGestor().getNome()));
+			tabela.addCell(celulaSemBorda("Fiscal: "+contrato.getFiscal().getNome()));
+			tabela.addCell(celulaSemBorda("Recurso: "+contrato.getRecurso().getNome()));
+			tabela.addCell(celulaSemBorda("Uso: "+contrato.getUso().getNome()));
+			tabela.addCell(celulaSemBorda("Fonte pagante: "+contrato.getFontePagante().getNome()));
+			tabela.addCell(celulaSemBorda(""));
+			tabela.addCell(celulaSemBorda("Valor inicial: R$"+contrato.getValorInicialAsString()));
+			tabela.addCell(celulaSemBorda("Total dos aditivos: R$"+contrato.getValorAditivoAsString()));
+			tabela.addCell(celulaSemBorda("Valor total: R$"+contrato.getValorTotalAsString()));
+			tabela.addCell(celulaSemBorda(""));
+			tabela.addCell(celulaSemBorda("Ass.: "+contrato.getDataAssinaturaAsString()));
+			tabela.addCell(celulaSemBorda("Venc.: "+contrato.getDataVencimentoContratoAsString()));
+			tabela.addCell(celulaSemBorda("Ass. da garantia: "+contrato.getDataGarantiaAsString()));
+			tabela.addCell(celulaSemBorda("Venc. da garantia: "+contrato.getDataVencimentoGarantiaAsString()));
 
-			
-			tabela.addCell(celulaSemBorda("Objeto: "+contrato.getObjeto()));
 			d.add(tabela);
+			
+			d.add(new Paragraph("Objeto: "+contrato.getObjeto()));
 			d.add(new Paragraph("\n\n"));
 			
 			//cada um desses valores corresponde a largura de cada célula
