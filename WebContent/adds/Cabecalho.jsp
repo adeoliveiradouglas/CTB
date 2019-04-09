@@ -22,7 +22,7 @@
 					<a href="sistema?logica=VoltarPagina"><img src="/gestaodecontratos/layout/images/voltar.png"></a>
 				</td>
 				<td>
-					<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipal">
+					<a class="navbar-brand" href="/gestaodecontratos/sistema?logica=TelaPrincipala">
 						<img align="left" height="20" src="/gestaodecontratos/layout/images/logo pequeno.png" />
 						Sistema de Gestão de Contratos
 					</a>
