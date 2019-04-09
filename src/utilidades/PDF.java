@@ -60,8 +60,8 @@ public class PDF {
 			paragrafo.setAlignment(Element.ALIGN_CENTER);
 			d.add(paragrafo);
 			
-			tabela.addCell(celulaSemBorda("Número do contrato:"+contrato.getNumero()));
-			tabela.addCell(celulaSemBorda("Número da portaria:"+contrato.getPortaria()));
+			tabela.addCell(celulaSemBorda("Nº contrato:"+contrato.getNumero()));
+			tabela.addCell(celulaSemBorda("Nº portaria:"+contrato.getPortaria()));
 			tabela.addCell(celulaSemBorda("Gestor:"+contrato.getGestor().getNome()));
 			tabela.addCell(celulaSemBorda("Fiscal: "+contrato.getFiscal().getNome()));
 			tabela.addCell(celulaSemBorda("Recurso: "+contrato.getRecurso().getNome()));

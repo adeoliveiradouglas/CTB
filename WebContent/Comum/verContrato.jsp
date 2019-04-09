@@ -12,15 +12,35 @@
 </head>
 <body>
 	<jsp:include page="../adds/Cabecalho.jsp"></jsp:include>
-	<table class="table table-striped">
+	<c:if test="${relatorioGerado == true}">
+		<div style="background-color: #5cb85c; color: white" align="center">
+		Veja o relatório do contrato <a href="/gestaodecontratos/Comum/relatorios/relatorioContrato${sessionScope.contratoVisualizar.id}.pdf" target="_blank">aqui</a>.
+		</div>
+	</c:if>
+	
+	<table class="table" style="border: none">
 	<tbody>	
+		
 		<tr>
-			<td>				
+			<td>
 				<form action="sistema?logica=VerResumoContrato" method="post">
 					<button class="btn btn-primary btn-lg aw-btn-full-width" type="submit">
 						Ver resumo do contrato
 					</button>
-				</form></td></tr></tbody></table>
+				</form>
+			</td>	
+			<td>
+				<form action="sistema?logica=ExportarPDF" method="post">
+					<button class="btn btn-primary btn-lg aw-btn-full-width" type="submit">
+						Exportar para PDF
+					</button>
+				</form>
+			</td>
+					
+		</tr>
+	</tbody>
+	</table>	
+	
 	<jsp:include page="../Comum/avisoDeVencimento.jsp"></jsp:include>
 	<jsp:include page="../Comum/planilha.jsp"></jsp:include>
 	<jsp:include page="../adds/Rodape.jsp"></jsp:include>
