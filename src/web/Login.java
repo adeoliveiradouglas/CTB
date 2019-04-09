@@ -20,29 +20,27 @@ public class Login implements Logica {
 		String email = pedido.getParameter("email");
 
 		/*
-		 * Busca usuario no banco: Caso tenha usado usu·rio administrador geral,
-		 * vai gerar uma exception de Null e esse usu·rio fica como nulo. …
-		 * exatamente isso que deve acontecer pois o administrador geral n„o
-		 * est· cadastrado no banco
+		 * Busca usuario no banco: Caso tenha usado usu√°rio administrador geral,
+		 * vai gerar uma exception de Null e esse usu√°rio fica como nulo. √â
+		 * exatamente isso que deve acontecer pois o administrador geral n√£o
+		 * est√° cadastrado no banco
 		 */
 		Usuario u = new UsuarioDAO().getByEmail(email);
 
-		// criptografa senha digitada. A comparaÁ„o È feita com as senhas
+		// criptografa senha digitada. A compara√ß√£o √© feita com as senhas
 		// criptografadas
 		String senha = new Cripto().criptografa(pedido.getParameter("senha"));
 
 		try {
 			System.out.println(senha + " " + u.getNome());
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-		}
+		} catch (Exception e1) {}
 		
 		if (u != null && senha.equals(u.getSenha())) {
-			// Caso o login seja v·lido
+			// Caso o login seja v√°lido
 		} else if (email.equals("contratos.ctb@ctb.ba.gov.br")
 				&& senha.equals("SZm6ez170MniprpMv9XhH5HVQ24JYbhs9Z9niOLSGH4=")) {
-			// Desse modo, sempre existir· um usu·rio administrador, n„o
-			// importando o que h· no banco de dados
+			// Desse modo, sempre existir√° um usu√°rio administrador, n√£o
+			// importando o que h√° no banco de dados
 
 			// Cria um objeto usuario para Administrador
 			List<Cargo> c = new ArrayList<Cargo>();
@@ -55,18 +53,18 @@ public class Login implements Logica {
 				"Administrador", 
 				email, 
 				senha, 
-				new Setor("09140271", "Subcoordenadoria de Tecnologia da InformaÁ„o", "CTB/ TECI"),
+				new Setor("09140271", "Subcoordenadoria de Tecnologia da Informa√ß√£o", "CTB/ TECI"),
 				c
 			);
 		} else {
-			// Senha errada, usu·rio inexistente...
+			// Senha errada, usu√°rio inexistente...
 			return "sistema?logica=Erro403";
 		}
-		// Coloca os dados do usu·rio na sess„o
+		// Coloca os dados do usu√°rio na sess√£o
 		pedido.getSession().setAttribute("usuario", u);
 
 		try{
-			// Pıe cargo em uso como o primeiro da lista do usu·rio
+			// P√µe cargo em uso como o primeiro da lista do usu√°rio
 			pedido.getSession().setAttribute("cargoParaLogin", u.getCargo().get(0));
 		}catch (IndexOutOfBoundsException e){
 			return "sistema?logica=Erro403";
